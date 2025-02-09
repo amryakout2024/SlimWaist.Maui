@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Views.AddFoodPage"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="True"
+             Title="اضافة غذاء جديد"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft">
+    <ur:UraniumContentPage.Resources>
+        <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="DarkSlateBlue" />
+        </Style>
+    </ur:UraniumContentPage.Resources>
+    <input:FormView
+        SubmitCommand="{Binding SaveNewFoodCommand}"
+        Spacing="10" Margin="5">
+        <mat:TextField 
+            Text="{Binding FoodCategory}"
+            Title="التصنيف"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AllowClear="True"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForNullOrEmpty/>
+                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+            </mat:TextField.Validations>
+            <mat:TextField.Behaviors>
+                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
+                                                 InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
+                                                 ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
+            </mat:TextField.Behaviors>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodName}"
+            Title="اسم الغذاء"
+            AllowClear="True"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForNullOrEmpty/>
+                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodCalories}"
+            Title="السعرات"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodCarb}"
+            Title="النشويات"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodProtien}"
+            Title="البروتين"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodFat}"
+            Title="الدهون"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding FoodFibers}"
+            Title="الالياف"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+
+        <Button 
+            Text="حفظ"
+            FontSize="20"
+            BackgroundColor="DarkSlateBlue"
+            TextColor="White"
+            VerticalOptions="CenterAndExpand"
+            Padding="0" 
+            input:FormView.IsSubmitButton="True"
+            StyleClass="FilledButton"
+            Command="{Binding SaveNewFoodCommand}"/>
+
+    </input:FormView>
+
+</ur:UraniumContentPage>

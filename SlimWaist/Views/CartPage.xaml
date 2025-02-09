@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Views.CartPage"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="True"
+             x:Name="this"
+             Title=""
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft">
+    <ur:UraniumContentPage.Resources>
+        <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="DarkSlateBlue" />
+        </Style>
+    </ur:UraniumContentPage.Resources>
+
+    <ur:UraniumContentPage.ToolbarItems>
+        <ToolbarItem Text="مسح الكل" 
+                     Order="Secondary"
+                     Command="{Binding ClearCartCommand}"/>
+        <ToolbarItem Text="حفظ" 
+                      Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartVM}},Path=AddCartItemCommand}"/>
+    </ur:UraniumContentPage.ToolbarItems>
+
+    <!--<ur:UraniumContentPage.Attachments>
+        <mat:BottomSheetView
+            IsPresented="{Binding IsPresented}"
+            DisablePageWhenOpened="True" 
+            CloseOnTapOutside="True">
+        --><!--<mat:BottomSheetView.Header>
+            <Grid 
+                BackgroundColor="Chocolate" 
+                HorizontalOptions="FillAndExpand">
+                <Label 
+                    TextColor="Chocolate" 
+                    HorizontalOptions="FillAndExpand"
+                    Text="header"/>
+            </Grid>
+        </mat:BottomSheetView.Header>--><!--
+        
+        <mat:BottomSheetView.Body>
+            <VerticalStackLayout BackgroundColor="Chocolate" 
+                    HorizontalOptions="FillAndExpand">
+                <Label TextColor="White" 
+                        HorizontalOptions="CenterAndExpand"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="CenterAndExpand"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="CenterAndExpand"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="CenterAndExpand"
+                        Text="header"/>
+            </VerticalStackLayout>
+        </mat:BottomSheetView.Body>
+        </mat:BottomSheetView>
+    </ur:UraniumContentPage.Attachments>-->
+
+    <Grid >
+        <Grid RowDefinitions="auto,auto,*" 
+              Padding="5,0,5,0">
+            <Label Text="مكونات الوجبة"
+               Grid.Row="0"
+               TextDecorations="Underline"
+               HorizontalOptions="CenterAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="25"
+               VerticalOptions="CenterAndExpand"/>
+            <HorizontalStackLayout 
+                Grid.Row="1"
+                HorizontalOptions="EndAndExpand"> 
+                <Label Text="سعرات الوجبة : "
+               TextDecorations="Underline"
+               HorizontalOptions="CenterAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="15"
+               VerticalOptions="CenterAndExpand"/>
+                <Label Text="{Binding CartTotalCalories}"
+               TextDecorations="Underline"
+               HorizontalOptions="CenterAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="15"
+               VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+            <CollectionView Grid.Row="2"
+                        SelectionMode="Single"
+                        ItemsSource="{Binding CartItems}"
+                        EmptyView="مفيش اصناف في السلة !">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate  x:DataType="m:CartItem">
+                        <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0.3"
+                        Padding="10"
+                        Margin="5" StrokeShape="RoundRectangle 5">
+                            <Grid ColumnDefinitions="*,*">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="الغذاء : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodName}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="الجرامات : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding Quantity}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="السعرات : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCalories}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="النشويات : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCarb}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="البروتين : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodProtien}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="الدهون : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFat}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="الالياف : "
+                                       FontSize="20"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFibers}"
+                                       FontSize="20"/>
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1"
+                                                 VerticalOptions="CenterAndExpand">
+                                    <Image Source="cartfull"/>
+                                    <Image 
+                                        BackgroundColor="DarkSlateBlue"
+                                        Source="edit2"
+                                        WidthRequest="70"
+                                        Margin="0,10,0,0"
+                                        HorizontalOptions="End">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartVM}},Path=GoToItemPageCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                        <Image.Behaviors>
+                                            <toolkit:IconTintColorBehavior TintColor="White"/>
+                                        </Image.Behaviors>
+
+                                    </Image>
+                                </VerticalStackLayout>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ur:UraniumContentPage>
+

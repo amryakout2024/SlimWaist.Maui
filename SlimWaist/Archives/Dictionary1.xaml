@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Archives.Dictionary1">
+
+    <!--//protected async override void OnAppearing()
+    //{
+    //    await _itemVM.Init();
+
+    //    //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
+    //    //{
+    //    //    this.FlowDirection = FlowDirection.LeftToRight;
+    //    //}
+
+    //}-->
+
+
+
+    <!--//Categories=new List<string>()
+    //{
+    //    "جميع الأصناف",
+    //    "الفواكة",
+    //    "لحوم",
+    //    "حلويات",
+    //    "بيض",
+    //    "أسماك",
+    //    "ألبان ومنتجات الألبان",
+    //    "عصائر ومشروبات",
+    //    "حبوب",
+    //    "مخبوزات",
+    //    "درنيات",
+    //    "بقوليات",
+    //    "بذور ومكسرات",
+    //    "خضروات"
+    //};-->
+
+    
+    <!--<CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="5" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>-->
+
+
+    <!--<ScrollView Grid.Row="2" HorizontalScrollBarVisibility="Always">
+        <StackLayout 
+                BindableLayout.ItemsSource="{Binding Categories}"
+                Orientation="Horizontal">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding .}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ScrollView>-->
+
+    <!--<Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button Text="7" Command="{Binding Calculator7Command}" Grid.Column="0" Grid.Row="0" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="8" Command="{Binding Calculator8Command}" Grid.Column="1" Grid.Row="0" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="9" Command="{Binding Calculator9Command}" Grid.Column="2" Grid.Row="0" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="4" Command="{Binding Calculator4Command}" Grid.Column="0" Grid.Row="1" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="5" Command="{Binding Calculator5Command}" Grid.Column="1" Grid.Row="1" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="6" Command="{Binding Calculator6Command}" Grid.Column="2" Grid.Row="1" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="1" Command="{Binding Calculator1Command}" Grid.Column="0" Grid.Row="2" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="2" Command="{Binding Calculator2Command}" Grid.Column="1" Grid.Row="2" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="3" Command="{Binding Calculator3Command}" Grid.Column="2" Grid.Row="2" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="0" Command="{Binding Calculator0Command}" Grid.Column="0" Grid.Row="3" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="." Command="{Binding CalculatorPointCommand}" Grid.Column="1" Grid.Row="3" Style="{StaticResource ButtonCalculatorStyle}"/>
+        <Button Text="C" Command="{Binding CalculatorClearCommand}" Grid.Column="2" Grid.Row="3" Style="{StaticResource ButtonCalculatorStyle}"/>
+    </Grid>-->
+
+
+    <!--<Button
+                                        Grid.Row="1"
+                                        HeightRequest="45"
+                                        IsVisible="{Binding IsButtonVisible}"
+                                        WidthRequest="50"
+                                        BackgroundColor="Transparent"
+                                        ImageSource="share"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}},Path=ShareDrugCommand}"
+                                        CommandParameter="{Binding .}">
+                                </Button>-->
+
+
+    <!--<Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding IsDrugSelected}" Value="true">
+                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>-->
+
+
+    <!--<Shell.TitleView>
+        <Border BackgroundColor="White" 
+                Margin="0"
+                StrokeThickness="0">
+            <Label 
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="Green"
+                    TextDecorations="Underline"
+                    Text="Welcome To ICD-10 App" 
+                    FontSize="26"/>
+        </Border>
+    </Shell.TitleView>-->
+
+    <!--<ur:UraniumContentPage.ToolbarItems>
+        <ToolbarItem 
+            Order="Secondary"
+            Text="Share the application"
+            Command="{Binding ShareTheApplicationCommand}">
+        </ToolbarItem>
+        <ToolbarItem 
+            Order="Secondary"  
+            Text="Log out"
+            Command="{Binding CloseAppCommand}">
+        </ToolbarItem>
+    </ur:UraniumContentPage.ToolbarItems>-->
+
+    <!--<ur:UraniumContentPage.Attachments>
+        <mat:BottomSheetView  
+            DisablePageWhenOpened="True"
+            CloseOnTapOutside="True"
+            Grid.Row="3">
+            
+        <mat:BottomSheetView.Header>
+                <Grid BackgroundColor="Chocolate" 
+                        HorizontalOptions="FillAndExpand">
+                    <Label TextColor="Chocolate" 
+                           HorizontalOptions="FillAndExpand"
+                           Text="header"/>
+                </Grid>
+            </mat:BottomSheetView.Header>
+        
+            <mat:BottomSheetView.Body>
+                <VerticalStackLayout BackgroundColor="Chocolate" 
+                        HorizontalOptions="FillAndExpand">
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                    <Label TextColor="White" 
+                           HorizontalOptions="CenterAndExpand"
+                           Text="header"/>
+                </VerticalStackLayout>
+            </mat:BottomSheetView.Body>
+        </mat:BottomSheetView>
+    </ur:UraniumContentPage.Attachments>-->
+    
+    
+    <!--<VerticalStackLayout Grid.Row="2">
+        <Border StrokeShape="RoundRectangle 10"
+                        StrokeThickness="0"
+                    Margin="5,0,5,0">
+            <controls:MTAdView x:Name="myAds">
+                <controls:MTAdView.HeightRequest>
+                    <OnIdiom 
+                                Phone="50"
+                                Tablet="90"
+                                Desktop="90"/>
+                </controls:MTAdView.HeightRequest>
+
+            </controls:MTAdView>
+        </Border>
+
+        <Border
+                   Margin="5"
+                   StrokeShape="RoundRectangle 10"
+                   BackgroundColor="ForestGreen"
+                   Padding="0">
+            <Label
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        FontSize="25"
+                        TextColor="White"
+                        Text="Powered By : Amr Yakout"/>
+        </Border>
+    </VerticalStackLayout>-->
+
+
+    <!--<Grid RowDefinitions="auto,*"
+                                      Grid.Column="1">
+                                    <mat:CheckBox
+                                        IconColor="DarkSlateBlue"
+                                        BorderColor="DarkSlateBlue"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        Margin="5"
+                                        BoxSizeRequest="23"
+                                        CheckChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}} ,Path=UpdateCheckedDrugCommand}"
+                                        CommandParameter="{Binding .}"
+                                        CornerRadius="25">
+                                    </mat:CheckBox>
+                                </Grid>-->
+
+</ResourceDictionary>

@@ -2,14 +2,67 @@
 <Shell
     x:Class="SlimWaist.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SlimWaist"
-    Shell.FlyoutBehavior="Flyout"
-    Title="SlimWaist">
+    xmlns:v="clr-namespace:SlimWaist.Views"
+    FlowDirection="RightToLeft"
+        Shell.FlyoutBehavior="Disabled"
+
+    Title="SlimWaist" >
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="DarkSlateBlue"/>
+    </Shell.Behaviors>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" Command="{Binding GoToHomePage}"/>
+    </Shell.BackButtonBehavior>
+    <!--<ShellContent
+        Title="MainPage"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />-->
+    <!--<ShellContent
+            ContentTemplate="{DataTemplate v:TabbedFoodsPage}"
+            Route="TabbedFoodsPage"
+            Title="الأغذية"
+            Icon="SlimWaist"/>-->
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="LoginPage"
+        ContentTemplate="{DataTemplate v:LoginPage}"
+        Route="LoginPage" />
+
+    <!--<ShellContent
+            ContentTemplate="{DataTemplate v:FoodsPage}"
+            Route="FoodsPage"
+            Title="الأغذية"
+            Icon="SlimWaist"/>-->
+    <!--<ShellContent
+            ContentTemplate="{DataTemplate v:HomePage}"
+            Route="HomePage"
+            Title="الرئيسية"
+            Icon="home"/>-->
+    <TabBar FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            ContentTemplate="{DataTemplate v:HomePage}"
+            Route="HomePage"
+            Title="الرئيسية"
+            Icon="home"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate v:FoodsPage}"
+            Route="FoodsPage"
+            Title="الأغذية"
+            Icon="diet"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate v:AllMealsPage}"
+            Route="AllMealsPage"
+            Title="وجباتي"
+            Icon="allmeal"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate v:CartPage}"
+            Route="CartPage"
+            Title="السلة"
+            Icon="cart4"/>
+    </TabBar>
 
 </Shell>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SlimWaist.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Title="LoginPage"
+             FlowDirection="RightToLeft">
+    <ur:UraniumContentPage.Resources>
+        <Style TargetType="mat:TextField" x:Key="InvalidMatTextFieldStyle">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <Style TargetType="mat:TextField" x:Key="ValidMatTextFieldStyle">
+            <Setter Property="TextColor" Value="DarkSlateBlue"/>
+        </Style>
+
+    </ur:UraniumContentPage.Resources>
+    <VerticalStackLayout Spacing="10" Margin="10">
+        <Label 
+            Text="أسهل طريق للتخسيس"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            TextColor="DarkSlateBlue"
+            FontSize="30"/>
+        
+        <Image
+            Source="fd"/>
+        
+        <mat:TextField 
+            Text="{Binding Email}"
+            Title="الإيميل"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AllowClear="True"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForNullOrEmpty/>
+                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+            </mat:TextField.Validations>
+            <mat:TextField.Behaviors>
+                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
+                                                 InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
+                                                 ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
+            </mat:TextField.Behaviors>
+        </mat:TextField>
+
+        <mat:TextField 
+            Text="{Binding Password}"
+            Title="كلمة السر"
+            IsPassword="True"
+            TextColor="DarkSlateBlue"
+            TitleColor="DarkGray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue"
+            FontSize="16">
+            <mat:TextField.Validations>
+                <helpers:ValidateForNullOrEmpty/>
+                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+            </mat:TextField.Validations>
+            <mat:TextField.Attachments>
+                <mat:TextFieldPasswordShowHideAttachment/>
+            </mat:TextField.Attachments>
+        </mat:TextField>
+        
+        <mat:CheckBox Text="حفظ بيانات الدخول"
+                      TextFontSize="15"
+                      BoxSizeRequest="20" 
+                      IsChecked="{Binding IsCheckBoxChecked}"
+                      CheckChangedCommand="{Binding SaveLoginCommand}"/>
+        
+        <Button 
+            Text="دخول"
+            FontSize="20"
+            BackgroundColor="DarkSlateBlue"
+            TextColor="White"
+            Command="{Binding LoginCommand}"
+            VerticalOptions="CenterAndExpand"
+            Padding="0"/>
+        
+        <HorizontalStackLayout>
+            <Label
+                FontSize="15"
+                VerticalOptions="CenterAndExpand"
+            Text="اذا لم يكن لك رقم عضوية قم "/>
+            <Label 
+                Text="بتسجيل عضوية جديدة"
+                FontSize="16"
+                BackgroundColor="Transparent"
+                TextColor="DodgerBlue"
+                VerticalOptions="CenterAndExpand"
+                Padding="0" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding RegisterNewMemberShipCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ur:UraniumContentPage>

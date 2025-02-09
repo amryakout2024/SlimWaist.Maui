@@ -1,0 +1,54 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Models;
+using SlimWaist.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SlimWaist.ViewModels
+{
+    public partial class DayMealsVM(DataContext dataContext) : BaseVM
+    {
+        private readonly DataContext _dataContext = dataContext;
+        
+        [ObservableProperty]
+        private List<MealGroup> _mealGroups;
+
+        [ObservableProperty]
+        private string _dayTotalCalories;
+
+        public async Task Init()
+        {
+            MealGroups = new List<MealGroup>();
+
+            var mealdetails = await _dataContext.LoadAsync<MealDetail>();
+
+            var meals =DayMealsPage.Meals;
+
+            DayTotalCalories=Math.Round( meals.Select(x=>x.TotalCalories).Sum(),1).ToString()?? "";
+
+            foreach (Meal meal in meals)
+            {
+                MealGroups.Add(new MealGroup(meal.MealId,
+                    meal.MealName,
+                    meal.MealType,
+                    meal.IsSelected,
+                    meal.TotalCalories,
+                    meal.TotalFoodCarb, 
+                    meal.TotalFoodProtien, 
+                    meal.TotalFoodFat,
+                    meal.TotalFoodFibers,
+                    mealdetails.Where(x=>x.MealName==meal.MealName).ToList()));
+            }
+        }
+
+        [RelayCommand]
+        private async Task ShowMealDetail(Meal meal)
+        {
+            var m = meal;
+        }
+    }
+}

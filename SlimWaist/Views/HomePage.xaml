@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SlimWaist.Views.HomePage"
+             Title="RegimePage"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft"
+             NavigationPage.BackButtonTitle="ff">
+    <ur:UraniumContentPage.Resources>
+        <Style TargetType="Label" x:Key="TitleLabel">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="TextColor" Value="DarkSlateBlue"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="Label" x:Key="ValueLabel">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="TextColor" Value="DarkGreen"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+    </ur:UraniumContentPage.Resources>
+    <Shell.TitleView>
+        <Label Text="rr" TextColor="White"/>
+    </Shell.TitleView>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" Command="{Binding GoBackCommand}"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="auto,auto,auto,auto,*" RowSpacing="5" Margin="5">
+        <Grid Grid.Row="0" ColumnDefinitions="*,auto">
+            <HorizontalStackLayout Grid.Column="0">
+                <Label 
+                Text="مرحبا بعودتك "
+                FontSize="20"
+                TextColor="DarkSlateBlue"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+                <Label 
+                Text="{Binding Name}"
+                FontSize="25"
+                TextColor="Green"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+            <Button
+                Grid.Column="1"
+                Padding="0"
+                WidthRequest="100"
+                FontSize="20"
+                BackgroundColor="DarkRed"
+                HorizontalOptions="End"
+                Text="خروج"
+                Command="{Binding LogOutCommand}"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Label 
+                Text="تحليل كتلة الجسم"
+                FontSize="15"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Label 
+                Text="تعديل"
+                FontSize="18"
+                    TextColor="SteelBlue"
+                VerticalOptions="Center" 
+                HorizontalOptions="End" />
+
+        </Grid>
+        <Border Grid.Row="2"
+            BackgroundColor="WhiteSmoke"
+                Padding="10"
+                StrokeThickness="1.5"
+                Stroke="WhiteSmoke"
+                StrokeShape="RoundRectangle 10">
+            <Grid ColumnDefinitions="*,*">
+                <VerticalStackLayout Grid.Column="0">
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="الوزن الحالي : "
+                                 Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding Weight}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="الطول : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding Height}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="مؤشر كتلة الجسم : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding BMI}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="الوزن المثالي : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding IdealWeight}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="الوزن المعدل : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding ModifiedWeight}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="نشاط الجسم : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding BodyActivity}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label 
+                                Text="السعرات الكلية : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                                Text="{Binding TotalEnergy}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+                <Image Grid.Column="1"
+                           Source="scale.jpg"/>
+            </Grid>
+        </Border>
+        <!--<Grid Grid.Row="3">
+            <Label 
+                Text="نظام الدايت الحالي"
+                FontSize="15"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+            <Label 
+                Text="عرض الكل"
+                FontSize="18"
+                    TextColor="SteelBlue"
+                VerticalOptions="Center" 
+                HorizontalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToSlimWaistListsPageCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </Grid>-->
+        <!--<CollectionView Grid.Row="4" ItemsSource="{Binding RegimeLists}">
+            <CollectionView.ItemTemplate >
+                <DataTemplate>
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        Padding="10"
+                        StrokeThickness="1.5"
+                        Stroke="WhiteSmoke"
+                        StrokeShape="RoundRectangle 10">
+                        <Grid ColumnDefinitions="*,*">
+                            <VerticalStackLayout Grid.Column="0">
+                                <HorizontalStackLayout>
+                                    <Label 
+                                Text="نوع الدايت : "
+                                 Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                                Text="{Binding RegimeName}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label 
+                                Text="من : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                                Text="{Binding Datestart}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label 
+                                Text="إلي : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                                Text="{Binding DateEnd}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label 
+                                Text="عدد الأيام : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                                Text="10"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label 
+                                Text="الوزن : "
+                                Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                                Text="{Binding Weight}"
+                                Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <Image Grid.Column="1"
+                           Source="food2.jfif"/>
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <ContentView HeightRequest="120">
+                    <StackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                        <Label Text="مفيش اي نظام دايت لسه !"
+                                   Margin="0,0,0,10"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   HorizontalOptions="Fill"
+                                   HorizontalTextAlignment="Center" />
+                        <Button Text="ابدأ الدايت"
+                                FontSize="20"
+                                Command="{Binding GoToSlimWaistListsPageCommand}"
+                                BackgroundColor="{StaticResource MainColor}"
+                                HorizontalOptions="Fill"/>
+                    </StackLayout>
+                </ContentView>
+            </CollectionView.EmptyView>
+        </CollectionView>-->
+    </Grid>
+</ur:UraniumContentPage>
+    
+    
+    
+<!--ابدأ الدايت و ضيف اول نظام-->
+
+<!--<CarouselView.ItemsSource>
+    <x:Array Type="{x:Type sys:String}">
+        <sys:String>
+            hh
+        </sys:String>
+        <sys:String>Page 2</sys:String>
+    </x:Array>
+</CarouselView.ItemsSource>-->

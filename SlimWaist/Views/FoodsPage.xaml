@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Views.FoodsPage"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="True"
+             x:Name="this"
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft">
+    <ur:UraniumContentPage.Resources>
+        <Style TargetType="mat:RadioButton">
+            <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+            <Setter Property="CircleColor" Value="{StaticResource MainColor}"/>
+        </Style>
+
+        <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="DarkSlateBlue" />
+        </Style>
+    </ur:UraniumContentPage.Resources>
+    
+    <Shell.TitleView>
+        <Border BackgroundColor="White" 
+                Margin="0"
+                StrokeThickness="0">
+            <Label Text="قم بانشاء وجبتك المفضلة"
+               Grid.Row="0"
+               TextDecorations="None"
+               HorizontalOptions="CenterAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="25"
+               VerticalOptions="CenterAndExpand"/>
+        </Border>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="auto,auto,auto,*" 
+              Padding="5,0,5,0" >
+        <HorizontalStackLayout Margin="5">
+            <Label Text="الوجبة : "
+                   Margin="0,0,10,0"
+               Grid.Row="1"
+               TextDecorations="Underline"
+               HorizontalOptions="EndAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="15"/>
+
+            <mat:RadioButtonGroupView Grid.Row="0" 
+                                      SelectedItemChangedCommand="{Binding MealChangedCommand}"
+                                      Orientation="Horizontal">
+                <mat:RadioButton Text="{Binding Breakfast}" IsChecked="{Binding IsBreakfast}"/>
+                <mat:RadioButton Text="{Binding Lunch}" IsChecked="{Binding IsLunch}"/>
+                <mat:RadioButton Text="{Binding Dinner}" IsChecked="{Binding IsDinner}"/>
+            </mat:RadioButtonGroupView>
+        </HorizontalStackLayout>
+        <Label Text="السعرات محسوبة لكل 100 جرام"
+               Grid.Row="1"
+               TextDecorations="None"
+               HorizontalOptions="EndAndExpand"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="13"/>
+
+        <mat:TextField
+            Grid.Row="2"
+            Text="{Binding SearchName}"
+            TextColor="Green"
+            FontSize="18"
+            AccentColor="Green"
+            VerticalOptions="CenterAndExpand"
+            AllowClear="True"
+            Title="اكتب اسم الغذاء"
+            TitleColor="LightGray">
+            <mat:TextField.Behaviors>
+                <toolkit:EventToCommandBehavior                            
+                    EventName="TextChanged"
+                    Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
+                </toolkit:EventToCommandBehavior>
+            </mat:TextField.Behaviors>
+        </mat:TextField>
+
+        <CollectionView Grid.Row="3"
+                        
+                        SelectionMode="Single"
+                        ItemsSource="{Binding Foods}"
+                        EmptyView="مفيش غذاء بالاسم دا !">
+            <CollectionView.ItemTemplate>
+                <DataTemplate  x:DataType="m:Food">
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0"
+                        Padding="10"
+                        Margin="5" StrokeShape="RoundRectangle 5">
+                        <Grid ColumnDefinitions="*,*">
+                            <VerticalStackLayout Grid.Column="0">
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="الغذاء : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodName}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="التصنيف : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCategory}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="السعرات : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCalories}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="النشويات : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCarb}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="البروتين : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodProtien}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="الدهون : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFat}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="الالياف : "
+                                       FontSize="20"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFibers}"
+                                       FontSize="20"/>
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+                            <Grid Grid.Column="1"
+                                                 VerticalOptions="CenterAndExpand">
+                                <Image Source="fd"/>
+                                <Border 
+                                    WidthRequest="60"
+                                    HeightRequest="60"
+                                    Margin="0,0,0,-30"
+                                    VerticalOptions="EndAndExpand"
+                                    BackgroundColor="{StaticResource MainColor}"
+                                    StrokeShape="RoundRectangle 30">
+                                    <Label 
+                                        Text="+" 
+                                        FontSize="35"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=GoToItemPageCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                </Border>
+                                <!--<Image 
+                                        BackgroundColor="DarkSlateBlue"
+                                        Source="plus"
+                                        WidthRequest="35"
+                                        Margin="0,10,0,0"
+                                        HorizontalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=GoToItemPageCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Image.GestureRecognizers>
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="White"/>
+                                    </Image.Behaviors>
+
+                                </Image>-->
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Border 
+            WidthRequest="60"
+            HeightRequest="60"
+            Grid.Row="3"
+            Margin="5"
+            HorizontalOptions="StartAndExpand"
+            VerticalOptions="EndAndExpand"                                    
+            BackgroundColor="ForestGreen"
+            StrokeShape="RoundRectangle 30">
+            <Label 
+                Text="+" 
+                FontSize="35"
+                TextColor="White"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToAddFoodPageCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
+    </Grid>
+</ur:UraniumContentPage>
+
