@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SlimWaist</ApplicationTitle>
+		<ApplicationTitle>Slim Waist</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.slimwaist</ApplicationId>
