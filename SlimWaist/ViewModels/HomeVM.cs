@@ -95,6 +95,7 @@ namespace SlimWaist.ViewModels
 
             TotalEnergy = MemberShip?.TotalEnergy ?? "";
 
+            RegimeLists = null;
             //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
 
             //var MaxRegimeId = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Select(x=>x.RegimeId).Max();
@@ -109,9 +110,9 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async Task GoToSlimWaistListsPage()
+        private async Task GoToDietsPage()
         {
-            await GoToAsyncWithStack(nameof(RegimesListPage),true);
+            await GoToAsyncWithStack(nameof(DietsPage),true);
         }
 
         [RelayCommand]

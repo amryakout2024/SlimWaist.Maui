@@ -12,7 +12,7 @@ namespace SlimWaist.Models
 {
 	public class DataContext
 	{
-		public const string DbName = "SlimWaistDb20";
+		public const string DbName = "SlimWaist2";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -49,6 +49,30 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<MealDetail>();
 
+                Database.CreateTable<Diet>();
+
+                List<Diet> diets = new List<Diet>()
+                {
+                    new Diet()
+                    {
+                        DietName="نظام الكيتو",
+                        DietDescription="aaaaaaaaaaa"
+                    },
+                    new Diet()
+                    {
+                        DietName="نظام منخفض السعرات",
+                        DietDescription="bbbbbbbbbbbb"
+                    },
+                    new Diet()
+                    {
+                        DietName="نظام الحصص",
+                        DietDescription="ccccccccccccc"
+                    },
+                };
+                foreach (Diet diet in diets)
+                {
+                    Database.Insert(diet);
+                }
                 List<Gender> genders = new List<Gender>()
                     {
                         new Gender(){GenderId=1,GenderName="ذكر"},

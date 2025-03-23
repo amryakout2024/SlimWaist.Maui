@@ -15,7 +15,7 @@
              Shell.TabBarIsVisible="True"
              BackgroundColor="White"
              FlowDirection="RightToLeft"
-             NavigationPage.BackButtonTitle="ff">
+             Shell.FlyoutBehavior="Disabled">
     <ur:UraniumContentPage.Resources>
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -31,40 +31,48 @@
         </Style>
 
     </ur:UraniumContentPage.Resources>
+    
     <Shell.TitleView>
-        <Label Text="rr" TextColor="White"/>
+        <Grid ColumnDefinitions="auto,*">
+            <Button
+                Grid.Column="0"
+                Padding="0"
+                WidthRequest="80"
+                Margin="0,5,0,5"
+                FontSize="20"
+                BackgroundColor="DarkRed"
+                Text="خروج"
+                Command="{Binding LogOutCommand}"/>
+            <Label 
+                Grid.Column="1"
+                Margin="0,0,5,0"
+                VerticalOptions="Center" 
+                HorizontalOptions="End">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span 
+                                Text="مرحبا بعودتك "
+                                FontSize="20"
+                                TextColor="DarkSlateBlue"/>
+                            <Span 
+                                Text="{Binding Name}"
+                                FontSize="25"
+                                TextColor="DarkSlateBlue"/>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </Grid>
     </Shell.TitleView>
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsVisible="False" Command="{Binding GoBackCommand}"/>
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="auto,auto,auto,auto,*" RowSpacing="5" Margin="5">
-        <Grid Grid.Row="0" ColumnDefinitions="*,auto">
-            <HorizontalStackLayout Grid.Column="0">
-                <Label 
-                Text="مرحبا بعودتك "
-                FontSize="20"
-                TextColor="DarkSlateBlue"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-                <Label 
-                Text="{Binding Name}"
-                FontSize="25"
-                TextColor="Green"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
-            </HorizontalStackLayout>
-            <Button
-                Grid.Column="1"
-                Padding="0"
-                WidthRequest="100"
-                FontSize="20"
-                BackgroundColor="DarkRed"
-                HorizontalOptions="End"
-                Text="خروج"
-                Command="{Binding LogOutCommand}"/>
-        </Grid>
-        <Grid Grid.Row="1">
+    <Grid RowDefinitions="auto,auto,auto,*" RowSpacing="5" Margin="5">
+        <Grid Grid.Row="0">
             <Label 
                 Text="تحليل كتلة الجسم"
                 FontSize="15"
@@ -78,7 +86,8 @@
                 HorizontalOptions="End" />
 
         </Grid>
-        <Border Grid.Row="2"
+        
+        <Border Grid.Row="1"
             BackgroundColor="WhiteSmoke"
                 Padding="10"
                 StrokeThickness="1.5"
@@ -148,7 +157,8 @@
                            Source="scale.jpg"/>
             </Grid>
         </Border>
-        <!--<Grid Grid.Row="3">
+        
+        <Grid Grid.Row="2">
             <Label 
                 Text="نظام الدايت الحالي"
                 FontSize="15"
@@ -161,12 +171,13 @@
                 VerticalOptions="Center" 
                 HorizontalOptions="End">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToSlimWaistListsPageCommand}"/>
+                    <TapGestureRecognizer Command="{Binding GoToDietsPageCommand}"/>
                 </Label.GestureRecognizers>
             </Label>
 
-        </Grid>-->
-        <!--<CollectionView Grid.Row="4" ItemsSource="{Binding RegimeLists}">
+        </Grid>
+
+        <CollectionView Grid.Row="3" ItemsSource="{Binding RegimeLists}">
             <CollectionView.ItemTemplate >
                 <DataTemplate>
                     <Border 
@@ -225,6 +236,7 @@
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            
             <CollectionView.EmptyView>
                 <ContentView HeightRequest="120">
                     <StackLayout HorizontalOptions="Center"
@@ -237,13 +249,13 @@
                                    HorizontalTextAlignment="Center" />
                         <Button Text="ابدأ الدايت"
                                 FontSize="20"
-                                Command="{Binding GoToSlimWaistListsPageCommand}"
+                                Command="{Binding GoToDietsPageCommand}"
                                 BackgroundColor="{StaticResource MainColor}"
                                 HorizontalOptions="Fill"/>
                     </StackLayout>
                 </ContentView>
             </CollectionView.EmptyView>
-        </CollectionView>-->
+        </CollectionView>
     </Grid>
 </ur:UraniumContentPage>
     

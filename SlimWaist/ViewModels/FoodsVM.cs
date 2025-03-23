@@ -42,7 +42,6 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string _searchName;
 
-
         [ObservableProperty]
         private string _breakfast= "إفطار";
         [ObservableProperty]

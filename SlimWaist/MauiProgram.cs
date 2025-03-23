@@ -9,8 +9,6 @@ using Microsoft.Maui.Hosting;
 using CommunityToolkit.Maui.ApplicationModel;
 using SlimWaist.Helpers;
 using SlimWaist.Models;
-using SlimWaist.ViewModels;
-using SlimWaist.Views;
 
 using SlimWaist;
 
@@ -70,8 +68,8 @@ namespace SlimWaist
             builder.Services.AddSingleton<SignUpPage>()
                             .AddSingleton<SignUpVM>();
 
-            //builder.Services.AddSingleton<SlimWaistDaysListPage>()
-            //                .AddSingleton<SlimWaistDaysListVM>();
+            builder.Services.AddSingleton<DietsPage>()
+                            .AddSingleton<DietsVM>();
 
             //builder.Services.AddSingleton<SlimWaistDayPage>()
             //                .AddSingleton<SlimWaistDayVM>();

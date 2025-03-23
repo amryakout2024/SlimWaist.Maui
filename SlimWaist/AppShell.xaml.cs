@@ -32,6 +32,7 @@ namespace SlimWaist
             typeof(MealDetailPage),
             typeof(DayMealsPage),
             typeof(AddFoodPage),
+            typeof(DietsPage),
         ];
         //private readonly static Type[] _routablePageTypes =
         //[

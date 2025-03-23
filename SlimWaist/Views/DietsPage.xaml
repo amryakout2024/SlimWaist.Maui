@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Views.DietsPage"
+             Title="أنظمة الدايت"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="White"
+             FlowDirection="RightToLeft"
+             Shell.FlyoutBehavior="Disabled">
+
+    <CollectionView ItemsSource="{Binding Diets}">
+        <CollectionView.ItemTemplate >
+            <DataTemplate>
+                <Border x:DataType="m:Diet"
+                        BackgroundColor="WhiteSmoke"
+                        Padding="10"
+                        Margin="10,0,10,10"
+                        StrokeThickness="1.5"
+                        Stroke="WhiteSmoke"
+                        StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout
+                        Spacing="10"
+                        BackgroundColor="WhiteSmoke">
+                        <Label 
+                            Text="{Binding DietName}"
+                            TextColor="{StaticResource MainColor}"
+                            FontSize="20"
+                            TextDecorations="Underline"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand" />
+                        <Label 
+                            Text="{Binding DietDescription}"
+                            FontSize="15"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand" />
+                    </VerticalStackLayout>
+                </Border>
+
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

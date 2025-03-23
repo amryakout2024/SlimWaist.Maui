@@ -16,16 +16,11 @@ public partial class FoodsPage : UraniumContentPage
         _foodsVM = foodsVM;
 
         BindingContext = _foodsVM;
+
     }
     protected async override void OnAppearing()
     {
         await _foodsVM.Init();
-
-        //if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ar")
-        //{
-        //    this.FlowDirection = FlowDirection.LeftToRight;
-        //}
-
     }
     protected override bool OnBackButtonPressed()
     {
