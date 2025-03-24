@@ -9,15 +9,10 @@ namespace SlimWaist.Models
 {
     public class Setting
     {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
 
-        public string? MemberShipId { get; set; }
+        public int SavedMemberShipId { get; set; }=0;
 
-        public bool IsLoginSaved { get; set; }=false;
-
-        public string? Email { get; set; }
-
-        public string? Password { get; set; }
     }
 }

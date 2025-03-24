@@ -10,12 +10,10 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SlimWaist.Views.HomePage"
-             Title="RegimePage"
              Shell.NavBarIsVisible="True"
              Shell.TabBarIsVisible="True"
              BackgroundColor="White"
-             FlowDirection="RightToLeft"
-             Shell.FlyoutBehavior="Disabled">
+             FlowDirection="RightToLeft">
     <ur:UraniumContentPage.Resources>
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -34,15 +32,12 @@
     
     <Shell.TitleView>
         <Grid ColumnDefinitions="auto,*">
-            <Button
+            <!--<ImageButton
                 Grid.Column="0"
-                Padding="0"
-                WidthRequest="80"
-                Margin="0,5,0,5"
-                FontSize="20"
-                BackgroundColor="DarkRed"
-                Text="خروج"
-                Command="{Binding LogOutCommand}"/>
+                Source="setting.png"
+                Scale="0.7"
+                HorizontalOptions="Start"
+                Command="{Binding GoToSettingPageCommand}"/>-->
             <Label 
                 Grid.Column="1"
                 Margin="0,0,5,0"

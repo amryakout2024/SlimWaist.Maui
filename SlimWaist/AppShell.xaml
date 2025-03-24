@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:SlimWaist"
     xmlns:v="clr-namespace:SlimWaist.Views"
     FlowDirection="RightToLeft"
-    Shell.FlyoutBehavior="Disabled"
     Title="SlimWaist" >
     <Shell.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="DarkSlateBlue"/>
@@ -43,6 +42,11 @@
             Route="CartPage"
             Title="السلة"
             Icon="cart4"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate v:SettingPage}"
+            Route="SettingPage"
+            Title="الإعدادات"
+            Icon="setting.png"/>
     </TabBar>
 
 </Shell>

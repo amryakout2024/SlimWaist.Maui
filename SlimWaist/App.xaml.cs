@@ -21,8 +21,6 @@ namespace SlimWaist
 
             MainPage = new AppShell(_appShellVM);
 
-            //MainPage = new TabbedPage();
-
             InitializeDatabase();
 
             //Helpers.ReadExcel.ReadExcelSheet();

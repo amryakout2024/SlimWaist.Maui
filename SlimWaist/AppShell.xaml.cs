@@ -33,11 +33,8 @@ namespace SlimWaist
             typeof(DayMealsPage),
             typeof(AddFoodPage),
             typeof(DietsPage),
+            typeof(SettingPage),
         ];
-        //private readonly static Type[] _routablePageTypes =
-        //[
-        //    typeof(RegisterPage),
-        //];
 
         private static void RegisterRoutes()
         {

@@ -95,6 +95,9 @@ namespace SlimWaist
             builder.Services.AddSingleton<DayMealsPage>()
                             .AddSingleton<DayMealsVM>();
 
+            builder.Services.AddSingleton<SettingPage>()
+                            .AddSingleton<SettingVM>();
+
             //builder.Services.AddSingleton<TabbarBadgeRenderer>();
             builder.Services.AddSingleton<DataContext>();
             builder.Services.AddSingleton<Setting>();

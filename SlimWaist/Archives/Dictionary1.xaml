@@ -110,7 +110,7 @@
                 Margin="0"
                 StrokeThickness="0">
             <Label 
-                    HorizontalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
                     TextColor="Green"
                     TextDecorations="Underline"
                     Text="Welcome To ICD-10 App" 
@@ -150,16 +150,16 @@
                 <VerticalStackLayout BackgroundColor="Chocolate" 
                         HorizontalOptions="FillAndExpand">
                     <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
+                           HorizontalOptions="Center"
                            Text="header"/>
                     <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
+                           HorizontalOptions="Center"
                            Text="header"/>
                     <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
+                           HorizontalOptions="Center"
                            Text="header"/>
                     <Label TextColor="White" 
-                           HorizontalOptions="CenterAndExpand"
+                           HorizontalOptions="Center"
                            Text="header"/>
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
@@ -188,8 +188,8 @@
                    BackgroundColor="ForestGreen"
                    Padding="0">
             <Label
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
                         FontSize="25"
                         TextColor="White"
                         Text="Powered By : Amr Yakout"/>
@@ -202,8 +202,8 @@
                                     <mat:CheckBox
                                         IconColor="DarkSlateBlue"
                                         BorderColor="DarkSlateBlue"
-                                        HorizontalOptions="CenterAndExpand"
-                                        VerticalOptions="CenterAndExpand"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
                                         Margin="5"
                                         BoxSizeRequest="23"
                                         CheckChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeVM}} ,Path=UpdateCheckedDrugCommand}"

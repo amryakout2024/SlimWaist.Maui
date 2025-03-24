@@ -14,7 +14,7 @@ using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class HomeVM(DataContext dataContext,Setting setting):BaseVM
+    public partial class SettingVM(DataContext dataContext,Setting setting):BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly Setting _setting = setting;
@@ -117,9 +117,13 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async void GoToSettingPage()
+        private async void LogOut()
         {
-            await GoToAsyncWithStack(nameof(SettingPage), true);
+            setting.SavedMemberShipId = 0;
+
+            await _dataContext.UpdateAsync<Setting>(setting);
+
+            await GoToAsyncWithShell(nameof(LoginPage), true);
         }
 
         [RelayCommand]

@@ -28,9 +28,12 @@ namespace SlimWaist.ViewModels
 
         private readonly DataContext _dataContext = dataContext;
 
+        Setting setting;
+
         public async Task init()
         {
             Email = "amrnewstory@gmail.com";
+
             Password = "1";
 
             IsCheckBoxChecked = false;
@@ -45,13 +48,12 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            //File.Delete(DataContext.DbPath);
+            var settings =await _dataContext.LoadAsync<Setting>();
 
-            var Email = Preferences.Get("Email", "");
+            setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(Email))
+            if (setting?.SavedMemberShipId!=0)
             {
-
                 await GoToAsyncWithShell(nameof(HomePage),true);
             }
         }
@@ -60,43 +62,32 @@ namespace SlimWaist.ViewModels
         private async Task RegisterNewMemberShip()
         {
             await GoToAsyncWithStack(nameof(RegisterPage), animate: true);
-            //await GoToAsyncWithStack(nameof(SignUpPage), animate: true);
         }
 
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore = _dataContext.FindEmailAsync(Email);
+            var IsRegisteredEmailBefore =await _dataContext.FindEmailAsync(Email);
 
-            if (IsRegisteredEmailBefore.Result)
+            if (IsRegisteredEmailBefore)
             {
-                var IsPassWordMatchWithEmail = _dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                var IsPassWordMatchWithEmail =await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
 
-                if (IsPassWordMatchWithEmail.Result)
+                if (IsPassWordMatchWithEmail)
                 {
-                    //await Shell.Current.GoToAsync(nameof(HomePage), animate: true);
-
                     if (IsCheckBoxChecked)
                     {
-                        await _dataContext.InsertAsync<Setting>(new Setting()
-                        {
-                            IsLoginSaved = true,
+                        var memberShips = await _dataContext.LoadAsync<Membership>();
 
-                            Email = Email,
+                        setting.SavedMemberShipId = memberShips.Where(x=>x.Email==Email).Select(x=>x.Id).FirstOrDefault();
 
-                            Password = Password
-                        });
+                        await _dataContext.UpdateAsync<Setting>(setting);
                     }
-
-                    Preferences.Set("Email", Email);
-
                     await GoToAsyncWithShell(nameof(HomePage), true);
-
                 }
                 else
                 {
                     await Shell.Current.DisplayAlert("خطأ", "كلمة السر غير صحيحة", "Ok");
-
                 }
 
             }

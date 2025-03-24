@@ -37,11 +37,11 @@
             <Label Text="قم بانشاء وجبتك المفضلة"
                Grid.Row="0"
                TextDecorations="None"
-               HorizontalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
                FontAttributes="Bold"
                TextColor="{StaticResource MainColor}"
                FontSize="25"
-               VerticalOptions="CenterAndExpand"/>
+               VerticalOptions="Center"/>
         </Border>
     </Shell.TitleView>
 
@@ -79,7 +79,7 @@
             TextColor="Green"
             FontSize="18"
             AccentColor="Green"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             AllowClear="True"
             Title="اكتب اسم الغذاء"
             TitleColor="LightGray">
@@ -165,7 +165,7 @@
 
                             </VerticalStackLayout>
                             <Grid Grid.Column="1"
-                                                 VerticalOptions="CenterAndExpand">
+                                                 VerticalOptions="Center">
                                 <Image Source="fd"/>
                                 <Border 
                                     WidthRequest="60"

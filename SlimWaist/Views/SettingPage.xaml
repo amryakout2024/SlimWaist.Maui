@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SlimWaist.Views.SettingPage"
+             x:Name="this"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             FlowDirection="RightToLeft">
+    <ur:UraniumContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Border Stroke="Green"
+                        StrokeThickness="0"
+                        x:Name="b"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="Green"
+                        HeightRequest="40"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                               Text="{TemplateBinding Content}" 
+                               FontSize="15"
+                               TextColor="White"
+                               x:Name="lb"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                    <BoxView Grid.Row="1"
+                                 x:Name="line"
+                                 Color="White"
+                                 WidthRequest="130"
+                                 HeightRequest="1"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="MediumSeaGreen" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="White" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="White" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="MediumSeaGreen" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="MediumSeaGreen" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+    </ur:UraniumContentPage.Resources>
+    
+    <Shell.TitleView>
+        <Grid>
+            <Label 
+            Text="الوسط الرشيق"
+                HorizontalOptions="End"
+                Margin="5"
+                FontSize="25"
+                FontAttributes="Bold"
+                TextColor="{StaticResource MainColor}">
+            </Label>
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="1">
+            <Border
+                   Margin="5"
+                   StrokeShape="RoundRectangle 10"
+                   BackgroundColor="ForestGreen"
+                   Padding="0">
+                <Label
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="25"
+                        TextColor="White"
+                        Text="Developed By : Amr Yakout"/>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ur:UraniumContentPage>

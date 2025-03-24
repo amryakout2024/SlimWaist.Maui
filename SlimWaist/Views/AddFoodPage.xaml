@@ -146,7 +146,7 @@
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Padding="0" 
             input:FormView.IsSubmitButton="True"
             StyleClass="FilledButton"

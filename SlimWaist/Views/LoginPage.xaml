@@ -80,20 +80,20 @@
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
             Command="{Binding LoginCommand}"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Padding="0"/>
         
         <HorizontalStackLayout>
             <Label
                 FontSize="15"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="Center"
             Text="اذا لم يكن لك رقم عضوية قم "/>
             <Label 
                 Text="بتسجيل عضوية جديدة"
                 FontSize="16"
                 BackgroundColor="Transparent"
                 TextColor="DodgerBlue"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="Center"
                 Padding="0" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer 

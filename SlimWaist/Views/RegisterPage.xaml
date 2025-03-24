@@ -22,10 +22,10 @@
     <Shell.TitleView>
         <Label 
             Text="عضوية جديدة"
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
             TextColor="White"
             HorizontalTextAlignment="Center"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             FontSize="25"/>
     </Shell.TitleView>
 
@@ -162,7 +162,7 @@
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Padding="0" 
             input:FormView.IsSubmitButton="True"
             StyleClass="FilledButton"
@@ -302,7 +302,7 @@
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Padding="0" 
             input:FormView.IsSubmitButton="True"
             StyleClass="FilledButton"

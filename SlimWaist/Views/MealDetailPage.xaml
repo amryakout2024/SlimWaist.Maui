@@ -31,11 +31,11 @@
             <Label Text="مكونات الوجبة"
                Grid.Row="0"
                TextDecorations="Underline"
-               HorizontalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
                FontAttributes="Bold"
                TextColor="{StaticResource MainColor}"
                FontSize="25"
-               VerticalOptions="CenterAndExpand"/>
+               VerticalOptions="Center"/>
 
             <CollectionView Grid.Row="3"
                         SelectionMode="Single"
@@ -111,7 +111,7 @@
 
                                 </VerticalStackLayout>
                                 <!--<VerticalStackLayout Grid.Column="1"
-                                                 VerticalOptions="CenterAndExpand">
+                                                 VerticalOptions="Center">
                                     <Image Source="cartfull"/>
                                     <Image 
                                         BackgroundColor="DarkSlateBlue"

@@ -12,7 +12,7 @@ namespace SlimWaist.Models
 {
 	public class DataContext
 	{
-		public const string DbName = "SlimWaist2";
+		public const string DbName = "SlimWaist4";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -26,9 +26,6 @@ namespace SlimWaist.Models
 		{
             try
             {
-
-                //BodyActivity bodyActivityTest = Database.Table<BodyActivity>().Where(x => x.BodyActivityId == 1).FirstOrDefault();
-
                 Database.CreateTable<Membership>();
 
                 Database.CreateTable<Gender>();
@@ -51,6 +48,8 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<Diet>();
 
+                Database.Insert(new Setting() { Id = 1 });
+
                 List<Diet> diets = new List<Diet>()
                 {
                     new Diet()
@@ -69,10 +68,12 @@ namespace SlimWaist.Models
                         DietDescription="ccccccccccccc"
                     },
                 };
+
                 foreach (Diet diet in diets)
                 {
                     Database.Insert(diet);
                 }
+
                 List<Gender> genders = new List<Gender>()
                     {
                         new Gender(){GenderId=1,GenderName="ذكر"},
@@ -102,6 +103,7 @@ namespace SlimWaist.Models
                     new Regime(){RegimeId=2,RegimeName="منخفض الكربوهيدرات"},
                     new Regime(){RegimeId=3,RegimeName="حصص غذائية"},
                 };
+
                 foreach (Regime regime in regimes)
                 {
                     Database.Insert(regime);
@@ -590,6 +592,12 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             await CheckDatabaseInitialization();
 
             Database.Insert(t);
+        }
+        public async Task UpdateAsync<T>(T t) where T : new()
+        {
+            await CheckDatabaseInitialization();
+
+            Database.Update(t);
         }
 
         public async Task DeleteAsync<T>(T t) where T : new()

@@ -34,16 +34,16 @@
             <Label Grid.Column="1"
             Text="سعرات اليوم"
             FontAttributes="Bold"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             Margin="5"
             TextColor="{StaticResource MainColor}">
             </Label>
             <Label 
             Text="{Binding DayTotalCalories}"
             FontAttributes="Bold"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             Margin="5"
             TextColor="{StaticResource MainColor}">
             </Label>
