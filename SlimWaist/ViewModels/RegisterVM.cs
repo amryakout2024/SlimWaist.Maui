@@ -87,16 +87,10 @@ namespace SlimWaist.ViewModels
             BodyActivities =await _dataContext.LoadAsync<BodyActivity>();
 
             SelectedBodyActivity = BodyActivities.FirstOrDefault()?? new BodyActivity();
-
-            Email = "amrnewstory@gmail.com";
-            Password = "1";
-            Name = "عمرو ياقوت";
-            Height = "180";
-            Weight = "91";
         }
 
         [RelayCommand]
-        private async void SaveNewMemberShip()
+        private async Task SaveNewMemberShip()
         {
             Gender = IsMale ? "ذكر" : "أنثي";
 
@@ -233,7 +227,7 @@ namespace SlimWaist.ViewModels
                 }
 
             }
-            else if (bodyActivity == "قليل النشاط")
+            else if (bodyActivity == "منخفض النشاط")
             {
                 if (Convert.ToDouble(BMI) < 18.5)
                 {

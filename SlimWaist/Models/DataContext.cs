@@ -12,7 +12,7 @@ namespace SlimWaist.Models
 {
 	public class DataContext
 	{
-		public const string DbName = "SlimWaist4";
+		public const string DbName = "SlimWaist11";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -47,6 +47,23 @@ namespace SlimWaist.Models
                 Database.CreateTable<MealDetail>();
 
                 Database.CreateTable<Diet>();
+
+                Database.Insert(new Membership()
+                {
+                    Name = "عمرو ياقوت",
+                    Email = "amrnewstory@gmail.com",
+                    Password = "1",
+                    Height = 180,
+                    Weight = 90,
+                    WeightDate = "26/03/2025",
+                    BirthDate = "26/03/2025",
+                    Gender = "ذكر",
+                    BodyActivity = "منخفض النشاط",
+                    BMI = "27.78",
+                    IdealWeight = "72.98",
+                    ModifiedWeight = "79.79",
+                    TotalEnergy = "1595.8"
+                });
 
                 Database.Insert(new Setting() { Id = 1 });
 
