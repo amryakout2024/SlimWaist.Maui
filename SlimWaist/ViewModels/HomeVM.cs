@@ -74,7 +74,7 @@ namespace SlimWaist.ViewModels
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            MemberShip = memberShips.Where(x=>x.Id== setting.SavedMemberShipId).FirstOrDefault();
+            MemberShip = memberShips.Where(x=>x.Id== setting.CurrentMemberShipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
            

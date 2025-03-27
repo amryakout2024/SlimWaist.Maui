@@ -10,8 +10,10 @@
              x:Name="this"
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="True"
              FlowDirection="RightToLeft">
+
     <ur:UraniumContentPage.Resources>
         <ControlTemplate x:Key="RadioButtonTemplate">
             <Border Stroke="Green"
@@ -79,37 +81,160 @@
                     Value="{StaticResource RadioButtonTemplate}" />
         </Style>
     </ur:UraniumContentPage.Resources>
-    
-    <Shell.TitleView>
-        <Grid>
+   
+    <Grid 
+        RowDefinitions="auto,auto,*,auto,auto"
+        BackgroundColor="WhiteSmoke">
+        <Grid
+            Grid.Row="0"
+            HeightRequest="80"
+            VerticalOptions="Start"
+            BackgroundColor="{StaticResource MainColor}">
             <Label 
             Text="الوسط الرشيق"
-                HorizontalOptions="End"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
                 Margin="5"
                 FontSize="25"
                 FontAttributes="Bold"
-                TextColor="{StaticResource MainColor}">
+                TextColor="White">
             </Label>
         </Grid>
-    </Shell.TitleView>
-
-    <Grid RowDefinitions="*,auto">
-        <ScrollView Grid.Row="0">
-
-        </ScrollView>
-        <VerticalStackLayout Grid.Row="1">
-            <Border
-                   Margin="5"
-                   StrokeShape="RoundRectangle 10"
-                   BackgroundColor="ForestGreen"
-                   Padding="0">
-                <Label
-                        HorizontalOptions="Center"
+        <Border
+            Grid.Row="1"
+            Margin="-5"
+            StrokeThickness="1"
+            HeightRequest="80"
+            BackgroundColor="White"
+            Padding="10">
+            <Grid ColumnDefinitions="*,auto">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label
+                HorizontalOptions="Start"
+                FontSize="25"
+                TextColor="Black"
+                Text="{Binding Name}"/>
+                    <Label
+                HorizontalOptions="Start"
+                FontSize="18"
+                TextColor="{StaticResource MainColor}"
+                Text="تعديل تفاصيل الحساب"/>
+                </VerticalStackLayout>
+                <Image
+                    Grid.Column="1"
+                    Scale="0.6"
+                    Source="back1.png">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                    </Image.Behaviors>
+                </Image>
+            </Grid>
+        </Border>
+        <ScrollView Grid.Row="2">
+            <Grid
+                Padding="10"
+                RowSpacing="10"
+                Margin="0,5,0,0"
+                RowDefinitions="auto,auto,auto,auto,*">
+                <Border
+                    Grid.Row="0"
+                    HeightRequest="75"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="White"
+                    Padding="5">
+                    <Label
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    FontSize="25"
+                    TextColor="Black"
+                    Text="الاعدادات 1"/>
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    HeightRequest="75"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="White"
+                    Padding="5">
+                    <Label
+                        HorizontalOptions="Start"
                         VerticalOptions="Center"
                         FontSize="25"
-                        TextColor="White"
-                        Text="Developed By : Amr Yakout"/>
-            </Border>
-        </VerticalStackLayout>
+                        TextColor="Black"
+                        Text="الاعدادات 2"/>
+                </Border>
+                <Border
+                    Grid.Row="2"
+                    HeightRequest="75"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="White"
+                    Padding="5">
+                    <Label
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        FontSize="25"
+                        TextColor="Black"
+                        Text="الاعدادات 3"/>
+                </Border>
+                <Border
+                    Grid.Row="3"
+                    HeightRequest="75"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="White"
+                    Padding="5">
+                    <Label
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        FontSize="25"
+                        TextColor="Black"
+                        Text="الاعدادات 4"/>
+                </Border>
+                <Border
+                    Grid.Row="4"
+                    StrokeThickness="1"
+                    VerticalOptions="End"
+                    StrokeShape="RoundRectangle 10"
+                    HeightRequest="70"
+                    BackgroundColor="White"
+                    Padding="5">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogOutCommand}"/>
+                    </Border.GestureRecognizers>
+
+                    <HorizontalStackLayout Grid.Column="0">
+                        <Image
+                            Scale="0.6"
+                            Source="logoutrounded.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="Red"/>
+                            </Image.Behaviors>
+                        </Image>
+                        <Label
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            FontSize="22"
+                            TextColor="Red"
+                            Text="تسجيل الخروج"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+            </Grid>
+        </ScrollView>
+        <Grid Grid.Row="4"
+              HeightRequest="60">
+            <Label
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                FontSize="18"
+                TextColor="Gray"
+                Text="الإصدار 1.5.1"/>
+        </Grid>
     </Grid>
 </ur:UraniumContentPage>
+<!--<Border.Stroke>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="Orange"
+                          Offset="0.1" />
+                    <GradientStop Color="Brown"
+                          Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Stroke>-->

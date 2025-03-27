@@ -25,6 +25,7 @@ public partial class SettingPage : UraniumContentPage
 		InitializeComponent();
 
 		_settingVM = settingVM;
+
         _dataContext = dataContext;
         
 		BindingContext = _settingVM;
@@ -42,8 +43,6 @@ public partial class SettingPage : UraniumContentPage
     protected async override void OnBindingContextChanged()
     {
         base.OnBindingContextChanged();
-
-        await _dataContext.init();
 
         await _settingVM.init();
 

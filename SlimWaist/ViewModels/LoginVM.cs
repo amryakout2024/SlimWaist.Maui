@@ -32,9 +32,9 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Email = "amrnewstory@gmail.com";
+            //Email = "amrnewstory@gmail.com";
 
-            Password = "1";
+            //Password = "1";
 
             IsCheckBoxChecked = false;
 
@@ -75,11 +75,19 @@ namespace SlimWaist.ViewModels
 
                 if (IsPassWordMatchWithEmail)
                 {
+                    var memberShips = await _dataContext.LoadAsync<Membership>();
+
                     if (IsCheckBoxChecked)
                     {
-                        var memberShips = await _dataContext.LoadAsync<Membership>();
-
                         setting.SavedMemberShipId = memberShips.Where(x=>x.Email==Email).Select(x=>x.Id).FirstOrDefault();
+
+                        setting.CurrentMemberShipId = memberShips.Where(x=>x.Email==Email).Select(x=>x.Id).FirstOrDefault();
+
+                        await _dataContext.UpdateAsync<Setting>(setting);
+                    }
+                    else
+                    {
+                        setting.CurrentMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
 
                         await _dataContext.UpdateAsync<Setting>(setting);
                     }

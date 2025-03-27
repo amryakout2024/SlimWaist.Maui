@@ -12,6 +12,8 @@ namespace SlimWaist.Models
         [PrimaryKey]
         public int Id { get; set; }
 
+        public int CurrentMemberShipId { get; set; }=0;
+
         public int SavedMemberShipId { get; set; }=0;
 
     }

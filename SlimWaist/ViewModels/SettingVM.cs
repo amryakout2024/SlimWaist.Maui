@@ -57,17 +57,10 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string? _totalEnergy;
 
-        [ObservableProperty]
-        private ObservableCollection<RegimeList> _regimeLists;
-
         Setting setting;
 
         public async Task init()
         {
-            //Preferences.Set("Email", "");
-
-            //File.Delete(DataContext.DbPath);
-
             var memberShips =await _dataContext.LoadAsync<Membership>();
 
             var settings = await _dataContext.LoadAsync<Setting>();
@@ -95,18 +88,6 @@ namespace SlimWaist.ViewModels
             ModifiedWeight = MemberShip?.ModifiedWeight ?? "";
 
             TotalEnergy = MemberShip?.TotalEnergy ?? "";
-
-            RegimeLists = null;
-            //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
-
-            //var MaxRegimeId = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Select(x=>x.RegimeId).Max();
-
-            //var FilteredRegimeList = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Where(x => x.RegimeId == MaxRegimeId);
-
-            //foreach (var r in FilteredRegimeList)
-            //{
-            //    RegimeLists.Add(r);
-            //}
             
         }
 
@@ -117,7 +98,7 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async void LogOut()
+        private async Task LogOut()
         {
             setting.SavedMemberShipId = 0;
 

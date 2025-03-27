@@ -9,7 +9,7 @@
     FlowDirection="RightToLeft"
     Title="SlimWaist" >
     <Shell.Behaviors>
-        <toolkit:StatusBarBehavior StatusBarColor="DarkSlateBlue"/>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource MainColor}"/>
     </Shell.Behaviors>
 
     <Shell.BackButtonBehavior>
