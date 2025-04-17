@@ -106,6 +106,9 @@
             BackgroundColor="White"
             Padding="10">
             <Grid ColumnDefinitions="*,auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToProfilePageCommand}"/>
+                </Grid.GestureRecognizers>
                 <VerticalStackLayout Grid.Column="0">
                     <Label
                 HorizontalOptions="Start"
@@ -130,10 +133,11 @@
             </Grid>
         </Border>
         
-        <ScrollView Grid.Row="2">
-            <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="2" 
+                    VerticalScrollBarVisibility="Never"
+                    HorizontalScrollBarVisibility="Never">
+            <Grid RowDefinitions="*,auto" Padding="10">
                 <VerticalStackLayout Grid.Row="0"
-                Padding="10"
                 Margin="0,5,0,0">
                     <Border
                     Grid.Row="0"
@@ -159,7 +163,6 @@
                     </Border>
                     <Border
                     Grid.Row="1"
-                    HeightRequest="75"
                     Margin="0,0,0,10"
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="White"
@@ -182,11 +185,11 @@
                     </Border>
                 </VerticalStackLayout>
                 <Border Grid.Row="1"
-            StrokeThickness="1"
-            VerticalOptions="End"
-            StrokeShape="RoundRectangle 10"
-            BackgroundColor="White"
-            Padding="5">
+                    StrokeThickness="1"
+                    VerticalOptions="End"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="White"
+                    Padding="5">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding LogOutCommand}"/>
                     </Border.GestureRecognizers>

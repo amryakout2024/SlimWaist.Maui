@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.ApplicationModel.Communication;
+using Microsoft.Maui.Storage;
 using SlimWaist.Helpers;
 using SlimWaist.Models;
+using SlimWaist.Popups;
 using SlimWaist.Views;
 using System;
 using System.Collections.Generic;
@@ -9,12 +12,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class SettingVM(DataContext dataContext,Setting setting):BaseVM
+    public partial class ProfileVM(DataContext dataContext, Setting setting) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly Setting _setting = setting;
@@ -23,7 +24,7 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private Membership? _memberShipFromQueryProperty;
-        
+
         [ObservableProperty]
         private string _email;
 
@@ -35,6 +36,9 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string? _gender;
+
+        [ObservableProperty]
+        private bool _isMale;
 
         [ObservableProperty]
         private string? _weight;
@@ -60,27 +64,50 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string? _totalEnergy;
 
+        [ObservableProperty]
+        private ObservableCollection<RegimeList> _regimeLists;
+
+        [ObservableProperty]
+        private List<BodyActivity> _bodyActivities;
+
+        [ObservableProperty]
+        private bool _isShowChangePasswordGrid=false;
+
         Setting setting;
 
         public async Task init()
         {
-            var memberShips =await _dataContext.LoadAsync<Membership>();
+            //Preferences.Set("Email", "");
+
+            //File.Delete(DataContext.DbPath);
+
+            var memberShips = await _dataContext.LoadAsync<Membership>();
 
             var settings = await _dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            MemberShip = memberShips.Where(x=>x.Id== setting.SavedMemberShipId).FirstOrDefault();
+            MemberShip = memberShips.Where(x => x.Id == setting.SavedMemberShipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
-           
+
+            Email = MemberShip?.Email ?? "";
+
             Weight = MemberShip?.Weight.ToString() ?? "";
-           
+
             Height = MemberShip?.Height.ToString() ?? "";
 
             BirthDate = MemberShip?.BirthDate ?? "";
 
             Gender = MemberShip?.Gender ?? "";
+
+            IsMale=(Gender=="ذكر")? true:false;
+
+            BodyActivity = MemberShip?.BodyActivity ?? "";
+
+            BodyActivities = await _dataContext.LoadAsync<BodyActivity>();
+
+            SelectedBodyActivity = BodyActivities.Where(x => x.BodyActivityName == MemberShip.BodyActivity).FirstOrDefault();
 
             BMI = MemberShip?.BMI ?? "";
 
@@ -89,17 +116,35 @@ namespace SlimWaist.ViewModels
             ModifiedWeight = MemberShip?.ModifiedWeight ?? "";
 
             TotalEnergy = MemberShip?.TotalEnergy ?? "";
-            
+
+            RegimeLists = null;
+            //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
+
+            //var MaxRegimeId = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Select(x=>x.RegimeId).Max();
+
+            //var FilteredRegimeList = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Where(x => x.RegimeId == MaxRegimeId);
+
+            //foreach (var r in FilteredRegimeList)
+            //{
+            //    RegimeLists.Add(r);
+            //}
+
         }
 
         [RelayCommand]
-        private async Task GoToProfilePage()
+        private async Task GoToDietsPage()
         {
-            await GoToAsyncWithStack(nameof(ProfilePage),true);
+            await GoToAsyncWithStack(nameof(DietsPage), true);
         }
 
         [RelayCommand]
-        private async Task LogOut()
+        private async Task UpdateMemberShip()
+        {
+
+        }
+
+        [RelayCommand]
+        private async void LogOut()
         {
             setting.SavedMemberShipId = 0;
 

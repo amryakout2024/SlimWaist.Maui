@@ -34,6 +34,7 @@ namespace SlimWaist
             typeof(AddFoodPage),
             typeof(DietsPage),
             typeof(SettingPage),
+            typeof(ProfilePage),
         ];
 
         private static void RegisterRoutes()

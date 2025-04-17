@@ -46,7 +46,7 @@
             ContentTemplate="{DataTemplate v:SettingPage}"
             Route="SettingPage"
             Title="الإعدادات"
-            Icon="setting.png"/>
+            Icon="setting1.png"/>
     </TabBar>
 
 </Shell>

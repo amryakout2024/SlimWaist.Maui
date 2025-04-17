@@ -434,6 +434,13 @@
         <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource MainColor}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
     </Style>
+    
+    <!--<Style TargetType="Shell" ApplyToDerivedTypes="False">
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource MainColor}, Dark={StaticResource Black}}" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
+    </Style>-->
 
     <Style TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />

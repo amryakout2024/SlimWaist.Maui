@@ -98,6 +98,9 @@ namespace SlimWaist
             builder.Services.AddSingleton<SettingPage>()
                             .AddSingleton<SettingVM>();
 
+            builder.Services.AddSingleton<ProfilePage>()
+                            .AddSingleton<ProfileVM>();
+
             //builder.Services.AddSingleton<TabbarBadgeRenderer>();
             builder.Services.AddSingleton<DataContext>();
             builder.Services.AddSingleton<Setting>();
