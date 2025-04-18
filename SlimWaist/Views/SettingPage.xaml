@@ -138,50 +138,88 @@
                     HorizontalScrollBarVisibility="Never">
             <Grid RowDefinitions="*,auto" Padding="10">
                 <VerticalStackLayout Grid.Row="0"
-                Margin="0,5,0,0">
+                    Margin="0,5,0,0">
                     <Border
-                    Grid.Row="0"
-                    Margin="0,0,0,10"
-                    StrokeShape="RoundRectangle 10"
-                    BackgroundColor="White"
-                    Padding="5">
-                        <VerticalStackLayout>
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="0">
+                        <HorizontalStackLayout>
+                            <Image
+                                Scale="0.5"
+                                Source="languageskill.png">
+                            </Image>
                             <Label
                                 FontAttributes="Bold"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center"
-                    FontSize="18"
-                    TextColor="Black"
-                    Text="الاعدادات 1"/>
-                            <Label
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center"
-                    FontSize="16"
-                    TextColor="Black"
-                    Text="الوصف 1"/>
-                        </VerticalStackLayout>
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="18"
+                                TextColor="Black"
+                                Text="اللغة"/>
+                        </HorizontalStackLayout>
                     </Border>
                     <Border
-                    Grid.Row="1"
-                    Margin="0,0,0,10"
-                    StrokeShape="RoundRectangle 10"
-                    BackgroundColor="White"
-                    Padding="5">
-                        <VerticalStackLayout>
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="0">
+                        <HorizontalStackLayout>
+                            <Image
+                                Scale="0.5"
+                                Source="rules.png">
+                            </Image>
                             <Label
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        FontSize="18"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            FontSize="18"
+                            TextColor="Black"
+                            Text="الشروط و الأحكام"/>
+                        </HorizontalStackLayout>
+                    </Border>
+                    <Border
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="0">
+                        <HorizontalStackLayout>
+                            <Image
+                                Scale="0.5"
+                                Source="contactus.png">
+                            </Image>
+                            <Label
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            FontSize="18"
+                            TextColor="Black"
+                            Text="تواصل معنا"/>
+                        </HorizontalStackLayout>
+
+                    </Border>
+                    <Border
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="0">
+                        <HorizontalStackLayout>
+                            <Image
+                                Scale="0.5"
+                                Source="like.png">
+                            </Image>
+                            <Label
                                 FontAttributes="Bold"
-                        TextColor="Black"
-                        Text="الاعدادات 2"/>
-                            <Label
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        FontSize="14"
-                        TextColor="Black"
-                        Text="الوصف 2"/>
-                        </VerticalStackLayout>
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"
+                                FontSize="18"
+                                TextColor="Black"
+                                Text="هل أعجبك التطبيق ؟"/>
+                        </HorizontalStackLayout>
+
                     </Border>
                 </VerticalStackLayout>
                 <Border Grid.Row="1"
@@ -189,7 +227,7 @@
                     VerticalOptions="End"
                     StrokeShape="RoundRectangle 10"
                     BackgroundColor="White"
-                    Padding="5">
+                    Padding="0">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding LogOutCommand}"/>
                     </Border.GestureRecognizers>
