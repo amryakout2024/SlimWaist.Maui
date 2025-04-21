@@ -10,7 +10,7 @@ namespace SlimWaist.Models
 {
     public class Membership
     {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
 
         public int Id { get; set; }
 
@@ -40,6 +40,7 @@ namespace SlimWaist.Models
 
         public string? TotalEnergy { get; set; }
 
+        public string? CultureInfo { get; set; } = "ar-SA";
     }
 
 }

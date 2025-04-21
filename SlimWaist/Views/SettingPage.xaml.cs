@@ -11,6 +11,9 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Views;
+using SlimWaist.Popups;
+using SlimWaist.Extentions;
 
 namespace SlimWaist.Views;
 
@@ -19,6 +22,10 @@ public partial class SettingPage : UraniumContentPage
 	private readonly SettingVM _settingVM;
 
 	private readonly DataContext _dataContext;
+    private List<Membership> memberships;
+    private Membership membership;
+    private Setting setting;
+    private List<Setting> settings;
 
     public SettingPage(SettingVM settingVM,DataContext dataContext)
 	{
@@ -27,9 +34,8 @@ public partial class SettingPage : UraniumContentPage
 		_settingVM = settingVM;
 
         _dataContext = dataContext;
-        
-		BindingContext = _settingVM;
 
+        BindingContext = _settingVM;
 
         SetBannerId();
     }
@@ -42,9 +48,34 @@ public partial class SettingPage : UraniumContentPage
 
     protected async override void OnBindingContextChanged()
     {
+
+#if ANDROID
+
         base.OnBindingContextChanged();
 
+        memberships = await _dataContext.LoadAsync<Membership>();
+
+        settings = await _dataContext.LoadAsync<Setting>();
+
+        setting = settings.Where(x => x.Id == 1).FirstOrDefault()??new Setting();
+
+        membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault() ?? new Membership();
+
+        if (membership.CultureInfo == "ar-SA")
+        {
+            ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+
+            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        }
+        else
+        {
+            ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+        }
+
         await _settingVM.init();
+#endif
 
     }
 
@@ -54,4 +85,12 @@ public partial class SettingPage : UraniumContentPage
 
         return true;
 	}
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        var popup = new LanguagePopup(_dataContext);
+
+        this.ShowPopup(popup);
+
+    }
 }

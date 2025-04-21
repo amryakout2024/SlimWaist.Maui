@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Popups.LanguagePopup"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
+               Color="White"
+             Shell.TabBarIsVisible="False">
+    <Border StrokeThickness="1"
+            Stroke="Gray" Padding="20">
+        <VerticalStackLayout>
+            <mat:RadioButton
+                x:Name="arabic"
+                Checked="arabic_Checked"
+                Text="العربية"/>
+            <mat:RadioButton
+                x:Name="english"
+                Checked="english_Checked"
+                Text="English"/>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

@@ -7,13 +7,14 @@
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SlimWaist.Views.HomePage"
-             Shell.NavBarIsVisible="True"
+             Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="True"
              BackgroundColor="White"
-             FlowDirection="RightToLeft">
+             FlowDirection="{extention:FlowDirectionsExtention}">
     <ur:UraniumContentPage.Resources>
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -30,8 +31,12 @@
 
     </ur:UraniumContentPage.Resources>
     
-    <Shell.TitleView>
-        <Grid ColumnDefinitions="auto,*">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" Command="{Binding GoBackCommand}"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid RowDefinitions="auto,auto,auto,auto,*" RowSpacing="5" Margin="5">
+        <Grid Grid.Row="0"  ColumnDefinitions="auto,*">
             <!--<ImageButton
                 Grid.Column="0"
                 Source="setting.png"
@@ -41,8 +46,7 @@
             <Label 
                 Grid.Column="1"
                 Margin="0,0,5,0"
-                VerticalOptions="Center" 
-                HorizontalOptions="End">
+                VerticalOptions="Center">
                 <Label.FormattedText>
                     <FormattedString>
                         <FormattedString.Spans>
@@ -60,14 +64,8 @@
             </Label>
 
         </Grid>
-    </Shell.TitleView>
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" Command="{Binding GoBackCommand}"/>
-    </Shell.BackButtonBehavior>
-
-    <Grid RowDefinitions="auto,auto,auto,*" RowSpacing="5" Margin="5">
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1">
             <Label 
                 Text="تحليل كتلة الجسم"
                 FontSize="15"
@@ -82,7 +80,7 @@
 
         </Grid>
         
-        <Border Grid.Row="1"
+        <Border Grid.Row="2"
             BackgroundColor="WhiteSmoke"
                 Padding="10"
                 StrokeThickness="1.5"
@@ -153,7 +151,7 @@
             </Grid>
         </Border>
         
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Label 
                 Text="نظام الدايت الحالي"
                 FontSize="15"
@@ -172,7 +170,7 @@
 
         </Grid>
 
-        <CollectionView Grid.Row="3" ItemsSource="{Binding RegimeLists}">
+        <CollectionView Grid.Row="4" ItemsSource="{Binding RegimeLists}">
             <CollectionView.ItemTemplate >
                 <DataTemplate>
                     <Border 

@@ -17,23 +17,30 @@ namespace SlimWaist
         }
 
         //disable font change in user device
-        public override Resources? Resources
+        //public override Resources? Resources
+        //{
+        //    get
+        //    {
+        //        Resources resource = base.Resources;
+        //        Configuration configuration = new Configuration();
+        //        configuration.SetToDefaults();
+        //        if (Build.VERSION.SdkInt >= BuildVersionCodes.NMr1)
+        //        {
+        //            return CreateConfigurationContext(configuration).Resources;
+        //        }
+        //        else
+        //        {
+        //            resource.UpdateConfiguration(configuration, resource.DisplayMetrics);
+        //            return resource;
+        //        }
+        //    }
+        //}
+
+        protected override void OnStop()
         {
-            get
-            {
-                Resources resource = base.Resources;
-                Configuration configuration = new Configuration();
-                configuration.SetToDefaults();
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.NMr1)
-                {
-                    return CreateConfigurationContext(configuration).Resources;
-                }
-                else
-                {
-                    resource.UpdateConfiguration(configuration, resource.DisplayMetrics);
-                    return resource;
-                }
-            }
+            base.OnStop();
+
+           
         }
     }
 }

@@ -109,7 +109,7 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async Task GoBack()
+        private async Task ShowLanguagePopup()
         {
 
         }

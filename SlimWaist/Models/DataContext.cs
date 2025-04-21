@@ -12,11 +12,19 @@ namespace SlimWaist.Models
 {
 	public class DataContext
 	{
-		public const string DbName = "SlimWaist12";
+		public const string DbName = "SlimWaist17";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
-		public SQLiteConnection Database = 
+        public static List<Membership> memberships = new List<Membership>();
+
+        public static List<Setting> settings = new List<Setting>();
+
+        public static Membership membership;
+
+        public static Setting setting;
+
+        public SQLiteConnection Database = 
             new SQLiteConnection(
             DbPath, SQLiteOpenFlags.Create |
             SQLiteOpenFlags.ReadWrite | 

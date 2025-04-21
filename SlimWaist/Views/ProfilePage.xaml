@@ -6,6 +6,7 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -14,8 +15,7 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.NavBarIsVisible="True"
-             Shell.TabBarIsVisible="False"
-             FlowDirection="RightToLeft">
+             Shell.TabBarIsVisible="False">
 
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">

@@ -1,30 +1,26 @@
-﻿using SlimWaist.Models;
+﻿using SlimWaist.Extentions;
+using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
+using System.Globalization;
 
 namespace SlimWaist
 {
     public partial class App : Application
     {
-        private readonly AppShellVM _appShellVM;
-
         private readonly DataContext _dataContext;
-        //private readonly TabbedFoodsVM _tabbedFoodsVM;
 
-        public App(AppShellVM appShellVM, DataContext dataContext)
+        public App(DataContext dataContext)
         {
             InitializeComponent();
 
-            _appShellVM = appShellVM;
-
             _dataContext = dataContext;
-
-            MainPage = new AppShell(_appShellVM);
 
             InitializeDatabase();
 
-            //Helpers.ReadExcel.ReadExcelSheet();
+            MainPage = new AppShell(_dataContext);
 
+            //Helpers.ReadExcel.ReadExcelSheet();
         }
 
         private async Task InitializeDatabase()

@@ -14,8 +14,7 @@
              Shell.NavBarIsVisible="True"
              x:Name="this"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="White"
-             FlowDirection="RightToLeft">
+             BackgroundColor="White">
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
             <Setter Property="TextColor" Value="Red" />
