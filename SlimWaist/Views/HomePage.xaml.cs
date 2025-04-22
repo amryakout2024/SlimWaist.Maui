@@ -32,56 +32,24 @@ public partial class HomePage : UraniumContentPage
 
         BindingContext = _homeVM;
 
-        //memberships = DataContext.memberships;
-
-        //settings=DataContext.settings;
-
-        //setting = settings.Where(x => x.Id == 1).FirstOrDefault() ?? new Setting();
-
-        //membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault() ?? new Membership();
-
-        //if (membership.CultureInfo == "ar-SA")
+        //if (DataContext.membership.CultureInfo == "ar-SA")
         //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
         //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+        //    this.FlowDirection = FlowDirection.RightToLeft;
+
+
         //}
         //else
         //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-        //    CultureInfo.CurrentCulture = new CultureInfo("en-US");
+        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+        //    this.FlowDirection = FlowDirection.LeftToRight;
         //}
-
-//#if ANDROID
-
-//        Dispatcher.DispatchAsync(async() =>
-//        {
-
-//            memberships = await _dataContext.LoadAsync<Membership>();
-
-//            settings = await _dataContext.LoadAsync<Setting>();
-
-//            setting = settings.Where(x => x.Id == 1).FirstOrDefault() ?? new Setting();
-
-//            membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault() ?? new Membership();
-
-//            if (membership.CultureInfo == "ar-SA")
-//            {
-//                ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-//                CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-//            }
-//            else
-//            {
-//                ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
-
-//                CultureInfo.CurrentCulture = new CultureInfo("en-US");
-//            }
-
-
-//        });
-//#endif
 
     }
 

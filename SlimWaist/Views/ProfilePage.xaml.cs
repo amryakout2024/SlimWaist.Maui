@@ -38,6 +38,23 @@ namespace SlimWaist.Views
 
             SetBannerId();
 
+            if (DataContext.membership.CultureInfo == "ar-SA")
+            {
+                //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+
+                CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+                this.FlowDirection = FlowDirection.RightToLeft;
+            }
+            else
+            {
+                //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+
+                CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+                this.FlowDirection = FlowDirection.LeftToRight;
+            }
+
         }
         private void SetBannerId()
         {
@@ -46,37 +63,11 @@ namespace SlimWaist.Views
             //#endif
         }
 
-        protected async override void OnBindingContextChanged()
+        protected async override void OnNavigatedTo(NavigatedToEventArgs args)
         {
-
-#if ANDROID
-
-            base.OnBindingContextChanged();
-
-            memberships = await _dataContext.LoadAsync<Membership>();
-
-            settings = await _dataContext.LoadAsync<Setting>();
-
-            setting = settings.Where(x => x.Id == 1).FirstOrDefault() ?? new Setting();
-
-            membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault() ?? new Membership();
-
-            if (membership.CultureInfo == "ar-SA")
-            {
-                ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-                CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-            }
-            else
-            {
-                ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
-
-                CultureInfo.CurrentCulture = new CultureInfo("en-US");
-            }
+            base.OnNavigatedTo(args);
 
             await _profileVM.init();
-#endif
-
         }
 
         protected override bool OnBackButtonPressed()

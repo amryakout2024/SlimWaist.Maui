@@ -8,10 +8,10 @@ namespace SlimWaist
     public partial class AppShell : Shell
     {
         private readonly DataContext _dataContext;
-        private List<Membership> memberships;
+        private List<Membership> memberships=new List<Membership>();
         private Membership membership;
         private Setting setting;
-        private List<Setting> settings;
+        private List<Setting> settings=new List<Setting>();
 
         public AppShell(DataContext dataContext)
         {
@@ -21,53 +21,31 @@ namespace SlimWaist
 
             _dataContext = dataContext;
 
-            //Dispatcher.DispatchAsync(async () =>
-            //{
-            //    memberships = await _dataContext.LoadAsync<Membership>();
+        }
 
-            //    settings = await _dataContext.LoadAsync<Setting>();
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
 
-            //    setting = settings.Where(x => x.Id == 1).FirstOrDefault();
+            DataContext.memberships = await _dataContext.LoadAsync<Membership>();
 
-            //    membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
+            DataContext.settings = await _dataContext.LoadAsync<Setting>();
 
-            //    if (membership.CultureInfo == "ar-SA")
-            //    {
-            //        this.FlowDirection = FlowDirection.RightToLeft;
-            //    }
-            //    else
-            //    {
-            //        this.FlowDirection = FlowDirection.LeftToRight;
-            //    }
+            DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            //});
+            DataContext.membership = DataContext.memberships.Where(x => x.Id ==DataContext.setting.CurrentMemberShipId).FirstOrDefault();
+            
+            if (DataContext.membership.CultureInfo == "ar-SA")
+            {
+                this.FlowDirection = FlowDirection.RightToLeft;
 
-
-            //Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            }
+            else
+            {
+                this.FlowDirection = FlowDirection.LeftToRight;
+            }
 
         }
-        //protected async override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-
-        //    DataContext.memberships = await _dataContext.LoadAsync<Membership>();
-
-        //    DataContext.settings = await _dataContext.LoadAsync<Setting>();
-
-        //    DataContext.setting = settings.Where(x => x.Id == 1).FirstOrDefault();
-
-        //    DataContext.membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
-
-        //    if (DataContext.membership.CultureInfo == "ar-SA")
-        //    {
-        //        this.FlowDirection = FlowDirection.RightToLeft;
-        //    }
-        //    else
-        //    {
-        //        this.FlowDirection = FlowDirection.LeftToRight;
-        //    }
-
-        //}
         private readonly static Type[] _routablePageTypes =
         [
             typeof(RegisterPage),

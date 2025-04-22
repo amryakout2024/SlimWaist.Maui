@@ -21,6 +21,7 @@ public partial class LoginPage : UraniumContentPage
 
     protected async override void OnAppearing()
     {
+
         await _loginVM.init();
     }
 }
