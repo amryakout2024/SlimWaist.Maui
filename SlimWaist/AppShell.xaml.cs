@@ -23,29 +23,29 @@ namespace SlimWaist
 
         }
 
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
+        //protected async override void OnAppearing()
+        //{
+        //    base.OnAppearing();
 
-            DataContext.memberships = await _dataContext.LoadAsync<Membership>();
+        //    DataContext.memberships = await _dataContext.LoadAsync<Membership>();
 
-            DataContext.settings = await _dataContext.LoadAsync<Setting>();
+        //    DataContext.settings = await _dataContext.LoadAsync<Setting>();
 
-            DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
+        //    DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            DataContext.membership = DataContext.memberships.Where(x => x.Id ==DataContext.setting.CurrentMemberShipId).FirstOrDefault();
+        //    DataContext.membership = DataContext.memberships.Where(x => x.Id ==DataContext.setting.CurrentMemberShipId).FirstOrDefault();
             
-            if (DataContext.membership.CultureInfo == "ar-SA")
-            {
-                this.FlowDirection = FlowDirection.RightToLeft;
+        //    if (DataContext.membership.CultureInfo == "ar-SA")
+        //    {
+        //        this.FlowDirection = FlowDirection.RightToLeft;
 
-            }
-            else
-            {
-                this.FlowDirection = FlowDirection.LeftToRight;
-            }
+        //    }
+        //    else
+        //    {
+        //        this.FlowDirection = FlowDirection.LeftToRight;
+        //    }
 
-        }
+        //}
         private readonly static Type[] _routablePageTypes =
         [
             typeof(RegisterPage),

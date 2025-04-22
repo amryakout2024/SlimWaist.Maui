@@ -9,8 +9,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SlimWaist.Views.LoginPage"
              Shell.NavBarIsVisible="False"
-             Title="LoginPage"
-             FlowDirection="RightToLeft">
+             Title="LoginPage">
     <ur:UraniumContentPage.Resources>
         <Style TargetType="mat:TextField" x:Key="InvalidMatTextFieldStyle">
             <Setter Property="TextColor" Value="Red"/>

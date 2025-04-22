@@ -30,7 +30,18 @@ namespace SlimWaist.Models
             SQLiteOpenFlags.ReadWrite | 
             SQLiteOpenFlags.SharedCache);
 
-		public async Task init()
+        public async Task LoadMemebershipAndSetting()
+        {
+            memberships = await LoadAsync<Membership>();
+
+            settings = await LoadAsync<Setting>();
+
+            setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
+
+            membership = DataContext.memberships.Where(x => x.Id == DataContext.setting.CurrentMemberShipId).FirstOrDefault();
+
+        }
+        public async Task init()
 		{
             try
             {

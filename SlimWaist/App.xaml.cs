@@ -18,6 +18,8 @@ namespace SlimWaist
 
             InitializeDatabase();
 
+            _dataContext.LoadMemebershipAndSetting();
+
             MainPage = new AppShell(_dataContext);
 
             //Helpers.ReadExcel.ReadExcelSheet();
