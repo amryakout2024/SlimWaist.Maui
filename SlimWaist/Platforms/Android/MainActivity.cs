@@ -14,21 +14,21 @@ namespace SlimWaist
         {
             base.OnCreate(savedInstanceState);
             // Disable font scaling
-            Resources.Configuration.FontScale = 1.0f;
+            //Resources.Configuration.FontScale = 1.0f;
             // Your existing code goes here
 
             //Forece app to run as RTL
 
 
-            if (DataContext.membership.CultureInfo == "ar-SA")
-            {
-                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
+            //if (DataContext.membership.CultureInfo == "ar-SA")
+            //{
+            //    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
 
-            }
-            else
-            {
-                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
-            }
+            //}
+            //else
+            //{
+            //    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
+            //}
 
 
         }

@@ -39,22 +39,22 @@ public partial class SettingPage : UraniumContentPage
 
         SetBannerId();
 
-        if (DataContext.membership.CultureInfo == "ar-SA")
-        {
-            //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        //if (DataContext.membership.CultureInfo == "ar-SA")
+        //{
+        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-            this.FlowDirection = FlowDirection.RightToLeft;
-        }
-        else
-        {
-            //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        //    this.FlowDirection = FlowDirection.RightToLeft;
+        //}
+        //else
+        //{
+        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-            this.FlowDirection = FlowDirection.LeftToRight;
-        }
+        //    this.FlowDirection = FlowDirection.LeftToRight;
+        //}
 
     }
     private void SetBannerId()

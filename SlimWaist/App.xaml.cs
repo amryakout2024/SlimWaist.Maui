@@ -18,7 +18,7 @@ namespace SlimWaist
 
             InitializeDatabase();
 
-            _dataContext.LoadMemebershipAndSetting();
+            //_dataContext.LoadMemebershipAndSetting();
 
             MainPage = new AppShell(_dataContext);
 
