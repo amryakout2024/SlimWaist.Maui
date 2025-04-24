@@ -20,32 +20,54 @@ namespace SlimWaist
             RegisterRoutes();
 
             _dataContext = dataContext;
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await InitializeDatabase();
+
+            await _dataContext.LoadMemebershipAndSetting();
+
+            ////DataContext.memberships = await _dataContext.LoadAsync<Membership>();
+
+            ////DataContext.settings = await _dataContext.LoadAsync<Setting>();
+
+            ////DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
+
+            ////DataContext.membership = DataContext.memberships.Where(x => x.Id == DataContext.setting.CurrentMemberShipId).FirstOrDefault();
+
+            ////if (DataContext.membership.CultureInfo == "ar-SA")
+            ////{
+            ////    this.FlowDirection = FlowDirection.RightToLeft;
+
+            ////}
+            ////else
+            ////{
+            ////    this.FlowDirection = FlowDirection.LeftToRight;
+            ////}
 
         }
 
-        //protected async override void OnAppearing()
-        //{
-        //    base.OnAppearing();
+        private async Task InitializeDatabase()
+        {
+            try
+            {
+                var BodyActivityTest = _dataContext.Database.Table<BodyActivity>().FirstOrDefault();
 
-        //    DataContext.memberships = await _dataContext.LoadAsync<Membership>();
+                if (BodyActivityTest == null)
+                {
+                    await _dataContext.init();
+                }
+            }
+            catch (Exception e)
+            {
+                await _dataContext.init();
+            }
 
-        //    DataContext.settings = await _dataContext.LoadAsync<Setting>();
+        }
 
-        //    DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
-
-        //    DataContext.membership = DataContext.memberships.Where(x => x.Id ==DataContext.setting.CurrentMemberShipId).FirstOrDefault();
-            
-        //    if (DataContext.membership.CultureInfo == "ar-SA")
-        //    {
-        //        this.FlowDirection = FlowDirection.RightToLeft;
-
-        //    }
-        //    else
-        //    {
-        //        this.FlowDirection = FlowDirection.LeftToRight;
-        //    }
-
-        //}
         private readonly static Type[] _routablePageTypes =
         [
             typeof(RegisterPage),

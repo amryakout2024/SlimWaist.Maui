@@ -24,9 +24,9 @@ public partial class LoginPage : UraniumContentPage
 
         //if (DataContext.membership.CultureInfo == "ar-SA")
         //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        //    ////ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        //    ////CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
         //    this.FlowDirection = FlowDirection.RightToLeft;
 
@@ -34,9 +34,9 @@ public partial class LoginPage : UraniumContentPage
         //}
         //else
         //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
         //    this.FlowDirection = FlowDirection.LeftToRight;
         //}
