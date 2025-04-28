@@ -16,5 +16,7 @@ namespace SlimWaist.Models
 
         public int SavedMemberShipId { get; set; }=0;
 
+        public string? CultureInfo { get; set; } = "ar-SA";
+
     }
 }

@@ -7,7 +7,7 @@ using SlimWaist.Models;
 namespace SlimWaist
 {
     [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
-    public class MainActivity : MauiAppCompatActivity
+    public class MainActivity() : MauiAppCompatActivity
     {
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -16,18 +16,19 @@ namespace SlimWaist
             // Disable font scaling
             //Resources.Configuration.FontScale = 1.0f;
 
+            //var setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
 
 
             //Forece app to run as RTL
-            //if (DataContext.membership.CultureInfo == "ar-SA")
-            //{
-            //    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
+            if (AppShell.setting.CultureInfo == "ar-SA")
+            {
+                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
 
-            //}
-            //else
-            //{
-            //    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
-            //}
+            }
+            else
+            {
+                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
+            }
 
 
         }

@@ -15,6 +15,7 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.FlyoutItemIsVisible="False"
              Shell.NavBarIsVisible="True"
+             FlowDirection="{extention:FlowDirectionsExtention}"
              Shell.TabBarIsVisible="False">
 
     <ur:UraniumContentPage.Resources>

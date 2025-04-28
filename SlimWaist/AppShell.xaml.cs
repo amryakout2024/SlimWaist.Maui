@@ -1,4 +1,5 @@
-﻿using SlimWaist.Models;
+﻿using SlimWaist.Extentions;
+using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
 using System.Globalization;
@@ -8,18 +9,18 @@ namespace SlimWaist
     public partial class AppShell : Shell
     {
         private readonly DataContext _dataContext;
-        private List<Membership> memberships=new List<Membership>();
-        private Membership membership;
-        private Setting setting;
-        private List<Setting> settings=new List<Setting>();
+
+        public static Setting setting = new Setting();
 
         public AppShell(DataContext dataContext)
         {
             InitializeComponent();
 
+            _dataContext = dataContext;
+
             RegisterRoutes();
 
-            _dataContext = dataContext;
+            ////SentrySdk.CaptureMessage("Hello Sentry");
         }
 
         protected async override void OnAppearing()
@@ -28,25 +29,29 @@ namespace SlimWaist
 
             await InitializeDatabase();
 
-            await _dataContext.LoadMemebershipAndSetting();
+            setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
+            
+            //var memberships = _dataContext.Database.Table<Membership>().ToList();
+            
+            //var membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
 
-            ////DataContext.memberships = await _dataContext.LoadAsync<Membership>();
+            if (setting != null)
+            {
+                if (setting.CultureInfo == "ar-SA")
+                {
+                    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-            ////DataContext.settings = await _dataContext.LoadAsync<Setting>();
+                    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-            ////DataContext.setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
+                }
+                else
+                {
+                    CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-            ////DataContext.membership = DataContext.memberships.Where(x => x.Id == DataContext.setting.CurrentMemberShipId).FirstOrDefault();
+                    ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
-            ////if (DataContext.membership.CultureInfo == "ar-SA")
-            ////{
-            ////    this.FlowDirection = FlowDirection.RightToLeft;
-
-            ////}
-            ////else
-            ////{
-            ////    this.FlowDirection = FlowDirection.LeftToRight;
-            ////}
+                }
+            }
 
         }
 
@@ -61,7 +66,7 @@ namespace SlimWaist
                     await _dataContext.init();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await _dataContext.init();
             }

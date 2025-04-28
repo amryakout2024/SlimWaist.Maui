@@ -61,13 +61,18 @@ public partial class LanguagePopup : Popup
     {
         if (membership.CultureInfo == "en-US")
         {
-            ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+            //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+            //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
             membership.CultureInfo = "ar-SA";
 
+            setting.CultureInfo = "ar-SA";
+
             await _dataContext.UpdateAsync<Membership>(membership);
+
+            await _dataContext.UpdateAsync<Setting>(setting);
+
 
 #if ANDROID   
    var context = Platform.AppContext;
@@ -96,11 +101,15 @@ public partial class LanguagePopup : Popup
         {
             ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
-            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            //CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
             membership.CultureInfo = "en-US";
 
+            setting.CultureInfo = "en-US";
+
             await _dataContext.UpdateAsync<Membership>(membership);
+
+            await _dataContext.UpdateAsync<Setting>(setting);
 
 #if ANDROID
    var context = Platform.AppContext;

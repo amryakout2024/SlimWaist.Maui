@@ -11,6 +11,8 @@ using SlimWaist.Helpers;
 using SlimWaist.Models;
 
 using SlimWaist;
+using SlimWaist.Extentions;
+
 
 
 
@@ -33,6 +35,10 @@ namespace SlimWaist
                 .UseUraniumUI()
                 .UseMauiCommunityToolkit()
                 .UseUraniumUIMaterial()
+                .UseSentry(options => 
+                {
+                    options.Dsn = "https://cf56e869a0b99378014d4959f18b6619@o4509224782528512.ingest.de.sentry.io/4509224784822352";
+                })
                 .ConfigureMauiHandlers(handlers =>
                 {
                     handlers.AddInputKitHandlers();
@@ -104,6 +110,8 @@ namespace SlimWaist
             //builder.Services.AddSingleton<TabbarBadgeRenderer>();
             builder.Services.AddSingleton<DataContext>();
             builder.Services.AddSingleton<Setting>();
+            builder.Services.AddSingleton<ChangeDirections>();
+            builder.Services.AddSingleton<FlowDirectionsExtention>();
             //builder.Services.AddTransient<PopupEntry,CartVM>();
             builder.Services.AddSingleton<AppShellVM>();
             builder.Services.AddSingleton<ValidateForIntegerNumber>();

@@ -2,6 +2,7 @@
 <ur:UraniumContentPage  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
@@ -10,7 +11,7 @@
              x:Class="SlimWaist.Views.RegisterPage"
              Shell.NavBarIsVisible="True"
              Shell.FlyoutBehavior="Disabled" 
-             FlowDirection="RightToLeft">
+             FlowDirection="{extention:FlowDirectionsExtention}">
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
             <Setter Property="TextColor" Value="Red" />

@@ -30,27 +30,10 @@ public partial class HomePage : UraniumContentPage
 
         _dataContext = dataContext;
 
+        //_dataContext.ChangeFlowDirection(this);
+        //var dd = ChangeDirections.instance.FlowDirection;
+
         BindingContext = _homeVM;
-
-        //if (DataContext.membership.CultureInfo == "ar-SA")
-        //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-        //    this.FlowDirection = FlowDirection.RightToLeft;
-
-
-        //}
-        //else
-        //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-        //    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-        //    this.FlowDirection = FlowDirection.LeftToRight;
-        //}
-
     }
 
     protected async override void OnAppearing()

@@ -34,27 +34,11 @@ namespace SlimWaist.Views
 
             _dataContext = dataContext;
 
+            //_dataContext.ChangeFlowDirection(this);
+
             BindingContext = _profileVM;
 
             SetBannerId();
-
-            ////if (DataContext.membership.CultureInfo == "ar-SA")
-            ////{
-            ////    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-            ////    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-            ////    this.FlowDirection = FlowDirection.RightToLeft;
-            ////}
-            ////else
-            ////{
-            ////    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-            ////    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-            ////    this.FlowDirection = FlowDirection.LeftToRight;
-            ////}
-
         }
         private void SetBannerId()
         {

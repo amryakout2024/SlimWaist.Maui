@@ -7,12 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.ApplicationModel.Communication;
 using Microsoft.Maui.Storage;
+using UraniumUI.Pages;
+using System.Globalization;
+using SlimWaist.Extentions;
 
 namespace SlimWaist.Models
 {
 	public class DataContext
 	{
-		public const string DbName = "SlimWaist17";
+		public const string DbName = "SlimWaist18";
 
 		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
 
@@ -30,17 +33,6 @@ namespace SlimWaist.Models
             SQLiteOpenFlags.ReadWrite | 
             SQLiteOpenFlags.SharedCache);
 
-        public async Task LoadMemebershipAndSetting()
-        {
-            memberships = await LoadAsync<Membership>();
-
-            settings = await LoadAsync<Setting>();
-
-            setting = DataContext.settings.Where(x => x.Id == 1).FirstOrDefault();
-
-            membership = DataContext.memberships.Where(x => x.Id == DataContext.setting.CurrentMemberShipId).FirstOrDefault();
-
-        }
         public async Task init()
 		{
             try
