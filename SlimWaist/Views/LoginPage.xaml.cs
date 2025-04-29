@@ -4,6 +4,12 @@ using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using System.Globalization;
 using UraniumUI.Pages;
+#if ANDROID
+using Android.App;
+using Android.Content;
+using Android.Content.PM;
+using Java.Lang;
+#endif
 
 namespace SlimWaist.Views;
 
@@ -12,83 +18,98 @@ public partial class LoginPage : UraniumContentPage
     private readonly LoginVM _loginVM;
     private readonly DataContext _dataContext;
     private readonly IBadge _badge;
+    private List<Membership> memberships;
+    private Membership membership;
+    private Setting setting;
+    private List<Setting> settings;
+
     //,IBadge badge
     public LoginPage(LoginVM loginVM,DataContext dataContext)
     {
         InitializeComponent();
 
         _loginVM = loginVM;
+
         _dataContext = dataContext;
 
-        //_dataContext.ChangeFlowDirection(this);
-
         BindingContext = _loginVM;
-
-        //if (DataContext.membership.CultureInfo == "ar-SA")
-        //{
-        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-        //    //this.FlowDirection = FlowDirection.RightToLeft;
-
-        //}
-        //else
-        //{
-        //    //CultureInfo.CurrentCulture = new CultureInfo("en-US");
-
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
-
-        //    //this.FlowDirection = FlowDirection.LeftToRight;
-        //}
-        //var dd = ChangeDirections.instance.FlowDirection;
-        //if (DataContext.membership.CultureInfo == "ar-SA")
-        //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-        //    //this.FlowDirection = FlowDirection.RightToLeft;
-
-
-        //}
-        //else
-        //{
-        //    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-        //    //this.FlowDirection = FlowDirection.LeftToRight;
-        //}
-
-        //_badge = badge;
-        //_badge.SetCount(6);
 
     }
 
     protected async override void OnAppearing()
     {
-
         await _loginVM.init();
 
-        //if (DataContext.membership.CultureInfo == "ar-SA")
-        //{
-        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        memberships = await _dataContext.LoadAsync<Membership>();
 
-        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+        settings = await _dataContext.LoadAsync<Setting>();
 
-        //    this.FlowDirection = FlowDirection.RightToLeft;
+        setting = settings.Where(x => x.Id == 1).FirstOrDefault();
+
+        membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
+
+    }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        if (AppShell.setting.CultureInfo == "ar-SA")
+        {
+            ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+
+            membership.CultureInfo = "en-US";
+
+            setting.CultureInfo = "en-US";
+
+            await _dataContext.UpdateAsync<Membership>(membership);
+
+            await _dataContext.UpdateAsync<Setting>(setting);
+
+#if ANDROID
+   var context = Platform.AppContext;
+      PackageManager packageManager = context.PackageManager;
+      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+      ComponentName componentName = intent.Component;
+      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+      mainIntent.SetPackage(context.PackageName);
+      context.StartActivity(mainIntent);
+      Runtime.GetRuntime().Exit(0);
+#endif
+        }
+        else
+        {
+            ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+
+            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+            membership.CultureInfo = "ar-SA";
+
+            setting.CultureInfo = "ar-SA";
+
+            await _dataContext.UpdateAsync<Membership>(membership);
+
+            await _dataContext.UpdateAsync<Setting>(setting);
 
 
-        //}
-        //else
-        //{
-        //    //ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+#if ANDROID   
+   var context = Platform.AppContext;
+      PackageManager packageManager = context.PackageManager;
+      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+      ComponentName componentName = intent.Component;
+      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+      mainIntent.SetPackage(context.PackageName);
+      context.StartActivity(mainIntent);
+      Runtime.GetRuntime().Exit(0);
 
-        //    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+#endif
 
-        //    this.FlowDirection = FlowDirection.LeftToRight;
-        //}
+            // Works for me, but I replaced
+            //Runtime.GetRuntime().Exit(0);`  
+            //with
+            //Platform.CurrentActivity.FinishAffinity(); // Close all activities properly
+        }
+
 
     }
 }
