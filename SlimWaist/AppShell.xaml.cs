@@ -12,6 +12,8 @@ namespace SlimWaist
 
         public static Setting setting = new Setting();
 
+        public static string ValidateForNullOrEmptyMessage;
+
         public AppShell(DataContext dataContext)
         {
             InitializeComponent();
@@ -39,17 +41,23 @@ namespace SlimWaist
             {
                 if (setting.CultureInfo == "ar-SA")
                 {
-                    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+                    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+                    Translator.instance.CultureInfo= new CultureInfo("ar-SA");
 
                     ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
+                    ValidateForNullOrEmptyMessage = "ادخل القيمة";
                 }
                 else
                 {
-                    CultureInfo.CurrentCulture = new CultureInfo("en-US");
+                    //CultureInfo.CurrentCulture = new CultureInfo("en-US");
+
+                    Translator.instance.CultureInfo = new CultureInfo("en-US");
 
                     ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
+                    ValidateForNullOrEmptyMessage = "Enter Value";
                 }
             }
 

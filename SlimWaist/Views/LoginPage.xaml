@@ -6,12 +6,14 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:lang="clr-namespace:SlimWaist.Languages"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SlimWaist.Views.LoginPage"
              Shell.NavBarIsVisible="False"
              FlowDirection="{extention:FlowDirectionsExtention}"
              Title="LoginPage">
+    
     <ur:UraniumContentPage.Resources>
         <Style TargetType="mat:TextField" x:Key="InvalidMatTextFieldStyle">
             <Setter Property="TextColor" Value="Red"/>
@@ -21,12 +23,26 @@
         </Style>
 
     </ur:UraniumContentPage.Resources>
+    
     <VerticalStackLayout Spacing="10" Margin="10">
-        <Label 
-            Text="أسهل طريق للتخسيس"
+        <HorizontalStackLayout>
+            <Image Source="earth.png"
+                   WidthRequest="23" VerticalOptions="Center"
+                   HorizontalOptions="Center">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                </Image.Behaviors>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </HorizontalStackLayout>
+
+        <Label
+            Text="{extention:TranslateExtention Key=LoginPageTitle}"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
-            TextColor="DarkSlateBlue"
+            TextColor="{StaticResource MainColor}"
             FontSize="30"/>
         
         <Image
@@ -34,7 +50,7 @@
         
         <mat:TextField 
             Text="{Binding Email}"
-            Title="الإيميل"
+            Title="{extention:TranslateExtention Key=LoginPageEmail}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
@@ -42,7 +58,7 @@
             FontSize="16">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
             </mat:TextField.Validations>
             <mat:TextField.Behaviors>
                 <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
@@ -53,7 +69,7 @@
 
         <mat:TextField 
             Text="{Binding Password}"
-            Title="كلمة السر"
+            Title="{extention:TranslateExtention Key=LoginPagePassword}"
             IsPassword="True"
             TextColor="DarkSlateBlue"
             TitleColor="DarkGray"
@@ -62,21 +78,21 @@
             FontSize="16">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
             </mat:TextField.Validations>
             <mat:TextField.Attachments>
                 <mat:TextFieldPasswordShowHideAttachment/>
             </mat:TextField.Attachments>
         </mat:TextField>
-        
-        <mat:CheckBox Text="حفظ بيانات الدخول"
+
+        <mat:CheckBox Text="{extention:TranslateExtention Key=LoginPageCheckBox}"
                       TextFontSize="15"
                       BoxSizeRequest="20" 
                       IsChecked="{Binding IsCheckBoxChecked}"
                       CheckChangedCommand="{Binding SaveLoginCommand}"/>
         
         <Button 
-            Text="دخول"
+            Text="{extention:TranslateExtention Key=LoginPageButtonLogin}"
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
@@ -88,9 +104,9 @@
             <Label
                 FontSize="15"
                 VerticalOptions="Center"
-            Text="اذا لم يكن لك رقم عضوية قم "/>
+            Text="{extention:TranslateExtention Key=LoginPageLabelHaveNoMembership} "/>
             <Label 
-                Text="بتسجيل عضوية جديدة"
+                Text="{extention:TranslateExtention Key=LoginPageLabelAddNewMembership}"
                 FontSize="16"
                 BackgroundColor="Transparent"
                 TextColor="DodgerBlue"
