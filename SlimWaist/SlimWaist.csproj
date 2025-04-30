@@ -40,6 +40,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackAsTool>False</PackAsTool>
 		<NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
@@ -98,9 +99,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Languages\AppResource.resx">
+	  <EmbeddedResource Update="Languages\AppResource.ar-SA.resx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\AppResource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </EmbeddedResource>
 	</ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using SlimWaist.Extentions;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
@@ -41,9 +42,21 @@ namespace SlimWaist
             {
                 if (setting.CultureInfo == "ar-SA")
                 {
-                    //CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+                    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+                    CultureInfo.CurrentUICulture = new CultureInfo("ar-SA");
+
+                    CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ar-SA");
+
+                    CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ar-SA");
+
+                    AppResource.ResourceManager.IgnoreCase = true;
+
+                    AppResource.Culture= new CultureInfo("ar-SA");
 
                     Translator.instance.CultureInfo= new CultureInfo("ar-SA");
+
+                    Translator.instance.OnPropertyChanged();
 
                     ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
@@ -51,9 +64,21 @@ namespace SlimWaist
                 }
                 else
                 {
-                    //CultureInfo.CurrentCulture = new CultureInfo("en-US");
+                    CultureInfo.CurrentCulture = new CultureInfo("en-US");
+                    
+                    CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+
+                    CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
+                    CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+                    
+                    AppResource.Culture = new CultureInfo("ar-SA");
+
+                    AppResource.Culture = new CultureInfo("en-US");
 
                     Translator.instance.CultureInfo = new CultureInfo("en-US");
+                    
+                    Translator.instance.OnPropertyChanged();
 
                     ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 

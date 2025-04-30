@@ -22,7 +22,7 @@ namespace SlimWaist.Languages {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppResource {
+    public class AppResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace SlimWaist.Languages {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SlimWaist.Languages.AppResource", typeof(AppResource).Assembly);
@@ -51,7 +51,7 @@ namespace SlimWaist.Languages {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
-        internal static string LoginPageButtonLogin {
+        public static string LoginPageButtonLogin {
             get {
                 return ResourceManager.GetString("LoginPageButtonLogin", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Save log in email and password.
         /// </summary>
-        internal static string LoginPageCheckBox {
+        public static string LoginPageCheckBox {
             get {
                 return ResourceManager.GetString("LoginPageCheckBox", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
-        internal static string LoginPageEmail {
+        public static string LoginPageEmail {
             get {
                 return ResourceManager.GetString("LoginPageEmail", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to register for new.
         /// </summary>
-        internal static string LoginPageLabelAddNewMembership {
+        public static string LoginPageLabelAddNewMembership {
             get {
                 return ResourceManager.GetString("LoginPageLabelAddNewMembership", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to If you don&apos;t have membership .
         /// </summary>
-        internal static string LoginPageLabelHaveNoMembership {
+        public static string LoginPageLabelHaveNoMembership {
             get {
                 return ResourceManager.GetString("LoginPageLabelHaveNoMembership", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string LoginPagePassword {
+        public static string LoginPagePassword {
             get {
                 return ResourceManager.GetString("LoginPagePassword", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Easy way for weight loss.
         /// </summary>
-        internal static string LoginPageTitle {
+        public static string LoginPageTitle {
             get {
                 return ResourceManager.GetString("LoginPageTitle", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to error.
         /// </summary>
-        internal static string RegexValidationMessage {
+        public static string RegexValidationMessage {
             get {
                 return ResourceManager.GetString("RegexValidationMessage", resourceCulture);
             }

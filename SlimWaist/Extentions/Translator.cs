@@ -18,7 +18,7 @@ namespace SlimWaist.Extentions
             get => AppResource.ResourceManager.GetString(Key, CultureInfo);
         }
 
-        public CultureInfo CultureInfo { get; set; }
+        public CultureInfo CultureInfo { get; set; }= new CultureInfo("ar-SA");
 
         public static Translator instance {  get;set; }=new Translator();
 
