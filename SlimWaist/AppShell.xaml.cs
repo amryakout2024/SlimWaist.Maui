@@ -1,7 +1,5 @@
 ﻿using SlimWaist.Extentions;
-using SlimWaist.Languages;
 using SlimWaist.Models;
-using SlimWaist.ViewModels;
 using SlimWaist.Views;
 using System.Globalization;
 
@@ -33,9 +31,9 @@ namespace SlimWaist
             await InitializeDatabase();
 
             setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
-            
+
             //var memberships = _dataContext.Database.Table<Membership>().ToList();
-            
+
             //var membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
 
             if (setting != null)
@@ -55,7 +53,7 @@ namespace SlimWaist
                     CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
                     Translator.instance.CultureInfo = new CultureInfo("en-US");
-                    
+
                     ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
                     ValidateForNullOrEmptyMessage = "Enter Value";

@@ -1,9 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.Models
 {
@@ -12,9 +7,9 @@ namespace SlimWaist.Models
         [PrimaryKey]
         public int Id { get; set; }
 
-        public int CurrentMemberShipId { get; set; }=0;
+        public int CurrentMemberShipId { get; set; } = 0;
 
-        public int SavedMemberShipId { get; set; }=0;
+        public int SavedMemberShipId { get; set; } = 0;
 
         public string? CultureInfo { get; set; } = "ar-SA";
 

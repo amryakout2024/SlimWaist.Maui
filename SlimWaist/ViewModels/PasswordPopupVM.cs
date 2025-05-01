@@ -1,15 +1,10 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class PasswordPopupVM(DataContext dataContext):BaseVM
+    public partial class PasswordPopupVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private Membership membership;

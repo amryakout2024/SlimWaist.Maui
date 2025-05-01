@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SlimWaist.Models
+﻿namespace SlimWaist.Models
 {
     public class MealGroup : List<MealDetail>
     {
@@ -48,6 +42,6 @@ namespace SlimWaist.Models
 
             TotalFoodFibers = totalFoodFibers;
         }
-    
+
     }
 }

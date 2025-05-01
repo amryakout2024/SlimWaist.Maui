@@ -1,17 +1,7 @@
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Extentions;
 using SlimWaist.Models;
 using SlimWaist.Popups;
 using SlimWaist.ViewModels;
-using SlimWaist.Views;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using UraniumUI.Material;
-using UraniumUI.Material.Controls;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views
@@ -30,7 +20,7 @@ namespace SlimWaist.Views
         {
             InitializeComponent();
 
-            _profileVM=profileVM;
+            _profileVM = profileVM;
 
             _dataContext = dataContext;
 

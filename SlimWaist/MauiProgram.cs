@@ -1,17 +1,12 @@
 ﻿using CommunityToolkit.Maui;
+using InputKit.Handlers;
+using Microsoft.Extensions.Logging;
+using SlimWaist.Extentions;
+using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
-using InputKit.Handlers;
-using Microsoft.Extensions.Logging;
 using UraniumUI;
-using Microsoft.Maui.Hosting;
-using CommunityToolkit.Maui.ApplicationModel;
-using SlimWaist.Helpers;
-using SlimWaist.Models;
-
-using SlimWaist;
-using SlimWaist.Extentions;
 
 
 
@@ -35,7 +30,7 @@ namespace SlimWaist
                 .UseUraniumUI()
                 .UseMauiCommunityToolkit()
                 .UseUraniumUIMaterial()
-                .UseSentry(options => 
+                .UseSentry(options =>
                 {
                     options.Dsn = "https://cf56e869a0b99378014d4959f18b6619@o4509224782528512.ingest.de.sentry.io/4509224784822352";
                 })
@@ -46,7 +41,7 @@ namespace SlimWaist
                 .ConfigureMauiHandlers(h =>
                 {
 #if ANDROID
-                                //h.AddHandler<Shell, TabbarBadgeRenderer>();
+                    //h.AddHandler<Shell, TabbarBadgeRenderer>();
 #endif
                 })
                 .ConfigureFonts(fonts =>

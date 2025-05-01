@@ -1,23 +1,12 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel.Communication;
-using Microsoft.Maui.Storage;
-using UraniumUI.Pages;
-using System.Globalization;
-using SlimWaist.Extentions;
 
 namespace SlimWaist.Models
 {
-	public class DataContext
-	{
-		public const string DbName = "SlimWaist19";
+    public class DataContext
+    {
+        public const string DbName = "SlimWaist19";
 
-		public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory,DbName);
+        public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
         public static List<Membership> memberships = new List<Membership>();
 
@@ -27,14 +16,14 @@ namespace SlimWaist.Models
 
         public static Setting setting;
 
-        public SQLiteConnection Database = 
+        public SQLiteConnection Database =
             new SQLiteConnection(
             DbPath, SQLiteOpenFlags.Create |
-            SQLiteOpenFlags.ReadWrite | 
+            SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.SharedCache);
 
         public async Task init()
-		{
+        {
             try
             {
                 Database.CreateTable<Membership>();
@@ -125,7 +114,7 @@ namespace SlimWaist.Models
                     Database.Insert(bodyActivity);
                 }
 
-                List<Regime> regimes= new List<Regime>()
+                List<Regime> regimes = new List<Regime>()
                 {
                     new Regime(){RegimeId=1,RegimeName="كيتو"},
                     new Regime(){RegimeId=2,RegimeName="منخفض الكربوهيدرات"},
@@ -721,7 +710,7 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
             List<Meal> allmeals = await LoadAsync<Meal>();
 
-            var value = allmeals.Where(x=>x.MealName==mealname).FirstOrDefault();
+            var value = allmeals.Where(x => x.MealName == mealname).FirstOrDefault();
 
             if (value != null)
             {

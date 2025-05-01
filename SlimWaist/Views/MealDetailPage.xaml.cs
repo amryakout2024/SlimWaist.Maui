@@ -5,16 +5,16 @@ namespace SlimWaist.Views;
 
 public partial class MealDetailPage : UraniumContentPage
 {
-    private readonly MealDetailVM _mealDetailVM ;
+    private readonly MealDetailVM _mealDetailVM;
 
     public MealDetailPage(MealDetailVM mealDetailVM)
     {
-		InitializeComponent();
+        InitializeComponent();
 
         _mealDetailVM = mealDetailVM;
 
         BindingContext = _mealDetailVM;
-	}
+    }
 
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
@@ -25,7 +25,7 @@ public partial class MealDetailPage : UraniumContentPage
     protected override bool OnBackButtonPressed()
     {
 #if ANDROID
-                Shell.Current.GoToAsync("..", animate: true);
+        Shell.Current.GoToAsync("..", animate: true);
 #endif
         return true;
 

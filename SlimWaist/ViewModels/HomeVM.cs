@@ -1,20 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class HomeVM(DataContext dataContext,Setting setting):BaseVM
+    public partial class HomeVM(DataContext dataContext, Setting setting) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly Setting _setting = setting;
@@ -23,7 +15,7 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private Membership? _memberShipFromQueryProperty;
-        
+
         [ObservableProperty]
         private string _email;
 
@@ -68,18 +60,18 @@ namespace SlimWaist.ViewModels
 
             //File.Delete(DataContext.DbPath);
 
-            var memberShips =await _dataContext.LoadAsync<Membership>();
+            var memberShips = await _dataContext.LoadAsync<Membership>();
 
             var settings = await _dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            MemberShip = memberShips.Where(x=>x.Id== setting.CurrentMemberShipId).FirstOrDefault();
+            MemberShip = memberShips.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
-           
+
             Weight = MemberShip?.Weight.ToString() ?? "";
-           
+
             Height = MemberShip?.Height.ToString() ?? "";
 
             BirthDate = MemberShip?.BirthDate ?? "";
@@ -107,13 +99,13 @@ namespace SlimWaist.ViewModels
             //{
             //    RegimeLists.Add(r);
             //}
-            
+
         }
 
         [RelayCommand]
         private async Task GoToDietsPage()
         {
-            await GoToAsyncWithStack(nameof(DietsPage),true);
+            await GoToAsyncWithStack(nameof(DietsPage), true);
         }
 
         [RelayCommand]

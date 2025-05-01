@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Mvvm;
+﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class BaseVM:ObservableObject
+    public partial class BaseVM : ObservableObject
     {
 
         [ObservableProperty]
@@ -20,13 +14,13 @@ namespace SlimWaist.ViewModels
 
         protected async Task GoToAsyncWithStack(string url, bool animate) =>
             await Shell.Current.GoToAsync(url, animate);
-        
-        protected async Task GoToAsyncWithStackAndParameter(string url, bool animate , Dictionary<string, object> parameter) =>
+
+        protected async Task GoToAsyncWithStackAndParameter(string url, bool animate, Dictionary<string, object> parameter) =>
             await Shell.Current.GoToAsync(url, animate, parameter);
 
         protected async Task GoToAsyncWithShell(string url, bool animate) =>
              await Shell.Current.GoToAsync($"//{url}", animate);
-        
+
         protected async Task GoToAsync(string url, bool animate, IDictionary<string, object> parameters) =>
             await Shell.Current.GoToAsync(url, animate, parameters);
 

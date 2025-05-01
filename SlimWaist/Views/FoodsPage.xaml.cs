@@ -1,6 +1,4 @@
-using SlimWaist.Models;
 using SlimWaist.ViewModels;
-using System.Globalization;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -10,8 +8,8 @@ public partial class FoodsPage : UraniumContentPage
     private readonly FoodsVM _foodsVM;
 
     public FoodsPage(FoodsVM foodsVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _foodsVM = foodsVM;
 

@@ -1,12 +1,6 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.Controls.Compatibility;
+﻿using CommunityToolkit.Maui.Views;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
-using SlimWaist.Views;
-using System.Diagnostics;
-using System.Globalization;
 #if ANDROID
 using Android.App;
 using Android.Content;
@@ -26,8 +20,8 @@ public partial class LanguagePopup : Popup
     private List<Setting> settings;
 
     public LanguagePopup(DataContext dataContext)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _dataContext = dataContext;
 
@@ -48,7 +42,7 @@ public partial class LanguagePopup : Popup
             }
             else
             {
-                arabic.IsChecked=false;
+                arabic.IsChecked = false;
                 english.IsChecked = true;
             }
 
@@ -74,15 +68,15 @@ public partial class LanguagePopup : Popup
             await _dataContext.UpdateAsync<Setting>(setting);
 
 
-#if ANDROID   
-   var context = Platform.AppContext;
-      PackageManager packageManager = context.PackageManager;
-      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
-      ComponentName componentName = intent.Component;
-      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
-      mainIntent.SetPackage(context.PackageName);
-      context.StartActivity(mainIntent);
-      Runtime.GetRuntime().Exit(0);
+#if ANDROID
+            var context = Platform.AppContext;
+            PackageManager packageManager = context.PackageManager;
+            Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+            ComponentName componentName = intent.Component;
+            Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+            mainIntent.SetPackage(context.PackageName);
+            context.StartActivity(mainIntent);
+            Runtime.GetRuntime().Exit(0);
 
 #endif
 
@@ -112,14 +106,14 @@ public partial class LanguagePopup : Popup
             await _dataContext.UpdateAsync<Setting>(setting);
 
 #if ANDROID
-   var context = Platform.AppContext;
-      PackageManager packageManager = context.PackageManager;
-      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
-      ComponentName componentName = intent.Component;
-      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
-      mainIntent.SetPackage(context.PackageName);
-      context.StartActivity(mainIntent);
-      Runtime.GetRuntime().Exit(0);
+            var context = Platform.AppContext;
+            PackageManager packageManager = context.PackageManager;
+            Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+            ComponentName componentName = intent.Component;
+            Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+            mainIntent.SetPackage(context.PackageName);
+            context.StartActivity(mainIntent);
+            Runtime.GetRuntime().Exit(0);
 #endif
 
             this.Close();

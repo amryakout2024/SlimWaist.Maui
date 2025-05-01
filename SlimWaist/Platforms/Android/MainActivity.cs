@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Content.Res;
 using Android.OS;
-using SlimWaist.Models;
 
 namespace SlimWaist
 {
@@ -57,7 +55,7 @@ namespace SlimWaist
         {
             base.OnStop();
 
-           
+
         }
     }
 }

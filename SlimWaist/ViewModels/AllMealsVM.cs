@@ -2,15 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class AllMealsVM(DataContext dataContext,DayMealsVM dayMealsVM):BaseVM
+    public partial class AllMealsVM(DataContext dataContext, DayMealsVM dayMealsVM) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly DayMealsVM _dayMealsVM = dayMealsVM;
@@ -26,12 +21,12 @@ namespace SlimWaist.ViewModels
 
         private List<Meal> _SelectedMeals;
         [ObservableProperty]
-        private int _selectedTab=1;
+        private int _selectedTab = 1;
 
         public async Task Init()
         {
             AllMeals = await _dataContext.LoadAsync<Meal>();
-            AllMeals.ForEach(x=>x.IsSelected = false);
+            AllMeals.ForEach(x => x.IsSelected = false);
 
             var breakfastMeals = await _dataContext.LoadAsync<Meal>();
             BreakfastMeals = breakfastMeals.Where(x => x.MealType == "إفطار").ToList();
@@ -45,9 +40,9 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task CreateDayPlan()
         {
-            if (SelectedMeals.Count>0)
+            if (SelectedMeals.Count > 0)
             {
-                DayMealsPage.Meals =SelectedMeals;
+                DayMealsPage.Meals = SelectedMeals;
 
                 await GoToAsyncWithStack(nameof(DayMealsPage), true);
             }
@@ -89,7 +84,7 @@ namespace SlimWaist.ViewModels
                 //CountCheckedDrugs = CheckedDrugs.Count.ToString();
             }
         }
-            [RelayCommand]
+        [RelayCommand]
         private async Task SelectedTabChanged()
         {
             AllMeals = await _dataContext.LoadAsync<Meal>();

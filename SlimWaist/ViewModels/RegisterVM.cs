@@ -2,22 +2,13 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class RegisterVM(DataContext dataContext) :BaseVM
-    {        
+    public partial class RegisterVM(DataContext dataContext) : BaseVM
+    {
         [ObservableProperty]
         private string _email;
 
@@ -78,15 +69,15 @@ namespace SlimWaist.ViewModels
         {
             IsCheckBoxChecked = false;
 
-            IsMale=true;
+            IsMale = true;
 
             IsPassword = true;
 
             //BirthDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            BodyActivities =await _dataContext.LoadAsync<BodyActivity>();
+            BodyActivities = await _dataContext.LoadAsync<BodyActivity>();
 
-            SelectedBodyActivity = BodyActivities.FirstOrDefault()?? new BodyActivity();
+            SelectedBodyActivity = BodyActivities.FirstOrDefault() ?? new BodyActivity();
         }
 
         [RelayCommand]
@@ -96,14 +87,14 @@ namespace SlimWaist.ViewModels
 
             BodyActivity = SelectedBodyActivity.BodyActivityName ?? "";
 
-            if (!string.IsNullOrEmpty(Email)&&
+            if (!string.IsNullOrEmpty(Email) &&
                 !string.IsNullOrEmpty(Password) &&
                 !string.IsNullOrEmpty(Name) &&
                 !string.IsNullOrEmpty(Weight) &&
                 !string.IsNullOrEmpty(Height) &&
                 !string.IsNullOrEmpty(BirthDate.ToString()) &&
                 !string.IsNullOrEmpty(Gender) &&
-                !string.IsNullOrEmpty(BodyActivity) )
+                !string.IsNullOrEmpty(BodyActivity))
             {
                 var IsRegisteredEmailBefore = _dataContext.FindEmailAsync(Email);
 
@@ -139,7 +130,7 @@ namespace SlimWaist.ViewModels
 
                     await Toast.Make("تم تسجيل العضوية بنجاح", ToastDuration.Short).Show(cancellationTokenSource.Token);
 
-                    await GoToAsyncWithShell(nameof(LoginPage),true);
+                    await GoToAsyncWithShell(nameof(LoginPage), true);
 
                 }
                 else

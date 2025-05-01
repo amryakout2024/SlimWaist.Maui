@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SlimWaist.ViewModels
+﻿namespace SlimWaist.ViewModels
 {
-    public partial class SlimWaistDaysListVM:BaseVM
+    public partial class SlimWaistDaysListVM : BaseVM
     {
 
     }

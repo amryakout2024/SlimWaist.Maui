@@ -1,18 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class FoodsVM(DataContext dataContext,CartVM cartVM) :BaseVM
+    public partial class FoodsVM(DataContext dataContext, CartVM cartVM) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly CartVM _cartVM = cartVM;
@@ -43,18 +36,18 @@ namespace SlimWaist.ViewModels
         private string _searchName;
 
         [ObservableProperty]
-        private string _breakfast= "إفطار";
+        private string _breakfast = "إفطار";
         [ObservableProperty]
-        private string _lunch= "غداء";
+        private string _lunch = "غداء";
         [ObservableProperty]
         private string _dinner = "عشاء";
 
         [ObservableProperty]
-        private bool _isBreakfast=true;
+        private bool _isBreakfast = true;
         [ObservableProperty]
-        private bool _isLunch=false;
+        private bool _isLunch = false;
         [ObservableProperty]
-        private bool _isDinner=false;
+        private bool _isDinner = false;
 
         //[ObservableProperty]
         //private bool _isFoodSelected;
@@ -68,9 +61,9 @@ namespace SlimWaist.ViewModels
         public async Task Init()
         {
             FoodsFromDatabase = await _dataContext.LoadAsync<Food>();
-            
+
             //IsFoodSelected = false;
-            
+
             Foods = FoodsFromDatabase;
 
         }
@@ -78,9 +71,9 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task MealChanged()
         {
-            List<CartItem> allcartitems =await _dataContext.LoadAsync<CartItem>();
+            List<CartItem> allcartitems = await _dataContext.LoadAsync<CartItem>();
 
-            if (allcartitems.Count>0)
+            if (allcartitems.Count > 0)
             {
                 MealType = allcartitems[0].MealType;
 

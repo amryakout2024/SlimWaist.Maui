@@ -8,11 +8,11 @@ public partial class DayMealsPage : UraniumContentPage
 {
     private readonly DayMealsVM _dayMealsVM;
 
-    public static List<Meal> Meals=new List<Meal>();
+    public static List<Meal> Meals = new List<Meal>();
 
     public DayMealsPage(DayMealsVM dayMealsVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _dayMealsVM = dayMealsVM;
 

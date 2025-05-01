@@ -8,8 +8,8 @@ public partial class AllMealsPage : UraniumContentPage
     private readonly AllMealsVM _allMealsVM;
 
     public AllMealsPage(AllMealsVM allMealsVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _allMealsVM = allMealsVM;
 

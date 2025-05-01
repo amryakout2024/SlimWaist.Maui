@@ -8,9 +8,9 @@ public partial class AddFoodPage : UraniumContentPage
     private readonly AddFoodVM _addFoodVM;
 
     public AddFoodPage(AddFoodVM addFoodVM)
-	{
-		InitializeComponent();
-        
+    {
+        InitializeComponent();
+
         _addFoodVM = addFoodVM;
 
         BindingContext = _addFoodVM;

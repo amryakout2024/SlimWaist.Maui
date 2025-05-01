@@ -1,8 +1,4 @@
-﻿using SlimWaist.Extentions;
-using SlimWaist.Models;
-using SlimWaist.ViewModels;
-using SlimWaist.Views;
-using System.Globalization;
+﻿using SlimWaist.Models;
 
 namespace SlimWaist
 {

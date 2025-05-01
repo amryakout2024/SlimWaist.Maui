@@ -1,17 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
-using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
-    [QueryProperty(nameof(CartItem),nameof(CartItem))]
-    public partial class ItemVM(DataContext dataContext):BaseVM
+    [QueryProperty(nameof(CartItem), nameof(CartItem))]
+    public partial class ItemVM(DataContext dataContext) : BaseVM
     {
         [ObservableProperty]
         private CartItem _cartItem;
@@ -50,7 +44,7 @@ namespace SlimWaist.ViewModels
         public static int TotalCartCount { get; set; }
 
         public static event EventHandler<int>? TotalCartCountChanged;
-        
+
         public async Task Init()
         {
             CartItems = await _dataContext.LoadAsync<CartItem>();
@@ -103,12 +97,12 @@ namespace SlimWaist.ViewModels
 
             if (existingItem is not null)
             {
-                if (Convert.ToInt32(Quantity)>0)
+                if (Convert.ToInt32(Quantity) > 0)
                 {
                     existingItem.Quantity = Convert.ToInt32(Quantity);
 
                     await _dataContext.UpdateCartItem(existingItem);
-                   
+
                     //await GoToAsyncWithShell(nameof(FoodsPage), true);
 
                     await Shell.Current.GoToAsync("..");
@@ -153,18 +147,18 @@ namespace SlimWaist.ViewModels
 
             NotifyCartCountChange();
         }
-        
+
         [RelayCommand]
         private async Task ChangeQuantity()
         {
             if (!string.IsNullOrEmpty(Quantity) && Convert.ToDouble(Quantity) > 0)
             {
-                FoodCalories =Math.Round((CartItem.FoodCalories * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
-                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
-                FoodProtien = Math.Round((CartItem.FoodProtien * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
-                FoodFat = Math.Round((CartItem.FoodFat * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
-                FoodFibers = Math.Round((CartItem.FoodFibers * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
-                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100),1).ToString("F1");
+                FoodCalories = Math.Round((CartItem.FoodCalories * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+                FoodProtien = Math.Round((CartItem.FoodProtien * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+                FoodFat = Math.Round((CartItem.FoodFat * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+                FoodFibers = Math.Round((CartItem.FoodFibers * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
             }
             else
             {

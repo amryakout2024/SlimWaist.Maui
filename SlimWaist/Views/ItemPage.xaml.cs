@@ -8,8 +8,8 @@ public partial class ItemPage : UraniumContentPage
     private readonly ItemVM _itemVM;
 
     public ItemPage(ItemVM itemVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _itemVM = itemVM;
 
@@ -24,9 +24,9 @@ public partial class ItemPage : UraniumContentPage
     }
     protected override bool OnBackButtonPressed()
     {
-//#if ANDROID
-//        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-//#endif
+        //#if ANDROID
+        //        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+        //#endif
         return true;
 
         //        if (_foodsVM.IsFoodSelected)

@@ -2,13 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
@@ -48,13 +41,13 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            var settings =await _dataContext.LoadAsync<Setting>();
+            var settings = await _dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            if (setting?.SavedMemberShipId!=0)
+            if (setting?.SavedMemberShipId != 0)
             {
-                await GoToAsyncWithShell(nameof(HomePage),true);
+                await GoToAsyncWithShell(nameof(HomePage), true);
             }
         }
 
@@ -67,11 +60,11 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore =await _dataContext.FindEmailAsync(Email);
+            var IsRegisteredEmailBefore = await _dataContext.FindEmailAsync(Email);
 
             if (IsRegisteredEmailBefore)
             {
-                var IsPassWordMatchWithEmail =await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                var IsPassWordMatchWithEmail = await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
 
                 if (IsPassWordMatchWithEmail)
                 {
@@ -79,9 +72,9 @@ namespace SlimWaist.ViewModels
 
                     if (IsCheckBoxChecked)
                     {
-                        setting.SavedMemberShipId = memberShips.Where(x=>x.Email==Email).Select(x=>x.Id).FirstOrDefault();
+                        setting.SavedMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
 
-                        setting.CurrentMemberShipId = memberShips.Where(x=>x.Email==Email).Select(x=>x.Id).FirstOrDefault();
+                        setting.CurrentMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
 
                         await _dataContext.UpdateAsync<Setting>(setting);
                     }

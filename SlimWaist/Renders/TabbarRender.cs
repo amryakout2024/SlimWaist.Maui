@@ -1,18 +1,11 @@
 ﻿//using Google.Android.Material.Badge;
 //using Google.Android.Material.BottomNavigation;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
-using Microsoft.Maui.Controls.Platform.Compatibility;
-using Microsoft.Maui.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.Renders
 {
 #if ANDROID
-    class TabbarRender:ShellRenderer
+    class TabbarRender : ShellRenderer
     {
         //protected override IShellBottomNavViewAppearanceTracker CreateBottomNavViewAppearanceTracker(ShellItem shellItem)
         //{

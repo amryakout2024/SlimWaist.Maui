@@ -7,8 +7,8 @@ public partial class SlimWaistDayPage : ContentPage
     private readonly SlimWaistDayVM _SlimWaistDayVM;
 
     public SlimWaistDayPage(SlimWaistDayVM SlimWaistDayVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _SlimWaistDayVM = SlimWaistDayVM;
 

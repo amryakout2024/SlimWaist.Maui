@@ -2,18 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
     public partial class DayMealsVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
-        
+
         [ObservableProperty]
         private List<MealGroup> _mealGroups;
 
@@ -26,9 +21,9 @@ namespace SlimWaist.ViewModels
 
             var mealdetails = await _dataContext.LoadAsync<MealDetail>();
 
-            var meals =DayMealsPage.Meals;
+            var meals = DayMealsPage.Meals;
 
-            DayTotalCalories=Math.Round( meals.Select(x=>x.TotalCalories).Sum(),1).ToString()?? "";
+            DayTotalCalories = Math.Round(meals.Select(x => x.TotalCalories).Sum(), 1).ToString() ?? "";
 
             foreach (Meal meal in meals)
             {
@@ -37,11 +32,11 @@ namespace SlimWaist.ViewModels
                     meal.MealType,
                     meal.IsSelected,
                     meal.TotalCalories,
-                    meal.TotalFoodCarb, 
-                    meal.TotalFoodProtien, 
+                    meal.TotalFoodCarb,
+                    meal.TotalFoodProtien,
                     meal.TotalFoodFat,
                     meal.TotalFoodFibers,
-                    mealdetails.Where(x=>x.MealName==meal.MealName).ToList()));
+                    mealdetails.Where(x => x.MealName == meal.MealName).ToList()));
             }
         }
 

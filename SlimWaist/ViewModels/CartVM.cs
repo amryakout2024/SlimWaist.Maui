@@ -1,22 +1,18 @@
-﻿using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.Views;
 
 //using Refit;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class CartVM (DataContext dataContext) : BaseVM
+    public partial class CartVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         //private readonly IPopupService _popupService = popupService;
         [ObservableProperty]
-        private List<CartItem> _cartItems ;
+        private List<CartItem> _cartItems;
 
         [ObservableProperty]
         private bool _isPresented;
@@ -29,8 +25,8 @@ namespace SlimWaist.ViewModels
         public async Task Init()
         {
             CartItems = await _dataContext.LoadAsync<CartItem>();
-            
-            CartTotalCalories=Math.Round( CartItems.Select(x=>x.FoodCalories).Sum(),1).ToString();
+
+            CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
             //NotifyCartCountChange();
 
@@ -47,7 +43,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task AddCartItem()
         {
-            if (CartItems.Count>0)
+            if (CartItems.Count > 0)
             {
                 string result = await Shell.Current.DisplayPromptAsync(
                                 "حفظ الوجبة",

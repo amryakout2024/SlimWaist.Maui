@@ -18,7 +18,7 @@ public partial class RegisterPage : UraniumContentPage
     }
     protected async override void OnAppearing()
     {
-         _registerVM.init();
+        _registerVM.init();
     }
 
 }

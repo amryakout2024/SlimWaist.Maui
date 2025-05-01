@@ -2,18 +2,9 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.ApplicationModel.Communication;
-using Microsoft.Maui.Storage;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
-using SlimWaist.Popups;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
@@ -73,7 +64,7 @@ namespace SlimWaist.ViewModels
         private List<BodyActivity> _bodyActivities;
 
         [ObservableProperty]
-        private bool _isShowChangePasswordGrid=false;
+        private bool _isShowChangePasswordGrid = false;
 
         Setting setting;
 
@@ -103,7 +94,7 @@ namespace SlimWaist.ViewModels
 
             Gender = MemberShip?.Gender ?? "";
 
-            IsMale=(Gender=="ذكر")? true:false;
+            IsMale = (Gender == "ذكر") ? true : false;
 
             BodyActivity = MemberShip?.BodyActivity ?? "";
 
@@ -290,7 +281,7 @@ namespace SlimWaist.ViewModels
 
             MemberShip.BirthDate = BirthDate;
 
-            MemberShip.BodyActivity =SelectedBodyActivity.BodyActivityName;
+            MemberShip.BodyActivity = SelectedBodyActivity.BodyActivityName;
 
             Gender = (IsMale == true) ? "ذكر" : "أنثي";
 

@@ -1,20 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
 using SlimWaist.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class SettingVM(DataContext dataContext,Setting setting):BaseVM
+    public partial class SettingVM(DataContext dataContext, Setting setting) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
         private readonly Setting _setting = setting;
@@ -23,7 +14,7 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private Membership? _memberShipFromQueryProperty;
-        
+
         [ObservableProperty]
         private string _email;
 
@@ -64,18 +55,18 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            var memberShips =await _dataContext.LoadAsync<Membership>();
+            var memberShips = await _dataContext.LoadAsync<Membership>();
 
             var settings = await _dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            MemberShip = memberShips.Where(x=>x.Id== setting.SavedMemberShipId).FirstOrDefault();
+            MemberShip = memberShips.Where(x => x.Id == setting.SavedMemberShipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
-           
+
             Weight = MemberShip?.Weight.ToString() ?? "";
-           
+
             Height = MemberShip?.Height.ToString() ?? "";
 
             BirthDate = MemberShip?.BirthDate ?? "";
@@ -89,13 +80,13 @@ namespace SlimWaist.ViewModels
             ModifiedWeight = MemberShip?.ModifiedWeight ?? "";
 
             TotalEnergy = MemberShip?.TotalEnergy ?? "";
-            
+
         }
 
         [RelayCommand]
         private async Task GoToProfilePage()
         {
-            await GoToAsyncWithStack(nameof(ProfilePage),true);
+            await GoToAsyncWithStack(nameof(ProfilePage), true);
         }
 
         [RelayCommand]

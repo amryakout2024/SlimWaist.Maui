@@ -7,8 +7,8 @@ public partial class DietsPage : ContentPage
     private readonly DietsVM _dietsVM;
 
     public DietsPage(DietsVM dietsVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _dietsVM = dietsVM;
 

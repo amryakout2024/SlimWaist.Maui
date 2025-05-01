@@ -19,9 +19,9 @@ public partial class LoginPage : UraniumContentPage
     private readonly DataContext _dataContext;
     private readonly IBadge _badge;
     private Setting setting;
- 
+
     //,IBadge badge
-    public LoginPage(LoginVM loginVM,DataContext dataContext)
+    public LoginPage(LoginVM loginVM, DataContext dataContext)
     {
         InitializeComponent();
 
@@ -37,7 +37,7 @@ public partial class LoginPage : UraniumContentPage
     {
         await _loginVM.init();
 
-        setting=_dataContext.Database.Table<Setting>().FirstOrDefault();
+        setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -53,14 +53,14 @@ public partial class LoginPage : UraniumContentPage
             await _dataContext.UpdateAsync<Setting>(setting);
 
 #if ANDROID
-   var context = Platform.AppContext;
-      PackageManager packageManager = context.PackageManager;
-      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
-      ComponentName componentName = intent.Component;
-      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
-      mainIntent.SetPackage(context.PackageName);
-      context.StartActivity(mainIntent);
-      Runtime.GetRuntime().Exit(0);
+            var context = Platform.AppContext;
+            PackageManager packageManager = context.PackageManager;
+            Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+            ComponentName componentName = intent.Component;
+            Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+            mainIntent.SetPackage(context.PackageName);
+            context.StartActivity(mainIntent);
+            Runtime.GetRuntime().Exit(0);
 #endif
         }
         else
@@ -74,15 +74,15 @@ public partial class LoginPage : UraniumContentPage
             await _dataContext.UpdateAsync<Setting>(setting);
 
 
-#if ANDROID   
-   var context = Platform.AppContext;
-      PackageManager packageManager = context.PackageManager;
-      Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
-      ComponentName componentName = intent.Component;
-      Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
-      mainIntent.SetPackage(context.PackageName);
-      context.StartActivity(mainIntent);
-      Runtime.GetRuntime().Exit(0);
+#if ANDROID
+            var context = Platform.AppContext;
+            PackageManager packageManager = context.PackageManager;
+            Intent intent = packageManager.GetLaunchIntentForPackage(context.PackageName);
+            ComponentName componentName = intent.Component;
+            Intent mainIntent = Intent.MakeRestartActivityTask(componentName);
+            mainIntent.SetPackage(context.PackageName);
+            context.StartActivity(mainIntent);
+            Runtime.GetRuntime().Exit(0);
 
 #endif
 

@@ -1,5 +1,4 @@
 using SlimWaist.ViewModels;
-using System;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -9,8 +8,8 @@ public partial class RegimesListPage : UraniumContentPage
     private readonly RegimesListVM _regimesListVM;
 
     public RegimesListPage(RegimesListVM regimesListVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _regimesListVM = regimesListVM;
 
@@ -18,7 +17,7 @@ public partial class RegimesListPage : UraniumContentPage
     }
     protected async override void OnAppearing()
     {
-         await _regimesListVM.Init();
+        await _regimesListVM.Init();
     }
     protected override bool OnBackButtonPressed()
     {

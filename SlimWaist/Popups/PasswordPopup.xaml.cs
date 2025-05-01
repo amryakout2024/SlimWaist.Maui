@@ -2,8 +2,6 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Views;
 using SlimWaist.Models;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace SlimWaist.Popups;
 
@@ -16,8 +14,8 @@ public partial class PasswordPopup : Popup
     private List<Setting> settings;
 
     public PasswordPopup(DataContext dataContext)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _dataContext = dataContext;
 
@@ -35,11 +33,11 @@ public partial class PasswordPopup : Popup
 
     private async void UpdatePassword_Clicked(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(PasswordOld.Text)&&
+        if (!string.IsNullOrEmpty(PasswordOld.Text) &&
             !string.IsNullOrEmpty(PasswordNew1.Text) &&
             !string.IsNullOrEmpty(PasswordNew2.Text))
         {
-            if (PasswordNew1.Text==PasswordNew2.Text)
+            if (PasswordNew1.Text == PasswordNew2.Text)
             {
                 if (membership.Password == PasswordOld.Text)
                 {

@@ -1,5 +1,4 @@
 using SlimWaist.ViewModels;
-using SlimWaist.Views;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -9,8 +8,8 @@ public partial class CartPage : UraniumContentPage
     private readonly CartVM _cartVM;
 
     public CartPage(CartVM cartVM)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         _cartVM = cartVM;
 

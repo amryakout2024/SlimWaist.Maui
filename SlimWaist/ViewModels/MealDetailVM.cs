@@ -1,10 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SlimWaist.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
@@ -21,9 +16,9 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            var mealDetails=await _dataContext.LoadAsync<MealDetail>();
+            var mealDetails = await _dataContext.LoadAsync<MealDetail>();
 
-            MealDetails = mealDetails.Where(x=>x.MealName==Meal.MealName).ToList();
+            MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
         }
     }
 }
