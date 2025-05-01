@@ -18,7 +18,7 @@ namespace SlimWaist
 
 
             //Forece app to run as RTL
-            if (AppShell.setting.CultureInfo == "ar-SA")
+            if (App.setting.CultureInfo == "ar-SA")
             {
                 Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
 

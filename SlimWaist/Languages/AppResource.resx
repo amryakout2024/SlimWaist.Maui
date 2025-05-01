@@ -119,35 +119,27 @@
   </resheader>
   <data name="LoginPageTitle" xml:space="preserve">
     <value>Easy way for weight loss</value>
-    <comment>1</comment>
   </data>
   <data name="RegexValidationMessage" xml:space="preserve">
     <value>error</value>
-    <comment>1</comment>
   </data>
   <data name="LoginPageLabelAddNewMembership" xml:space="preserve">
     <value>register for new</value>
-    <comment>1</comment>
   </data>
   <data name="LoginPageLabelHaveNoMembership" xml:space="preserve">
     <value>If you don't have membership </value>
-    <comment>1</comment>
   </data>
   <data name="LoginPageCheckBox" xml:space="preserve">
     <value>Save log in email and password</value>
-    <comment>1</comment>
   </data>
   <data name="LoginPageButtonLogin" xml:space="preserve">
     <value>Log in</value>
-    <comment>1</comment>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
-    <comment>1</comment>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
-    <comment>1</comment>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -175,5 +167,20 @@
   </data>
   <data name="SelectBodyActivity" xml:space="preserve">
     <value>Select Body Activity</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Foods" xml:space="preserve">
+    <value>Foods</value>
+  </data>
+  <data name="Mymeals" xml:space="preserve">
+    <value>My meals</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
 </root>

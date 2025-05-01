@@ -6,7 +6,7 @@ namespace SlimWaist.Helpers
     {
         // work only for advanced entry
 
-        public string Message => AppShell.ValidateForNullOrEmptyMessage;
+        public string Message => App.ValidateForNullOrEmptyMessage;
 
         public bool Validate(object value)
         {

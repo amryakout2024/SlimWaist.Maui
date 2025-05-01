@@ -168,4 +168,19 @@
   <data name="SelectBodyActivity" xml:space="preserve">
     <value>اختر نشاط الجسم</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Foods" xml:space="preserve">
+    <value>الأغذية</value>
+  </data>
+  <data name="Mymeals" xml:space="preserve">
+    <value>وجباتي</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>السلة</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
 </root>

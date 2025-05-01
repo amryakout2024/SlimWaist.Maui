@@ -591,9 +591,13 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
         public async Task<List<T>> LoadAsync<T>() where T : new()
         {
+            List<T> values = new List<T>();
+
             await CheckDatabaseInitialization();
 
-            return Database.Table<T>().ToList();
+            values = Database.Table<T>().ToList();
+
+            return values;
         }
         public async Task<List<T>> ClearAllAsync<T>() where T : new()
         {

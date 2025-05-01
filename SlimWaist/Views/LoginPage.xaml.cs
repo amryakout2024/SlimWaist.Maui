@@ -42,7 +42,7 @@ public partial class LoginPage : UraniumContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        if (AppShell.setting.CultureInfo == "ar-SA")
+        if (App.setting.CultureInfo == "ar-SA")
         {
             ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 

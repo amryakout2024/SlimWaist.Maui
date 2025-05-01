@@ -9,9 +9,7 @@ namespace SlimWaist
     {
         private readonly DataContext _dataContext;
 
-        public static Setting setting = new Setting();
 
-        public static string ValidateForNullOrEmptyMessage;
 
         public AppShell(DataContext dataContext)
         {
@@ -28,37 +26,37 @@ namespace SlimWaist
         {
             base.OnAppearing();
 
-            await InitializeDatabase();
+            //await InitializeDatabase();
 
-            setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
+            //setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
 
             //var memberships = _dataContext.Database.Table<Membership>().ToList();
 
             //var membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
 
-            if (setting != null)
-            {
-                if (setting.CultureInfo == "ar-SA")
-                {
-                    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+            //if (setting != null)
+            //{
+            //    if (setting.CultureInfo == "ar-SA")
+            //    {
+            //        CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-                    Translator.instance.CultureInfo = new CultureInfo("ar-SA");
+            //        Translator.instance.CultureInfo = new CultureInfo("ar-SA");
 
-                    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+            //        ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-                    ValidateForNullOrEmptyMessage = "ادخل القيمة";
-                }
-                else
-                {
-                    CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            //        ValidateForNullOrEmptyMessage = "ادخل القيمة";
+            //    }
+            //    else
+            //    {
+            //        CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-                    Translator.instance.CultureInfo = new CultureInfo("en-US");
+            //        Translator.instance.CultureInfo = new CultureInfo("en-US");
 
-                    ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+            //        ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
-                    ValidateForNullOrEmptyMessage = "Enter Value";
-                }
-            }
+            //        ValidateForNullOrEmptyMessage = "Enter Value";
+            //    }
+            //}
 
         }
 

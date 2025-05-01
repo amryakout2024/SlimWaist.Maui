@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using SlimWaist.Extentions;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
+using System.Globalization;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -30,6 +32,24 @@ public partial class HomePage : UraniumContentPage
         //var dd = ChangeDirections.instance.FlowDirection;
 
         BindingContext = _homeVM;
+
+        if (App.setting.CultureInfo == "ar-SA")
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+
+            Translator.instance.CultureInfo = new CultureInfo("ar-SA");
+
+            ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+        }
+        else
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
+
+            Translator.instance.CultureInfo = new CultureInfo("en-US");
+
+            ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+        }
+
     }
 
     protected async override void OnAppearing()
@@ -37,6 +57,7 @@ public partial class HomePage : UraniumContentPage
         WantToExit = false;
 
         await _homeVM.init();
+
     }
 
     protected override bool OnBackButtonPressed()

@@ -68,19 +68,16 @@ namespace SlimWaist.ViewModels
 
         Setting setting;
 
+        List<Membership> memberships =new List<Membership>();
         public async Task init()
         {
             //Preferences.Set("Email", "");
 
             //File.Delete(DataContext.DbPath);
 
-            var memberShips = await _dataContext.LoadAsync<Membership>();
+            memberships = await _dataContext.LoadAsync<Membership>();
 
-            var settings = await _dataContext.LoadAsync<Setting>();
-
-            setting = settings.Where(x => x.Id == 1).FirstOrDefault();
-
-            MemberShip = memberShips.Where(x => x.Id == setting.SavedMemberShipId).FirstOrDefault();
+            MemberShip = memberships.Where(x => x.Id == App.setting.CurrentMemberShipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
 
@@ -109,20 +106,8 @@ namespace SlimWaist.ViewModels
             ModifiedWeight = MemberShip?.ModifiedWeight ?? "";
 
             TotalEnergy = MemberShip?.TotalEnergy ?? "";
-
-            RegimeLists = null;
-            //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
-
-            //var MaxRegimeId = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Select(x=>x.RegimeId).Max();
-
-            //var FilteredRegimeList = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Where(x => x.RegimeId == MaxRegimeId);
-
-            //foreach (var r in FilteredRegimeList)
-            //{
-            //    RegimeLists.Add(r);
-            //}
-
         }
+
         private void BmiCalculator()
         {
             double mi = (Convert.ToDouble(Weight)) / ((Convert.ToDouble(Height) / 100) * (Convert.ToDouble(Height) / 100));
