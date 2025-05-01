@@ -61,6 +61,33 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string Height {
+            get {
+                return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string LoginPageButtonLogin {
@@ -75,15 +102,6 @@ namespace SlimWaist.Languages {
         public static string LoginPageCheckBox {
             get {
                 return ResourceManager.GetString("LoginPageCheckBox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email.
-        /// </summary>
-        public static string LoginPageEmail {
-            get {
-                return ResourceManager.GetString("LoginPageEmail", resourceCulture);
             }
         }
         
@@ -106,15 +124,6 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string LoginPagePassword {
-            get {
-                return ResourceManager.GetString("LoginPagePassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Easy way for weight loss.
         /// </summary>
         public static string LoginPageTitle {
@@ -124,11 +133,83 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to error.
         /// </summary>
         public static string RegexValidationMessage {
             get {
                 return ResourceManager.GetString("RegexValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Body Activity.
+        /// </summary>
+        public static string SelectBodyActivity {
+            get {
+                return ResourceManager.GetString("SelectBodyActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Password.
+        /// </summary>
+        public static string UpdatePassword {
+            get {
+                return ResourceManager.GetString("UpdatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weight.
+        /// </summary>
+        public static string Weight {
+            get {
+                return ResourceManager.GetString("Weight", resourceCulture);
             }
         }
     }

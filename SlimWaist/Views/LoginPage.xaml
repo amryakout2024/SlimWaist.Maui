@@ -50,7 +50,7 @@
         
         <mat:TextField 
             Text="{Binding Email}"
-            Title="{extention:TranslateExtention Key=LoginPageEmail}"
+            Title="{extention:TranslateExtention Key=Email}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
@@ -69,7 +69,7 @@
 
         <mat:TextField 
             Text="{Binding Password}"
-            Title="{extention:TranslateExtention Key=LoginPagePassword}"
+            Title="{extention:TranslateExtention Key=Password}"
             IsPassword="True"
             TextColor="DarkSlateBlue"
             TitleColor="DarkGray"

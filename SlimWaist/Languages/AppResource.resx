@@ -121,10 +121,6 @@
     <value>Easy way for weight loss</value>
     <comment>1</comment>
   </data>
-  <data name="LoginPageEmail" xml:space="preserve">
-    <value>Email</value>
-    <comment>1</comment>
-  </data>
   <data name="RegexValidationMessage" xml:space="preserve">
     <value>error</value>
     <comment>1</comment>
@@ -145,8 +141,39 @@
     <value>Log in</value>
     <comment>1</comment>
   </data>
-  <data name="LoginPagePassword" xml:space="preserve">
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>1</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
     <value>Password</value>
     <comment>1</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Update Password</value>
+  </data>
+  <data name="SelectBodyActivity" xml:space="preserve">
+    <value>Select Body Activity</value>
   </data>
 </root>

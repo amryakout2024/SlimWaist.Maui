@@ -36,7 +36,7 @@
     <VerticalStackLayout Spacing="10" Margin="5">
         <mat:TextField 
             Text="{Binding Email}"
-            Title="الإيميل"
+            Title="{extention:TranslateExtention Key=Email}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
@@ -55,7 +55,7 @@
 
         <mat:TextField 
             Text="{Binding Password}"
-            Title="كلمة السر"
+            Title="{extention:TranslateExtention Key=Password}"
             AllowClear="True"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
@@ -70,7 +70,7 @@
 
         <mat:TextField 
             Text="{Binding Name}"
-            Title="الإسم"
+            Title="{extention:TranslateExtention Key=Name}"
             AllowClear="True"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
@@ -85,7 +85,7 @@
 
         <mat:TextField 
             Text="{Binding Height}"
-            Title="الطول"
+            Title="{extention:TranslateExtention Key=Height}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
@@ -101,7 +101,7 @@
 
         <mat:TextField 
             Text="{Binding Weight}"
-            Title="الوزن"
+            Title="{extention:TranslateExtention Key=Weight}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
@@ -135,7 +135,7 @@
         </mat:DatePickerField>-->
 
         <Picker
-            Title="اختر نشاط الجسم"
+            Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="act"
             ItemsSource="{Binding BodyActivities}"
             SelectedItem="{Binding SelectedBodyActivity}"
@@ -147,19 +147,19 @@
 
         <mat:RadioButtonGroupView Orientation="Horizontal">
             <mat:RadioButton
-                Text="ذكر"
+                Text="{extention:TranslateExtention Key=Male}"
                 IsChecked="{Binding IsMale}"
                 StyleClass="CheckRadioButton"
                 TextColor="DarkSlateBlue"/>
             <mat:RadioButton
-                Text="أنثي"
+                Text="{extention:TranslateExtention Key=Female}"
                 StyleClass="CheckRadioButton"
                 TextColor="DarkSlateBlue"/>
 
         </mat:RadioButtonGroupView>
 
         <Button 
-            Text="حفظ"
+            Text="{extention:TranslateExtention Key=Save}"
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"

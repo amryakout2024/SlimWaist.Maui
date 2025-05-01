@@ -120,9 +120,6 @@
   <data name="LoginPageTitle" xml:space="preserve">
     <value>أسهل طريقة للتخسيس</value>
   </data>
-  <data name="LoginPageEmail" xml:space="preserve">
-    <value>الإيميل</value>
-  </data>
   <data name="RegexValidationMessage" xml:space="preserve">
     <value>خطأ</value>
   </data>
@@ -138,7 +135,37 @@
   <data name="LoginPageButtonLogin" xml:space="preserve">
     <value>دخول</value>
   </data>
-  <data name="LoginPagePassword" xml:space="preserve">
+  <data name="Email" xml:space="preserve">
+    <value>الإيميل</value>
+  </data>
+  <data name="Password" xml:space="preserve">
     <value>كلمة السر</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الإسم</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>الطول</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>الوزن</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>أنثي</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value> تحديث كلمة المرور</value>
+  </data>
+  <data name="SelectBodyActivity" xml:space="preserve">
+    <value>اختر نشاط الجسم</value>
   </data>
 </root>

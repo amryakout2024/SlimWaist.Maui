@@ -18,11 +18,8 @@ public partial class LoginPage : UraniumContentPage
     private readonly LoginVM _loginVM;
     private readonly DataContext _dataContext;
     private readonly IBadge _badge;
-    private List<Membership> memberships;
-    private Membership membership;
     private Setting setting;
-    private List<Setting> settings;
-
+ 
     //,IBadge badge
     public LoginPage(LoginVM loginVM,DataContext dataContext)
     {
@@ -40,14 +37,7 @@ public partial class LoginPage : UraniumContentPage
     {
         await _loginVM.init();
 
-        memberships = await _dataContext.LoadAsync<Membership>();
-
-        settings = await _dataContext.LoadAsync<Setting>();
-
-        setting = settings.Where(x => x.Id == 1).FirstOrDefault();
-
-        membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
-
+        setting=_dataContext.Database.Table<Setting>().FirstOrDefault();
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -58,11 +48,7 @@ public partial class LoginPage : UraniumContentPage
 
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-            membership.CultureInfo = "en-US";
-
             setting.CultureInfo = "en-US";
-
-            await _dataContext.UpdateAsync<Membership>(membership);
 
             await _dataContext.UpdateAsync<Setting>(setting);
 
@@ -83,11 +69,7 @@ public partial class LoginPage : UraniumContentPage
 
             CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-            membership.CultureInfo = "ar-SA";
-
             setting.CultureInfo = "ar-SA";
-
-            await _dataContext.UpdateAsync<Membership>(membership);
 
             await _dataContext.UpdateAsync<Setting>(setting);
 
