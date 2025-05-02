@@ -130,7 +130,7 @@
     <value>If you don't have membership </value>
   </data>
   <data name="LoginPageCheckBox" xml:space="preserve">
-    <value>Save log in email and password</value>
+    <value>Save email and password</value>
   </data>
   <data name="LoginPageButtonLogin" xml:space="preserve">
     <value>Log in</value>
@@ -149,6 +149,9 @@
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
+  </data>
+  <data name="Currentweight" xml:space="preserve">
+    <value>Current weight</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Male</value>
@@ -182,5 +185,41 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Welcomeback" xml:space="preserve">
+    <value>Welcome back</value>
+  </data>
+  <data name="Bodymassanalysis" xml:space="preserve">
+    <value>Body mass analysis</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Bodymassindex" xml:space="preserve">
+    <value>Body mass index (BMI)</value>
+  </data>
+  <data name="Idealweight" xml:space="preserve">
+    <value>Ideal weight</value>
+  </data>
+  <data name="Modifiedweight" xml:space="preserve">
+    <value>Modified weight</value>
+  </data>
+  <data name="Bodyactivity" xml:space="preserve">
+    <value>Body activity</value>
+  </data>
+  <data name="Totalenergy" xml:space="preserve">
+    <value>Total energy</value>
+  </data>
+  <data name="Currentregieme" xml:space="preserve">
+    <value>Current regieme</value>
+  </data>
+  <data name="Showall" xml:space="preserve">
+    <value>Show all</value>
+  </data>
+  <data name="Noregiemetillnow" xml:space="preserve">
+    <value>No regieme till now !</value>
+  </data>
+  <data name="Startregieme" xml:space="preserve">
+    <value>Start regieme</value>
   </data>
 </root>

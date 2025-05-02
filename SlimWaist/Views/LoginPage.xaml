@@ -25,10 +25,9 @@
     </ur:UraniumContentPage.Resources>
     
     <VerticalStackLayout Spacing="10" Margin="10">
-        <HorizontalStackLayout>
+        <HorizontalStackLayout HorizontalOptions="End">
             <Image Source="earth.png"
-                   WidthRequest="23" VerticalOptions="Center"
-                   HorizontalOptions="Center">
+                   WidthRequest="25">
                 <Image.Behaviors>
                     <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
                 </Image.Behaviors>
@@ -54,8 +53,7 @@
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
@@ -74,8 +72,7 @@
             TextColor="DarkSlateBlue"
             TitleColor="DarkGray"
             CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
@@ -86,7 +83,6 @@
         </mat:TextField>
 
         <mat:CheckBox Text="{extention:TranslateExtention Key=LoginPageCheckBox}"
-                      TextFontSize="15"
                       BoxSizeRequest="20" 
                       IsChecked="{Binding IsCheckBoxChecked}"
                       CheckChangedCommand="{Binding SaveLoginCommand}"/>
@@ -102,12 +98,10 @@
         
         <HorizontalStackLayout>
             <Label
-                FontSize="15"
                 VerticalOptions="Center"
             Text="{extention:TranslateExtention Key=LoginPageLabelHaveNoMembership} "/>
             <Label 
                 Text="{extention:TranslateExtention Key=LoginPageLabelAddNewMembership}"
-                FontSize="16"
                 BackgroundColor="Transparent"
                 TextColor="DodgerBlue"
                 VerticalOptions="Center"
@@ -118,5 +112,6 @@
                 </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
+        
     </VerticalStackLayout>
 </ur:UraniumContentPage>

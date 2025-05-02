@@ -61,11 +61,65 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Body activity.
+        /// </summary>
+        public static string Bodyactivity {
+            get {
+                return ResourceManager.GetString("Bodyactivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Body mass analysis.
+        /// </summary>
+        public static string Bodymassanalysis {
+            get {
+                return ResourceManager.GetString("Bodymassanalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Body mass index (BMI).
+        /// </summary>
+        public static string Bodymassindex {
+            get {
+                return ResourceManager.GetString("Bodymassindex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cart.
         /// </summary>
         public static string Cart {
             get {
                 return ResourceManager.GetString("Cart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current regieme.
+        /// </summary>
+        public static string Currentregieme {
+            get {
+                return ResourceManager.GetString("Currentregieme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current weight.
+        /// </summary>
+        public static string Currentweight {
+            get {
+                return ResourceManager.GetString("Currentweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -115,6 +169,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ideal weight.
+        /// </summary>
+        public static string Idealweight {
+            get {
+                return ResourceManager.GetString("Idealweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log in.
         /// </summary>
         public static string LoginPageButtonLogin {
@@ -124,7 +187,7 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save log in email and password.
+        ///   Looks up a localized string similar to Save email and password.
         /// </summary>
         public static string LoginPageCheckBox {
             get {
@@ -169,6 +232,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modified weight.
+        /// </summary>
+        public static string Modifiedweight {
+            get {
+                return ResourceManager.GetString("Modifiedweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My meals.
         /// </summary>
         public static string Mymeals {
@@ -183,6 +255,15 @@ namespace SlimWaist.Languages {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No regieme till now !.
+        /// </summary>
+        public static string Noregiemetillnow {
+            get {
+                return ResourceManager.GetString("Noregiemetillnow", resourceCulture);
             }
         }
         
@@ -232,6 +313,33 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show all.
+        /// </summary>
+        public static string Showall {
+            get {
+                return ResourceManager.GetString("Showall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start regieme.
+        /// </summary>
+        public static string Startregieme {
+            get {
+                return ResourceManager.GetString("Startregieme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total energy.
+        /// </summary>
+        public static string Totalenergy {
+            get {
+                return ResourceManager.GetString("Totalenergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Update {
@@ -255,6 +363,15 @@ namespace SlimWaist.Languages {
         public static string Weight {
             get {
                 return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome back.
+        /// </summary>
+        public static string Welcomeback {
+            get {
+                return ResourceManager.GetString("Welcomeback", resourceCulture);
             }
         }
     }

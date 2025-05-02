@@ -150,6 +150,9 @@
   <data name="Weight" xml:space="preserve">
     <value>الوزن</value>
   </data>
+  <data name="Currentweight" xml:space="preserve">
+    <value>الوزن الحالي</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>ذكر</value>
   </data>
@@ -182,5 +185,41 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>الإعدادات</value>
+  </data>
+  <data name="Welcomeback" xml:space="preserve">
+    <value>مرحبا بعودتك</value>
+  </data>
+  <data name="Bodymassanalysis" xml:space="preserve">
+    <value>تحليل كتلة الجسم</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Bodymassindex" xml:space="preserve">
+    <value>مؤشر كتلة الجسم</value>
+  </data>
+  <data name="Idealweight" xml:space="preserve">
+    <value>الوزن المثالي</value>
+  </data>
+  <data name="Modifiedweight" xml:space="preserve">
+    <value>الوزن المعدل</value>
+  </data>
+  <data name="Bodyactivity" xml:space="preserve">
+    <value>نشاط الجسم</value>
+  </data>
+  <data name="Totalenergy" xml:space="preserve">
+    <value>السعرات الكلية</value>
+  </data>
+  <data name="Currentregieme" xml:space="preserve">
+    <value>نظام الدايت الحالي</value>
+  </data>
+  <data name="Showall" xml:space="preserve">
+    <value>عرض الكل</value>
+  </data>
+  <data name="Noregiemetillnow" xml:space="preserve">
+    <value>مفيش اي نظام دايت لسه !</value>
+  </data>
+  <data name="Startregieme" xml:space="preserve">
+    <value>ابدأ الدايت</value>
   </data>
 </root>
