@@ -61,6 +61,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Birth date.
+        /// </summary>
+        public static string Birthdate {
+            get {
+                return ResourceManager.GetString("Birthdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Body activity.
         /// </summary>
         public static string Bodyactivity {
@@ -120,6 +129,15 @@ namespace SlimWaist.Languages {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit membership.
+        /// </summary>
+        public static string Editmembership {
+            get {
+                return ResourceManager.GetString("Editmembership", resourceCulture);
             }
         }
         

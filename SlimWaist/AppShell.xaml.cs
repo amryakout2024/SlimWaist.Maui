@@ -81,7 +81,6 @@ namespace SlimWaist
         private readonly static Type[] _routablePageTypes =
         [
             typeof(RegisterPage),
-            typeof(SignUpPage),
             typeof(HomePage),
             typeof(RegimesListPage),
             typeof(FoodsPage),

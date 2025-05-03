@@ -111,28 +111,26 @@
             </mat:TextField.Validations>
         </mat:TextField>
 
-        <!--<mat:DatePickerField
+        <mat:DatePickerField
             Date="{Binding BirthDate}"
             Padding="0"
             Format="dd/MM/yyyy"
-            Title="تاريج الميلاد"
-            FontSize="15"
+            Title="{extention:TranslateExtention Key=Birthdate}"
+            x:Name="datePickerField"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             MinimumDate="01/01/1930"
-            MaximumDate="01/01/2025"
-            AccentColor="DarkSlateBlue"
-            TitleFontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:DatePickerField.Validations>
                 <validation:RequiredValidation  Message="اختر التاريخ"/>
                 <validation:RegexValidation Pattern="01-12-2025"
                                                Message=""/>
             </mat:DatePickerField.Validations>
-        </mat:DatePickerField>-->
+        </mat:DatePickerField>
 
         <Picker
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
-            x:Name="act"
+            x:Name="picker"
             ItemsSource="{Binding BodyActivities}"
             SelectedItem="{Binding SelectedBodyActivity}"
             ItemDisplayBinding="{Binding BodyActivityName}"
@@ -166,3 +164,6 @@
 
     </input:FormView >
 </ur:UraniumContentPage>
+ <!--
+    
+-->

@@ -26,28 +26,27 @@
             <Setter Property="TextColor" Value="DarkSlateBlue" />
         </Style>
     </ur:UraniumContentPage.Resources>
+    
     <Shell.TitleView>
         <Label 
-            Text="عضوية جديدة"
+            Text="{extention:TranslateExtention Key=Editmembership}"
             HorizontalOptions="Center"
-            TextColor="White"
+            TextColor="{StaticResource MainColor}"
             HorizontalTextAlignment="Center"
             VerticalOptions="Center"
             FontSize="25"/>
     </Shell.TitleView>
 
-    <!--<Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="True" Command="{Binding GoBackCommand}"/>
-    </Shell.BackButtonBehavior>-->
-    <VerticalStackLayout Spacing="10" Margin="5">
+    <input:FormView Spacing="5" Margin="10,5,10,0" 
+                    FlowDirection="RightToLeft"
+                    SubmitCommand="{Binding SaveNewMemberShipCommand}">
         <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="خطأ"/>
@@ -70,7 +69,6 @@
                 <Label Grid.Column="0"
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
-                    FontSize="16"
                        Margin="10,0,0,0"
                     TextColor="{StaticResource MainColor}"
                     Text="{extention:TranslateExtention Key=UpdatePassword}"/>
@@ -92,8 +90,7 @@
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="خطأ"/>
@@ -108,8 +105,7 @@
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -124,39 +120,36 @@
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>
 
-        <!--<mat:DatePickerField
+        <mat:DatePickerField
             Date="{Binding BirthDate}"
             Padding="0"
             Format="dd/MM/yyyy"
-            Title="تاريج الميلاد"
-            FontSize="15"
+            x:Name="datePickerField"
+            Title="{extention:TranslateExtention Key=Birthdate}"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             MinimumDate="01/01/1930"
             MaximumDate="01/01/2025"
-            AccentColor="DarkSlateBlue"
-            TitleFontSize="16">
+            AccentColor="DarkSlateBlue">
             <mat:DatePickerField.Validations>
                 <validation:RequiredValidation  Message="اختر التاريخ"/>
                 <validation:RegexValidation Pattern="01-12-2025"
                                                Message=""/>
             </mat:DatePickerField.Validations>
-        </mat:DatePickerField>-->
+        </mat:DatePickerField>
 
         <Picker
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="act"
             ItemsSource="{Binding BodyActivities}"
             SelectedItem="{Binding SelectedBodyActivity}"
-            FontSize="15"
             ItemDisplayBinding="{Binding BodyActivityName}"
             TextColor="DarkSlateBlue"
             TitleColor="DarkSlateBlue">
@@ -186,146 +179,7 @@
             StyleClass="FilledButton"
             Command="{Binding UpdateMemberShipCommand}"/>
 
-    </VerticalStackLayout>
-    <!--<input:FormView Spacing="5" Margin="10,5,10,0" 
-                    FlowDirection="RightToLeft"
-                    SubmitCommand="{Binding SaveNewMemberShipCommand}">
-        
-        <mat:TextField 
-            Text="{Binding Email}"
-            Title="الإيميل"
-            TitleColor="Gray"
-            CornerRadius="10"
-            AllowClear="True"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-            <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
-                                                 InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
-                                                 ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
-            </mat:TextField.Behaviors>
-        </mat:TextField>
-
-        <mat:TextField 
-            Text="{Binding Password}"
-            Title="كلمة السر"
-            AllowClear="True"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-        </mat:TextField>
-
-        <mat:TextField 
-            Text="{Binding Name}"
-            Title="الإسم"
-            AllowClear="True"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-        </mat:TextField>
-
-        <mat:TextField 
-            Text="{Binding Height}"
-            Title="الطول"
-            AllowClear="True"
-            Keyboard="Numeric"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
-            <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
-                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
-            </mat:TextField.Validations>
-        </mat:TextField>
-
-        <mat:TextField 
-            Text="{Binding Weight}"
-            Title="الوزن"
-            AllowClear="True"
-            Keyboard="Numeric"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            CornerRadius="10"
-            AccentColor="DarkSlateBlue"
-            FontSize="16">
-            <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
-                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
-            </mat:TextField.Validations>
-        </mat:TextField>
-
-        <mat:DatePickerField
-            Date="{Binding BirthDate}"
-            Padding="0"
-            Format="dd/MM/yyyy"
-            Title="تاريج الميلاد"
-            FontSize="15"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            MinimumDate="01/01/1930"
-            MaximumDate="01/01/2025"
-            AccentColor="DarkSlateBlue"
-            TitleFontSize="16">
-            <mat:DatePickerField.Validations>
-                <validation:RequiredValidation  Message="اختر التاريخ"/>
-                <validation:RegexValidation Pattern="01-12-2025"
-                                               Message=""/>
-            </mat:DatePickerField.Validations>
-        </mat:DatePickerField>
-
-        <Picker
-            Title="اختر نشاط الجسم"
-            x:Name="act"
-            ItemsSource="{Binding BodyActivities}"
-            SelectedItem="{Binding SelectedBodyActivity}"
-            FontSize="15"
-            ItemDisplayBinding="{Binding BodyActivityName}"
-            TextColor="DarkSlateBlue"
-            TitleColor="DarkSlateBlue">
-        </Picker>
-
-        <mat:RadioButtonGroupView Orientation="Horizontal">
-            <mat:RadioButton
-                Text="ذكر"
-                IsChecked="{Binding IsMale}"
-                StyleClass="CheckRadioButton"
-                TextColor="DarkSlateBlue"/>
-            <mat:RadioButton
-                Text="أنثي"
-                StyleClass="CheckRadioButton"
-                TextColor="DarkSlateBlue"/>
-
-        </mat:RadioButtonGroupView>
-        
-        <Button 
-            Text="حفظ"
-            FontSize="20"
-            BackgroundColor="DarkSlateBlue"
-            TextColor="White"
-            VerticalOptions="Center"
-            Padding="0" 
-            input:FormView.IsSubmitButton="True"
-            StyleClass="FilledButton"
-            Command="{Binding SaveNewMemberShipCommand}"/>
-        
-    </input:FormView>-->
+    </input:FormView>
+    
 </ur:UraniumContentPage>
 

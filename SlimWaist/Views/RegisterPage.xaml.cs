@@ -1,4 +1,7 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using SlimWaist.Models;
 using SlimWaist.ViewModels;
+using System.Xml.Linq;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -15,10 +18,14 @@ public partial class RegisterPage : UraniumContentPage
 
         BindingContext = _registerVM;
 
+        datePickerField.MinimumDate = new DateTime(1930, 1, 1);
+
+        datePickerField.MaximumDate = DateTime.Now;
+
     }
     protected async override void OnAppearing()
     {
-        _registerVM.init();
+        await _registerVM.init();
     }
 
 }

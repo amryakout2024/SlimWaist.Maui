@@ -225,4 +225,7 @@
   <data name="Newmembership" xml:space="preserve">
     <value>عضوية جديدة</value>
   </data>
+  <data name="Birthdate" xml:space="preserve">
+    <value> تاريخ الميلاد</value>
+  </data>
 </root>

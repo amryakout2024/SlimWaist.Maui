@@ -24,9 +24,11 @@ namespace SlimWaist.Views
 
             _dataContext = dataContext;
 
-            //_dataContext.ChangeFlowDirection(this);
-
             BindingContext = _profileVM;
+
+            datePickerField.MinimumDate = new DateTime(1930, 1, 1);
+
+            datePickerField.MaximumDate = DateTime.Now;
 
             SetBannerId();
         }

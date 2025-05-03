@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist20";
+        public const string DbName = "SlimWaist22";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -131,8 +131,12 @@ namespace SlimWaist.Models
                     Password = "1",
                     Height = 180,
                     Weight = 90,
-                    WeightDate = "26/03/2025",
-                    BirthDate = "26/03/2025",
+                    WeightDateDay=28,
+                    WeightDateMounth=2,
+                    WeightDateYear=2025,
+                    BirthDateDay=19,
+                    BirthDateMounth=8,
+                    BirthDateYear=1990,
                     Gender = "ذكر",
                     BodyActivity = "منخفض النشاط",
                     BMI = "27.78",
@@ -187,10 +191,26 @@ namespace SlimWaist.Models
                 }
 
                 List<BodyActivity> bodyActivities = new List<BodyActivity>() {
-                        new BodyActivity(){BodyActivityId=1,BodyActivityName="خامل"},
-                        new BodyActivity(){BodyActivityId=2,BodyActivityName="منخفض النشاط"},
-                        new BodyActivity(){BodyActivityId=3,BodyActivityName="نشط"},
-                        new BodyActivity(){BodyActivityId=4,BodyActivityName="نشط جدا"},
+                        new BodyActivity()
+                        {
+                            BodyActivityId=1,
+                            BodyActivityName="خامل"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=2,
+                            BodyActivityName="منخفض النشاط"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=3,
+                            BodyActivityName="نشط"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=4,
+                            BodyActivityName="نشط جدا"
+                        },
                     };
 
                 foreach (BodyActivity bodyActivity in bodyActivities)

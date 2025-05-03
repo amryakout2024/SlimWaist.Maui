@@ -25,7 +25,7 @@ namespace SlimWaist.ViewModels
         private string? _name;
 
         [ObservableProperty]
-        private string? _birthDate;
+        private DateTime? _birthDate;
 
         [ObservableProperty]
         private string? _gender;
@@ -75,6 +75,61 @@ namespace SlimWaist.ViewModels
 
             //File.Delete(DataContext.DbPath);
 
+            if (App.setting.CultureInfo == "ar-SA")
+            {
+                BodyActivities = new List<BodyActivity>() {
+
+                    new BodyActivity()
+                    {
+                        BodyActivityId=1,
+                        BodyActivityName="خامل"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=2,
+                        BodyActivityName="منخفض النشاط"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=3,
+                        BodyActivityName="نشط"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=4,
+                        BodyActivityName="نشط جدا"
+                    },
+                    };
+            }
+            else
+            {
+                BodyActivities = new List<BodyActivity>() {
+
+                    new BodyActivity()
+                    {
+                        BodyActivityId=1,
+                        BodyActivityName="Inactive"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=2,
+                        BodyActivityName="Lightly  active"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=3,
+                        BodyActivityName="Moderately  Active"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=4,
+                        BodyActivityName="Very active"
+                    },
+                    };
+            }
+
+            SelectedBodyActivity = BodyActivities.FirstOrDefault() ?? new BodyActivity();
+
             memberships = await _dataContext.LoadAsync<Membership>();
 
             MemberShip = memberships.Where(x => x.Id == App.setting.CurrentMemberShipId).FirstOrDefault();
@@ -87,7 +142,7 @@ namespace SlimWaist.ViewModels
 
             Height = MemberShip?.Height.ToString() ?? "";
 
-            BirthDate = MemberShip?.BirthDate ?? "";
+            BirthDate = new DateTime(MemberShip.BirthDateYear, MemberShip.BirthDateMounth, MemberShip.BirthDateDay);
 
             Gender = MemberShip?.Gender ?? "";
 
@@ -95,9 +150,7 @@ namespace SlimWaist.ViewModels
 
             BodyActivity = MemberShip?.BodyActivity ?? "";
 
-            BodyActivities = await _dataContext.LoadAsync<BodyActivity>();
-
-            SelectedBodyActivity = BodyActivities.Where(x => x.BodyActivityName == MemberShip.BodyActivity).FirstOrDefault();
+            //SelectedBodyActivity = BodyActivities.Where(x => x.BodyActivityName == MemberShip.BodyActivity).FirstOrDefault();
 
             BMI = MemberShip?.BMI ?? "";
 
@@ -264,7 +317,7 @@ namespace SlimWaist.ViewModels
 
             MemberShip.Weight = Convert.ToDouble(Weight);
 
-            MemberShip.BirthDate = BirthDate;
+            //MemberShip.BirthDate = BirthDate;
 
             MemberShip.BodyActivity = SelectedBodyActivity.BodyActivityName;
 

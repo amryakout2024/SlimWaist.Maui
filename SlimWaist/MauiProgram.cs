@@ -66,9 +66,6 @@ namespace SlimWaist
             builder.Services.AddSingleton<RegimesListPage>()
                             .AddSingleton<RegimesListVM>();
 
-            builder.Services.AddSingleton<SignUpPage>()
-                            .AddSingleton<SignUpVM>();
-
             builder.Services.AddSingleton<DietsPage>()
                             .AddSingleton<DietsVM>();
 

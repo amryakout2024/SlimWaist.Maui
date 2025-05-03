@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
 using SlimWaist.Views;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
@@ -73,9 +74,60 @@ namespace SlimWaist.ViewModels
 
             IsPassword = true;
 
-            //BirthDate = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            BirthDate = DateTime.Now;
 
-            BodyActivities = await _dataContext.LoadAsync<BodyActivity>();
+            if (App.setting.CultureInfo=="ar-SA")
+            {
+                BodyActivities = new List<BodyActivity>() {
+
+                    new BodyActivity()
+                    {
+                        BodyActivityId=1,
+                        BodyActivityName="خامل"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=2,
+                        BodyActivityName="منخفض النشاط"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=3,
+                        BodyActivityName="نشط"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=4,
+                        BodyActivityName="نشط جدا"
+                    },
+                    };
+            }
+            else
+            {
+                BodyActivities = new List<BodyActivity>() {
+
+                    new BodyActivity()
+                    {
+                        BodyActivityId=1,
+                        BodyActivityName="Inactive"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=2,
+                        BodyActivityName="Lightly  active"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=3,
+                        BodyActivityName="Moderately  Active"
+                    },
+                    new BodyActivity()
+                    {
+                        BodyActivityId=4,
+                        BodyActivityName="Very active"
+                    },
+                    };
+            }
 
             SelectedBodyActivity = BodyActivities.FirstOrDefault() ?? new BodyActivity();
         }
@@ -114,10 +166,15 @@ namespace SlimWaist.ViewModels
                         Password = Password,
                         Name = Name,
                         Weight = Convert.ToDouble(Weight),
-                        WeightDate = DateTime.Now.ToString("dd/MM/yyyy"),
-                        Height = Convert.ToDouble(Height),
-                        BirthDate = DateTime.Now.ToString("dd/MM/yyyy"),
+                        WeightDateDay=DateTime.Now.Day,
+                        WeightDateMounth=DateTime.Now.Month,
+                        WeightDateYear=DateTime.Now.Year,
+                        Height = Convert.ToDouble(Height),                        
+                        BirthDateDay=BirthDate.Day,
+                        BirthDateMounth=BirthDate.Month,
+                        BirthDateYear=BirthDate.Year,
                         Gender = Gender,
+
                         BodyActivity = BodyActivity,
                         BMI = BMI,
                         IdealWeight = IdealWeight,

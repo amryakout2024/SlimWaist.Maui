@@ -74,7 +74,7 @@ namespace SlimWaist.ViewModels
 
             Height = MemberShip?.Height.ToString() ?? "";
 
-            BirthDate = MemberShip?.BirthDate ?? "";
+            BirthDate = MemberShip?.BirthDateDay.ToString() ?? "";
 
             Gender = MemberShip?.Gender ?? "";
 

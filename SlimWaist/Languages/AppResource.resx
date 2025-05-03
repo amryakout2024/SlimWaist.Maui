@@ -225,4 +225,7 @@
   <data name="Newmembership" xml:space="preserve">
     <value>New membership</value>
   </data>
+  <data name="Birthdate" xml:space="preserve">
+    <value>Birth date</value>
+  </data>
 </root>
