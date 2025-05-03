@@ -1,4 +1,5 @@
-﻿using SlimWaist.Extentions;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+using SlimWaist.Extentions;
 using SlimWaist.Models;
 using System.Globalization;
 
@@ -43,8 +44,6 @@ namespace SlimWaist
                     ValidateForNullOrEmptyMessage = "Enter Value";
                 }
             }
-
-
 
             MainPage = new AppShell(_dataContext);
 

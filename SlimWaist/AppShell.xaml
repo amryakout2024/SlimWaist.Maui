@@ -8,6 +8,7 @@
     xmlns:extention="clr-namespace:SlimWaist.Extentions"        
     xmlns:v="clr-namespace:SlimWaist.Views"
     Title="SlimWaist"
+    FlowDirection="{extention:FlowDirectionsExtention}"
     >
     <Shell.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{StaticResource MainColor}"/>

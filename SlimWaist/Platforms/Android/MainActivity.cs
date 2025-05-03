@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Bumptech.Glide.Request.Target;
+using System.Globalization;
 
 namespace SlimWaist
 {
@@ -14,21 +16,38 @@ namespace SlimWaist
             // Disable font scaling
             //Resources.Configuration.FontScale = 1.0f;
 
-            //var setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
 
+
+            var currentLanguage = this.Resources.Configuration.Locales.Get(0);
 
             //Forece app to run as RTL
-            if (App.setting.CultureInfo == "ar-SA")
+
+            var firstTwoLetterFromDeviceLanguage = currentLanguage.Language;
+
+            if (firstTwoLetterFromDeviceLanguage == "ar")
             {
-                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
+                if (App.setting.CultureInfo == "ar-SA")
+                {
+                    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
+                }
+                else
+                {
+                    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.Unknown;
+                }
 
             }
             else
             {
-                Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
+                if (App.setting.CultureInfo == "ar-SA")
+                {
+                    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
+                }
+                else
+                {
+                    Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
+                }
+
             }
-
-
         }
 
         //disable font change in user device
