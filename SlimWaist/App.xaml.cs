@@ -10,6 +10,8 @@ namespace SlimWaist
         private readonly DataContext _dataContext;
         public static Setting setting;
         public static string ValidateForNullOrEmptyMessage;
+        public static string ValidateForIntegerNumberMessage;
+        public static string ValidateForDecimalNumberMessage;
 
         public App(DataContext dataContext)
         {
@@ -32,6 +34,10 @@ namespace SlimWaist
                     ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
                     ValidateForNullOrEmptyMessage = "ادخل القيمة";
+
+                    ValidateForIntegerNumberMessage = "ادخل رقم صحيح";
+
+                    ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
                 }
                 else
                 {
@@ -42,6 +48,11 @@ namespace SlimWaist
                     ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
                     ValidateForNullOrEmptyMessage = "Enter Value";
+
+                    ValidateForIntegerNumberMessage = "Enter integer number";
+
+                    ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
+
                 }
             }
 

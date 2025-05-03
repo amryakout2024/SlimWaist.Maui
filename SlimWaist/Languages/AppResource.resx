@@ -222,4 +222,7 @@
   <data name="Startregieme" xml:space="preserve">
     <value>Start regieme</value>
   </data>
+  <data name="Newmembership" xml:space="preserve">
+    <value>New membership</value>
+  </data>
 </root>

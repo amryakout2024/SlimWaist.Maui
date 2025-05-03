@@ -9,7 +9,7 @@ namespace SlimWaist.Helpers
 
         Regex regex = new Regex(@"^[0-9]+$");
 
-        public string Message { get; set; } = "ادخل رقم صحيح";
+        public string Message => App.ValidateForIntegerNumberMessage;
 
         public bool Validate(object value)
         {

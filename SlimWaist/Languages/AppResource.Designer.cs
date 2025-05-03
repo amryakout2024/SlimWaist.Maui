@@ -259,6 +259,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New membership.
+        /// </summary>
+        public static string Newmembership {
+            get {
+                return ResourceManager.GetString("Newmembership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No regieme till now !.
         /// </summary>
         public static string Noregiemetillnow {

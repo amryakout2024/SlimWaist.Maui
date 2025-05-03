@@ -18,7 +18,7 @@ namespace SlimWaist
 
 
 
-            var currentLanguage = this.Resources.Configuration.Locales.Get(0);
+            var currentLanguage = Resources.Configuration.Locales.Get(0);
 
             //Forece app to run as RTL
 

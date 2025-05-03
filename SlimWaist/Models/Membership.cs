@@ -34,6 +34,12 @@ namespace SlimWaist.Models
 
         public string? TotalEnergy { get; set; }
 
+        public int ObesityDegreeId { get; set; }
+
+        public double WaistCircumferenceMeasurement { get; set; }
+
+        public int WaistCircumferenceId { get; set; }
+
         public string? CultureInfo { get; set; } = "ar-SA";
     }
 

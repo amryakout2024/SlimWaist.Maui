@@ -1,10 +1,11 @@
 ﻿using SQLite;
+using System.Resources;
 
 namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist19";
+        public const string DbName = "SlimWaist20";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -26,6 +27,8 @@ namespace SlimWaist.Models
         {
             try
             {
+                //create tables
+
                 Database.CreateTable<Membership>();
 
                 Database.CreateTable<Gender>();
@@ -48,8 +51,81 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<Diet>();
 
+                Database.CreateTable<ObesityDegree>();
+
+                Database.CreateTable<WaistCircumference>();
+
+                //inserting data
+
+                List<WaistCircumference> waistCircumferences= new List<WaistCircumference>()
+                {
+                    new WaistCircumference()
+                    {
+                        WaistCircumferenceId=1,
+                        WaistCircumferenceArabicName="مقبول",
+                        WaistCircumferenceEnglishName="Accepted"
+                    },
+                    new WaistCircumference()
+                    {
+                        WaistCircumferenceId=2,
+                        WaistCircumferenceArabicName="خطر",
+                        WaistCircumferenceEnglishName="Low risk"
+                    },
+                    new WaistCircumference()
+                    {
+                        WaistCircumferenceId=3,
+                        WaistCircumferenceArabicName="خطرعالي",
+                        WaistCircumferenceEnglishName="High risk"
+                    },
+                };
+
+                foreach (var waistCircumference in waistCircumferences)
+                {
+                    Database.Insert(waistCircumference);
+                }
+
+                List<ObesityDegree> obesityDegrees = new List<ObesityDegree>()
+                {
+                    new ObesityDegree()
+                    {
+                        ObesityDegreeId = 1,
+                        ObesityDegreeArabicName="عادي",
+                        ObesityDegreeEnglishName="Normal"
+                    },
+                    new ObesityDegree()
+                    {
+                        ObesityDegreeId=2,
+                        ObesityDegreeArabicName="زيادة وزن",
+                        ObesityDegreeEnglishName="Over weight"
+                    },
+                    new ObesityDegree()
+                    {
+                        ObesityDegreeId=1,
+                        ObesityDegreeArabicName="سمنة درجة أولي",
+                        ObesityDegreeEnglishName="Obese degree 1"
+                    },
+                    new ObesityDegree()
+                    {
+                        ObesityDegreeId=1,
+                        ObesityDegreeArabicName="سمنة درجة ثانية",
+                        ObesityDegreeEnglishName="Obese degree 2"
+                    },
+                    new ObesityDegree()
+                    {
+                        ObesityDegreeId=1,
+                        ObesityDegreeArabicName="سمنة درجة ثالثة",
+                        ObesityDegreeEnglishName="Obese degree 3"
+                    }
+                };
+
+                foreach (var obesityDegree in obesityDegrees)
+                {
+                    Database.Insert(obesityDegree);
+                }
+
                 Database.Insert(new Membership()
                 {
+                    Id= 1,
                     Name = "عمرو ياقوت",
                     Email = "amrnewstory@gmail.com",
                     Password = "1",
@@ -62,10 +138,18 @@ namespace SlimWaist.Models
                     BMI = "27.78",
                     IdealWeight = "72.98",
                     ModifiedWeight = "79.79",
-                    TotalEnergy = "1595.8"
+                    TotalEnergy = "1595.8",
+                    ObesityDegreeId = 1,
+                    WaistCircumferenceId= 1,
+                    WaistCircumferenceMeasurement=60,
+                    CultureInfo="ar-SA",
                 });
 
-                Database.Insert(new Setting() { Id = 1 });
+                Database.Insert(new Setting() 
+                { 
+                   Id = 1,
+                   CultureInfo= "ar-SA",
+                });
 
                 List<Diet> diets = new List<Diet>()
                 {

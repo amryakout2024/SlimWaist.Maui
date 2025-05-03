@@ -222,4 +222,7 @@
   <data name="Startregieme" xml:space="preserve">
     <value>ابدأ الدايت</value>
   </data>
+  <data name="Newmembership" xml:space="preserve">
+    <value>عضوية جديدة</value>
+  </data>
 </root>
