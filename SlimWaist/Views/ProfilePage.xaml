@@ -39,7 +39,7 @@
 
     <input:FormView Spacing="5" Margin="10,5,10,0" 
                     FlowDirection="RightToLeft"
-                    SubmitCommand="{Binding SaveNewMemberShipCommand}">
+                    SubmitCommand="{Binding UpdateMemberShipCommand}">
         <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
@@ -149,7 +149,7 @@
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="act"
             ItemsSource="{Binding BodyActivities}"
-            SelectedItem="{Binding SelectedBodyActivity}"
+            SelectedIndex="{Binding BodyActivityIndex}"
             ItemDisplayBinding="{Binding BodyActivityName}"
             TextColor="DarkSlateBlue"
             TitleColor="DarkSlateBlue">

@@ -10,14 +10,16 @@ namespace SlimWaist.ViewModels
 {
     public partial class RegisterVM(DataContext dataContext) : BaseVM
     {
-        [ObservableProperty]
-        private string _email;
+        private readonly DataContext _dataContext = dataContext;
 
         [ObservableProperty]
-        private string _password;
+        private string? _email;
 
         [ObservableProperty]
-        private string _name;
+        private string? _password;
+
+        [ObservableProperty]
+        private string? _name;
 
         [ObservableProperty]
         private string? _weight;
@@ -29,22 +31,10 @@ namespace SlimWaist.ViewModels
         private DateTime _birthDate;
 
         [ObservableProperty]
-        private string _gender;
+        private int _genderIndex;
 
         [ObservableProperty]
-        private string? _bodyActivity;
-
-        [ObservableProperty]
-        private string? _bMI;
-
-        [ObservableProperty]
-        private string? _idealWeight;
-
-        [ObservableProperty]
-        private string? _modifiedWeight;
-
-        [ObservableProperty]
-        private string? _totalEnergy;
+        private int _bodyActivityIndex;
 
         [ObservableProperty]
         private bool _isPassword;
@@ -56,15 +46,8 @@ namespace SlimWaist.ViewModels
         private bool _isMale;
 
         [ObservableProperty]
-        private string _pickerSelectedIndex;
-
-        [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
 
-        [ObservableProperty]
-        private BodyActivity _selectedBodyActivity;
-
-        private readonly DataContext _dataContext = dataContext;
 
         public async Task init()
         {
@@ -76,90 +59,27 @@ namespace SlimWaist.ViewModels
 
             BirthDate = DateTime.Now;
 
-            if (App.setting.CultureInfo=="ar-SA")
-            {
-                BodyActivities = new List<BodyActivity>() {
+            BodyActivities=App.BodyActivities;
 
-                    new BodyActivity()
-                    {
-                        BodyActivityId=1,
-                        BodyActivityName="خامل"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=2,
-                        BodyActivityName="منخفض النشاط"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=3,
-                        BodyActivityName="نشط"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=4,
-                        BodyActivityName="نشط جدا"
-                    },
-                    };
-            }
-            else
-            {
-                BodyActivities = new List<BodyActivity>() {
-
-                    new BodyActivity()
-                    {
-                        BodyActivityId=1,
-                        BodyActivityName="Inactive"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=2,
-                        BodyActivityName="Lightly  active"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=3,
-                        BodyActivityName="Moderately  Active"
-                    },
-                    new BodyActivity()
-                    {
-                        BodyActivityId=4,
-                        BodyActivityName="Very active"
-                    },
-                    };
-            }
-
-            SelectedBodyActivity = BodyActivities.FirstOrDefault() ?? new BodyActivity();
+            BodyActivityIndex = 0;
         }
 
         [RelayCommand]
         private async Task SaveNewMemberShip()
         {
-            Gender = IsMale ? "ذكر" : "أنثي";
-
-            BodyActivity = SelectedBodyActivity.BodyActivityName ?? "";
+            GenderIndex = IsMale ? 0 : 1;
 
             if (!string.IsNullOrEmpty(Email) &&
                 !string.IsNullOrEmpty(Password) &&
                 !string.IsNullOrEmpty(Name) &&
                 !string.IsNullOrEmpty(Weight) &&
                 !string.IsNullOrEmpty(Height) &&
-                !string.IsNullOrEmpty(BirthDate.ToString()) &&
-                !string.IsNullOrEmpty(Gender) &&
-                !string.IsNullOrEmpty(BodyActivity))
+                !string.IsNullOrEmpty(BirthDate.ToString()))
             {
                 var IsRegisteredEmailBefore = _dataContext.FindEmailAsync(Email);
 
                 if (!IsRegisteredEmailBefore.Result)
                 {
-                    BmiCalculator();
-
-                    IdealWeightCalculator();
-
-                    ModifiedWeightCalculator();
-
-                    TotalEnergyCalculator(BodyActivity ?? "");
-
                     await _dataContext.InsertAsync(new Membership()
                     {
                         Email = Email,
@@ -173,14 +93,8 @@ namespace SlimWaist.ViewModels
                         BirthDateDay=BirthDate.Day,
                         BirthDateMounth=BirthDate.Month,
                         BirthDateYear=BirthDate.Year,
-                        Gender = Gender,
-
-                        BodyActivity = BodyActivity,
-                        BMI = BMI,
-                        IdealWeight = IdealWeight,
-                        ModifiedWeight = ModifiedWeight,
-                        TotalEnergy = TotalEnergy
-
+                        BodyActivityIndex= BodyActivityIndex,
+                        GenderIndex = GenderIndex,
                     });
 
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -194,153 +108,7 @@ namespace SlimWaist.ViewModels
                 {
                     await Shell.Current.DisplayAlert("خطأ", "الايميل مسجل مسبقا", "Ok");
                 }
-
-            }
-
-
-
-        }
-
-        private void BmiCalculator()
-        {
-            double mi = (Convert.ToDouble(Weight)) / ((Convert.ToDouble(Height) / 100) * (Convert.ToDouble(Height) / 100));
-
-            BMI = Math.Round(mi, 2).ToString();
-        }
-
-        private void IdealWeightCalculator()
-        {
-            if (Gender == "أنثي")
-            {
-                double iw = ((((Convert.ToDouble(Height)) - 152.4) / 2.5) * 1.7) + 49;
-                IdealWeight = Math.Round(iw, 2).ToString();
-            }
-            if (Gender == "ذكر")
-            {
-                double iw = ((((Convert.ToDouble(Height)) - 152.4) / 2.5) * 1.9) + 52;
-                IdealWeight = Math.Round(iw, 2).ToString();
-            }
-
-        }
-
-        private void ModifiedWeightCalculator()
-        {
-            double mi = (Convert.ToDouble(IdealWeight)) + (0.4 * ((Convert.ToDouble(Weight) - Convert.ToDouble(IdealWeight))));
-            ModifiedWeight = Math.Round(mi, 2).ToString();
-        }
-
-        private void BodyActivityCalculator()
-        {
-            double bm = Convert.ToDouble(BMI);
-            if (bm <= 18.5)
-            {
-                BodyActivity = "خامل";
-            }
-            else if (bm <= 18.5)
-            {
-                BodyActivity = "قليل النشاط";
-            }
-            else if (bm <= 18.5)
-            {
-                BodyActivity = "نشط";
-            }
-            else if (bm <= 18.5)
-            {
-                BodyActivity = "نشط جدا";
             }
         }
-
-        private void TotalEnergyCalculator(string bodyActivity)
-        {
-            double BodyActivityDouble2 = 0;
-
-            if (bodyActivity == "خامل")
-            {
-
-                if (Convert.ToDouble(BMI) < 18.5)
-                {
-                    BodyActivityDouble2 = 35;
-                }
-                else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
-                {
-                    BodyActivityDouble2 = 30;
-                }
-                else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
-                {
-                    BodyActivityDouble2 = 20;
-                }
-                else if (Convert.ToDouble(BMI) >= 30)
-                {
-                    BodyActivityDouble2 = 15;
-                }
-
-            }
-            else if (bodyActivity == "منخفض النشاط")
-            {
-                if (Convert.ToDouble(BMI) < 18.5)
-                {
-                    BodyActivityDouble2 = 40;
-                }
-                else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
-                {
-                    BodyActivityDouble2 = 35;
-                }
-                else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
-                {
-                    BodyActivityDouble2 = 25;
-                }
-                else if (Convert.ToDouble(BMI) >= 30)
-                {
-                    BodyActivityDouble2 = 20;
-                }
-
-            }
-            else if (bodyActivity == "نشط")
-            {
-                if (Convert.ToDouble(BMI) < 18.5)
-                {
-                    BodyActivityDouble2 = 45;
-                }
-                else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
-                {
-                    BodyActivityDouble2 = 40;
-                }
-                else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
-                {
-                    BodyActivityDouble2 = 30;
-                }
-                else if (Convert.ToDouble(BMI) >= 30)
-                {
-                    BodyActivityDouble2 = 25;
-                }
-
-            }
-            else if (bodyActivity == "نشط جدا")
-            {
-                if (Convert.ToDouble(BMI) < 18.5)
-                {
-                    BodyActivityDouble2 = 50;
-                }
-                else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
-                {
-                    BodyActivityDouble2 = 45;
-                }
-                else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
-                {
-                    BodyActivityDouble2 = 35;
-                }
-                else if (Convert.ToDouble(BMI) >= 30)
-                {
-                    BodyActivityDouble2 = 30;
-                }
-
-            }
-
-            TotalEnergy = Math.Round((Convert.ToDouble(ModifiedWeight) * BodyActivityDouble2), 2).ToString();
-
-        }
-
-
-
     }
 }

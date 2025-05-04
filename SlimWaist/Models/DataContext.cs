@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist22";
+        public const string DbName = "SlimWaist29";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -137,14 +137,8 @@ namespace SlimWaist.Models
                     BirthDateDay=19,
                     BirthDateMounth=8,
                     BirthDateYear=1990,
-                    Gender = "ذكر",
-                    BodyActivity = "منخفض النشاط",
-                    BMI = "27.78",
-                    IdealWeight = "72.98",
-                    ModifiedWeight = "79.79",
-                    TotalEnergy = "1595.8",
-                    ObesityDegreeId = 1,
-                    WaistCircumferenceId= 1,
+                    GenderIndex = 0,
+                    BodyActivityIndex=1,
                     WaistCircumferenceMeasurement=60,
                     CultureInfo="ar-SA",
                 });
@@ -152,6 +146,8 @@ namespace SlimWaist.Models
                 Database.Insert(new Setting() 
                 { 
                    Id = 1,
+                   CurrentMemberShipId=1,
+                   SavedMemberShipId=0,
                    CultureInfo= "ar-SA",
                 });
 

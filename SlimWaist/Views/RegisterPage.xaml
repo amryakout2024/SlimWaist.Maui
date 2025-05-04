@@ -131,8 +131,8 @@
         <Picker
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="picker"
+            SelectedIndex="{Binding BodyActivityIndex}"
             ItemsSource="{Binding BodyActivities}"
-            SelectedItem="{Binding SelectedBodyActivity}"
             ItemDisplayBinding="{Binding BodyActivityName}"
             TextColor="DarkSlateBlue"
             TitleColor="DarkSlateBlue">

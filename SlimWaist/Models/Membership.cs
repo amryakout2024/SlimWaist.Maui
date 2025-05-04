@@ -30,23 +30,24 @@ namespace SlimWaist.Models
 
         public int BirthDateYear { get; set; }
 
-        public string? BodyActivity { get; set; }
+        public int BodyActivityIndex { get; set; }
 
-        public string? Gender { get; set; }
+        //0 means male ---- 1 means female
+        public int GenderIndex { get; set; }
 
-        public string? BMI { get; set; }
+        //public string? BMI { get; set; }
 
-        public string? IdealWeight { get; set; }
+        //public string? IdealWeight { get; set; }
 
-        public string? ModifiedWeight { get; set; }
+        //public string? ModifiedWeight { get; set; }
 
-        public string? TotalEnergy { get; set; }
+        //public string? TotalEnergy { get; set; }
 
-        public int ObesityDegreeId { get; set; }
+        //public int ObesityDegreeId { get; set; }
 
         public double WaistCircumferenceMeasurement { get; set; }
 
-        public int WaistCircumferenceId { get; set; }
+        //public int WaistCircumferenceId { get; set; }
 
         public string? CultureInfo { get; set; } = "ar-SA";
     }

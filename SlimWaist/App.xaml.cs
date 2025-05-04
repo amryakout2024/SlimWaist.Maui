@@ -12,6 +12,8 @@ namespace SlimWaist
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;
+        public static List<BodyActivity> BodyActivities;
+        public static List<Gender> Genders;
 
         public App(DataContext dataContext)
         {
@@ -38,6 +40,44 @@ namespace SlimWaist
                     ValidateForIntegerNumberMessage = "ادخل رقم صحيح";
 
                     ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
+
+                    BodyActivities = new List<BodyActivity>() {
+
+                        new BodyActivity()
+                        {
+                            BodyActivityId=1,
+                            BodyActivityName="خامل"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=2,
+                            BodyActivityName="منخفض النشاط"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=3,
+                            BodyActivityName="نشط"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=4,
+                            BodyActivityName="نشط جدا"
+                        },
+                    };
+
+                    Genders = new List<Gender>()
+                    {
+                        new Gender()
+                        {
+                            GenderId=1,
+                            GenderName="ذكر"
+                        },
+                        new Gender()
+                        {
+                            GenderId=2,
+                            GenderName="أنثي"
+                        }
+                    };
                 }
                 else
                 {
@@ -52,6 +92,44 @@ namespace SlimWaist
                     ValidateForIntegerNumberMessage = "Enter integer number";
 
                     ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
+
+                    BodyActivities = new List<BodyActivity>() {
+
+                        new BodyActivity()
+                        {
+                            BodyActivityId=1,
+                            BodyActivityName="Inactive"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=2,
+                            BodyActivityName="Lightly  active"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=3,
+                            BodyActivityName="Moderately  Active"
+                        },
+                        new BodyActivity()
+                        {
+                            BodyActivityId=4,
+                            BodyActivityName="Very active"
+                        },
+                    };
+                   
+                    Genders = new List<Gender>()
+                    {
+                        new Gender()
+                        {
+                            GenderId=1,
+                            GenderName="Male"
+                        },
+                        new Gender()
+                        {
+                            GenderId=2,
+                            GenderName="Female"
+                        }
+                    };
 
                 }
             }
