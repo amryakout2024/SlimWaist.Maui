@@ -133,15 +133,6 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit membership.
-        /// </summary>
-        public static string Editmembership {
-            get {
-                return ResourceManager.GetString("Editmembership", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -295,6 +286,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obesity degree.
+        /// </summary>
+        public static string Obesitydegree {
+            get {
+                return ResourceManager.GetString("Obesitydegree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -381,6 +381,24 @@ namespace SlimWaist.Languages {
         public static string UpdatePassword {
             get {
                 return ResourceManager.GetString("UpdatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waist circumference.
+        /// </summary>
+        public static string Waistcircumference {
+            get {
+                return ResourceManager.GetString("Waistcircumference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waist circumference evaluation.
+        /// </summary>
+        public static string Waistcircumferenceevaluation {
+            get {
+                return ResourceManager.GetString("Waistcircumferenceevaluation", resourceCulture);
             }
         }
         

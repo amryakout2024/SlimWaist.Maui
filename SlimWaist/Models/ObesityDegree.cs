@@ -10,8 +10,6 @@ namespace SlimWaist.Models
     {
         public int ObesityDegreeId { get; set; }
 
-        public string? ObesityDegreeArabicName { get; set; }
-
-        public string? ObesityDegreeEnglishName { get; set; }
+        public string? ObesityDegreeName { get; set; }
     }
 }

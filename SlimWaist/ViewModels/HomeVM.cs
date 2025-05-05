@@ -49,10 +49,23 @@ namespace SlimWaist.ViewModels
         private string? _modifiedWeight;
 
         [ObservableProperty]
+        private string? _waistCircumferenceMeasurement;
+
+        [ObservableProperty]
         private string? _bodyActivity;
 
         [ObservableProperty]
         private string? _totalEnergy;
+
+        private int ObesityDegreeId;
+
+        [ObservableProperty]
+        private string? _obesityDegreeName;
+
+        private int WaistCircumferenceId;
+
+        [ObservableProperty]
+        private string? _waistCircumferenceName;
 
         [ObservableProperty]
         private ObservableCollection<RegimeList> _regimeLists;
@@ -85,7 +98,24 @@ namespace SlimWaist.ViewModels
             
             BodyActivity = BodyActivities[MemberShip.BodyActivityIndex].BodyActivityName;
 
-            RegimeLists = null;
+            WaistCircumferenceMeasurement = MemberShip.WaistCircumferenceMeasurement.ToString();
+            
+            BmiCalculator();
+
+            IdealWeightCalculator();
+
+            ModifiedWeightCalculator();
+
+            //BodyActivityCalculator();
+
+            TotalEnergyCalculator(MemberShip.BodyActivityIndex);
+
+            WaistCircumferenceEvaluationCalculator();
+
+            ObesityDegreeCalculator();
+
+
+            //RegimeLists = null;
 
             //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
 
@@ -148,94 +178,122 @@ namespace SlimWaist.ViewModels
             }
         }
 
-        private void TotalEnergyCalculator(string bodyActivity)
+        private void TotalEnergyCalculator(int bodyActivityIndex)
         {
-            double BodyActivityDouble2 = 0;
+            double BodyActivityDouble = 0;
 
-            if (bodyActivity == "خامل")
+            if (bodyActivityIndex == 0)
             {
 
                 if (Convert.ToDouble(BMI) < 18.5)
                 {
-                    BodyActivityDouble2 = 35;
+                    BodyActivityDouble = 35;
                 }
                 else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
                 {
-                    BodyActivityDouble2 = 30;
+                    BodyActivityDouble = 30;
                 }
                 else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
                 {
-                    BodyActivityDouble2 = 20;
+                    BodyActivityDouble = 20;
                 }
                 else if (Convert.ToDouble(BMI) >= 30)
                 {
-                    BodyActivityDouble2 = 15;
+                    BodyActivityDouble = 15;
                 }
 
             }
-            else if (bodyActivity == "منخفض النشاط")
+            else if (bodyActivityIndex == 1)
             {
                 if (Convert.ToDouble(BMI) < 18.5)
                 {
-                    BodyActivityDouble2 = 40;
+                    BodyActivityDouble = 40;
                 }
                 else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
                 {
-                    BodyActivityDouble2 = 35;
+                    BodyActivityDouble = 35;
                 }
                 else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
                 {
-                    BodyActivityDouble2 = 25;
+                    BodyActivityDouble = 25;
                 }
                 else if (Convert.ToDouble(BMI) >= 30)
                 {
-                    BodyActivityDouble2 = 20;
+                    BodyActivityDouble = 20;
                 }
 
             }
-            else if (bodyActivity == "نشط")
+            else if (bodyActivityIndex == 2)
             {
                 if (Convert.ToDouble(BMI) < 18.5)
                 {
-                    BodyActivityDouble2 = 45;
+                    BodyActivityDouble = 45;
                 }
                 else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
                 {
-                    BodyActivityDouble2 = 40;
+                    BodyActivityDouble = 40;
                 }
                 else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
                 {
-                    BodyActivityDouble2 = 30;
+                    BodyActivityDouble = 30;
                 }
                 else if (Convert.ToDouble(BMI) >= 30)
                 {
-                    BodyActivityDouble2 = 25;
+                    BodyActivityDouble = 25;
                 }
 
             }
-            else if (bodyActivity == "نشط جدا")
+            else if (bodyActivityIndex == 3)
             {
                 if (Convert.ToDouble(BMI) < 18.5)
                 {
-                    BodyActivityDouble2 = 50;
+                    BodyActivityDouble = 50;
                 }
                 else if (Convert.ToDouble(BMI) >= 18.5 && Convert.ToDouble(BMI) <= 24.9)
                 {
-                    BodyActivityDouble2 = 45;
+                    BodyActivityDouble = 45;
                 }
                 else if (Convert.ToDouble(BMI) > 25 && Convert.ToDouble(BMI) <= 29.9)
                 {
-                    BodyActivityDouble2 = 35;
+                    BodyActivityDouble = 35;
                 }
                 else if (Convert.ToDouble(BMI) >= 30)
                 {
-                    BodyActivityDouble2 = 30;
+                    BodyActivityDouble = 30;
                 }
 
             }
 
-            TotalEnergy = Math.Round((Convert.ToDouble(ModifiedWeight) * BodyActivityDouble2), 2).ToString();
+            TotalEnergy = Math.Round((Convert.ToDouble(ModifiedWeight) * BodyActivityDouble), 2).ToString();
 
+        }
+
+        private void WaistCircumferenceEvaluationCalculator() 
+        {
+            if (MemberShip.WaistCircumferenceMeasurement < 94)
+                WaistCircumferenceId = 1;
+            else if (MemberShip.WaistCircumferenceMeasurement >=94 && MemberShip.WaistCircumferenceMeasurement <= 101)
+                WaistCircumferenceId = 2;
+            else if (MemberShip.WaistCircumferenceMeasurement >101)
+                WaistCircumferenceId = 3;
+
+            WaistCircumferenceName = App.waistCircumferences.Where(x => x.WaistCircumferenceId == WaistCircumferenceId).FirstOrDefault().WaistCircumferenceName;
+        }
+
+        private void ObesityDegreeCalculator()
+        {
+            if(Convert.ToDouble(BMI)>=18 &&Convert.ToDouble(BMI) <=24)
+                ObesityDegreeId = 1;
+            if(Convert.ToDouble(BMI)>24 &&Convert.ToDouble(BMI) <=29)
+                ObesityDegreeId = 2;
+            if(Convert.ToDouble(BMI)>29 &&Convert.ToDouble(BMI) <=34)
+                ObesityDegreeId = 3;
+            if(Convert.ToDouble(BMI)>34 &&Convert.ToDouble(BMI) <=39)
+                ObesityDegreeId = 4;
+            if(Convert.ToDouble(BMI)>39)
+                ObesityDegreeId = 5;
+
+            ObesityDegreeName = App.obesityDegrees.Where(x => x.ObesityDegreeId == ObesityDegreeId).FirstOrDefault().ObesityDegreeName;
         }
 
         [RelayCommand]

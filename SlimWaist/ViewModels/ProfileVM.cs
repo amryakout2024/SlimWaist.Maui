@@ -61,6 +61,9 @@ namespace SlimWaist.ViewModels
 
         Setting setting;
 
+        [ObservableProperty]
+        private double _waistCircumferenceMeasurement;
+
         public async Task init()
         {
             //Preferences.Set("Email", "");
@@ -88,6 +91,8 @@ namespace SlimWaist.ViewModels
             BodyActivityIndex = MemberShip.BodyActivityIndex;
 
             IsMale = (MemberShip.GenderIndex== 0) ? true : false;
+
+            WaistCircumferenceMeasurement=MemberShip.WaistCircumferenceMeasurement;
         }
 
 
@@ -119,6 +124,8 @@ namespace SlimWaist.ViewModels
             GenderIndex = (IsMale == true) ? 0 : 1;
 
             MemberShip.GenderIndex = GenderIndex;
+
+            MemberShip.WaistCircumferenceMeasurement = WaistCircumferenceMeasurement;
 
             await _dataContext.UpdateAsync<Membership>(MemberShip);
 

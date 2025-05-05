@@ -10,8 +10,6 @@ namespace SlimWaist.Models
     {
         public int WaistCircumferenceId { get; set; }
 
-        public string? WaistCircumferenceArabicName { get; set; }
-
-        public string? WaistCircumferenceEnglishName { get; set; }
+        public string? WaistCircumferenceName { get; set; }
     }
 }

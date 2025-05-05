@@ -228,4 +228,13 @@
   <data name="Birthdate" xml:space="preserve">
     <value> تاريخ الميلاد</value>
   </data>
+  <data name="Waistcircumference" xml:space="preserve">
+    <value>محيط الخصر</value>
+  </data>
+  <data name="Obesitydegree" xml:space="preserve">
+    <value>درجة السمنة</value>
+  </data>
+  <data name="Waistcircumferenceevaluation" xml:space="preserve">
+    <value>تقييم محيط الخصر</value>
+  </data>
 </root>

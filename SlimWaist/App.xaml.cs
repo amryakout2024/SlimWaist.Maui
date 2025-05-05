@@ -14,6 +14,8 @@ namespace SlimWaist
         public static string ValidateForDecimalNumberMessage;
         public static List<BodyActivity> BodyActivities;
         public static List<Gender> Genders;
+        public static List<ObesityDegree> obesityDegrees;
+        public static List<WaistCircumference> waistCircumferences;
 
         public App(DataContext dataContext)
         {
@@ -78,6 +80,55 @@ namespace SlimWaist
                             GenderName="أنثي"
                         }
                     };
+
+                    obesityDegrees = new List<ObesityDegree>()
+                    {
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId = 1,
+                            ObesityDegreeName="عادي"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=2,
+                            ObesityDegreeName="زيادة وزن"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=3,
+                            ObesityDegreeName="سمنة درجة أولي"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=4,
+                            ObesityDegreeName="سمنة درجة ثانية"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=5,
+                            ObesityDegreeName="سمنة درجة ثالثة"
+                        }
+                };
+
+                    waistCircumferences = new List<WaistCircumference>()
+                    {
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=1,
+                            WaistCircumferenceName="مقبول"
+                        },
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=2,
+                            WaistCircumferenceName="خطر"
+                        },
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=3,
+                            WaistCircumferenceName="خطرعالي"
+                        },
+                    };
+
                 }
                 else
                 {
@@ -129,6 +180,54 @@ namespace SlimWaist
                             GenderId=2,
                             GenderName="Female"
                         }
+                    };
+
+                    obesityDegrees = new List<ObesityDegree>()
+                    {
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId = 1,
+                            ObesityDegreeName="Normal"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=2,
+                            ObesityDegreeName="Over weight"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=3,
+                            ObesityDegreeName="Obese degree 1"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=4,
+                            ObesityDegreeName="Obese degree 2"
+                        },
+                        new ObesityDegree()
+                        {
+                            ObesityDegreeId=5,
+                            ObesityDegreeName="Obese degree 3"
+                        }
+                };
+
+                    waistCircumferences = new List<WaistCircumference>()
+                    {
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=1,
+                            WaistCircumferenceName="Accepted"
+                        },
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=2,
+                            WaistCircumferenceName="Low risk"
+                        },
+                        new WaistCircumference()
+                        {
+                            WaistCircumferenceId=3,
+                            WaistCircumferenceName="High risk"
+                        },
                     };
 
                 }

@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist29";
+        public const string DbName = "SlimWaist30";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -51,77 +51,7 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<Diet>();
 
-                Database.CreateTable<ObesityDegree>();
-
-                Database.CreateTable<WaistCircumference>();
-
-                //inserting data
-
-                List<WaistCircumference> waistCircumferences= new List<WaistCircumference>()
-                {
-                    new WaistCircumference()
-                    {
-                        WaistCircumferenceId=1,
-                        WaistCircumferenceArabicName="مقبول",
-                        WaistCircumferenceEnglishName="Accepted"
-                    },
-                    new WaistCircumference()
-                    {
-                        WaistCircumferenceId=2,
-                        WaistCircumferenceArabicName="خطر",
-                        WaistCircumferenceEnglishName="Low risk"
-                    },
-                    new WaistCircumference()
-                    {
-                        WaistCircumferenceId=3,
-                        WaistCircumferenceArabicName="خطرعالي",
-                        WaistCircumferenceEnglishName="High risk"
-                    },
-                };
-
-                foreach (var waistCircumference in waistCircumferences)
-                {
-                    Database.Insert(waistCircumference);
-                }
-
-                List<ObesityDegree> obesityDegrees = new List<ObesityDegree>()
-                {
-                    new ObesityDegree()
-                    {
-                        ObesityDegreeId = 1,
-                        ObesityDegreeArabicName="عادي",
-                        ObesityDegreeEnglishName="Normal"
-                    },
-                    new ObesityDegree()
-                    {
-                        ObesityDegreeId=2,
-                        ObesityDegreeArabicName="زيادة وزن",
-                        ObesityDegreeEnglishName="Over weight"
-                    },
-                    new ObesityDegree()
-                    {
-                        ObesityDegreeId=1,
-                        ObesityDegreeArabicName="سمنة درجة أولي",
-                        ObesityDegreeEnglishName="Obese degree 1"
-                    },
-                    new ObesityDegree()
-                    {
-                        ObesityDegreeId=1,
-                        ObesityDegreeArabicName="سمنة درجة ثانية",
-                        ObesityDegreeEnglishName="Obese degree 2"
-                    },
-                    new ObesityDegree()
-                    {
-                        ObesityDegreeId=1,
-                        ObesityDegreeArabicName="سمنة درجة ثالثة",
-                        ObesityDegreeEnglishName="Obese degree 3"
-                    }
-                };
-
-                foreach (var obesityDegree in obesityDegrees)
-                {
-                    Database.Insert(obesityDegree);
-                }
+                ///////inserting data////////
 
                 Database.Insert(new Membership()
                 {
@@ -139,8 +69,8 @@ namespace SlimWaist.Models
                     BirthDateYear=1990,
                     GenderIndex = 0,
                     BodyActivityIndex=1,
-                    WaistCircumferenceMeasurement=60,
-                    CultureInfo="ar-SA",
+                    WaistCircumferenceMeasurement=100,
+                    CultureInfo = "ar-SA",
                 });
 
                 Database.Insert(new Setting() 

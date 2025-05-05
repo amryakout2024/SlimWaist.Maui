@@ -48,6 +48,8 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
 
+        [ObservableProperty]
+        private double _waistCircumferenceMeasurement ;
 
         public async Task init()
         {
@@ -95,6 +97,7 @@ namespace SlimWaist.ViewModels
                         BirthDateYear=BirthDate.Year,
                         BodyActivityIndex= BodyActivityIndex,
                         GenderIndex = GenderIndex,
+                        WaistCircumferenceMeasurement= WaistCircumferenceMeasurement
                     });
 
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();

@@ -97,6 +97,20 @@
         </mat:TextField>
 
         <mat:TextField 
+            Text="{Binding WaistCircumferenceMeasurement}"
+            Title="{extention:TranslateExtention Key=Waistcircumference}"
+            AllowClear="True"
+            Keyboard="Numeric"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            CornerRadius="10"
+            AccentColor="DarkSlateBlue">
+            <mat:TextField.Validations>
+                <helpers:ValidateForDecimalNumber/>
+                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+            </mat:TextField.Validations>
+        </mat:TextField>
+        <mat:TextField 
             Text="{Binding Weight}"
             Title="{extention:TranslateExtention Key=Weight}"
             AllowClear="True"
