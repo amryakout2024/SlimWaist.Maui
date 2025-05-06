@@ -40,10 +40,13 @@ namespace SlimWaist.ViewModels
         private string? _height;
 
         [ObservableProperty]
-        private int _genderIndex;
+        private int _genderId;
 
         [ObservableProperty]
-        private int _bodyActivityIndex;
+        private int _bodyActivityId;
+
+        [ObservableProperty]
+        private BodyActivity _selectedBodyActivity;
 
         [ObservableProperty]
         private string? _totalEnergy;
@@ -62,7 +65,7 @@ namespace SlimWaist.ViewModels
         Setting setting;
 
         [ObservableProperty]
-        private double _waistCircumferenceMeasurement;
+        private string _waistCircumferenceMeasurement;
 
         public async Task init()
         {
@@ -88,11 +91,11 @@ namespace SlimWaist.ViewModels
 
             BirthDate = new DateTime(MemberShip.BirthDateYear, MemberShip.BirthDateMounth, MemberShip.BirthDateDay);
 
-            BodyActivityIndex = MemberShip.BodyActivityIndex;
+            SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==MemberShip.BodyActivityId).FirstOrDefault();
 
-            IsMale = (MemberShip.GenderIndex== 0) ? true : false;
+            IsMale = (MemberShip.GenderId== 1) ? true : false;
 
-            WaistCircumferenceMeasurement=MemberShip.WaistCircumferenceMeasurement;
+            WaistCircumferenceMeasurement=MemberShip.WaistCircumferenceMeasurement.ToString();
         }
 
 
@@ -119,13 +122,13 @@ namespace SlimWaist.ViewModels
 
             MemberShip.BirthDateDay=BirthDate.Day;
 
-            MemberShip.BodyActivityIndex = BodyActivityIndex;
+            MemberShip.BodyActivityId = SelectedBodyActivity.BodyActivityId;
 
-            GenderIndex = (IsMale == true) ? 0 : 1;
+            GenderId = (IsMale == true) ? 1 : 2;
 
-            MemberShip.GenderIndex = GenderIndex;
+            MemberShip.GenderId = GenderId;
 
-            MemberShip.WaistCircumferenceMeasurement = WaistCircumferenceMeasurement;
+            MemberShip.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
 
             await _dataContext.UpdateAsync<Membership>(MemberShip);
 

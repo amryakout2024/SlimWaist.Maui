@@ -164,7 +164,7 @@
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="act"
             ItemsSource="{Binding BodyActivities}"
-            SelectedIndex="{Binding BodyActivityIndex}"
+            SelectedItem="{Binding SelectedBodyActivity}"
             ItemDisplayBinding="{Binding BodyActivityName}"
             TextColor="DarkSlateBlue"
             TitleColor="DarkSlateBlue">

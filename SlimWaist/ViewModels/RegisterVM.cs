@@ -31,10 +31,13 @@ namespace SlimWaist.ViewModels
         private DateTime _birthDate;
 
         [ObservableProperty]
-        private int _genderIndex;
+        private int _genderId;
 
         [ObservableProperty]
-        private int _bodyActivityIndex;
+        private int _bodyActivityId;
+
+        [ObservableProperty]
+        private BodyActivity _selectedBodyActivity;
 
         [ObservableProperty]
         private bool _isPassword;
@@ -49,7 +52,7 @@ namespace SlimWaist.ViewModels
         private List<BodyActivity> _bodyActivities;
 
         [ObservableProperty]
-        private double _waistCircumferenceMeasurement ;
+        private string _waistCircumferenceMeasurement ;
 
         public async Task init()
         {
@@ -63,13 +66,13 @@ namespace SlimWaist.ViewModels
 
             BodyActivities=App.BodyActivities;
 
-            BodyActivityIndex = 0;
+            SelectedBodyActivity = BodyActivities.FirstOrDefault();
         }
 
         [RelayCommand]
         private async Task SaveNewMemberShip()
         {
-            GenderIndex = IsMale ? 0 : 1;
+            GenderId = IsMale ? 1 : 2;
 
             if (!string.IsNullOrEmpty(Email) &&
                 !string.IsNullOrEmpty(Password) &&
@@ -95,9 +98,9 @@ namespace SlimWaist.ViewModels
                         BirthDateDay=BirthDate.Day,
                         BirthDateMounth=BirthDate.Month,
                         BirthDateYear=BirthDate.Year,
-                        BodyActivityIndex= BodyActivityIndex,
-                        GenderIndex = GenderIndex,
-                        WaistCircumferenceMeasurement= WaistCircumferenceMeasurement
+                        BodyActivityId= SelectedBodyActivity.BodyActivityId,
+                        GenderId = GenderId,
+                        WaistCircumferenceMeasurement=Convert.ToDouble( WaistCircumferenceMeasurement)
                     });
 
                     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();

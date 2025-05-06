@@ -39,13 +39,10 @@ namespace SlimWaist.Views
             //#endif
         }
 
-        protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+        protected async override void OnAppearing()
         {
-            base.OnNavigatedTo(args);
-
             await _profileVM.init();
         }
-
         protected override bool OnBackButtonPressed()
         {
 

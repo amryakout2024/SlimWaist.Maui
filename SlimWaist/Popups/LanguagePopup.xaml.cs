@@ -33,7 +33,7 @@ public partial class LanguagePopup : Popup
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
+            membership = memberships.Where(x => x.Id ==setting.CurrentMemberShipId).FirstOrDefault();
 
             if (membership.CultureInfo == "ar-SA")
             {

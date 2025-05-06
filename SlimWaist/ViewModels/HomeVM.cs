@@ -96,7 +96,7 @@ namespace SlimWaist.ViewModels
 
             BirthDate = MemberShip?.BirthDateDay.ToString() ?? "";
             
-            BodyActivity = BodyActivities[MemberShip.BodyActivityIndex].BodyActivityName;
+            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== MemberShip.BodyActivityId).FirstOrDefault().BodyActivityName;
 
             WaistCircumferenceMeasurement = MemberShip.WaistCircumferenceMeasurement.ToString();
             
@@ -108,7 +108,7 @@ namespace SlimWaist.ViewModels
 
             //BodyActivityCalculator();
 
-            TotalEnergyCalculator(MemberShip.BodyActivityIndex);
+            TotalEnergyCalculator(MemberShip.BodyActivityId);
 
             WaistCircumferenceEvaluationCalculator();
 

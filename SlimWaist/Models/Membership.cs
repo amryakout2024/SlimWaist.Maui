@@ -30,10 +30,10 @@ namespace SlimWaist.Models
 
         public int BirthDateYear { get; set; }
 
-        public int BodyActivityIndex { get; set; }
+        public int BodyActivityId { get; set; }
 
-        //0 means male ---- 1 means female
-        public int GenderIndex { get; set; }
+        //1 means male ---- 2 means female
+        public int GenderId { get; set; }
 
         public double WaistCircumferenceMeasurement { get; set; }
 
