@@ -5,9 +5,8 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class AllMealsVM(DataContext dataContext, DayMealsVM dayMealsVM) : BaseVM
+    public partial class AllMealsVM(DayMealsVM dayMealsVM) : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
         private readonly DayMealsVM _dayMealsVM = dayMealsVM;
         [ObservableProperty]
         private List<Meal> _allMeals;
@@ -25,14 +24,14 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            AllMeals = await _dataContext.LoadAsync<Meal>();
+            AllMeals = await App.dataContext.LoadAsync<Meal>();
             AllMeals.ForEach(x => x.IsSelected = false);
 
-            var breakfastMeals = await _dataContext.LoadAsync<Meal>();
+            var breakfastMeals = await App.dataContext.LoadAsync<Meal>();
             BreakfastMeals = breakfastMeals.Where(x => x.MealType == "إفطار").ToList();
-            var lunchMeals = await _dataContext.LoadAsync<Meal>();
+            var lunchMeals = await App.dataContext.LoadAsync<Meal>();
             LunchMeals = lunchMeals.Where(x => x.MealType == "غداء").ToList();
-            var dinnerMeals = await _dataContext.LoadAsync<Meal>();
+            var dinnerMeals = await App.dataContext.LoadAsync<Meal>();
             DinnerMeals = dinnerMeals.Where(x => x.MealType == "عشاء").ToList();
             SelectedMeals = new List<Meal>();
         }
@@ -59,7 +58,7 @@ namespace SlimWaist.ViewModels
             //{
             //    meal.IsSelected = true;
             //}
-            await _dataContext.UpdateMeal(meal);
+            await App.dataContext.UpdateMeal(meal);
 
             if (meal.IsSelected == true)
             {
@@ -87,12 +86,12 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task SelectedTabChanged()
         {
-            AllMeals = await _dataContext.LoadAsync<Meal>();
-            var breakfastMeals = await _dataContext.LoadAsync<Meal>();
+            AllMeals = await App.dataContext.LoadAsync<Meal>();
+            var breakfastMeals = await App.dataContext.LoadAsync<Meal>();
             BreakfastMeals = breakfastMeals.Where(x => x.MealType == "إفطار").ToList();
-            var lunchMeals = await _dataContext.LoadAsync<Meal>();
+            var lunchMeals = await App.dataContext.LoadAsync<Meal>();
             LunchMeals = lunchMeals.Where(x => x.MealType == "غداء").ToList();
-            var dinnerMeals = await _dataContext.LoadAsync<Meal>();
+            var dinnerMeals = await App.dataContext.LoadAsync<Meal>();
             DinnerMeals = dinnerMeals.Where(x => x.MealType == "عشاء").ToList();
         }
 

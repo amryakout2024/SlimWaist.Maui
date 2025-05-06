@@ -7,9 +7,7 @@ namespace SlimWaist.Models
         [PrimaryKey]
         public int Id { get; set; }
 
-        public int CurrentMemberShipId { get; set; } = 0;
-
-        public int SavedMemberShipId { get; set; } = 0;
+        public int SavedMembershipId { get; set; } = 0;
 
         public string? CultureInfo { get; set; } = "ar-SA";
 

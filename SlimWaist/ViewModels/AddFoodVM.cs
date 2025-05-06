@@ -4,9 +4,8 @@ using SlimWaist.Models;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class AddFoodVM(DataContext dataContext) : BaseVM
+    public partial class AddFoodVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
         [ObservableProperty]
         private string _foodCategory;
 
@@ -31,7 +30,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task SaveNewFood()
         {
-            await _dataContext.InsertAsync<Food>(new Food()
+            await App.dataContext.InsertAsync<Food>(new Food()
             {
                 FoodCategory = FoodCategory,
                 FoodName = FoodName,

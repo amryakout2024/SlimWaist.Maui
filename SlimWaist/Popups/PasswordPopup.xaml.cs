@@ -7,27 +7,24 @@ namespace SlimWaist.Popups;
 
 public partial class PasswordPopup : Popup
 {
-    private readonly DataContext _dataContext;
     private Membership membership;
     private List<Membership> memberships;
     private Setting setting;
     private List<Setting> settings;
 
-    public PasswordPopup(DataContext dataContext)
+    public PasswordPopup()
     {
         InitializeComponent();
 
-        _dataContext = dataContext;
-
         Dispatcher.DispatchAsync(async () =>
         {
-            memberships = await _dataContext.LoadAsync<Membership>();
+            memberships = await App.dataContext.LoadAsync<Membership>();
 
-            settings = await _dataContext.LoadAsync<Setting>();
+            settings = await App.dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
+            membership = memberships.Where(x => x.Id == setting.SavedMembershipId).FirstOrDefault();
         });
     }
 
@@ -43,7 +40,7 @@ public partial class PasswordPopup : Popup
                 {
                     membership.Password = PasswordNew1.Text;
 
-                    await _dataContext.UpdateAsync<Membership>(membership);
+                    await App.dataContext.UpdateAsync<Membership>(membership);
 
                     await Toast.Make("تم التحديث", ToastDuration.Short).Show();
 

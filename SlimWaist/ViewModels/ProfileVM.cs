@@ -8,10 +8,8 @@ using System.Collections.ObjectModel;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class ProfileVM(DataContext dataContext) : BaseVM
-    {
-        private readonly DataContext _dataContext = dataContext;
-        
+    public partial class ProfileVM() : BaseVM
+    {        
         [ObservableProperty]
         private Membership? _memberShip;
 
@@ -71,15 +69,15 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            //File.Delete(DataContext.DbPath);
+            //File.Delete(dataContext.DbPath);
 
-            setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
+            setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
 
             BodyActivities = App.BodyActivities;
 
-            memberships = await _dataContext.LoadAsync<Membership>();
+            memberships = await App.dataContext.LoadAsync<Membership>();
 
-            MemberShip = memberships.Where(x => x.Id == App.setting.CurrentMemberShipId).FirstOrDefault();
+            MemberShip = memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
 
@@ -130,7 +128,7 @@ namespace SlimWaist.ViewModels
 
             MemberShip.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
 
-            await _dataContext.UpdateAsync<Membership>(MemberShip);
+            await App.dataContext.UpdateAsync<Membership>(MemberShip);
 
             await Toast.Make("تم التحديث", ToastDuration.Short).Show();
         }
@@ -138,9 +136,9 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async void LogOut()
         {
-            setting.SavedMemberShipId = 0;
+            setting.SavedMembershipId = 0;
 
-            await _dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
         }

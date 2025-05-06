@@ -3,15 +3,14 @@ using SlimWaist.Models;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class DietsVM(DataContext dataContext) : BaseVM
+    public partial class DietsVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
         [ObservableProperty]
         private List<Diet> _diets;
 
         public async Task init()
         {
-            Diets = await _dataContext.LoadAsync<Diet>();
+            Diets = await App.dataContext.LoadAsync<Diet>();
 
         }
     }

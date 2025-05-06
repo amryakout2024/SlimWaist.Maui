@@ -5,9 +5,8 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class FoodsVM(DataContext dataContext, CartVM cartVM) : BaseVM
+    public partial class FoodsVM(CartVM cartVM) : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
         private readonly CartVM _cartVM = cartVM;
         private List<Food> FoodsFromDatabase;
 
@@ -60,7 +59,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            FoodsFromDatabase = await _dataContext.LoadAsync<Food>();
+            FoodsFromDatabase = await App.dataContext.LoadAsync<Food>();
 
             //IsFoodSelected = false;
 
@@ -71,7 +70,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task MealChanged()
         {
-            List<CartItem> allcartitems = await _dataContext.LoadAsync<CartItem>();
+            List<CartItem> allcartitems = await App.dataContext.LoadAsync<CartItem>();
 
             if (allcartitems.Count > 0)
             {

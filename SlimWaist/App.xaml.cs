@@ -7,11 +7,15 @@ namespace SlimWaist
 {
     public partial class App : Application
     {
-        private readonly DataContext _dataContext;
+        public static DataContext dataContext;
         public static Setting setting;
+        public static List<Membership> memberships;
+        public static Membership currentMembership;
+
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;
+
         public static List<BodyActivity> BodyActivities;
         public static List<Gender> Genders;
         public static List<ObesityDegree> obesityDegrees;
@@ -21,15 +25,13 @@ namespace SlimWaist
         {
             InitializeComponent();
 
-            _dataContext = dataContext;
+            App.dataContext = dataContext;
 
             InitializeDatabase();
 
-            setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
-
-            if (setting != null)
+            if (!string.IsNullOrEmpty(App.setting.CultureInfo))
             {
-                if (setting.CultureInfo == "ar-SA")
+                if (App.setting.CultureInfo == "ar-SA")
                 {
                     CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
@@ -233,27 +235,27 @@ namespace SlimWaist
                 }
             }
 
-            MainPage = new AppShell(_dataContext);
+            MainPage = new AppShell();
 
             //Helpers.ReadExcel.ReadExcelSheet();
-
-
         }
 
         private async Task InitializeDatabase()
         {
             try
             {
-                var BodyActivityTest = _dataContext.Database.Table<BodyActivity>().FirstOrDefault();
+                App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
 
-                if (BodyActivityTest == null)
+                App.memberships = await App.dataContext.LoadAsync<Membership>();
+                
+                if (App.setting == null)
                 {
-                    await _dataContext.init();
+                    await App.dataContext.init();
                 }
             }
             catch (Exception)
             {
-                await _dataContext.init();
+                await App.dataContext.init();
             }
 
         }

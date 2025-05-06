@@ -10,19 +10,16 @@ namespace SlimWaist.Views
     {
         private readonly ProfileVM _profileVM;
 
-        private readonly DataContext _dataContext;
         private List<Membership> memberships;
         private Membership membership;
         private Setting setting;
         private List<Setting> settings;
 
-        public ProfilePage(ProfileVM profileVM, DataContext dataContext)
+        public ProfilePage(ProfileVM profileVM)
         {
             InitializeComponent();
 
             _profileVM = profileVM;
-
-            _dataContext = dataContext;
 
             BindingContext = _profileVM;
 
@@ -53,7 +50,7 @@ namespace SlimWaist.Views
 
         private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
         {
-            var popup = new PasswordPopup(_dataContext);
+            var popup = new PasswordPopup();
 
             this.ShowPopup(popup);
         }

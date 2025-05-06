@@ -6,20 +6,10 @@ using System.Collections.ObjectModel;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class HomeVM(DataContext dataContext, Setting setting) : BaseVM
-    {
-        private readonly DataContext _dataContext = dataContext;
-        
-        private readonly Setting _setting = setting;
-
-        [ObservableProperty]
-        private Membership? _memberShip;
-
+    public partial class HomeVM(Setting setting) : BaseVM
+    {        
         [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
-
-        [ObservableProperty]
-        private Membership? _memberShipFromQueryProperty;
 
         [ObservableProperty]
         private string _email;
@@ -76,29 +66,21 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            //File.Delete(DataContext.DbPath);
+            //File.Delete(dataContext.DbPath);
 
             BodyActivities = App.BodyActivities;
 
-            var memberShips = await _dataContext.LoadAsync<Membership>();
+            Name = App.currentMembership?.Name ?? "";
 
-            var settings = await _dataContext.LoadAsync<Setting>();
+            Weight = App.currentMembership?.Weight.ToString() ?? "";
 
-            setting = settings.Where(x => x.Id == 1).FirstOrDefault();
+            Height = App.currentMembership?.Height.ToString() ?? "";
 
-            MemberShip = memberShips.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
-
-            Name = MemberShip?.Name ?? "";
-
-            Weight = MemberShip?.Weight.ToString() ?? "";
-
-            Height = MemberShip?.Height.ToString() ?? "";
-
-            BirthDate = MemberShip?.BirthDateDay.ToString() ?? "";
+            BirthDate = App.currentMembership?.BirthDateDay.ToString() ?? "";
             
-            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== MemberShip.BodyActivityId).FirstOrDefault().BodyActivityName;
+            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
 
-            WaistCircumferenceMeasurement = MemberShip.WaistCircumferenceMeasurement.ToString();
+            WaistCircumferenceMeasurement = App.currentMembership.WaistCircumferenceMeasurement.ToString();
             
             BmiCalculator();
 
@@ -108,7 +90,7 @@ namespace SlimWaist.ViewModels
 
             //BodyActivityCalculator();
 
-            TotalEnergyCalculator(MemberShip.BodyActivityId);
+            TotalEnergyCalculator(App.currentMembership.BodyActivityId);
 
             WaistCircumferenceEvaluationCalculator();
 
@@ -117,11 +99,11 @@ namespace SlimWaist.ViewModels
 
             //RegimeLists = null;
 
-            //List<RegimeList> AllRegimeLists = await _dataContext.LoadAsync<RegimeList>();
+            //List<RegimeList> AllRegimeLists = await App.dataContext.LoadAsync<RegimeList>();
 
-            //var MaxRegimeId = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Select(x=>x.RegimeId).Max();
+            //var MaxRegimeId = AllRegimeLists.Where(x => x.App.currentMembershipId == App.currentMembership.Id).Select(x=>x.RegimeId).Max();
 
-            //var FilteredRegimeList = AllRegimeLists.Where(x => x.MembershipId == MemberShip.Id).Where(x => x.RegimeId == MaxRegimeId);
+            //var FilteredRegimeList = AllRegimeLists.Where(x => x.App.currentMembershipId == App.currentMembership.Id).Where(x => x.RegimeId == MaxRegimeId);
 
             //foreach (var r in FilteredRegimeList)
             //{
@@ -270,11 +252,11 @@ namespace SlimWaist.ViewModels
 
         private void WaistCircumferenceEvaluationCalculator() 
         {
-            if (MemberShip.WaistCircumferenceMeasurement < 94)
+            if (App.currentMembership.WaistCircumferenceMeasurement < 94)
                 WaistCircumferenceId = 1;
-            else if (MemberShip.WaistCircumferenceMeasurement >=94 && MemberShip.WaistCircumferenceMeasurement <= 101)
+            else if (App.currentMembership.WaistCircumferenceMeasurement >=94 && App.currentMembership.WaistCircumferenceMeasurement <= 101)
                 WaistCircumferenceId = 2;
-            else if (MemberShip.WaistCircumferenceMeasurement >101)
+            else if (App.currentMembership.WaistCircumferenceMeasurement >101)
                 WaistCircumferenceId = 3;
 
             WaistCircumferenceName = App.waistCircumferences.Where(x => x.WaistCircumferenceId == WaistCircumferenceId).FirstOrDefault().WaistCircumferenceName;
@@ -316,4 +298,4 @@ namespace SlimWaist.ViewModels
 
     }
 }
-//[QueryProperty(nameof(Membership), nameof(Membership))]
+//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]

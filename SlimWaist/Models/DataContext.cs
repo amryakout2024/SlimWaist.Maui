@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist33";
+        public const string DbName = "SlimWaist36";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -31,11 +31,9 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<Membership>();
 
-                Database.CreateTable<Gender>();
-
-                Database.CreateTable<BodyActivity>();
-
                 Database.CreateTable<Setting>();
+
+
 
                 Database.CreateTable<RegimeList>();
 
@@ -76,9 +74,6 @@ namespace SlimWaist.Models
                 Database.Insert(new Setting() 
                 { 
                    Id = 1,
-                   CurrentMemberShipId=1,
-                   SavedMemberShipId=0,
-                   CultureInfo= "ar-SA",
                 });
 
                 List<Diet> diets = new List<Diet>()
@@ -103,45 +98,6 @@ namespace SlimWaist.Models
                 foreach (Diet diet in diets)
                 {
                     Database.Insert(diet);
-                }
-
-                List<Gender> genders = new List<Gender>()
-                    {
-                        new Gender(){GenderId=1,GenderName="ذكر"},
-                        new Gender(){GenderId=2,GenderName="أنثي"},
-                    };
-
-                foreach (Gender gender in genders)
-                {
-                    Database.Insert(gender);
-                }
-
-                List<BodyActivity> bodyActivities = new List<BodyActivity>() {
-                        new BodyActivity()
-                        {
-                            BodyActivityId=1,
-                            BodyActivityName="خامل"
-                        },
-                        new BodyActivity()
-                        {
-                            BodyActivityId=2,
-                            BodyActivityName="منخفض النشاط"
-                        },
-                        new BodyActivity()
-                        {
-                            BodyActivityId=3,
-                            BodyActivityName="نشط"
-                        },
-                        new BodyActivity()
-                        {
-                            BodyActivityId=4,
-                            BodyActivityName="نشط جدا"
-                        },
-                    };
-
-                foreach (BodyActivity bodyActivity in bodyActivities)
-                {
-                    Database.Insert(bodyActivity);
                 }
 
                 List<Regime> regimes = new List<Regime>()

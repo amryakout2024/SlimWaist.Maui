@@ -7,9 +7,8 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class CartVM(DataContext dataContext) : BaseVM
+    public partial class CartVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
         //private readonly IPopupService _popupService = popupService;
         [ObservableProperty]
         private List<CartItem> _cartItems;
@@ -24,7 +23,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            CartItems = await _dataContext.LoadAsync<CartItem>();
+            CartItems = await App.dataContext.LoadAsync<CartItem>();
 
             CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
@@ -35,7 +34,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task ClearCart()
         {
-            await _dataContext.ClearAllAsync<CartItem>();
+            await App.dataContext.ClearAllAsync<CartItem>();
 
             await Init();
         }
@@ -53,11 +52,11 @@ namespace SlimWaist.ViewModels
 
                 if (!string.IsNullOrEmpty(result))
                 {
-                    var previousmeal = await _dataContext.FindMealAsync(result);
+                    var previousmeal = await App.dataContext.FindMealAsync(result);
 
                     if (!previousmeal)
                     {
-                        await _dataContext.InsertAsync<Meal>(new Meal()
+                        await App.dataContext.InsertAsync<Meal>(new Meal()
                         {
                             MealName = result,
                             MealType = CartItems.FirstOrDefault()?.MealType,
@@ -70,7 +69,7 @@ namespace SlimWaist.ViewModels
 
                         foreach (var cartitem in CartItems)
                         {
-                            await _dataContext.InsertAsync<MealDetail>(new MealDetail()
+                            await App.dataContext.InsertAsync<MealDetail>(new MealDetail()
                             {
                                 MealName = result,
                                 MealType = cartitem.MealType,

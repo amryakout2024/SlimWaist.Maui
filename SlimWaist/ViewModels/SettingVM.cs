@@ -5,9 +5,9 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class SettingVM(DataContext dataContext) : BaseVM
+    public partial class SettingVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
+
                 
         [ObservableProperty]
         private Membership? _memberShip;
@@ -17,9 +17,9 @@ namespace SlimWaist.ViewModels
        
         public async Task init()
         {
-            var memberShips = await _dataContext.LoadAsync<Membership>();
+            var memberShips = await App.dataContext.LoadAsync<Membership>();
 
-            MemberShip = memberShips.Where(x => x.Id ==App.setting.SavedMemberShipId).FirstOrDefault();
+            MemberShip = memberShips.Where(x => x.Id ==App.setting.SavedMembershipId).FirstOrDefault();
 
             Name = MemberShip?.Name ?? "";
         }
@@ -33,9 +33,9 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task LogOut()
         {
-            App.setting.SavedMemberShipId = 0;
+            App.setting.SavedMembershipId = 0;
 
-            await _dataContext.UpdateAsync<Setting>(App.setting);
+            await App.dataContext.UpdateAsync<Setting>(App.setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
         }

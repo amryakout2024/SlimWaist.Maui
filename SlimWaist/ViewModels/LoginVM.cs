@@ -5,7 +5,7 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class LoginVM(DataContext dataContext) : BaseVM
+    public partial class LoginVM() : BaseVM
     {
         [ObservableProperty]
         private string _email;
@@ -18,10 +18,6 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private bool _isCheckBoxChecked;
-
-        private readonly DataContext _dataContext = dataContext;
-
-        Setting setting;
 
         public async Task init()
         {
@@ -41,11 +37,7 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            var settings = await _dataContext.LoadAsync<Setting>();
-
-            setting = settings.Where(x => x.Id == 1).FirstOrDefault();
-
-            if (setting?.SavedMemberShipId != 0)
+            if (App.setting?.SavedMembershipId != 0)
             {
                 await GoToAsyncWithShell(nameof(HomePage), true);
             }
@@ -60,30 +52,25 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore = await _dataContext.FindEmailAsync(Email);
+            var IsRegisteredEmailBefore = await App.dataContext.FindEmailAsync(Email);
 
             if (IsRegisteredEmailBefore)
             {
-                var IsPassWordMatchWithEmail = await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                var IsPassWordMatchWithEmail = await App.dataContext.MatchEmailWithPassWordAsync(Email, Password);
 
                 if (IsPassWordMatchWithEmail)
                 {
-                    var memberShips = await _dataContext.LoadAsync<Membership>();
+                    App.currentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
+
+                    App.setting.CultureInfo= App.currentMembership.CultureInfo;
 
                     if (IsCheckBoxChecked)
                     {
-                        setting.SavedMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
-
-                        setting.CurrentMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
-
-                        await _dataContext.UpdateAsync<Setting>(setting);
+                        App.setting.SavedMembershipId = App.currentMembership.Id;
                     }
-                    else
-                    {
-                        setting.CurrentMemberShipId = memberShips.Where(x => x.Email == Email).Select(x => x.Id).FirstOrDefault();
 
-                        await _dataContext.UpdateAsync<Setting>(setting);
-                    }
+                    await App.dataContext.UpdateAsync<Setting>(App.setting);
+
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }
                 else

@@ -5,10 +5,8 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class DayMealsVM(DataContext dataContext) : BaseVM
+    public partial class DayMealsVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
-
         [ObservableProperty]
         private List<MealGroup> _mealGroups;
 
@@ -19,7 +17,7 @@ namespace SlimWaist.ViewModels
         {
             MealGroups = new List<MealGroup>();
 
-            var mealdetails = await _dataContext.LoadAsync<MealDetail>();
+            var mealdetails = await App.dataContext.LoadAsync<MealDetail>();
 
             var meals = DayMealsPage.Meals;
 

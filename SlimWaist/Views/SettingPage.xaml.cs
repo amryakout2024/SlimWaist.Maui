@@ -11,21 +11,18 @@ public partial class SettingPage : UraniumContentPage
 {
     private readonly SettingVM _settingVM;
 
-    private readonly DataContext _dataContext;
     private List<Membership> memberships;
     private Membership membership;
     private Setting setting;
     private List<Setting> settings;
 
-    public SettingPage(SettingVM settingVM, DataContext dataContext)
+    public SettingPage(SettingVM settingVM)
     {
         InitializeComponent();
 
         _settingVM = settingVM;
 
-        _dataContext = dataContext;
-
-        //_dataContext.ChangeFlowDirection(this);
+        //App.dataContext.ChangeFlowDirection(this);
 
         BindingContext = _settingVM;
 
@@ -55,7 +52,7 @@ public partial class SettingPage : UraniumContentPage
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        var popup = new LanguagePopup(_dataContext);
+        var popup = new LanguagePopup();
 
         this.ShowPopup(popup);
 

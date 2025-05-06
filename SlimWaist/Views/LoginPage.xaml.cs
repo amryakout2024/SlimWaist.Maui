@@ -16,20 +16,14 @@ namespace SlimWaist.Views;
 public partial class LoginPage : UraniumContentPage
 {
     private readonly LoginVM _loginVM;
-    private readonly DataContext _dataContext;
     private readonly IBadge _badge;
-    private Setting setting;
-    private List<Membership> memberships;
-    private Membership membership;
 
     //,IBadge badge
-    public LoginPage(LoginVM loginVM, DataContext dataContext)
+    public LoginPage(LoginVM loginVM)
     {
         InitializeComponent();
 
         _loginVM = loginVM;
-
-        _dataContext = dataContext;
 
         BindingContext = _loginVM;
 
@@ -38,13 +32,6 @@ public partial class LoginPage : UraniumContentPage
     protected async override void OnAppearing()
     {
         await _loginVM.init();
-
-        setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
-
-        memberships = await _dataContext.LoadAsync<Membership>();
-
-        membership = memberships.Where(x => x.Id == setting.CurrentMemberShipId).FirstOrDefault();
-
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
@@ -55,13 +42,13 @@ public partial class LoginPage : UraniumContentPage
 
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-            membership.CultureInfo = "ar-SA";
+            App.currentMembership.CultureInfo = "ar-SA";
 
-            setting.CultureInfo = "ar-SA";
+            App.setting.CultureInfo = "ar-SA";
 
-            await _dataContext.UpdateAsync<Membership>(membership);
+            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
 
-            await _dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(App.setting);
 
 #if ANDROID
             var context = Platform.AppContext;
@@ -80,13 +67,13 @@ public partial class LoginPage : UraniumContentPage
 
             CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-            membership.CultureInfo = "en-US";
+            App.currentMembership.CultureInfo = "en-US";
 
-            setting.CultureInfo = "en-US";
+            App.setting.CultureInfo = "en-US";
 
-            await _dataContext.UpdateAsync<Membership>(membership);
+            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
 
-            await _dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(App.setting);
 
 
 #if ANDROID

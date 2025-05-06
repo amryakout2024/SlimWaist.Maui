@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class RegimesListVM(DataContext dataContext) : BaseVM
+    public partial class RegimesListVM() : BaseVM
     {
 
         [ObservableProperty]
@@ -37,17 +37,15 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private Regime _selectedRegime;
 
-        private readonly DataContext _dataContext = dataContext;
-
         public async Task Init()
         {
-            var MemberShips = await _dataContext.LoadAsync<Membership>();
+            var MemberShips = await App.dataContext.LoadAsync<Membership>();
 
             DateStart = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             DateEnd = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            Regimes = await _dataContext.LoadAsync<Regime>();
+            Regimes = await App.dataContext.LoadAsync<Regime>();
 
             SelectedRegime = Regimes.FirstOrDefault() ?? new Regime();
 
@@ -57,7 +55,7 @@ namespace SlimWaist.ViewModels
 
             RegimeLists = new ObservableCollection<RegimeList>();
 
-            List<RegimeList> rl = await _dataContext.LoadAsync<RegimeList>();
+            List<RegimeList> rl = await App.dataContext.LoadAsync<RegimeList>();
 
             var rlf = rl.Where(x => x.MembershipId == MemberShip.Id);
 
@@ -111,7 +109,7 @@ namespace SlimWaist.ViewModels
             }
             else
             {
-                await _dataContext.InsertAsync<RegimeList>(new RegimeList()
+                await App.dataContext.InsertAsync<RegimeList>(new RegimeList()
                 {
                     MembershipId = MemberShip.Id,
                     RegimeName = SelectedRegime.RegimeName,
@@ -122,7 +120,7 @@ namespace SlimWaist.ViewModels
 
                 IsShowNewRegimeForm = false;
 
-                List<RegimeList> rl = await _dataContext.LoadAsync<RegimeList>();
+                List<RegimeList> rl = await App.dataContext.LoadAsync<RegimeList>();
 
                 var rlf = rl.Where(x => x.MembershipId == MemberShip.Id);
 

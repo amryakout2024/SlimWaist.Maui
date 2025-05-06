@@ -8,10 +8,8 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class RegisterVM(DataContext dataContext) : BaseVM
+    public partial class RegisterVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
-
         [ObservableProperty]
         private string? _email;
 
@@ -81,11 +79,11 @@ namespace SlimWaist.ViewModels
                 !string.IsNullOrEmpty(Height) &&
                 !string.IsNullOrEmpty(BirthDate.ToString()))
             {
-                var IsRegisteredEmailBefore = _dataContext.FindEmailAsync(Email);
+                var IsRegisteredEmailBefore = App.dataContext.FindEmailAsync(Email);
 
                 if (!IsRegisteredEmailBefore.Result)
                 {
-                    await _dataContext.InsertAsync(new Membership()
+                    await App.dataContext.InsertAsync(new Membership()
                     {
                         Email = Email,
                         Password = Password,

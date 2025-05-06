@@ -4,9 +4,9 @@ using SlimWaist.Models;
 namespace SlimWaist.ViewModels
 {
     [QueryProperty(nameof(Meal), nameof(Meal))]
-    public partial class MealDetailVM(DataContext dataContext) : BaseVM
+    public partial class MealDetailVM() : BaseVM
     {
-        private readonly DataContext _dataContext = dataContext;
+
 
         [ObservableProperty]
         private Meal _meal;
@@ -16,7 +16,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            var mealDetails = await _dataContext.LoadAsync<MealDetail>();
+            var mealDetails = await App.dataContext.LoadAsync<MealDetail>();
 
             MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
         }

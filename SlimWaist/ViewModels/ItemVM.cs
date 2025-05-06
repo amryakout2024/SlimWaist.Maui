@@ -5,7 +5,7 @@ using SlimWaist.Models;
 namespace SlimWaist.ViewModels
 {
     [QueryProperty(nameof(CartItem), nameof(CartItem))]
-    public partial class ItemVM(DataContext dataContext) : BaseVM
+    public partial class ItemVM() : BaseVM
     {
         [ObservableProperty]
         private CartItem _cartItem;
@@ -34,7 +34,7 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string _foodFibers;
 
-        private readonly DataContext _dataContext = dataContext;
+
 
         [ObservableProperty]
         private List<CartItem> _cartItems;
@@ -47,7 +47,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            CartItems = await _dataContext.LoadAsync<CartItem>();
+            CartItems = await App.dataContext.LoadAsync<CartItem>();
 
             FoodName = CartItem.FoodName;
 
@@ -101,7 +101,7 @@ namespace SlimWaist.ViewModels
                 {
                     existingItem.Quantity = Convert.ToInt32(Quantity);
 
-                    await _dataContext.UpdateCartItem(existingItem);
+                    await App.dataContext.UpdateCartItem(existingItem);
 
                     //await GoToAsyncWithShell(nameof(FoodsPage), true);
 
@@ -112,7 +112,7 @@ namespace SlimWaist.ViewModels
                 }
                 else
                 {
-                    await _dataContext.DeleteAsync<CartItem>(existingItem);
+                    await App.dataContext.DeleteAsync<CartItem>(existingItem);
 
                     //await GoToAsyncWithShell(nameof(FoodsPage), true);
                     await Shell.Current.GoToAsync("..");
@@ -137,7 +137,7 @@ namespace SlimWaist.ViewModels
                     Quantity = Convert.ToInt32(Quantity)
                 };
 
-                await _dataContext.InsertAsync<CartItem>(cartItem);
+                await App.dataContext.InsertAsync<CartItem>(cartItem);
 
                 //await GoToAsyncWithShell(nameof(FoodsPage), true);
                 await Shell.Current.GoToAsync("..");

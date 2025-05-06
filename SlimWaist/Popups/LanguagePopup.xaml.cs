@@ -12,28 +12,24 @@ namespace SlimWaist.Popups;
 
 public partial class LanguagePopup : Popup
 {
-    private readonly DataContext _dataContext;
-
     private List<Membership> memberships;
     private Membership membership;
     private Setting setting;
     private List<Setting> settings;
 
-    public LanguagePopup(DataContext dataContext)
+    public LanguagePopup()
     {
         InitializeComponent();
 
-        _dataContext = dataContext;
-
         Dispatcher.DispatchAsync(async () =>
         {
-            memberships = await _dataContext.LoadAsync<Membership>();
+            memberships = await App.dataContext.LoadAsync<Membership>();
 
-            settings = await _dataContext.LoadAsync<Setting>();
+            settings = await App.dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
-            membership = memberships.Where(x => x.Id ==setting.CurrentMemberShipId).FirstOrDefault();
+            membership = memberships.Where(x => x.Id ==setting.SavedMembershipId).FirstOrDefault();
 
             if (membership.CultureInfo == "ar-SA")
             {
@@ -63,9 +59,9 @@ public partial class LanguagePopup : Popup
 
             setting.CultureInfo = "ar-SA";
 
-            await _dataContext.UpdateAsync<Membership>(membership);
+            await App.dataContext.UpdateAsync<Membership>(membership);
 
-            await _dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(setting);
 
 
 #if ANDROID
@@ -101,9 +97,9 @@ public partial class LanguagePopup : Popup
 
             setting.CultureInfo = "en-US";
 
-            await _dataContext.UpdateAsync<Membership>(membership);
+            await App.dataContext.UpdateAsync<Membership>(membership);
 
-            await _dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(setting);
 
 #if ANDROID
             var context = Platform.AppContext;
