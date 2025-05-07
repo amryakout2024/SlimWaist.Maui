@@ -5,17 +5,9 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist36";
+        public const string DbName = "SlimWaist45";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
-
-        public static List<Membership> memberships = new List<Membership>();
-
-        public static List<Setting> settings = new List<Setting>();
-
-        public static Membership membership;
-
-        public static Setting setting;
 
         public SQLiteConnection Database =
             new SQLiteConnection(
@@ -68,7 +60,7 @@ namespace SlimWaist.Models
                     GenderId = 1,
                     BodyActivityId=2,
                     WaistCircumferenceMeasurement=100,
-                    CultureInfo = "ar-SA",
+                    CultureInfo = "en-US",
                 });
 
                 Database.Insert(new Setting() 

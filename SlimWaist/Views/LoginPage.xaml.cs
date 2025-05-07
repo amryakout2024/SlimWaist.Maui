@@ -38,15 +38,7 @@ public partial class LoginPage : UraniumContentPage
     {
         if (App.setting.CultureInfo == "ar-SA")
         {
-            ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
-
-            CultureInfo.CurrentCulture = new CultureInfo("en-US");
-
-            App.currentMembership.CultureInfo = "ar-SA";
-
-            App.setting.CultureInfo = "ar-SA";
-
-            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
+            App.setting.CultureInfo = "en-US";
 
             await App.dataContext.UpdateAsync<Setting>(App.setting);
 
@@ -63,15 +55,7 @@ public partial class LoginPage : UraniumContentPage
         }
         else
         {
-            ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
-
-            CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
-
-            App.currentMembership.CultureInfo = "en-US";
-
-            App.setting.CultureInfo = "en-US";
-
-            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
+            App.setting.CultureInfo = "ar-SA";
 
             await App.dataContext.UpdateAsync<Setting>(App.setting);
 

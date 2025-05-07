@@ -86,12 +86,13 @@
     <Grid 
         RowDefinitions="auto,auto,*,auto"
         BackgroundColor="WhiteSmoke">
+        
         <Grid Grid.Row="0"
             HeightRequest="80"
             VerticalOptions="Start"
             BackgroundColor="{StaticResource MainColor}">
             <Label 
-                Text="الوسط الرشيق"
+                Text="{extention:TranslateExtention Key=Slimwaste}"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 Margin="5"
@@ -110,6 +111,7 @@
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToProfilePageCommand}"/>
                 </Grid.GestureRecognizers>
+                
                 <VerticalStackLayout Grid.Column="0">
                     <Label
                 HorizontalOptions="Start"
@@ -121,12 +123,24 @@
                 HorizontalOptions="Start"
                 FontSize="16"
                 TextColor="{StaticResource MainColor}"
-                Text="تعديل تفاصيل الحساب"/>
+                Text="{extention:TranslateExtention Key=Editprofile}"/>
                 </VerticalStackLayout>
+                
                 <Image
                     Grid.Column="1"
-                    Scale="0.5"
-                    Source="back1.png">
+                    Scale="0.5">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Image" Binding="{Binding IsCultureInfoArrowArabic}" Value="true">
+                                    <Setter Property="Source" Value="leftarrow.png"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Image" Binding="{Binding IsCultureInfoArrowArabic}" Value="false">
+                                    <Setter Property="Source" Value="rightarrow.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
                     </Image.Behaviors>
@@ -158,7 +172,7 @@
                                 VerticalOptions="Center"
                                 FontSize="18"
                                 TextColor="Black"
-                                Text="اللغة"/>
+                                Text="{extention:TranslateExtention Key=Language}"/>
                         </HorizontalStackLayout>
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
@@ -181,7 +195,7 @@
                             VerticalOptions="Center"
                             FontSize="18"
                             TextColor="Black"
-                            Text="الشروط و الأحكام"/>
+                            Text="{extention:TranslateExtention Key=Termsandconditions}"/>
                         </HorizontalStackLayout>
                     </Border>
                     <Border
@@ -201,7 +215,7 @@
                             VerticalOptions="Center"
                             FontSize="18"
                             TextColor="Black"
-                            Text="تواصل معنا"/>
+                            Text="{extention:TranslateExtention Key=Contactus}"/>
                         </HorizontalStackLayout>
 
                     </Border>
@@ -222,7 +236,7 @@
                                 VerticalOptions="Center"
                                 FontSize="18"
                                 TextColor="Black"
-                                Text="هل أعجبك التطبيق ؟"/>
+                                Text="{extention:TranslateExtention Key=Doyouliketheapp}"/>
                         </HorizontalStackLayout>
 
                     </Border>
@@ -250,7 +264,7 @@
                             VerticalOptions="Center"
                             FontSize="18"
                             TextColor="Red"
-                            Text="تسجيل الخروج"/>
+                            Text="{extention:TranslateExtention Key=Exit}"/>
                     </HorizontalStackLayout>
                 </Border>
             </Grid>
@@ -263,15 +277,7 @@
                 VerticalOptions="Center"
                 FontSize="14"
                 TextColor="Gray"
-                Text="الإصدار 1.5.1"/>
+                Text="{extention:TranslateExtention Key=Version}"/>
         </Grid>
     </Grid>
 </ur:UraniumContentPage>
-<!--<Border.Stroke>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="Orange"
-                          Offset="0.1" />
-                    <GradientStop Color="Brown"
-                          Offset="1.0" />
-                </LinearGradientBrush>
-            </Border.Stroke>-->

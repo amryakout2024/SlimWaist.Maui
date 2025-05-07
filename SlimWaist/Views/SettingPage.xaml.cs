@@ -11,18 +11,11 @@ public partial class SettingPage : UraniumContentPage
 {
     private readonly SettingVM _settingVM;
 
-    private List<Membership> memberships;
-    private Membership membership;
-    private Setting setting;
-    private List<Setting> settings;
-
     public SettingPage(SettingVM settingVM)
     {
         InitializeComponent();
 
         _settingVM = settingVM;
-
-        //App.dataContext.ChangeFlowDirection(this);
 
         BindingContext = _settingVM;
 

@@ -29,23 +29,21 @@ namespace SlimWaist
 
             InitializeDatabase();
 
-            if (!string.IsNullOrEmpty(App.setting.CultureInfo))
+            if (App.setting.CultureInfo == "ar-SA")
             {
-                if (App.setting.CultureInfo == "ar-SA")
-                {
-                    CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
+                CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 
-                    Translator.instance.CultureInfo = new CultureInfo("ar-SA");
+                Translator.instance.CultureInfo = new CultureInfo("ar-SA");
 
-                    ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
+                ChangeDirections.instance.FlowDirection = FlowDirection.RightToLeft;
 
-                    ValidateForNullOrEmptyMessage = "ادخل القيمة";
+                ValidateForNullOrEmptyMessage = "ادخل القيمة";
 
-                    ValidateForIntegerNumberMessage = "ادخل رقم صحيح";
+                ValidateForIntegerNumberMessage = "ادخل رقم صحيح";
 
-                    ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
+                ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
 
-                    BodyActivities = new List<BodyActivity>() {
+                BodyActivities = new List<BodyActivity>() {
 
                         new BodyActivity()
                         {
@@ -69,7 +67,7 @@ namespace SlimWaist
                         },
                     };
 
-                    Genders = new List<Gender>()
+                Genders = new List<Gender>()
                     {
                         new Gender()
                         {
@@ -83,7 +81,7 @@ namespace SlimWaist
                         }
                     };
 
-                    obesityDegrees = new List<ObesityDegree>()
+                obesityDegrees = new List<ObesityDegree>()
                     {
                         new ObesityDegree()
                         {
@@ -112,7 +110,7 @@ namespace SlimWaist
                         }
                 };
 
-                    waistCircumferences = new List<WaistCircumference>()
+                waistCircumferences = new List<WaistCircumference>()
                     {
                         new WaistCircumference()
                         {
@@ -131,22 +129,22 @@ namespace SlimWaist
                         },
                     };
 
-                }
-                else
-                {
-                    CultureInfo.CurrentCulture = new CultureInfo("en-US");
+            }
+            else
+            {
+                CultureInfo.CurrentCulture = new CultureInfo("en-US");
 
-                    Translator.instance.CultureInfo = new CultureInfo("en-US");
+                Translator.instance.CultureInfo = new CultureInfo("en-US");
 
-                    ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
+                ChangeDirections.instance.FlowDirection = FlowDirection.LeftToRight;
 
-                    ValidateForNullOrEmptyMessage = "Enter Value";
+                ValidateForNullOrEmptyMessage = "Enter Value";
 
-                    ValidateForIntegerNumberMessage = "Enter integer number";
+                ValidateForIntegerNumberMessage = "Enter integer number";
 
-                    ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
+                ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
 
-                    BodyActivities = new List<BodyActivity>() {
+                BodyActivities = new List<BodyActivity>() {
 
                         new BodyActivity()
                         {
@@ -169,8 +167,8 @@ namespace SlimWaist
                             BodyActivityName="Very active"
                         },
                     };
-                   
-                    Genders = new List<Gender>()
+
+                Genders = new List<Gender>()
                     {
                         new Gender()
                         {
@@ -184,7 +182,7 @@ namespace SlimWaist
                         }
                     };
 
-                    obesityDegrees = new List<ObesityDegree>()
+                obesityDegrees = new List<ObesityDegree>()
                     {
                         new ObesityDegree()
                         {
@@ -213,7 +211,7 @@ namespace SlimWaist
                         }
                 };
 
-                    waistCircumferences = new List<WaistCircumference>()
+                waistCircumferences = new List<WaistCircumference>()
                     {
                         new WaistCircumference()
                         {
@@ -232,7 +230,6 @@ namespace SlimWaist
                         },
                     };
 
-                }
             }
 
             MainPage = new AppShell();
@@ -245,17 +242,25 @@ namespace SlimWaist
             try
             {
                 App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
-
-                App.memberships = await App.dataContext.LoadAsync<Membership>();
                 
                 if (App.setting == null)
                 {
                     await App.dataContext.init();
+
+                    App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
+
+                    App.memberships = await App.dataContext.LoadAsync<Membership>();
+
                 }
             }
             catch (Exception)
             {
                 await App.dataContext.init();
+
+                App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
+
+                App.memberships = await App.dataContext.LoadAsync<Membership>();
+
             }
 
         }

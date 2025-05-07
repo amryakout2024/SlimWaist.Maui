@@ -9,7 +9,7 @@ namespace SlimWaist.Models
 
         public int SavedMembershipId { get; set; } = 0;
 
-        public string? CultureInfo { get; set; } = "ar-SA";
+        public string? CultureInfo { get; set; } = "en-US";
 
     }
 }

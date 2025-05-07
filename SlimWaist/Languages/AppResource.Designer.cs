@@ -106,6 +106,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact us.
+        /// </summary>
+        public static string Contactus {
+            get {
+                return ResourceManager.GetString("Contactus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current regieme.
         /// </summary>
         public static string Currentregieme {
@@ -124,6 +133,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you like the app?.
+        /// </summary>
+        public static string Doyouliketheapp {
+            get {
+                return ResourceManager.GetString("Doyouliketheapp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -133,11 +151,38 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit membership.
+        /// </summary>
+        public static string Editmembership {
+            get {
+                return ResourceManager.GetString("Editmembership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit profile.
+        /// </summary>
+        public static string Editprofile {
+            get {
+                return ResourceManager.GetString("Editprofile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
         
@@ -183,6 +228,15 @@ namespace SlimWaist.Languages {
         public static string Idealweight {
             get {
                 return ResourceManager.GetString("Idealweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
@@ -349,11 +403,29 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slim waste.
+        /// </summary>
+        public static string Slimwaste {
+            get {
+                return ResourceManager.GetString("Slimwaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start regieme.
         /// </summary>
         public static string Startregieme {
             get {
                 return ResourceManager.GetString("Startregieme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms and conditions.
+        /// </summary>
+        public static string Termsandconditions {
+            get {
+                return ResourceManager.GetString("Termsandconditions", resourceCulture);
             }
         }
         
@@ -381,6 +453,15 @@ namespace SlimWaist.Languages {
         public static string UpdatePassword {
             get {
                 return ResourceManager.GetString("UpdatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version 1.5.1.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         

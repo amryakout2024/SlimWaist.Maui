@@ -237,4 +237,31 @@
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
     <value>تقييم محيط الخصر</value>
   </data>
+  <data name="Slimwaste" xml:space="preserve">
+    <value>الوسط الرشيق</value>
+  </data>
+  <data name="Editprofile" xml:space="preserve">
+    <value>تعديل تفاصيل الحساب</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="Termsandconditions" xml:space="preserve">
+    <value>الشروط و الأحكام</value>
+  </data>
+  <data name="Contactus" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="Doyouliketheapp" xml:space="preserve">
+    <value>هل أعجبك التطبيق ؟</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>الإصدار 1.5.1</value>
+  </data>
+  <data name="Editmembership" xml:space="preserve">
+    <value>تعديل العضوية</value>
+  </data>
 </root>

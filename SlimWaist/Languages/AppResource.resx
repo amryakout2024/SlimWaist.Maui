@@ -237,4 +237,31 @@
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
     <value>Waist circumference evaluation</value>
   </data>
+  <data name="Slimwaste" xml:space="preserve">
+    <value>Slim waste</value>
+  </data>
+  <data name="Editprofile" xml:space="preserve">
+    <value>Edit profile</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Termsandconditions" xml:space="preserve">
+    <value>Terms and conditions</value>
+  </data>
+  <data name="Contactus" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="Doyouliketheapp" xml:space="preserve">
+    <value>Do you like the app?</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version 1.5.1</value>
+  </data>
+  <data name="Editmembership" xml:space="preserve">
+    <value>Edit membership</value>
+  </data>
 </root>

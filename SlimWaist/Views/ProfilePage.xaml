@@ -37,9 +37,10 @@
             FontSize="25"/>
     </Shell.TitleView>
 
-    <input:FormView Spacing="5" Margin="10,5,10,0" 
-                    FlowDirection="RightToLeft"
-                    SubmitCommand="{Binding UpdateMemberShipCommand}">
+    <input:FormView 
+        Spacing="5" 
+        Margin="10,5,10,0" 
+        SubmitCommand="{Binding UpdateMemberShipCommand}">
         <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"

@@ -6,9 +6,10 @@ namespace SlimWaist.Extentions
 {
     public class Translator : INotifyPropertyChanged
     {
-        public string this[string Key]
+        // public object this[string Key] to get string values only
+        public object this[string Key]
         {
-            get => AppResource.ResourceManager.GetString(Key, CultureInfo);
+            get => AppResource.ResourceManager.GetObject(Key, CultureInfo);
         }
 
         public CultureInfo CultureInfo { get; set; } = new CultureInfo("ar-SA");

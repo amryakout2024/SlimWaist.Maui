@@ -29,6 +29,8 @@ namespace SlimWaist.ViewModels
 
             IsPassword = true;
 
+            App.memberships = await App.dataContext.LoadAsync<Membership>();
+
             CheckLoginSaved();
 
         }
@@ -37,8 +39,10 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            if (App.setting?.SavedMembershipId != 0)
+            if (App.setting.SavedMembershipId != 0)
             {
+                App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+
                 await GoToAsyncWithShell(nameof(HomePage), true);
             }
         }
@@ -70,6 +74,8 @@ namespace SlimWaist.ViewModels
                     }
 
                     await App.dataContext.UpdateAsync<Setting>(App.setting);
+
+                    await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
 
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }

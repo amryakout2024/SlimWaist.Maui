@@ -7,21 +7,24 @@ namespace SlimWaist.ViewModels
 {
     public partial class SettingVM() : BaseVM
     {
-
-                
-        [ObservableProperty]
-        private Membership? _memberShip;
-
         [ObservableProperty]
         private string? _name;
+
+        [ObservableProperty]
+        private bool _isCultureInfoArrowArabic;
        
         public async Task init()
         {
-            var memberShips = await App.dataContext.LoadAsync<Membership>();
+            Name = App.currentMembership?.Name ?? "";
 
-            MemberShip = memberShips.Where(x => x.Id ==App.setting.SavedMembershipId).FirstOrDefault();
-
-            Name = MemberShip?.Name ?? "";
+            if (App.currentMembership.CultureInfo=="ar-SA")
+            {
+                IsCultureInfoArrowArabic = true;
+            }
+            else
+            {
+                IsCultureInfoArrowArabic = false;
+            }
         }
 
         [RelayCommand]
@@ -38,12 +41,6 @@ namespace SlimWaist.ViewModels
             await App.dataContext.UpdateAsync<Setting>(App.setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
-        }
-
-        [RelayCommand]
-        private async Task ShowLanguagePopup()
-        {
-
         }
 
     }
