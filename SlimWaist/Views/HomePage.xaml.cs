@@ -4,6 +4,7 @@ using SlimWaist.Extentions;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
 using System.Globalization;
+using System.Threading.Tasks;
 using UraniumUI.Pages;
 
 namespace SlimWaist.Views;
@@ -14,6 +15,7 @@ public partial class HomePage : UraniumContentPage
 
     bool WantToExit = false;
 
+    IDispatcherTimer timer;
 
     public HomePage(HomeVM homeVM)
     {
@@ -22,6 +24,25 @@ public partial class HomePage : UraniumContentPage
         _homeVM = homeVM;
 
         BindingContext = _homeVM;
+
+        timer = Application.Current?.Dispatcher.CreateTimer();
+
+        timer.Interval = TimeSpan.FromSeconds(20);
+
+        timer.Tick += Timer_Tick;
+
+    }
+
+    private async void Timer_Tick(object? sender, EventArgs e)
+    {
+        await NoRegiemeLabel.ScaleTo(1.2, 1000, Easing.Linear);
+        await NoRegiemeLabel.ScaleTo(1, 1000, Easing.Linear);
+        //List<Task> tasks = new List<Task>();
+        //tasks.Add(new Task(() => ));
+        //tasks.Add(new Task(() => NoRegiemeLabel.ScaleTo(1, 2000, Easing.Linear)));      
+        //await Task.WhenAll(tasks);
+
+
     }
 
     protected async override void OnAppearing()
@@ -29,6 +50,8 @@ public partial class HomePage : UraniumContentPage
         WantToExit = false;
 
         await _homeVM.init();
+
+        timer.Start();
 
     }
 
@@ -50,4 +73,5 @@ public partial class HomePage : UraniumContentPage
         // Return true to prevent back button 
 
     }
+
 }

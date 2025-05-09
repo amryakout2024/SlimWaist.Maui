@@ -290,6 +290,7 @@
                              VerticalOptions="Center">
                         <Label Text="{extention:TranslateExtention Key=Noregiemetillnow}"
                                    Margin="0,0,0,10"
+                               x:Name="NoRegiemeLabel"
                                    FontAttributes="Bold"
                                    FontSize="18"
                                    HorizontalOptions="Fill"
