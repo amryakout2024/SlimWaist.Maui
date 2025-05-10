@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Views.DietsPage"
-             Title="أنظمة الدايت"
+             Title="{extention:TranslateExtention Key=Diets}"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
@@ -14,10 +15,163 @@
              Shell.NavBarIsVisible="True"
              Shell.TabBarIsVisible="False"
              BackgroundColor="White"
-             FlowDirection="RightToLeft"
+             FlowDirection="{extention:FlowDirectionsExtention}"
              Shell.FlyoutBehavior="Disabled">
 
-    <CollectionView ItemsSource="{Binding Diets}">
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout>
+                <toolkit:Expander
+            BackgroundColor="WhiteSmoke"
+            Padding="5" IsExpanded="False"
+            x:Name="expander1"
+            Margin="10,0,10,10">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="auto,auto,*">
+                            <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        IsChecked="{Binding IsKetoChecked}"
+                        Margin="0,0,5,0"/>
+                            <Label Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Ketodiet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                            <Image Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End" 
+                        Scale="0.5">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="false">
+                                                <Setter Property="Source" Value="downarrow.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="true">
+                                                <Setter Property="Source" Value="uparrow.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                                </Image.Behaviors>
+                            </Image>
+                        </Grid>
+                    </toolkit:Expander.Header>
+                    <Label 
+                    Text="{extention:TranslateExtention Key=Ketodescription}"/>
+                </toolkit:Expander>
+
+                <toolkit:Expander
+            BackgroundColor="WhiteSmoke"
+            Padding="5" IsExpanded="False"
+            x:Name="expander2"
+            Margin="10,0,10,10">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="auto,auto,*">
+                            <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        IsChecked="{Binding IsLowCarbChecked}"
+                        Margin="0,0,5,0"/>
+                            <Label Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Lowcarbdiet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                            <Image Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End" 
+                        Scale="0.5">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="false">
+                                                <Setter Property="Source" Value="downarrow.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="true">
+                                                <Setter Property="Source" Value="uparrow.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                                </Image.Behaviors>
+                            </Image>
+                        </Grid>
+                    </toolkit:Expander.Header>
+                    <Label 
+                    Text="{extention:TranslateExtention Key=Lowcarbdescription}"/>
+                </toolkit:Expander>
+
+                <toolkit:Expander
+            BackgroundColor="WhiteSmoke"
+            Padding="5" IsExpanded="False"
+            x:Name="expander3"
+            Margin="10,0,10,10">
+                    <toolkit:Expander.Header>
+                        <Grid ColumnDefinitions="auto,auto,*">
+                            <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        IsChecked="{Binding IsServingSizeChecked}"
+                        Margin="0,0,5,0"/>
+                            <Label Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Servingsizediet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                            <Image Grid.Column="2"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End" 
+                        Scale="0.5">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="false">
+                                                <Setter Property="Source" Value="downarrow.png"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="true">
+                                                <Setter Property="Source" Value="uparrow.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                                </Image.Behaviors>
+                            </Image>
+                        </Grid>
+                    </toolkit:Expander.Header>
+                    <Label 
+                    Text="{extention:TranslateExtention Key=Servingsizedescription}"/>
+                </toolkit:Expander>
+            </VerticalStackLayout>
+            <Button 
+                VerticalOptions="End"
+                Text="{extention:TranslateExtention Key=Save}"
+                FontSize="20"
+                BackgroundColor="DarkSlateBlue"
+                TextColor="White"
+                Padding="0" 
+                Margin="10"
+                input:FormView.IsSubmitButton="True"
+                StyleClass="FilledButton"
+                Command="{Binding SaveDietCommand}"/>
+
+        </Grid>
+
+    </ScrollView>
+    <!--<CollectionView ItemsSource="{Binding Diets}">
         <CollectionView.ItemTemplate >
             <DataTemplate>
                 <Border x:DataType="m:Diet"
@@ -47,5 +201,5 @@
 
             </DataTemplate>
         </CollectionView.ItemTemplate>
-    </CollectionView>
+    </CollectionView>-->
 </ContentPage>

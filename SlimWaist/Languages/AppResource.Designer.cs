@@ -133,6 +133,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diets.
+        /// </summary>
+        public static string Diets {
+            get {
+                return ResourceManager.GetString("Diets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you like the app?.
         /// </summary>
         public static string Doyouliketheapp {
@@ -232,6 +241,24 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The keto diet is a low-carb, high-fat diet that helps the body enter ketosis, where it burns fat for energy instead of carbs. It includes foods like meat, eggs, cheese, oils, and non-starchy vegetables, while avoiding bread, sugar, pasta, and most fruits. Benefits include weight loss and steady energy. Some may experience side effects like fatigue or headache at first..
+        /// </summary>
+        public static string Ketodescription {
+            get {
+                return ResourceManager.GetString("Ketodescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keto diet.
+        /// </summary>
+        public static string Ketodiet {
+            get {
+                return ResourceManager.GetString("Ketodiet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -282,6 +309,24 @@ namespace SlimWaist.Languages {
         public static string LoginPageTitle {
             get {
                 return ResourceManager.GetString("LoginPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A low-calorie diet limits daily calorie intake, typically between 1200–1800 calories, to support weight loss and improve overall health. It emphasizes nutrient-rich foods like vegetables, fruits, lean proteins, and whole grains, while reducing sugars, fried foods, and processed snacks. This diet helps create a calorie deficit, which encourages the body to burn stored fat. For best results, it should be balanced to provide essential nutrients and may be adjusted based on age, activity level, and health goals [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Lowcarbdescription {
+            get {
+                return ResourceManager.GetString("Lowcarbdescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low carb diet.
+        /// </summary>
+        public static string Lowcarbdiet {
+            get {
+                return ResourceManager.GetString("Lowcarbdiet", resourceCulture);
             }
         }
         
@@ -381,6 +426,24 @@ namespace SlimWaist.Languages {
         public static string SelectBodyActivity {
             get {
                 return ResourceManager.GetString("SelectBodyActivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Serving Size Diet involves controlling portion sizes of different food groups to maintain a balanced diet and avoid overeating. Each food group has a defined serving size, such as 30g of protein (e.g., chicken), 1 cup of vegetables, or ½ cup of grains. This system helps regulate calorie intake while ensuring the body gets the necessary nutrients. It&apos;s commonly used for weight management, promoting healthy eating habits, and creating sustainable, balanced meals..
+        /// </summary>
+        public static string Servingsizedescription {
+            get {
+                return ResourceManager.GetString("Servingsizedescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serving size diet.
+        /// </summary>
+        public static string Servingsizediet {
+            get {
+                return ResourceManager.GetString("Servingsizediet", resourceCulture);
             }
         }
         

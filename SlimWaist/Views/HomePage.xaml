@@ -32,10 +32,6 @@
 
     </ur:UraniumContentPage.Resources>
     
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsVisible="False" Command="{Binding GoBackCommand}"/>
-    </Shell.BackButtonBehavior>
-
     <Grid RowDefinitions="auto,auto,auto,auto,*" RowSpacing="5" Margin="5">
         
         <HorizontalStackLayout Grid.Row="0">
@@ -66,7 +62,11 @@
                 Text="{extention:TranslateExtention Key=Edit}"
                 TextColor="SteelBlue"
                 VerticalOptions="Center" 
-                HorizontalOptions="End" />
+                HorizontalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoProfilePageCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
 
         </Grid>
         

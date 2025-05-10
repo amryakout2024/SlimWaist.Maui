@@ -111,6 +111,26 @@ namespace SlimWaist.ViewModels
             //}
 
         }
+
+
+        [RelayCommand]
+        private async Task GoToDietsPage()
+        {
+            await GoToAsyncWithStack(nameof(DietsPage), true);
+        }
+
+        [RelayCommand]
+        private async void GoToSettingPage()
+        {
+            await GoToAsyncWithStack(nameof(SettingPage), true);
+        }
+
+        [RelayCommand]
+        private async Task GoProfilePage()
+        {
+            await GoToAsyncWithStack(nameof(ProfilePage), true);
+        }
+
         private void BmiCalculator()
         {
             double mi = (Convert.ToDouble(Weight)) / ((Convert.ToDouble(Height) / 100) * (Convert.ToDouble(Height) / 100));
@@ -276,24 +296,6 @@ namespace SlimWaist.ViewModels
                 ObesityDegreeId = 5;
 
             ObesityDegreeName = App.obesityDegrees.Where(x => x.ObesityDegreeId == ObesityDegreeId).FirstOrDefault().ObesityDegreeName;
-        }
-
-        [RelayCommand]
-        private async Task GoToDietsPage()
-        {
-            await GoToAsyncWithStack(nameof(DietsPage), true);
-        }
-
-        [RelayCommand]
-        private async void GoToSettingPage()
-        {
-            await GoToAsyncWithStack(nameof(SettingPage), true);
-        }
-
-        [RelayCommand]
-        private async Task GoBack()
-        {
-
         }
 
     }

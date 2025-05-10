@@ -21,9 +21,9 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Email = "amrnewstory@gmail.com";
+            //Email = "amrnewstory@gmail.com";
 
-            Password = "1";
+            //Password = "1";
 
             IsCheckBoxChecked = false;
 
@@ -37,14 +37,14 @@ namespace SlimWaist.ViewModels
 
         private async void CheckLoginSaved()
         {
-            //Preferences.Set("Email", "");
-         
-            //if (App.setting.SavedMembershipId != 0)
-            //{
-            //    App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+            Preferences.Set("Email", "");
 
-            //    await GoToAsyncWithShell(nameof(HomePage), true);
-            //}
+            if (App.setting.SavedMembershipId != 0)
+            {
+                App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+
+                await GoToAsyncWithShell(nameof(HomePage), true);
+            }
         }
 
         [RelayCommand]

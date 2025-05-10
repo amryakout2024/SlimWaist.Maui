@@ -28,8 +28,8 @@
 		<ApplicationId>com.companyname.slimwaist</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>37.0</ApplicationDisplayVersion>
-		<ApplicationVersion>37</ApplicationVersion>
+		<ApplicationDisplayVersion>43.0</ApplicationDisplayVersion>
+		<ApplicationVersion>43</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
