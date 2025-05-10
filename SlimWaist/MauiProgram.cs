@@ -8,9 +8,6 @@ using SlimWaist.ViewModels;
 using SlimWaist.Views;
 using UraniumUI;
 
-
-
-
 #if ANDROID
 using System.Net.Security;
 using Xamarin.Android.Net;

@@ -37,12 +37,6 @@ public partial class HomePage : UraniumContentPage
     {
         await NoRegiemeLabel.ScaleTo(1.2, 1000, Easing.Linear);
         await NoRegiemeLabel.ScaleTo(1, 1000, Easing.Linear);
-        //List<Task> tasks = new List<Task>();
-        //tasks.Add(new Task(() => ));
-        //tasks.Add(new Task(() => NoRegiemeLabel.ScaleTo(1, 2000, Easing.Linear)));      
-        //await Task.WhenAll(tasks);
-
-
     }
 
     protected async override void OnAppearing()

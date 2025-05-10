@@ -38,13 +38,13 @@ namespace SlimWaist.ViewModels
         private async void CheckLoginSaved()
         {
             //Preferences.Set("Email", "");
+         
+            //if (App.setting.SavedMembershipId != 0)
+            //{
+            //    App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
 
-            if (App.setting.SavedMembershipId != 0)
-            {
-                App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
-
-                await GoToAsyncWithShell(nameof(HomePage), true);
-            }
+            //    await GoToAsyncWithShell(nameof(HomePage), true);
+            //}
         }
 
         [RelayCommand]
@@ -76,7 +76,7 @@ namespace SlimWaist.ViewModels
                     await App.dataContext.UpdateAsync<Setting>(App.setting);
 
                     await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
-
+                    
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }
                 else

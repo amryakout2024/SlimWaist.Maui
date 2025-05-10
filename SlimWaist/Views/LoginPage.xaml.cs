@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui.ApplicationModel;
+﻿using CommunityToolkit.Maui.ApplicationModel;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
@@ -22,16 +22,15 @@ public partial class LoginPage : UraniumContentPage
     public LoginPage(LoginVM loginVM)
     {
         InitializeComponent();
-
         _loginVM = loginVM;
-
         BindingContext = _loginVM;
-
     }
 
     protected async override void OnAppearing()
     {
         await _loginVM.init();
+
+
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
