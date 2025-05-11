@@ -97,11 +97,56 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breakfast.
+        /// </summary>
+        public static string Breakfast {
+            get {
+                return ResourceManager.GetString("Breakfast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calories.
+        /// </summary>
+        public static string Calories {
+            get {
+                return ResourceManager.GetString("Calories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calories calculated for each 100 gm.
+        /// </summary>
+        public static string Caloriescalculatedforeach100gm {
+            get {
+                return ResourceManager.GetString("Caloriescalculatedforeach100gm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carbohydrates.
+        /// </summary>
+        public static string Carbohydrates {
+            get {
+                return ResourceManager.GetString("Carbohydrates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cart.
         /// </summary>
         public static string Cart {
             get {
                 return ResourceManager.GetString("Cart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
             }
         }
         
@@ -138,6 +183,15 @@ namespace SlimWaist.Languages {
         public static string Diets {
             get {
                 return ResourceManager.GetString("Diets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dinner.
+        /// </summary>
+        public static string Dinner {
+            get {
+                return ResourceManager.GetString("Dinner", resourceCulture);
             }
         }
         
@@ -196,11 +250,38 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fats.
+        /// </summary>
+        public static string Fats {
+            get {
+                return ResourceManager.GetString("Fats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Female.
         /// </summary>
         public static string Female {
             get {
                 return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fibers.
+        /// </summary>
+        public static string Fibers {
+            get {
+                return ResourceManager.GetString("Fibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food.
+        /// </summary>
+        public static string Food {
+            get {
+                return ResourceManager.GetString("Food", resourceCulture);
             }
         }
         
@@ -331,11 +412,29 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lunch.
+        /// </summary>
+        public static string Lunch {
+            get {
+                return ResourceManager.GetString("Lunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {
             get {
                 return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal.
+        /// </summary>
+        public static string Meal {
+            get {
+                return ResourceManager.GetString("Meal", resourceCulture);
             }
         }
         
@@ -376,6 +475,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No food by this name !.
+        /// </summary>
+        public static string Nofoodbythisname {
+            get {
+                return ResourceManager.GetString("Nofoodbythisname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No regieme till now !.
         /// </summary>
         public static string Noregiemetillnow {
@@ -399,6 +507,24 @@ namespace SlimWaist.Languages {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepare your favorite meal.
+        /// </summary>
+        public static string Prepareyourfavoritemeal {
+            get {
+                return ResourceManager.GetString("Prepareyourfavoritemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Protiens.
+        /// </summary>
+        public static string Protiens {
+            get {
+                return ResourceManager.GetString("Protiens", resourceCulture);
             }
         }
         
@@ -561,6 +687,15 @@ namespace SlimWaist.Languages {
         public static string Welcomeback {
             get {
                 return ResourceManager.GetString("Welcomeback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write food name.
+        /// </summary>
+        public static string Writefoodname {
+            get {
+                return ResourceManager.GetString("Writefoodname", resourceCulture);
             }
         }
     }

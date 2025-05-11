@@ -285,4 +285,49 @@
   <data name="Servingsizedescription" xml:space="preserve">
     <value>The Serving Size Diet involves controlling portion sizes of different food groups to maintain a balanced diet and avoid overeating. Each food group has a defined serving size, such as 30g of protein (e.g., chicken), 1 cup of vegetables, or ½ cup of grains. This system helps regulate calorie intake while ensuring the body gets the necessary nutrients. It's commonly used for weight management, promoting healthy eating habits, and creating sustainable, balanced meals.</value>
   </data>
+  <data name="Prepareyourfavoritemeal" xml:space="preserve">
+    <value>Prepare your favorite meal</value>
+  </data>
+  <data name="Meal" xml:space="preserve">
+    <value>Meal</value>
+  </data>
+  <data name="Breakfast" xml:space="preserve">
+    <value>Breakfast</value>
+  </data>
+  <data name="Lunch" xml:space="preserve">
+    <value>Lunch</value>
+  </data>
+  <data name="Dinner" xml:space="preserve">
+    <value>Dinner</value>
+  </data>
+  <data name="Caloriescalculatedforeach100gm" xml:space="preserve">
+    <value>Calories calculated for each 100 gm</value>
+  </data>
+  <data name="Writefoodname" xml:space="preserve">
+    <value>Write food name</value>
+  </data>
+  <data name="Nofoodbythisname" xml:space="preserve">
+    <value>No food by this name !</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>Food</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Calories" xml:space="preserve">
+    <value>Calories</value>
+  </data>
+  <data name="Carbohydrates" xml:space="preserve">
+    <value>Carbohydrates</value>
+  </data>
+  <data name="Protiens" xml:space="preserve">
+    <value>Protiens</value>
+  </data>
+  <data name="Fats" xml:space="preserve">
+    <value>Fats</value>
+  </data>
+  <data name="Fibers" xml:space="preserve">
+    <value>Fibers</value>
+  </data>
 </root>

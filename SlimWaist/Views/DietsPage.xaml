@@ -19,143 +19,142 @@
              Shell.FlyoutBehavior="Disabled">
 
     <ScrollView>
-        <Grid>
-            <VerticalStackLayout>
-                <toolkit:Expander
+        <VerticalStackLayout>
+            <toolkit:Expander
             BackgroundColor="WhiteSmoke"
             Padding="5" IsExpanded="False"
             x:Name="expander1"
             Margin="10,0,10,10">
-                    <toolkit:Expander.Header>
-                        <Grid ColumnDefinitions="auto,auto,*">
-                            <mat:CheckBox
+                <toolkit:Expander.Header>
+                    <Grid ColumnDefinitions="auto,auto,*">
+                        <mat:CheckBox
                         HorizontalOptions="Center"
                         WidthRequest="25"
                         HeightRequest="25"
                         IsChecked="{Binding IsKetoChecked}"
                         Margin="0,0,5,0"/>
-                            <Label Grid.Column="1"
+                        <Label Grid.Column="1"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
                         Text="{extention:TranslateExtention Key=Ketodiet}"
                         TextColor="{StaticResource MainColor}"
                         FontSize="16"/>
-                            <Image Grid.Column="2"
+                        <Image Grid.Column="2"
                         VerticalOptions="Center"
                         HorizontalOptions="End" 
                         Scale="0.5">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Style.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="false">
-                                                <Setter Property="Source" Value="downarrow.png"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="true">
-                                                <Setter Property="Source" Value="uparrow.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                                <Image.Behaviors>
-                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                                </Image.Behaviors>
-                            </Image>
-                        </Grid>
-                    </toolkit:Expander.Header>
-                    <Label 
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="false">
+                                            <Setter Property="Source" Value="downarrow.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander1},Path=IsExpanded}"  Value="true">
+                                            <Setter Property="Source" Value="uparrow.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </toolkit:Expander.Header>
+                <Label 
                     Text="{extention:TranslateExtention Key=Ketodescription}"/>
-                </toolkit:Expander>
+            </toolkit:Expander>
 
-                <toolkit:Expander
+            <toolkit:Expander
             BackgroundColor="WhiteSmoke"
             Padding="5" IsExpanded="False"
             x:Name="expander2"
             Margin="10,0,10,10">
-                    <toolkit:Expander.Header>
-                        <Grid ColumnDefinitions="auto,auto,*">
-                            <mat:CheckBox
+                <toolkit:Expander.Header>
+                    <Grid ColumnDefinitions="auto,auto,*">
+                        <mat:CheckBox
                         HorizontalOptions="Center"
                         WidthRequest="25"
                         HeightRequest="25"
                         IsChecked="{Binding IsLowCarbChecked}"
                         Margin="0,0,5,0"/>
-                            <Label Grid.Column="1"
+                        <Label Grid.Column="1"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
                         Text="{extention:TranslateExtention Key=Lowcarbdiet}"
                         TextColor="{StaticResource MainColor}"
                         FontSize="16"/>
-                            <Image Grid.Column="2"
+                        <Image Grid.Column="2"
                         VerticalOptions="Center"
                         HorizontalOptions="End" 
                         Scale="0.5">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Style.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="false">
-                                                <Setter Property="Source" Value="downarrow.png"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="true">
-                                                <Setter Property="Source" Value="uparrow.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                                <Image.Behaviors>
-                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                                </Image.Behaviors>
-                            </Image>
-                        </Grid>
-                    </toolkit:Expander.Header>
-                    <Label 
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="false">
+                                            <Setter Property="Source" Value="downarrow.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander2},Path=IsExpanded}"  Value="true">
+                                            <Setter Property="Source" Value="uparrow.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </toolkit:Expander.Header>
+                <Label 
                     Text="{extention:TranslateExtention Key=Lowcarbdescription}"/>
-                </toolkit:Expander>
+            </toolkit:Expander>
 
-                <toolkit:Expander
+            <toolkit:Expander
             BackgroundColor="WhiteSmoke"
             Padding="5" IsExpanded="False"
             x:Name="expander3"
             Margin="10,0,10,10">
-                    <toolkit:Expander.Header>
-                        <Grid ColumnDefinitions="auto,auto,*">
-                            <mat:CheckBox
+                <toolkit:Expander.Header>
+                    <Grid ColumnDefinitions="auto,auto,*">
+                        <mat:CheckBox
                         HorizontalOptions="Center"
                         WidthRequest="25"
                         HeightRequest="25"
                         IsChecked="{Binding IsServingSizeChecked}"
                         Margin="0,0,5,0"/>
-                            <Label Grid.Column="1"
+                        <Label Grid.Column="1"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
                         Text="{extention:TranslateExtention Key=Servingsizediet}"
                         TextColor="{StaticResource MainColor}"
                         FontSize="16"/>
-                            <Image Grid.Column="2"
+                        <Image Grid.Column="2"
                         VerticalOptions="Center"
                         HorizontalOptions="End" 
                         Scale="0.5">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Style.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="false">
-                                                <Setter Property="Source" Value="downarrow.png"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="true">
-                                                <Setter Property="Source" Value="uparrow.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                                <Image.Behaviors>
-                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                                </Image.Behaviors>
-                            </Image>
-                        </Grid>
-                    </toolkit:Expander.Header>
-                    <Label 
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="false">
+                                            <Setter Property="Source" Value="downarrow.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander3},Path=IsExpanded}"  Value="true">
+                                            <Setter Property="Source" Value="uparrow.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </toolkit:Expander.Header>
+                <Label 
                     Text="{extention:TranslateExtention Key=Servingsizedescription}"/>
-                </toolkit:Expander>
-            </VerticalStackLayout>
+            </toolkit:Expander>
+
             <Button 
                 VerticalOptions="End"
                 Text="{extention:TranslateExtention Key=Save}"
@@ -168,38 +167,7 @@
                 StyleClass="FilledButton"
                 Command="{Binding SaveDietCommand}"/>
 
-        </Grid>
+        </VerticalStackLayout>
 
     </ScrollView>
-    <!--<CollectionView ItemsSource="{Binding Diets}">
-        <CollectionView.ItemTemplate >
-            <DataTemplate>
-                <Border x:DataType="m:Diet"
-                        BackgroundColor="WhiteSmoke"
-                        Padding="10"
-                        Margin="10,0,10,10"
-                        StrokeThickness="1.5"
-                        Stroke="WhiteSmoke"
-                        StrokeShape="RoundRectangle 10">
-                    <VerticalStackLayout
-                        Spacing="10"
-                        BackgroundColor="WhiteSmoke">
-                        <Label 
-                            Text="{Binding DietName}"
-                            TextColor="{StaticResource MainColor}"
-                            FontSize="20"
-                            TextDecorations="Underline"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="EndAndExpand" />
-                        <Label 
-                            Text="{Binding DietDescription}"
-                            FontSize="15"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="EndAndExpand" />
-                    </VerticalStackLayout>
-                </Border>
-
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>-->
 </ContentPage>

@@ -285,4 +285,49 @@
   <data name="Servingsizedescription" xml:space="preserve">
     <value>نظام الحصص الغذائي يتضمن التحكم في أحجام الحصص لمجموعات الطعام المختلفة للحفاظ على نظام غذائي متوازن وتجنب الإفراط في تناول الطعام. لكل مجموعة غذائية حجم حصة محدد، مثل 30 غرامًا من البروتين (مثل الدجاج)، 1 كوب من الخضروات، أو نصف كوب من الحبوب. يساعد هذا النظام في تنظيم تناول السعرات الحرارية مع ضمان حصول الجسم على العناصر الغذائية الضرورية. يُستخدم عادةً لإدارة الوزن، وتعزيز عادات الأكل الصحية، وخلق وجبات متوازنة ومستدامة.</value>
   </data>
+  <data name="Prepareyourfavoritemeal" xml:space="preserve">
+    <value>قم بانشاء وجبتك المفضلة</value>
+  </data>
+  <data name="Meal" xml:space="preserve">
+    <value>الوجبة</value>
+  </data>
+  <data name="Breakfast" xml:space="preserve">
+    <value>إفطار</value>
+  </data>
+  <data name="Lunch" xml:space="preserve">
+    <value>غداء</value>
+  </data>
+  <data name="Dinner" xml:space="preserve">
+    <value>عشاء</value>
+  </data>
+  <data name="Caloriescalculatedforeach100gm" xml:space="preserve">
+    <value>السعرات محسوبة لكل 100 جرام</value>
+  </data>
+  <data name="Writefoodname" xml:space="preserve">
+    <value>اكتب اسم الغذاء</value>
+  </data>
+  <data name="Nofoodbythisname" xml:space="preserve">
+    <value>مفيش غذاء بالاسم دا !</value>
+  </data>
+  <data name="Food" xml:space="preserve">
+    <value>الغذاء</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>التصنيف</value>
+  </data>
+  <data name="Calories" xml:space="preserve">
+    <value>السعرات</value>
+  </data>
+  <data name="Carbohydrates" xml:space="preserve">
+    <value>النشويات</value>
+  </data>
+  <data name="Protiens" xml:space="preserve">
+    <value>البروتينات</value>
+  </data>
+  <data name="Fats" xml:space="preserve">
+    <value>الدهون</value>
+  </data>
+  <data name="Fibers" xml:space="preserve">
+    <value>الالياف</value>
+  </data>
 </root>

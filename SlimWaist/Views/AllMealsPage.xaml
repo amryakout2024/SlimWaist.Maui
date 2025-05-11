@@ -30,7 +30,7 @@
         <Label 
             Text="انشاء مخطط وجبات يوم"
             FontAttributes="Bold"
-            HorizontalOptions="EndAndExpand"
+            HorizontalOptions="End"
             VerticalOptions="Center"
             Margin="5"
             TextColor="{StaticResource MainColor}">
@@ -143,7 +143,7 @@
                                                 Grid.Column="1"
                                                 IsChecked="{Binding IsSelected}"
                                                 BorderColor="{StaticResource MainColor}"
-                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalOptions="End"
                                                 VerticalOptions="StartAndExpand"
                                                 BoxSizeRequest="23"
                                                 FlowDirection="LeftToRight"
@@ -156,7 +156,7 @@
                                                 FontSize="20"
                                                 TextDecorations="Underline"
                                                 FontAttributes="Bold"
-                                                VerticalOptions="EndAndExpand"
+                                                VerticalOptions="End"
                                                 HorizontalOptions="End">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer
@@ -256,7 +256,7 @@
                                                 Grid.Column="1"
                                                 IsChecked="{Binding IsSelected}"
                                                 BorderColor="{StaticResource MainColor}"
-                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalOptions="End"
                                                 VerticalOptions="StartAndExpand"
                                                 BoxSizeRequest="23"
                                                 FlowDirection="LeftToRight"
@@ -269,7 +269,7 @@
                                                 FontSize="20"
                                                 TextDecorations="Underline"
                                                 FontAttributes="Bold"
-                                                VerticalOptions="EndAndExpand"
+                                                VerticalOptions="End"
                                                 HorizontalOptions="End">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer
@@ -369,7 +369,7 @@
                                                 Grid.Column="1"
                                                 IsChecked="{Binding IsSelected}"
                                                 BorderColor="{StaticResource MainColor}"
-                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalOptions="End"
                                                 VerticalOptions="StartAndExpand"
                                                 BoxSizeRequest="23"
                                                 FlowDirection="LeftToRight"
@@ -382,7 +382,7 @@
                                                 FontSize="20"
                                                 TextDecorations="Underline"
                                                 FontAttributes="Bold"
-                                                VerticalOptions="EndAndExpand"
+                                                VerticalOptions="End"
                                                 HorizontalOptions="End">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer
@@ -482,7 +482,7 @@
                                                 Grid.Column="1"
                                                 IsChecked="{Binding IsSelected}"
                                                 BorderColor="{StaticResource MainColor}"
-                                                HorizontalOptions="EndAndExpand"
+                                                HorizontalOptions="End"
                                                 VerticalOptions="StartAndExpand"
                                                 BoxSizeRequest="23"
                                                 FlowDirection="LeftToRight"
@@ -495,7 +495,7 @@
                                                 FontSize="20"
                                                 TextDecorations="Underline"
                                                 FontAttributes="Bold"
-                                                VerticalOptions="EndAndExpand"
+                                                VerticalOptions="End"
                                                 HorizontalOptions="End">
                                                 <Label.GestureRecognizers>
                                                     <TapGestureRecognizer

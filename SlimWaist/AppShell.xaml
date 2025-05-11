@@ -25,11 +25,6 @@
 
     <TabBar FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-            ContentTemplate="{DataTemplate v:HomePage}"
-            Route="HomePage"
-            Title="{extention:TranslateExtention Key=Home}"     
-            Icon="home"/>
-        <ShellContent
             ContentTemplate="{DataTemplate v:FoodsPage}"
             Route="FoodsPage"
             Title="{extention:TranslateExtention Key=Foods}"
@@ -39,6 +34,11 @@
             Route="AllMealsPage"
             Title="{extention:TranslateExtention Key=Mymeals}"
             Icon="allmeal"/>
+        <ShellContent
+            ContentTemplate="{DataTemplate v:HomePage}"
+            Route="HomePage"
+            Title="{extention:TranslateExtention Key=Home}"     
+            Icon="home"/>
         <ShellContent
             ContentTemplate="{DataTemplate v:CartPage}"
             Route="CartPage"

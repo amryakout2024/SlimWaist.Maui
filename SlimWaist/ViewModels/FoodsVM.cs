@@ -8,6 +8,7 @@ namespace SlimWaist.ViewModels
     public partial class FoodsVM(CartVM cartVM) : BaseVM
     {
         private readonly CartVM _cartVM = cartVM;
+        
         private List<Food> FoodsFromDatabase;
 
         [ObservableProperty]
