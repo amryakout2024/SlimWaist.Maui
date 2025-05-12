@@ -29,15 +29,15 @@ namespace SlimWaist.Renders
         //        {
         //            const int cartTabbarItemIndex = 1;
         //            _badgeDrawable = bottomView.GetOrCreateBadge(cartTabbarItemIndex);
-        //            //UpdateBadge(CartViewModel.TotalCartCount);
+        //            //UpdateBadgeVisibilityAccordingToCartCount(CartViewModel.TotalCartCount);
         //            //CartViewModel.TotalCartCountChanged += CartViewModel_TotalCartCountChanged;
         //        }
         //    }
 
         //    private void CartViewModel_TotalCartCountChanged(object? sender, int newCount) =>
-        //        UpdateBadge(newCount);
+        //        UpdateBadgeVisibilityAccordingToCartCount(newCount);
 
-        //    private void UpdateBadge(int count)
+        //    private void UpdateBadgeVisibilityAccordingToCartCount(int count)
         //    {
         //        if (count <= 0)
         //        {

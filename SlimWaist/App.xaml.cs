@@ -15,8 +15,6 @@ namespace SlimWaist
 
         public static List<CartItem> CartItems = new List<CartItem>();
 
-        //public static event EventHandler<int>? TotalCartCountChanged;
-
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;

@@ -37,10 +37,7 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string _foodFibers;
 
-
         public static event EventHandler<int>? TotalCartCountChanged;
-
-
 
         public async Task Init()
         {
@@ -73,8 +70,6 @@ namespace SlimWaist.ViewModels
                 FoodFat = "0.0";
                 FoodFibers = "0.0";
             }
-
-            await NotifyCartCountChange();
         }
 
         [RelayCommand]
@@ -156,13 +151,19 @@ namespace SlimWaist.ViewModels
                 await Shell.Current.GoToAsync("..");
             }
 
-            NotifyCartCountChange();
+
+            await NotifyCartCountChange();
         }
 
         [RelayCommand]
         private async Task NotifyCartCountChange()
         {
+            App.CartItems = await App.dataContext.LoadAsync<CartItem>();
+
             App.TotalCartCount = App.CartItems.Count();
+
+            //when make invoke it fires the event that implemented in the BadgeShellBottomNavViewAppearanceTracker class
+            //invoke only fire not create it as method
 
             TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
         }

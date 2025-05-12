@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.ApplicationModel;
 using InputKit.Handlers;
 using Microsoft.Extensions.Logging;
 using SlimWaist.Extentions;
@@ -11,6 +12,7 @@ using UraniumUI;
 #if ANDROID
 using System.Net.Security;
 using Xamarin.Android.Net;
+using SlimWaist.Platforms.Android;
 #elif IOS
 using Security;
 #endif
@@ -35,10 +37,10 @@ namespace SlimWaist
                 {
                     handlers.AddInputKitHandlers();
                 })
-                .ConfigureMauiHandlers(h =>
+                .ConfigureMauiHandlers ( h =>
                 {
 #if ANDROID
-                    //h.AddHandler<Shell, TabbarBadgeRenderer>();
+                    h.AddHandler<Shell, TabbarBadgeRenderer>();
 #endif
                 })
                 .ConfigureFonts(fonts =>
@@ -50,7 +52,7 @@ namespace SlimWaist
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-            //builder.Services.AddSingleton<IBadge>(Badge.Default);
+
             builder.Services.AddSingleton<LoginPage>()
                             .AddSingleton<LoginVM>();
 
