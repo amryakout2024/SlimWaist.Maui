@@ -70,6 +70,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added successfully.
+        /// </summary>
+        public static string Addedsuccessfully {
+            get {
+                return ResourceManager.GetString("Addedsuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add food to meal cart.
         /// </summary>
         public static string Addfoodtomealcart {
@@ -210,6 +219,15 @@ namespace SlimWaist.Languages {
         public static string Currentweight {
             get {
                 return ResourceManager.GetString("Currentweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted successfully.
+        /// </summary>
+        public static string Deletedsuccessfully {
+            get {
+                return ResourceManager.GetString("Deletedsuccessfully", resourceCulture);
             }
         }
         
@@ -669,6 +687,15 @@ namespace SlimWaist.Languages {
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated successfully.
+        /// </summary>
+        public static string Updatedsuccessfully {
+            get {
+                return ResourceManager.GetString("Updatedsuccessfully", resourceCulture);
             }
         }
         

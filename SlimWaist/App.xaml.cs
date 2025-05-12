@@ -11,6 +11,11 @@ namespace SlimWaist
         public static Setting setting;
         public static List<Membership> memberships;
         public static Membership currentMembership;
+        public static int TotalCartCount;
+
+        public static List<CartItem> CartItems = new List<CartItem>();
+
+        //public static event EventHandler<int>? TotalCartCountChanged;
 
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
@@ -28,6 +33,7 @@ namespace SlimWaist
             App.dataContext = dataContext;
 
             InitializeDatabase();
+
 
             if (App.setting.CultureInfo == "ar-SA")
             {
@@ -246,20 +252,22 @@ namespace SlimWaist
                 if (App.setting == null)
                 {
                     await App.dataContext.init();
-
-                    App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
-
-                    App.memberships = await App.dataContext.LoadAsync<Membership>();
-
                 }
             }
             catch (Exception)
             {
                 await App.dataContext.init();
+            }
+            finally
+            {
 
                 App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
 
                 App.memberships = await App.dataContext.LoadAsync<Membership>();
+
+                CartItems = await App.dataContext.LoadAsync<CartItem>();
+
+                App.TotalCartCount = CartItems.Count();
 
             }
 

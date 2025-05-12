@@ -342,4 +342,13 @@
   <data name="Cancel" xml:space="preserve">
     <value>الغاء</value>
   </data>
+  <data name="Updatedsuccessfully" xml:space="preserve">
+    <value>تم التحديث</value>
+  </data>
+  <data name="Deletedsuccessfully" xml:space="preserve">
+    <value>تم الحذف</value>
+  </data>
+  <data name="Addedsuccessfully" xml:space="preserve">
+    <value>تمت الاضافة</value>
+  </data>
 </root>

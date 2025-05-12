@@ -342,4 +342,13 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Updatedsuccessfully" xml:space="preserve">
+    <value>Updated successfully</value>
+  </data>
+  <data name="Deletedsuccessfully" xml:space="preserve">
+    <value>Deleted successfully</value>
+  </data>
+  <data name="Addedsuccessfully" xml:space="preserve">
+    <value>Added successfully</value>
+  </data>
 </root>
