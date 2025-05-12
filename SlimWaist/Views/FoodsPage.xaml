@@ -237,9 +237,9 @@
             HeightRequest="60"
             Grid.Row="3"
             Margin="5"
-            HorizontalOptions="Start"
+            HorizontalOptions="End"
             VerticalOptions="End"                                    
-            BackgroundColor="ForestGreen"
+            BackgroundColor="DarkSlateBlue"
             StrokeShape="RoundRectangle 30">
             <Label 
                 Text="+" 

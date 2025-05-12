@@ -10,6 +10,7 @@ namespace SlimWaist.Models
         public string? MealType { get; set; }
         public int FoodId { get; set; }
         public string? FoodName { get; set; }
+        public string? FoodCategory { get; set; }
         public int Quantity { get; set; }
 
         public double FoodCalories { get; set; }

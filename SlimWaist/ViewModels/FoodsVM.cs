@@ -119,6 +119,7 @@ namespace SlimWaist.ViewModels
                 cartItem.MealType = Breakfast;
                 cartItem.FoodId = food.FoodId;
                 cartItem.FoodName = food.FoodName;
+                cartItem.FoodCategory = food.FoodCategory;
                 cartItem.FoodCalories = food.FoodCalories;
                 cartItem.FoodCarb = food.FoodCarb;
                 cartItem.FoodProtien = food.FoodProtien;
@@ -130,6 +131,7 @@ namespace SlimWaist.ViewModels
                 cartItem.MealType = Lunch;
                 cartItem.FoodId = food.FoodId;
                 cartItem.FoodName = food.FoodName;
+                cartItem.FoodCategory = food.FoodCategory;
                 cartItem.FoodCalories = food.FoodCalories;
                 cartItem.FoodCarb = food.FoodCarb;
                 cartItem.FoodProtien = food.FoodProtien;
@@ -142,12 +144,12 @@ namespace SlimWaist.ViewModels
                 cartItem.MealType = Dinner;
                 cartItem.FoodId = food.FoodId;
                 cartItem.FoodName = food.FoodName;
+                cartItem.FoodCategory = food.FoodCategory;
                 cartItem.FoodCalories = food.FoodCalories;
                 cartItem.FoodCarb = food.FoodCarb;
                 cartItem.FoodProtien = food.FoodProtien;
                 cartItem.FoodFat = food.FoodFat;
                 cartItem.FoodFibers = food.FoodFibers;
-
             }
 
             var parameter = new Dictionary<string, object>
@@ -155,31 +157,12 @@ namespace SlimWaist.ViewModels
                 [nameof(ItemVM.CartItem)] = cartItem,
             };
             await GoToAsyncWithStackAndParameter(nameof(ItemPage), animate: true, parameter);
-
-            //FoodName = food.FoodName;
-            ////Quantity = "0";
-            //FoodCalories = "0";
-            //FoodCarb = "0";
-            //FoodProtien = "0";
-            //FoodFat = "0";
-            //FoodFibers = "0";
-
-            //IsFoodSelected = true;
         }
-
 
         [RelayCommand]
         private async Task GoToAddFoodPage()
         {
             await GoToAsyncWithStack(nameof(AddFoodPage), true);
         }
-
-
-        //[RelayCommand]
-        //private async Task GoToHomePage()
-        //{
-        //    await GoToAsyncWithStack(nameof(HomePage), true);
-        //}
-
     }
 }

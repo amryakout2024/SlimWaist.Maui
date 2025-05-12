@@ -2,6 +2,7 @@
 <ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Views.ItemPage"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
@@ -14,6 +15,7 @@
              Shell.NavBarIsVisible="True"
              x:Name="this"
              Shell.TabBarIsVisible="False"
+             FlowDirection="{extention:FlowDirectionsExtention}"
              BackgroundColor="White">
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
@@ -24,27 +26,45 @@
         </Style>
     </ur:UraniumContentPage.Resources>
     
+    <Shell.TitleView>
+        <Border BackgroundColor="White" 
+                Margin="0"
+                StrokeThickness="0">
+            <Label Text="{extention:TranslateExtention Key=Addfoodtomealcart}"
+               Grid.Row="0"
+               TextDecorations="None"
+               HorizontalOptions="Center"
+               FontSize="20"
+               TextColor="{StaticResource MainColor}"
+               FontAttributes="Bold"
+               VerticalOptions="Center"/>
+        </Border>
+    </Shell.TitleView>
+
     <Grid Grid.Row="1" Grid.RowSpan="3">
-        <input:FormView Spacing="5" 
-                            Padding="10"
-                    FlowDirection="RightToLeft"
-                            BackgroundColor="WhiteSmoke"
-                            SubmitCommand="{Binding AddItemToCartCommand}">
-            <Label Text="{Binding FoodName}" 
-                           FontSize="20"
-                           TextDecorations="Underline"
-                           TextColor="{StaticResource MainColor}"
-                           FontAttributes="Bold"/>
+        <input:FormView 
+            Spacing="5" 
+            Padding="10"
+            BackgroundColor="WhiteSmoke"
+            SubmitCommand="{Binding AddItemToCartCommand}">
+            
+            <Label 
+                Text="{Binding FoodName}" 
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource MainColor}"
+                FontAttributes="Bold"/>
+            
             <mat:TextField 
-                    Text="{Binding Quantity}"
-                    Title="ادخل الكمية"
-                    AllowClear="True"
-                    Keyboard="Numeric"
-                    TextColor="DarkSlateBlue"
-                    TitleColor="Gray"
-                    CornerRadius="10"
-                    AccentColor="DarkSlateBlue"
-                    FontSize="16">
+                Text="{Binding Quantity}"
+                Title="{extention:TranslateExtention Key=Addquantity}"
+                AllowClear="True"
+                Keyboard="Numeric"
+                TextColor="DarkSlateBlue"
+                TitleColor="Gray"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                AccentColor="DarkSlateBlue">
                 <mat:TextField.Validations>
                     <helpers:ValidateForDecimalNumber/>
                     <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -58,92 +78,105 @@
 
             </mat:TextField>
 
-            <VerticalStackLayout Grid.Column="0">
-                <!--<HorizontalStackLayout>
-                            <Label TextColor="DarkSlateBlue" 
-                                       Text="الغذاء : "
-                                       FontSize="20"/>
-                            <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodName}"
-                                       FontSize="20"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Label TextColor="DarkSlateBlue" 
-                                       Text="التصنيف : "
-                                       FontSize="20"/>
-                            <Label TextColor="IndianRed" 
+            <VerticalStackLayout 
+                Grid.Column="0">
+                <HorizontalStackLayout>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Category}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCategory}"
-                                       FontSize="20"/>
-                        </HorizontalStackLayout>-->
+                                       FontAttributes="Bold"/>
+                </HorizontalStackLayout>
 
                 <HorizontalStackLayout>
                     <Label TextColor="DarkSlateBlue" 
-                                       Text="السعرات : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Calories}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                     <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCalories}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <Label TextColor="DarkSlateBlue" 
-                                       Text="النشويات : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                     <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCarb}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <Label TextColor="DarkSlateBlue" 
-                                       Text="البروتين : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Protiens}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                     <Label TextColor="IndianRed" 
                                        Text="{Binding FoodProtien}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <Label TextColor="DarkSlateBlue" 
-                                       Text="الدهون : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Fats}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                     <Label TextColor="IndianRed" 
                                        Text="{Binding FoodFat}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
                     <Label TextColor="DarkSlateBlue" 
-                                       Text="الالياف : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Fibers}"
+                                       FontAttributes="Bold"/>
+                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                     <Label TextColor="IndianRed" 
                                        Text="{Binding FoodFibers}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>
 
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                 <Button 
-                            Grid.Column="0"
-                    Text="اضافة"
-                    FontSize="20"
+                    Grid.Column="0"
+                    Text="{extention:TranslateExtention Key=Add}"
+                    FontAttributes="Bold"
                     BackgroundColor="DarkSlateBlue"
                     TextColor="White"
                     VerticalOptions="Center"
                     Padding="0" 
+                    FontSize="14"
                     input:FormView.IsSubmitButton="True"
                     StyleClass="FilledButton"
                     Command="{Binding AddItemToCartCommand}"/>
-
                 <Button 
-                            Grid.Column="1"
-                    Text="الغاء"
-                    FontSize="20"
+                    Grid.Column="1"
+                    Text="{extention:TranslateExtention Key=Cancel}"
+                    FontAttributes="Bold"
                     BackgroundColor="DarkSlateBlue"
                     TextColor="White"
                     VerticalOptions="Center"
                     Padding="0" 
+                    FontSize="14"
                     input:FormView.IsSubmitButton="False"
                     StyleClass="FilledButton"
                     Command="{Binding GoBackCommand}"/>
             </Grid>
+            
         </input:FormView>
     </Grid>
 

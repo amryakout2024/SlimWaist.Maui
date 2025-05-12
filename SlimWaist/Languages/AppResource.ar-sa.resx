@@ -330,4 +330,16 @@
   <data name="Fibers" xml:space="preserve">
     <value>الالياف</value>
   </data>
+  <data name="Addfoodtomealcart" xml:space="preserve">
+    <value>اضافة صنف لسلة الوجبة</value>
+  </data>
+  <data name="Addquantity" xml:space="preserve">
+    <value>ادخل الكمية</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
 </root>

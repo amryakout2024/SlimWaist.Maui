@@ -32,14 +32,15 @@ namespace SlimWaist.ViewModels
         private string _foodFat;
 
         [ObservableProperty]
+        private string _foodCategory;
+
+        [ObservableProperty]
         private string _foodFibers;
-
-
 
         [ObservableProperty]
         private List<CartItem> _cartItems;
 
-        private List<CartItem> CartItemsFromDatabase;
+        private List<CartItem> CartItemsFromDatabase=new List<CartItem>();
 
         public static int TotalCartCount { get; set; }
 
@@ -49,13 +50,14 @@ namespace SlimWaist.ViewModels
         {
             CartItems = await App.dataContext.LoadAsync<CartItem>();
 
-            FoodName = CartItem.FoodName;
+            FoodName = CartItem.FoodName ?? "";
+
+            FoodCategory = CartItem.FoodCategory ?? "";
 
             var existingItem = CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
 
             if (existingItem is not null)
             {
-
                 Quantity = existingItem.Quantity.ToString();
 
                 FoodCalories = existingItem.FoodCalories.ToString("F1");
@@ -80,7 +82,8 @@ namespace SlimWaist.ViewModels
                 FoodFibers = "0.0";
 
             }
-            NotifyCartCountChange();
+
+            await NotifyCartCountChange();
 
         }
 

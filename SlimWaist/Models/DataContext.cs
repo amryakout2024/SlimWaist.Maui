@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist45";
+        public const string DbName = "SlimWaist46";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 

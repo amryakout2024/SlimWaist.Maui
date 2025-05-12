@@ -61,6 +61,33 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add food to meal cart.
+        /// </summary>
+        public static string Addfoodtomealcart {
+            get {
+                return ResourceManager.GetString("Addfoodtomealcart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add quantity.
+        /// </summary>
+        public static string Addquantity {
+            get {
+                return ResourceManager.GetString("Addquantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Birth date.
         /// </summary>
         public static string Birthdate {
@@ -120,6 +147,15 @@ namespace SlimWaist.Languages {
         public static string Caloriescalculatedforeach100gm {
             get {
                 return ResourceManager.GetString("Caloriescalculatedforeach100gm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         

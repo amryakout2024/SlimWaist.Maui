@@ -330,4 +330,16 @@
   <data name="Fibers" xml:space="preserve">
     <value>Fibers</value>
   </data>
+  <data name="Addfoodtomealcart" xml:space="preserve">
+    <value>Add food to meal cart</value>
+  </data>
+  <data name="Addquantity" xml:space="preserve">
+    <value>Add quantity</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

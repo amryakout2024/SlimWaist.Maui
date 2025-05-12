@@ -14,36 +14,18 @@ public partial class ItemPage : UraniumContentPage
         _itemVM = itemVM;
 
         BindingContext = _itemVM;
-
     }
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        await _itemVM.Init();
+        base.OnNavigatedTo(args);
 
-        //base.OnNavigatedTo(args);
+        await _itemVM.Init();
     }
     protected override bool OnBackButtonPressed()
     {
-        //#if ANDROID
-        //        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-        //#endif
+        Shell.Current.GoToAsync($"//{nameof(FoodsPage)}", animate: true);
+       
         return true;
-
-        //        if (_foodsVM.IsFoodSelected)
-        //        {
-        //            _foodsVM.IsFoodSelected = false;
-
-        //            return true;
-        //        }
-        //        else
-        //        {
-
-        //#if ANDROID
-        //        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-        //#endif
-        //        return true;
-
-        //        }
     }
 
 }
