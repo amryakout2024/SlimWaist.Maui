@@ -351,4 +351,10 @@
   <data name="Addedsuccessfully" xml:space="preserve">
     <value>Added successfully</value>
   </data>
+  <data name="Addnewfood" xml:space="preserve">
+    <value>Add new food</value>
+  </data>
+  <data name="Foodname" xml:space="preserve">
+    <value>Food name</value>
+  </data>
 </root>

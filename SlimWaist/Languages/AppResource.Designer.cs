@@ -88,6 +88,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new food.
+        /// </summary>
+        public static string Addnewfood {
+            get {
+                return ResourceManager.GetString("Addnewfood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add quantity.
         /// </summary>
         public static string Addquantity {
@@ -336,6 +345,15 @@ namespace SlimWaist.Languages {
         public static string Food {
             get {
                 return ResourceManager.GetString("Food", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Food name.
+        /// </summary>
+        public static string Foodname {
+            get {
+                return ResourceManager.GetString("Foodname", resourceCulture);
             }
         }
         

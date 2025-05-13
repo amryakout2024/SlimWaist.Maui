@@ -12,10 +12,11 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Shell.NavBarIsVisible="True"
-             Title="اضافة غذاء جديد"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
+             Title="{extention:TranslateExtention Key=Addnewfood}"
              Shell.TabBarIsVisible="False"
              BackgroundColor="White"
-             FlowDirection="RightToLeft">
+             FlowDirection="{extention:FlowDirectionsExtention}">
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
             <Setter Property="TextColor" Value="Red" />
@@ -29,32 +30,27 @@
         Spacing="10" Margin="5">
         <mat:TextField 
             Text="{Binding FoodCategory}"
-            Title="التصنيف"
+            Title="{extention:TranslateExtention Key=Category}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold" >
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=Error}"/>
             </mat:TextField.Validations>
-            <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
-                                                 InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
-                                                 ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
-            </mat:TextField.Behaviors>
         </mat:TextField>
 
         <mat:TextField 
             Text="{Binding FoodName}"
-            Title="اسم الغذاء"
+            Title="{extention:TranslateExtention Key=Foodname}"
             AllowClear="True"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="خطأ"/>
@@ -63,14 +59,14 @@
 
         <mat:TextField 
             Text="{Binding FoodCalories}"
-            Title="السعرات"
+            Title="{extention:TranslateExtention Key=Calories}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -79,14 +75,14 @@
 
         <mat:TextField 
             Text="{Binding FoodCarb}"
-            Title="النشويات"
+            Title="{extention:TranslateExtention Key=Carbohydrates}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -95,14 +91,14 @@
 
         <mat:TextField 
             Text="{Binding FoodProtien}"
-            Title="البروتين"
+            Title="{extention:TranslateExtention Key=Protiens}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -111,14 +107,14 @@
 
         <mat:TextField 
             Text="{Binding FoodFat}"
-            Title="الدهون"
+            Title="{extention:TranslateExtention Key=Fats}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -127,14 +123,14 @@
 
         <mat:TextField 
             Text="{Binding FoodFibers}"
-            Title="الالياف"
+            Title="{extention:TranslateExtention Key=Fibers}"
             AllowClear="True"
             Keyboard="Numeric"
             TextColor="DarkSlateBlue"
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue"
-            FontSize="16">
+            FontAttributes="Bold">
             <mat:TextField.Validations>
                 <helpers:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
@@ -142,7 +138,7 @@
         </mat:TextField>
 
         <Button 
-            Text="حفظ"
+            Text="{extention:TranslateExtention Key=Save}"
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"

@@ -49,9 +49,6 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isDinner = false;
 
-        //[ObservableProperty]
-        //private bool _isFoodSelected;
-
         [ObservableProperty]
         private Food _selectedFood;
 
@@ -61,8 +58,6 @@ namespace SlimWaist.ViewModels
         public async Task Init()
         {
             FoodsFromDatabase = await App.dataContext.LoadAsync<Food>();
-
-            //IsFoodSelected = false;
 
             Foods = FoodsFromDatabase;
 

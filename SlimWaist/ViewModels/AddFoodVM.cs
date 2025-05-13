@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
@@ -41,7 +43,7 @@ namespace SlimWaist.ViewModels
                 FoodFibers = Math.Round(Convert.ToDouble(FoodFibers), 1)
             });
 
-            await ShowToastAsync("تم حفظ الغذاء بنجاح");
+            await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture));
 
             await Shell.Current.GoToAsync("..");
         }
