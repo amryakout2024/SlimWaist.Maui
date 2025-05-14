@@ -259,6 +259,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day calories.
+        /// </summary>
+        public static string Daycalories {
+            get {
+                return ResourceManager.GetString("Daycalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleted successfully.
         /// </summary>
         public static string Deletedsuccessfully {

@@ -408,4 +408,7 @@
   <data name="Show" xml:space="preserve">
     <value> عرض</value>
   </data>
+  <data name="Daycalories" xml:space="preserve">
+    <value> سعرات اليوم</value>
+  </data>
 </root>

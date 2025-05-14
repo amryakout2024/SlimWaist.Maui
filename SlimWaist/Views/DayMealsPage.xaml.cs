@@ -22,10 +22,6 @@ public partial class DayMealsPage : UraniumContentPage
     {
         await _dayMealsVM.Init();
     }
-    //protected async override void OnNavigatedTo(NavigatedToEventArgs args)
-    //{
-    //    await _dayMealsVM.Init();
-    //}
     protected override bool OnBackButtonPressed()
     {
 #if ANDROID
