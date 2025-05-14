@@ -6,6 +6,7 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
              xmlns:vm="clr-namespace:SlimWaist.ViewModels"
@@ -15,7 +16,8 @@
              x:Name="this"
              Shell.TabBarIsVisible="False"
              BackgroundColor="White"
-             FlowDirection="RightToLeft">
+             FlowDirection="{extention:FlowDirectionsExtention}">
+  
     <ur:UraniumContentPage.Resources>
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
             <Setter Property="TextColor" Value="Red" />
@@ -28,19 +30,19 @@
     <Grid >
         <Grid RowDefinitions="auto,*" 
               Padding="5,0,5,0">
-            <Label Text="مكونات الوجبة"
+            <Label Text="{extention:TranslateExtention Key=Mealcomponents}"
                Grid.Row="0"
                TextDecorations="Underline"
                HorizontalOptions="Center"
-               FontAttributes="Bold"
+               FontSize="20"
                TextColor="{StaticResource MainColor}"
-               FontSize="25"
+               FontAttributes="Bold"
                VerticalOptions="Center"/>
 
             <CollectionView Grid.Row="3"
                         SelectionMode="Single"
                         ItemsSource="{Binding MealDetails}"
-                        EmptyView="مفيش اصناف في السلة !">
+                        EmptyView="No items">
                 <CollectionView.ItemTemplate>
                     <DataTemplate  x:DataType="m:MealDetail">
                         <Border 
@@ -52,85 +54,86 @@
                                 <VerticalStackLayout Grid.Column="0">
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="الغذاء : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Foodname}" 
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodName}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
 
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="الجرامات : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Grams}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding Quantity}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
 
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="السعرات : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Calories}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCalories}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="النشويات : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCarb}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="البروتين : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Protiens}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodProtien}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="الدهون : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Fats}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodFat}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
-                                       Text="الالياف : "
-                                       FontSize="20"/>
+                                       Text="{extention:TranslateExtention Key=Fibers}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
                                         <Label TextColor="IndianRed" 
                                        Text="{Binding FoodFibers}"
-                                       FontSize="20"/>
+                                       FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
 
                                 </VerticalStackLayout>
-                                <!--<VerticalStackLayout Grid.Column="1"
-                                                 VerticalOptions="Center">
-                                    <Image Source="cartfull"/>
-                                    <Image 
-                                        BackgroundColor="DarkSlateBlue"
-                                        Source="edit2"
-                                        WidthRequest="70"
-                                        Margin="0,10,0,0"
-                                        HorizontalOptions="End">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartVM}},Path=GoToItemPageCommand}"
-                                                CommandParameter="{Binding .}"/>
-                                        </Image.GestureRecognizers>
-                                        <Image.Behaviors>
-                                            <toolkit:IconTintColorBehavior TintColor="White"/>
-                                        </Image.Behaviors>
-
-                                    </Image>
-                                </VerticalStackLayout>-->
-
                             </Grid>
                         </Border>
                     </DataTemplate>

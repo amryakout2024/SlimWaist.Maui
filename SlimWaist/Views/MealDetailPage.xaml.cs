@@ -28,22 +28,6 @@ public partial class MealDetailPage : UraniumContentPage
         Shell.Current.GoToAsync("..", animate: true);
 #endif
         return true;
-
-        //        if (_foodsVM.IsFoodSelected)
-        //        {
-        //            _foodsVM.IsFoodSelected = false;
-
-        //            return true;
-        //        }
-        //        else
-        //        {
-
-        //#if ANDROID
-        //        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-        //#endif
-        //        return true;
-
-        //        }
     }
 
 }
