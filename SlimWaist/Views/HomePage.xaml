@@ -13,7 +13,7 @@
              x:Class="SlimWaist.Views.HomePage"
              Shell.NavBarIsVisible="False"
              Shell.TabBarIsVisible="True"
-             BackgroundColor="White"
+             BackgroundColor="WhiteSmoke"
              FlowDirection="{extention:FlowDirectionsExtention}">
    
     <ur:UraniumContentPage.Resources>
@@ -71,11 +71,21 @@
         </Grid>
         
         <Border Grid.Row="2"
-            BackgroundColor="WhiteSmoke"
+            BackgroundColor="White"
                 Padding="5"
-                StrokeThickness="1.5"
-                Stroke="WhiteSmoke"
+                Stroke="LightGray"
+                StrokeThickness="0.3"
                 StrokeShape="RoundRectangle 10">
+            <!--<Border.Stroke>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop 
+                        Color="White"
+                        Offset="0.1"/>
+                    <GradientStop 
+                        Color="LightGray"
+                        Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.Stroke>-->
             <Grid>
                 <VerticalStackLayout Spacing="3" ZIndex="1">
                     

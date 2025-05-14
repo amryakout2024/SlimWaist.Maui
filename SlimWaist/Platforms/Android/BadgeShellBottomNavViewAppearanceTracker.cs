@@ -33,7 +33,6 @@ namespace SlimWaist.Platforms.Android
                 const int cartTabbarItemIndex = 3;
 
                 _badgeDrawable = bottomView.GetOrCreateBadge(cartTabbarItemIndex);
-                
                 UpdateBadgeVisibilityAccordingToCartCount(App.TotalCartCount);
 
                 //create the event implementation of the itemVM
@@ -64,7 +63,13 @@ namespace SlimWaist.Platforms.Android
             else
             {
                 _badgeDrawable.Number = cartCount;
+
+                _badgeDrawable.VerticalOffset = 15;
+
+                _badgeDrawable.HorizontalOffset = -15;
+
                 _badgeDrawable.BackgroundColor = Colors.DarkGreen.ToPlatform();
+                
                 _badgeDrawable.BadgeTextColor = Colors.White.ToPlatform();
                 _badgeDrawable.SetVisible(true);
             }
