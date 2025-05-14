@@ -106,6 +106,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Birth date.
         /// </summary>
         public static string Birthdate {
@@ -205,11 +214,29 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear all.
+        /// </summary>
+        public static string Clearall {
+            get {
+                return ResourceManager.GetString("Clearall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact us.
         /// </summary>
         public static string Contactus {
             get {
                 return ResourceManager.GetString("Contactus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create one day plan.
+        /// </summary>
+        public static string Createonedayplan {
+            get {
+                return ResourceManager.GetString("Createonedayplan", resourceCulture);
             }
         }
         
@@ -367,6 +394,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Grams.
+        /// </summary>
+        public static string Grams {
+            get {
+                return ResourceManager.GetString("Grams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
         public static string Height {
@@ -511,6 +547,51 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meal calories.
+        /// </summary>
+        public static string Mealcalories {
+            get {
+                return ResourceManager.GetString("Mealcalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal components.
+        /// </summary>
+        public static string Mealcomponents {
+            get {
+                return ResourceManager.GetString("Mealcomponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mealname.
+        /// </summary>
+        public static string Mealname {
+            get {
+                return ResourceManager.GetString("Mealname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal name exists before.
+        /// </summary>
+        public static string Mealnameexistsbefore {
+            get {
+                return ResourceManager.GetString("Mealnameexistsbefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meal type.
+        /// </summary>
+        public static string Mealtype {
+            get {
+                return ResourceManager.GetString("Mealtype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modified weight.
         /// </summary>
         public static string Modifiedweight {
@@ -552,6 +633,24 @@ namespace SlimWaist.Languages {
         public static string Nofoodbythisname {
             get {
                 return ResourceManager.GetString("Nofoodbythisname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No foods in the cart !.
+        /// </summary>
+        public static string Nofoodsinthecart {
+            get {
+                return ResourceManager.GetString("Nofoodsinthecart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No items to be added !.
+        /// </summary>
+        public static string Noitemstobeadded {
+            get {
+                return ResourceManager.GetString("Noitemstobeadded", resourceCulture);
             }
         }
         
@@ -655,6 +754,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show all.
         /// </summary>
         public static string Showall {
@@ -691,11 +799,56 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total calories.
+        /// </summary>
+        public static string Totalcalories {
+            get {
+                return ResourceManager.GetString("Totalcalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total carbohydrates.
+        /// </summary>
+        public static string Totalcarbohydrates {
+            get {
+                return ResourceManager.GetString("Totalcarbohydrates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total energy.
         /// </summary>
         public static string Totalenergy {
             get {
                 return ResourceManager.GetString("Totalenergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total fats.
+        /// </summary>
+        public static string Totalfats {
+            get {
+                return ResourceManager.GetString("Totalfats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total fibers.
+        /// </summary>
+        public static string Totalfibers {
+            get {
+                return ResourceManager.GetString("Totalfibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total protiens.
+        /// </summary>
+        public static string Totalprotiens {
+            get {
+                return ResourceManager.GetString("Totalprotiens", resourceCulture);
             }
         }
         

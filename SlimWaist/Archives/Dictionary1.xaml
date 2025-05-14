@@ -3,6 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Archives.Dictionary1">
 
+
+    <!--<ur:UraniumContentPage.Attachments>
+        <mat:BottomSheetView
+            IsPresented="{Binding IsPresented}"
+            DisablePageWhenOpened="True" 
+            CloseOnTapOutside="True">
+        -->
+    <!--<mat:BottomSheetView.Header>
+            <Grid 
+                BackgroundColor="Chocolate" 
+                HorizontalOptions="FillAndExpand">
+                <Label 
+                    TextColor="Chocolate" 
+                    HorizontalOptions="FillAndExpand"
+                    Text="header"/>
+            </Grid>
+        </mat:BottomSheetView.Header>-->
+    <!--
+        
+        <mat:BottomSheetView.Body>
+            <VerticalStackLayout BackgroundColor="Chocolate" 
+                    HorizontalOptions="FillAndExpand">
+                <Label TextColor="White" 
+                        HorizontalOptions="Center"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="Center"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="Center"
+                        Text="header"/>
+                <Label TextColor="White" 
+                        HorizontalOptions="Center"
+                        Text="header"/>
+            </VerticalStackLayout>
+        </mat:BottomSheetView.Body>
+        </mat:BottomSheetView>
+    </ur:UraniumContentPage.Attachments>-->
+
     <!--//protected async override void OnAppearing()
     //{
     //    await _itemVM.Init();

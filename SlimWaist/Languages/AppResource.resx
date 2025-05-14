@@ -357,4 +357,55 @@
   <data name="Foodname" xml:space="preserve">
     <value>Food name</value>
   </data>
+  <data name="Clearall" xml:space="preserve">
+    <value>Clear all</value>
+  </data>
+  <data name="Mealcomponents" xml:space="preserve">
+    <value>Meal components</value>
+  </data>
+  <data name="Mealcalories" xml:space="preserve">
+    <value>Meal calories</value>
+  </data>
+  <data name="Nofoodsinthecart" xml:space="preserve">
+    <value>No foods in the cart !</value>
+  </data>
+  <data name="Grams" xml:space="preserve">
+    <value>Grams</value>
+  </data>
+  <data name="Mealnameexistsbefore" xml:space="preserve">
+    <value>Meal name exists before</value>
+  </data>
+  <data name="Noitemstobeadded" xml:space="preserve">
+    <value>No items to be added !</value>
+  </data>
+  <data name="Createonedayplan" xml:space="preserve">
+    <value>Create one day plan</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Mealname" xml:space="preserve">
+    <value>Mealname</value>
+  </data>
+  <data name="Mealtype" xml:space="preserve">
+    <value>Meal type</value>
+  </data>
+  <data name="Totalcalories" xml:space="preserve">
+    <value>Total calories</value>
+  </data>
+  <data name="Totalcarbohydrates" xml:space="preserve">
+    <value>Total carbohydrates</value>
+  </data>
+  <data name="Totalprotiens" xml:space="preserve">
+    <value>Total protiens</value>
+  </data>
+  <data name="Totalfats" xml:space="preserve">
+    <value>Total fats</value>
+  </data>
+  <data name="Totalfibers" xml:space="preserve">
+    <value>Total fibers</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
 </root>

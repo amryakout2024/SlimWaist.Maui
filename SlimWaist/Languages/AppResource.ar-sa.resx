@@ -357,4 +357,55 @@
   <data name="Foodname" xml:space="preserve">
     <value>اسم الغذاء</value>
   </data>
+  <data name="Clearall" xml:space="preserve">
+    <value>مسح الكل</value>
+  </data>
+  <data name="Mealcomponents" xml:space="preserve">
+    <value> مكونات الوجبة</value>
+  </data>
+  <data name="Mealcalories" xml:space="preserve">
+    <value> سعرات الوجبة</value>
+  </data>
+  <data name="Nofoodsinthecart" xml:space="preserve">
+    <value>مفيش اصناف في السلة !</value>
+  </data>
+  <data name="Grams" xml:space="preserve">
+    <value> الجرامات</value>
+  </data>
+  <data name="Mealnameexistsbefore" xml:space="preserve">
+    <value> اسم الوجبة موجود مسبقا</value>
+  </data>
+  <data name="Noitemstobeadded" xml:space="preserve">
+    <value> لا يوجد اصناف لحفظها</value>
+  </data>
+  <data name="Createonedayplan" xml:space="preserve">
+    <value>انشاء مخطط وجبات يوم</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value> الكل</value>
+  </data>
+  <data name="Mealname" xml:space="preserve">
+    <value> اسم الوجبة</value>
+  </data>
+  <data name="Mealtype" xml:space="preserve">
+    <value> اسم الوجبة</value>
+  </data>
+  <data name="Totalcalories" xml:space="preserve">
+    <value> إجمالي السعرات</value>
+  </data>
+  <data name="Totalcarbohydrates" xml:space="preserve">
+    <value>إجمالي النشويات</value>
+  </data>
+  <data name="Totalprotiens" xml:space="preserve">
+    <value>إجمالي البروتين</value>
+  </data>
+  <data name="Totalfats" xml:space="preserve">
+    <value>إجمالي الدهون </value>
+  </data>
+  <data name="Totalfibers" xml:space="preserve">
+    <value> إجمالي الالياف</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value> عرض</value>
+  </data>
 </root>

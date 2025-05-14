@@ -1,13 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
+using System.Globalization;
 
 //using Refit;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class CartVM() : BaseVM
+    public partial class CartVM(ItemVM itemVM) : BaseVM
     {
         //private readonly IPopupService _popupService = popupService;
         [ObservableProperty]
@@ -18,6 +20,7 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string _cartTotalCalories;
+        private readonly ItemVM _itemVM = itemVM;
 
         public static event EventHandler<int>? TotalCartCountChanged;
 
@@ -27,8 +30,20 @@ namespace SlimWaist.ViewModels
 
             CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
-            //NotifyCartCountChange();
+            await NotifyCartCountChange();
 
+        }
+
+        private async Task NotifyCartCountChange()
+        {
+            App.CartItems = await App.dataContext.LoadAsync<CartItem>();
+
+            App.TotalCartCount = App.CartItems.Count();
+
+            //when make invoke it fires the event that implemented in the BadgeShellBottomNavViewAppearanceTracker class
+            //invoke only fire not create it as method
+
+            TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
         }
 
         [RelayCommand]
@@ -44,11 +59,26 @@ namespace SlimWaist.ViewModels
         {
             if (CartItems.Count > 0)
             {
-                string result = await Shell.Current.DisplayPromptAsync(
-                                "حفظ الوجبة",
-                                "اختر اسم للوجبة",
-                                accept: "حفظ",
-                                cancel: "إلغاء");
+                string result = "";
+
+                switch (App.currentMembership.CultureInfo)
+                {
+                    case "ar-SA":
+                        result = await Shell.Current.DisplayPromptAsync(
+                        "",
+                        "حفظ الوجبة",
+                        accept: "حفظ",
+                        cancel: "إلغاء", "ادخل اسم الوجبة");
+                        break;
+
+                    default:
+                        result = await Shell.Current.DisplayPromptAsync(
+                        "",
+                        "Save meal",
+                        accept: "Save",
+                        cancel: "Cancel", "Enter meal name");
+                        break;
+                };
 
                 if (!string.IsNullOrEmpty(result))
                 {
@@ -87,19 +117,22 @@ namespace SlimWaist.ViewModels
 
                         await ClearCart();
 
-                        await ShowToastAsync("تم حفظ الوجبة بنجاح");
+                        await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully",CultureInfo.CurrentCulture));
 
                     }
                     else
                     {
-                        await ShowToastAsync("اسم الوجبة موجود مسبقا");
+                        await ShowToastAsync(AppResource.ResourceManager.GetString("Mealnameexistsbefore", CultureInfo.CurrentCulture));
                     }
+
+                    await NotifyCartCountChange();
+
                 }
 
             }
             else
             {
-                await ShowAlertAsync("لا يوجد اصناف لحفظها");
+                await ShowAlertAsync("", AppResource.ResourceManager.GetString("Noitemstobeadded", CultureInfo.CurrentCulture));
             }
 
         }
@@ -112,75 +145,7 @@ namespace SlimWaist.ViewModels
                 [nameof(ItemVM.CartItem)] = cartItem,
             };
             await GoToAsyncWithStackAndParameter(nameof(ItemPage), animate: true, parameter);
-
-            //FoodName = food.FoodName;
-            ////Quantity = "0";
-            //FoodCalories = "0";
-            //FoodCarb = "0";
-            //FoodProtien = "0";
-            //FoodFat = "0";
-            //FoodFibers = "0";
-
-            //IsFoodSelected = true;
         }
-
-        //private async Task NotifyCartCountChange()
-        //{
-        //    await Init();
-        //    TotalCartCount = CartItems.Count();
-        //    TotalCartCountChanged?.Invoke(null, TotalCartCount);
-        //}
-
-        //public int GetItemCartCount(int foodId)
-        //{
-        //    var existingItem = CartItems.FirstOrDefault(i => i.FoodId == foodId);
-        //    return existingItem?.Quantity ?? 0;
-        //}
-
-
-        private async Task ClearCartInternalAsync(bool fromPlaceOrder)
-        {
-            if (!fromPlaceOrder && CartItems.Count == 0)
-            {
-                await ShowAlertAsync("Empty Cart", "There are no items in the cart");
-                return;
-            }
-
-            //if (fromPlaceOrder  // If we are coming from PLaceOrder, we will not display this confirm dialog
-            //    || await ConfirmAsync("Clear Cart?", "Do you really want to clear all the items from the cart?"))
-            //{
-            //    await _databaseService.ClearCartAsync();
-            //    CartItems.Clear();
-
-            //    if(!fromPlaceOrder)
-            //        await ShowToastAsync("Cart cleared");
-
-            //    NotifyCartCountChange();
-            //}
-        }
-
-        [RelayCommand]
-        private async Task RemoveCartItemAsync(int cartItemId)
-        {
-            //if (await ConfirmAsync("Remove item from Cart?", "Do you really want to delet this item from the cart?"))
-            //{
-            //    var existingItem = CartItems.FirstOrDefault(i => i.Id == cartItemId);
-            //    if (existingItem is null)
-            //        return;
-
-            //    CartItems.Remove(existingItem);
-
-            //    var dbCartItem = await _databaseService.GetCartItemAsync(cartItemId);
-            //    if (dbCartItem is null)
-            //        return;
-
-            //    await _databaseService.DeleteCartItem(dbCartItem);
-
-            //    await ShowToastAsync("Icecream removed from cart");
-            //    NotifyCartCountChange();
-            //}
-        }
-
 
     }
 

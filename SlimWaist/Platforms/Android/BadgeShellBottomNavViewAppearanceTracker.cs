@@ -37,9 +37,16 @@ namespace SlimWaist.Platforms.Android
                 UpdateBadgeVisibilityAccordingToCartCount(App.TotalCartCount);
 
                 //create the event implementation of the itemVM
-                ItemVM.TotalCartCountChanged += ItemVM_TotalCartCountChanged; ;
+                ItemVM.TotalCartCountChanged += ItemVM_TotalCartCountChanged;
+                CartVM.TotalCartCountChanged += CartVM_TotalCartCountChanged;
             }
 
+        }
+
+        private void CartVM_TotalCartCountChanged(object? sender, int newCartCount)
+        {
+            //new cart count come after firing the event in itemVM
+            UpdateBadgeVisibilityAccordingToCartCount(newCartCount);
         }
 
         private void ItemVM_TotalCartCountChanged(object? sender, int newCartCount)
@@ -67,6 +74,7 @@ namespace SlimWaist.Platforms.Android
         {
             //fired only on start the app
             ItemVM.TotalCartCountChanged -= ItemVM_TotalCartCountChanged;
+            CartVM.TotalCartCountChanged -= CartVM_TotalCartCountChanged;
             base.Dispose(disposing);
         }
 
