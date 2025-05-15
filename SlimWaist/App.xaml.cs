@@ -90,7 +90,7 @@ namespace SlimWaist
                         new ObesityDegree()
                         {
                             ObesityDegreeId = 1,
-                            ObesityDegreeName="عادي"
+                            ObesityDegreeName="وزن طبيعي"
                         },
                         new ObesityDegree()
                         {
@@ -191,7 +191,7 @@ namespace SlimWaist
                         new ObesityDegree()
                         {
                             ObesityDegreeId = 1,
-                            ObesityDegreeName="Normal"
+                            ObesityDegreeName="Normal weight"
                         },
                         new ObesityDegree()
                         {

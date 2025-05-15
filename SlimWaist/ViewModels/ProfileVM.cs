@@ -2,20 +2,16 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
     public partial class ProfileVM() : BaseVM
     {        
-        [ObservableProperty]
-        private Membership? _memberShip;
-
-        [ObservableProperty]
-        private Membership? _memberShipFromQueryProperty;
-
         [ObservableProperty]
         private string _email;
 
@@ -58,8 +54,6 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isShowChangePasswordGrid = false;
 
-        List<Membership> memberships;
-
         Setting setting;
 
         [ObservableProperty]
@@ -69,31 +63,25 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            //File.Delete(dataContext.DbPath);
-
             setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
 
             BodyActivities = App.BodyActivities;
 
-            memberships = await App.dataContext.LoadAsync<Membership>();
+            Name = App.currentMembership?.Name ?? "";
 
-            MemberShip = memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+            Email = App.currentMembership?.Email ?? "";
 
-            Name = MemberShip?.Name ?? "";
+            Weight = App.currentMembership?.Weight.ToString() ?? "";
 
-            Email = MemberShip?.Email ?? "";
+            Height = App.currentMembership?.Height.ToString() ?? "";
 
-            Weight = MemberShip?.Weight.ToString() ?? "";
+            BirthDate = new DateTime(App.currentMembership.BirthDateYear, App.currentMembership.BirthDateMounth, App.currentMembership.BirthDateDay);
 
-            Height = MemberShip?.Height.ToString() ?? "";
+            SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==App.currentMembership.BodyActivityId).FirstOrDefault();
 
-            BirthDate = new DateTime(MemberShip.BirthDateYear, MemberShip.BirthDateMounth, MemberShip.BirthDateDay);
+            IsMale = (App.currentMembership.GenderId== 1) ? true : false;
 
-            SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==MemberShip.BodyActivityId).FirstOrDefault();
-
-            IsMale = (MemberShip.GenderId== 1) ? true : false;
-
-            WaistCircumferenceMeasurement=MemberShip.WaistCircumferenceMeasurement.ToString();
+            WaistCircumferenceMeasurement=App.currentMembership.WaistCircumferenceMeasurement.ToString();
         }
 
 
@@ -104,41 +92,41 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async Task UpdateMemberShip()
+        private async Task UpdateMembership()
         {
-            MemberShip.Email = Email ?? "";
+            App.currentMembership.Email = Email ?? "";
 
-            MemberShip.Name = Name;
+            App.currentMembership.Name = Name;
 
-            MemberShip.Height = Convert.ToDouble(Height);
+            App.currentMembership.Height = Convert.ToDouble(Height);
 
-            MemberShip.Weight = Convert.ToDouble(Weight);
+            App.currentMembership.Weight = Convert.ToDouble(Weight);
 
-            MemberShip.BirthDateYear = BirthDate.Year;
+            App.currentMembership.BirthDateYear = BirthDate.Year;
 
-            MemberShip.BirthDateMounth=BirthDate.Month;
+            App.currentMembership.BirthDateMounth=BirthDate.Month;
 
-            MemberShip.BirthDateDay=BirthDate.Day;
+            App.currentMembership.BirthDateDay=BirthDate.Day;
 
-            MemberShip.BodyActivityId = SelectedBodyActivity.BodyActivityId;
+            App.currentMembership.BodyActivityId = SelectedBodyActivity.BodyActivityId;
 
             GenderId = (IsMale == true) ? 1 : 2;
 
-            MemberShip.GenderId = GenderId;
+            App.currentMembership.GenderId = GenderId;
 
-            MemberShip.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
+            App.currentMembership.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
 
-            await App.dataContext.UpdateAsync<Membership>(MemberShip);
+            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
 
-            await Toast.Make("تم التحديث", ToastDuration.Short).Show();
+            await Toast.Make(AppResource.ResourceManager.GetString("Updatedsuccessfully",CultureInfo.CurrentCulture), ToastDuration.Short).Show();
         }
 
         [RelayCommand]
         private async void LogOut()
         {
-            setting.SavedMembershipId = 0;
+            App.setting.SavedMembershipId = 0;
 
-            await App.dataContext.UpdateAsync<Setting>(setting);
+            await App.dataContext.UpdateAsync<Setting>(App.setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
         }
@@ -151,4 +139,4 @@ namespace SlimWaist.ViewModels
 
     }
 }
-//[QueryProperty(nameof(Membership), nameof(Membership))]
+//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]

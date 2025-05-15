@@ -40,7 +40,7 @@
     <input:FormView 
         Spacing="5" 
         Margin="10,5,10,0" 
-        SubmitCommand="{Binding UpdateMemberShipCommand}">
+        SubmitCommand="{Binding UpdateMembershipCommand}">
         <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
@@ -193,7 +193,7 @@
             Padding="0" 
             input:FormView.IsSubmitButton="True"
             StyleClass="FilledButton"
-            Command="{Binding UpdateMemberShipCommand}"/>
+            Command="{Binding UpdateMembershipCommand}"/>
 
     </input:FormView>
     
