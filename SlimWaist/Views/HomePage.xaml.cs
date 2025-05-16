@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using Microcharts;
+using SkiaSharp;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
 using SlimWaist.ViewModels;
@@ -27,7 +29,7 @@ public partial class HomePage : UraniumContentPage
 
         timer = Application.Current?.Dispatcher.CreateTimer();
 
-        timer.Interval = TimeSpan.FromSeconds(20);
+        timer.Interval = TimeSpan.FromSeconds(7);
 
         timer.Tick += Timer_Tick;
 
@@ -35,6 +37,12 @@ public partial class HomePage : UraniumContentPage
 
     private async void Timer_Tick(object? sender, EventArgs e)
     {
+        //chartView.Chart = new RadialGaugeChart()
+        //{
+        //    Entries = chartEntries,
+        //    IsAnimated = true,
+        //    AnimationDuration = TimeSpan.FromSeconds(5),
+        //};
         //await NoRegiemeLabel.ScaleTo(1.2, 1000, Easing.Linear);
         //await NoRegiemeLabel.ScaleTo(1, 1000, Easing.Linear);
     }
@@ -59,12 +67,13 @@ public partial class HomePage : UraniumContentPage
         timer.Start();
 
         waistProgressBar.Loaded += WaistProgressBar_Loaded;
-        bmiProgressBar.Loaded += BmiProgressBar_Loaded; ;
+
+        bmiProgressBar.Loaded += BmiProgressBar_Loaded;
     }
 
     private async void BmiProgressBar_Loaded(object? sender, EventArgs e)
     {
-        await Task.Delay(1000);
+        await Task.Delay(500);
 
         waistProgressBar.Progress = 0;
 
@@ -125,7 +134,7 @@ public partial class HomePage : UraniumContentPage
 
     private async void WaistProgressBar_Loaded(object? sender, EventArgs e)
     {
-        await Task.Delay(1000);
+        await Task.Delay(500);
 
         waistProgressBar.Progress = 0;
 

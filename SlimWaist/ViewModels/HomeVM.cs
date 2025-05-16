@@ -1,8 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microcharts;
+using Microcharts.Maui;
+using SkiaSharp;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
@@ -62,6 +67,9 @@ namespace SlimWaist.ViewModels
 
         Setting setting;
 
+        ChartEntry[] chartEntries;
+        [ObservableProperty]
+        private Chart _chart;
         public async Task init()
         {
             //Preferences.Set("Email", "");
@@ -96,19 +104,43 @@ namespace SlimWaist.ViewModels
 
             ObesityDegreeCalculator();
 
+            chartEntries = new ChartEntry[]
+            {
+                new ChartEntry((float)Math.Round(Convert.ToDouble(Weight),2))
+                {
+                    Label=AppResource.ResourceManager.GetString( "Weight",CultureInfo.CurrentCulture),
+                    ValueLabel=Weight,
+                    Color=SKColor.Parse("#127a0f"),
+                    TextColor=SKColor.Parse("#127a0f")
+                },
+                new ChartEntry((float) Math.Round(Convert.ToDouble(IdealWeight),2))
+                {
+                    Label=AppResource.ResourceManager.GetString( "Idealweight",CultureInfo.CurrentCulture),
+                    ValueLabel=IdealWeight,
+                    Color=SKColor.Parse("#127a0f"),
+                    TextColor=SKColor.Parse("#127a0f")
+                },
+                new ChartEntry((float)Math.Round( Convert.ToDouble(ModifiedWeight),2))
+                {
+                    Label=AppResource.ResourceManager.GetString( "Modifiedweight",CultureInfo.CurrentCulture),
+                    ValueLabel=ModifiedWeight,
+                    Color=SKColor.Parse("#127a0f"),
+                    TextColor=SKColor.Parse("#127a0f")
+                },
+            };
 
-            //RegimeLists = null;
+            await Task.Delay(500);
 
-            //List<RegimeList> AllRegimeLists = await App.dataContext.LoadAsync<RegimeList>();
-
-            //var MaxRegimeId = AllRegimeLists.Where(x => x.App.currentMembershipId == App.currentMembership.Id).Select(x=>x.RegimeId).Max();
-
-            //var FilteredRegimeList = AllRegimeLists.Where(x => x.App.currentMembershipId == App.currentMembership.Id).Where(x => x.RegimeId == MaxRegimeId);
-
-            //foreach (var r in FilteredRegimeList)
-            //{
-            //    RegimeLists.Add(r);
-            //}
+            Chart = new BarChart()
+            {
+                Entries = chartEntries,
+                IsAnimated = true,
+                LabelTextSize = 14,
+                ValueLabelTextSize = 14,
+                SerieLabelTextSize = 14,
+                LabelOrientation = Orientation.Vertical,
+                AnimationDuration = TimeSpan.FromSeconds(4),
+            };
 
         }
 

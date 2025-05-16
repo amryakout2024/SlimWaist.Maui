@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.ApplicationModel;
 using InputKit.Handlers;
+using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using SlimWaist.Extentions;
 using SlimWaist.Helpers;
 using SlimWaist.Models;
@@ -29,6 +31,8 @@ namespace SlimWaist
                 .UseUraniumUI()
                 .UseMauiCommunityToolkit()
                 .UseUraniumUIMaterial()
+                .UseMicrocharts()
+                .UseSkiaSharp()
                 .UseSentry(options =>
                 {
                     options.Dsn = "https://cf56e869a0b99378014d4959f18b6619@o4509224782528512.ingest.de.sentry.io/4509224784822352";

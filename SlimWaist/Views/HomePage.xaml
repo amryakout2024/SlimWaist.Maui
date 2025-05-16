@@ -5,6 +5,8 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
              xmlns:extention="clr-namespace:SlimWaist.Extentions"        
@@ -12,6 +14,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="SlimWaist.Views.HomePage"
              Shell.NavBarIsVisible="False"
+             x:Name="this" 
              Shell.TabBarIsVisible="True"
              BackgroundColor="WhiteSmoke"
              FlowDirection="{extention:FlowDirectionsExtention}">
@@ -34,6 +37,7 @@
     
     <Grid RowDefinitions="auto,auto,auto,auto,*" RowSpacing="5" Margin="5">
         
+        <!--label for name-->
         <HorizontalStackLayout Grid.Row="0">
             <Label 
                 Grid.Column="1"
@@ -52,7 +56,8 @@
                 TextColor="DarkSlateBlue">
             </Label>
         </HorizontalStackLayout>
-
+        
+        <!--label above body analysis-->
         <Grid Grid.Row="1">
             <Label 
                 Text="{extention:TranslateExtention Key=Bodymassanalysis}"
@@ -70,6 +75,7 @@
 
         </Grid>
 
+        <!--body analysis form-->
         <VerticalStackLayout
             Grid.Row="2"
             Spacing="5">
@@ -82,7 +88,7 @@
                 <Grid>
                     <VerticalStackLayout Spacing="3" ZIndex="1">
 
-                        <HorizontalStackLayout>
+                        <!--<HorizontalStackLayout>
                             <Label 
                             Text="{extention:TranslateExtention Key=Currentweight}"
                             Style="{StaticResource Key=TitleLabel}"/>
@@ -92,7 +98,7 @@
                             <Label 
                             Text="{Binding Weight}"
                             Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
+                        </HorizontalStackLayout>-->
 
                         <HorizontalStackLayout>
                             <Label 
@@ -118,7 +124,7 @@
                             Style="{StaticResource Key=ValueLabel}"/>
                         </HorizontalStackLayout>-->
 
-                        <HorizontalStackLayout>
+                        <!--<HorizontalStackLayout>
                             <Label 
                             Text="{extention:TranslateExtention Key=Idealweight}"
                             Style="{StaticResource Key=TitleLabel}"/>
@@ -128,9 +134,9 @@
                             <Label 
                             Text="{Binding IdealWeight}"
                             Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
+                        </HorizontalStackLayout>-->
 
-                        <HorizontalStackLayout>
+                        <!--<HorizontalStackLayout>
                             <Label 
                             Text="{extention:TranslateExtention Key=Modifiedweight}"
                             Style="{StaticResource Key=TitleLabel}"/>
@@ -140,7 +146,7 @@
                             <Label 
                             Text="{Binding ModifiedWeight}"
                             Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
+                        </HorizontalStackLayout>-->
 
                         <HorizontalStackLayout>
                             <Label 
@@ -203,12 +209,35 @@
                         </HorizontalStackLayout>-->
 
                     </VerticalStackLayout>
-                    <Image 
+                    <!--<Image 
                     WidthRequest="100"
                     Opacity="0.2"
-                    Source="scale.jpg"/>
+                    Source="scale.jpg"/>-->
                 </Grid>
             </Border>
+            
+            <Border 
+                BackgroundColor="White"
+                Padding="5"
+                Stroke="LightGray"
+                StrokeThickness="0.4"
+                StrokeShape="RoundRectangle 10">
+                <Grid HeightRequest="100">
+                    <micro:ChartView 
+                        Rotation="270"
+                        Chart="{Binding Chart}"
+                        x:Name="chartView"
+                        HeightRequest="250"
+                        WidthRequest="100"
+                        />
+                    <!--<Label 
+                            x:Name="WaistCircumferenceNameLabel1"
+                            Grid.Column="1"
+                            Margin="15,0,5,0"
+                            Style="{StaticResource Key=ValueLabel}"/>-->
+                </Grid>
+            </Border>
+
             <Border 
                     BackgroundColor="White"
                     Padding="5"
@@ -256,6 +285,7 @@
                     </Grid>
                 </VerticalStackLayout>
             </Border>
+            
             <Border 
                     BackgroundColor="White"
                     Padding="5"
@@ -294,6 +324,7 @@
 
         </VerticalStackLayout>
 
+        <!--label above collection view-->
         <Grid Grid.Row="3">
             <Label 
                 Text="{extention:TranslateExtention Key=Currentregieme}"
@@ -395,16 +426,12 @@
         </CollectionView>
     </Grid>
 </ur:UraniumContentPage>
-    
-    
-    
-<!--ابدأ الدايت و ضيف اول نظام-->
 
-<!--<CarouselView.ItemsSource>
-    <x:Array Type="{x:Type sys:String}">
-        <sys:String>
-            hh
-        </sys:String>
-        <sys:String>Page 2</sys:String>
-    </x:Array>
-</CarouselView.ItemsSource>-->
+<!--<skia:SKLottieView Source="AniRun.json" 
+                               IsAnimationEnabled="True"
+                               x:Name="sk"
+                               ZIndex="1"
+                               WidthRequest="350"
+                               HeightRequest="350" 
+                               RepeatMode="Restart"
+                               RepeatCount="-1"/>-->
