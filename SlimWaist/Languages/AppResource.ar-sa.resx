@@ -411,4 +411,7 @@
   <data name="Daycalories" xml:space="preserve">
     <value> سعرات اليوم</value>
   </data>
+  <data name="Targetedweight" xml:space="preserve">
+    <value>الوزن المستهدف</value>
+  </data>
 </root>

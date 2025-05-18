@@ -799,6 +799,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Targeted weight.
+        /// </summary>
+        public static string Targetedweight {
+            get {
+                return ResourceManager.GetString("Targetedweight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terms and conditions.
         /// </summary>
         public static string Termsandconditions {

@@ -41,6 +41,9 @@ namespace SlimWaist.ViewModels
         private string? _idealWeight;
 
         [ObservableProperty]
+        private string? _targetedWeight;
+
+        [ObservableProperty]
         private string? _modifiedWeight;
 
         [ObservableProperty]
@@ -51,6 +54,12 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string? _totalEnergy;
+
+        [ObservableProperty]
+        private bool _isBottomSheetPresented;
+
+        [ObservableProperty]
+        private bool _isTabbarVisible;
 
         private int ObesityDegreeId;
 
@@ -73,9 +82,9 @@ namespace SlimWaist.ViewModels
         public async Task init()
         {
             //Preferences.Set("Email", "");
-
-            //File.Delete(dataContext.DbPath);
-
+            
+            IsBottomSheetPresented = false;
+            IsTabbarVisible = true;
             BodyActivities = App.BodyActivities;
 
             Name = App.currentMembership?.Name ?? "";
@@ -93,6 +102,8 @@ namespace SlimWaist.ViewModels
             BmiCalculator();
 
             IdealWeightCalculator();
+
+            TargetedWeight = IdealWeight;
 
             ModifiedWeightCalculator();
 
@@ -129,7 +140,7 @@ namespace SlimWaist.ViewModels
                 },
             };
 
-            await Task.Delay(500);
+            //await Task.Delay(500);
 
             Chart = new BarChart()
             {
@@ -149,6 +160,17 @@ namespace SlimWaist.ViewModels
         private async Task GoToDietsPage()
         {
             await GoToAsyncWithStack(nameof(DietsPage), true);
+        }
+
+        [RelayCommand]
+        private async Task ShowBottomSheet()
+        {
+            IsBottomSheetPresented = true;
+        }
+
+        partial void OnIsBottomSheetPresentedChanged(bool value)
+        {
+           IsTabbarVisible=IsBottomSheetPresented? false:true;
         }
 
         [RelayCommand]
