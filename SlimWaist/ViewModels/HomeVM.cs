@@ -20,6 +20,18 @@ namespace SlimWaist.ViewModels
         private string _email;
 
         [ObservableProperty]
+        private string _dateday;
+
+        [ObservableProperty]
+        private string _datedayname;
+
+        [ObservableProperty]
+        private string _datemonth;
+
+        [ObservableProperty]
+        private string _dateyear;
+
+        [ObservableProperty]
         private string? _name;
 
         [ObservableProperty]
@@ -82,7 +94,12 @@ namespace SlimWaist.ViewModels
         public async Task init()
         {
             //Preferences.Set("Email", "");
-            
+
+            Dateday = DateTime.Now.Day.ToString();
+            Datedayname = DateTime.Now.DayOfWeek.ToString();
+            Datemonth = DateTime.Now.Month.ToString();
+            Dateyear = DateTime.Now.Year.ToString();
+
             IsBottomSheetPresented = false;
             IsTabbarVisible = true;
             BodyActivities = App.BodyActivities;

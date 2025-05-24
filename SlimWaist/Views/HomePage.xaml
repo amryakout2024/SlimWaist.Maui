@@ -88,9 +88,67 @@
         <VerticalStackLayout 
             Margin="5"
             Spacing="5">
+            <Grid
+                ColumnDefinitions="auto,*,auto"
+                Margin="0,20,0,20"
+                HorizontalOptions="Center">
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                    </Style>
+                </Grid.Resources>
+                <Image 
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    HeightRequest="30"
+                    Source="today.png">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                    </Image.Behaviors>
+                </Image>
+
+                <HorizontalStackLayout
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Spacing="2">
+                    <Label Text="{extention:TranslateExtention Key=Date}"/>
+                    <Label Text=":"/>
+                    <Label Text="{Binding Dateday}"/>
+                    <Label Text="/"/>
+                    <Label Text="{Binding Datemonth}"/>
+                    <Label Text="/"/>
+                    <Label Text="{Binding Dateyear}"/>
+                    <!--<BoxView 
+                    StyleClass="Divider"
+                    WidthRequest="1"
+                    HeightRequest="10"/>-->
+
+                </HorizontalStackLayout>
+                <!--<
+                    
+            Date="{Binding BirthDate}"
+            Padding="0"
+                    Grid.Column="2"
+            Format=""
+                    IsClippedToBounds="True"
+            x:Name="datePickerField"
+            TextColor="DarkSlateBlue"
+            TitleColor="Gray"
+            MinimumDate="01/01/1930"
+            AccentColor="DarkSlateBlue">
+                    <mat:.Validations>
+                        --><!--<validation:RequiredValidation  Message="اختر التاريخ"/>
+                        <validation:RegexValidation Pattern="01-12-2025"
+                                               Message=""/>--><!--
+                    </mat:.Validations>
+                </>-->
+
+            </Grid>
             
             <!--label for name-->
-            <HorizontalStackLayout Grid.Row="0">
+            <!--<HorizontalStackLayout Grid.Row="0">
                 <Label 
                 Grid.Column="1"
                 Margin="0,0,5,0"
@@ -107,7 +165,7 @@
                 FontSize="23"
                 TextColor="DarkSlateBlue">
                 </Label>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
 
             <!--label above body analysis-->
             <Grid Grid.Row="1">

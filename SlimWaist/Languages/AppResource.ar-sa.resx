@@ -414,4 +414,7 @@
   <data name="Targetedweight" xml:space="preserve">
     <value>الوزن المستهدف</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
 </root>

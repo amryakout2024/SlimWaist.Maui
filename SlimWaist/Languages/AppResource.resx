@@ -414,4 +414,7 @@
   <data name="Targetedweight" xml:space="preserve">
     <value>Targeted weight</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
 </root>
