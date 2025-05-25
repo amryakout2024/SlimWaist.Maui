@@ -417,4 +417,10 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="Consumedcalories" xml:space="preserve">
+    <value>Consumed calories</value>
+  </data>
+  <data name="Remainingcalories" xml:space="preserve">
+    <value>Remaining calories</value>
+  </data>
 </root>

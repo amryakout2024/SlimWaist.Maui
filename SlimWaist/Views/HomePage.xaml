@@ -88,31 +88,31 @@
         <VerticalStackLayout 
             Margin="5"
             Spacing="5">
-            <Grid
-                ColumnDefinitions="auto,*,auto"
-                Margin="0,20,0,20"
-                HorizontalOptions="Center">
-                <Grid.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
-                        <Setter Property="FontSize" Value="18"/>
-                        <Setter Property="FontAttributes" Value="Bold"/>
-                    </Style>
-                </Grid.Resources>
-                <Image 
-                    Grid.Column="0"
-                    Margin="0,0,10,0"
-                    HeightRequest="30"
-                    Source="today.png">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                    </Image.Behaviors>
-                </Image>
-
+            <VerticalStackLayout
+                Margin="0,10,0,10">
+                
                 <HorizontalStackLayout
                     Grid.Column="1"
                     VerticalOptions="Center"
                     Spacing="2">
+                    <HorizontalStackLayout.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="FontAttributes" Value="Bold"/>
+                        </Style>
+                    </HorizontalStackLayout.Resources>
+
+                    <Image 
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    HeightRequest="30"
+                        VerticalOptions="Center"
+                    Source="today.png">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                        </Image.Behaviors>
+                    </Image>
                     <Label Text="{extention:TranslateExtention Key=Date}"/>
                     <Label Text=":"/>
                     <Label Text="{Binding Dateday}"/>
@@ -120,12 +120,24 @@
                     <Label Text="{Binding Datemonth}"/>
                     <Label Text="/"/>
                     <Label Text="{Binding Dateyear}"/>
-                    <!--<BoxView 
-                    StyleClass="Divider"
-                    WidthRequest="1"
-                    HeightRequest="10"/>-->
-
                 </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="5">
+                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Daycalories}"/>
+                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
+                    <Label Style="{StaticResource ValueLabel}" Text="{Binding TotalEnergy}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Consumedcalories}"/>
+                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
+                    <Label Style="{StaticResource ValueLabel}" Text="2000"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Remainingcalories}"/>
+                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
+                    <Label Style="{StaticResource ValueLabel}" Text="500"/>
+                </HorizontalStackLayout>
+
                 <!--<
                     
             Date="{Binding BirthDate}"
@@ -145,7 +157,7 @@
                     </mat:.Validations>
                 </>-->
 
-            </Grid>
+            </VerticalStackLayout>
             
             <!--label for name-->
             <!--<HorizontalStackLayout Grid.Row="0">

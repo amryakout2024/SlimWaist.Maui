@@ -223,6 +223,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consumed calories.
+        /// </summary>
+        public static string Consumedcalories {
+            get {
+                return ResourceManager.GetString("Consumedcalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact us.
         /// </summary>
         public static string Contactus {
@@ -723,6 +732,15 @@ namespace SlimWaist.Languages {
         public static string RegexValidationMessage {
             get {
                 return ResourceManager.GetString("RegexValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining calories.
+        /// </summary>
+        public static string Remainingcalories {
+            get {
+                return ResourceManager.GetString("Remainingcalories", resourceCulture);
             }
         }
         
