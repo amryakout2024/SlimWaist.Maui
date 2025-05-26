@@ -269,4 +269,8 @@ public partial class HomePage : UraniumContentPage
 
     }
 
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }

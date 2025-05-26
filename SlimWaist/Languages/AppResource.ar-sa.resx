@@ -423,4 +423,10 @@
   <data name="Remainingcalories" xml:space="preserve">
     <value>السعرات المتبقية</value>
   </data>
+  <data name="Diettype" xml:space="preserve">
+    <value>نوع الديت</value>
+  </data>
+  <data name="Nodietselected" xml:space="preserve">
+    <value>لم يتم اختيار نوع الدايت</value>
+  </data>
 </root>
