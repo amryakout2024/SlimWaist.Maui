@@ -3,6 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Archives.Dictionary1">
 
+    <!--<Border 
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid HeightRequest="100">
+                        <micro:ChartView 
+                            Rotation="270"
+                            Chart="{Binding Chart}"
+                            x:Name="chartView"
+                            HeightRequest="250"
+                            WidthRequest="100"
+                                            />                    </Grid>
+                </Border>-->
+
+    <!--<Border 
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout
+                    Spacing="3"
+                    Padding="5">
+                        <HorizontalStackLayout>
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Waistcircumference}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding WaistCircumferenceMeasurement}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+
+                        -->
+    <!--<HorizontalStackLayout>
+                        <Label 
+                            Text="{extention:TranslateExtention Key=Waistcircumferenceevaluation}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                            Text="{Binding WaistCircumferenceName}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>-->
+    <!--
+
+                        <Grid ColumnDefinitions="*,*">
+                            <ProgressBar 
+                            BackgroundColor="WhiteSmoke"
+                            Grid.Column="0"
+                            Progress="0"
+                            x:Name="waistProgressBar"/>
+                            <Label 
+                            x:Name="WaistCircumferenceNameLabel"
+                            Grid.Column="1"
+                            Margin="15,0,5,0"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>-->
+
+
     <!--<BoxView 
                     StyleClass="Divider"
                     WidthRequest="1"

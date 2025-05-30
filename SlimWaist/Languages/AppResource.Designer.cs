@@ -781,6 +781,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select diet type.
+        /// </summary>
+        public static string Selectdiettype {
+            get {
+                return ResourceManager.GetString("Selectdiettype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Serving Size Diet involves controlling portion sizes of different food groups to maintain a balanced diet and avoid overeating. Each food group has a defined serving size, such as 30g of protein (e.g., chicken), 1 cup of vegetables, or ½ cup of grains. This system helps regulate calorie intake while ensuring the body gets the necessary nutrients. It&apos;s commonly used for weight management, promoting healthy eating habits, and creating sustainable, balanced meals..
         /// </summary>
         public static string Servingsizedescription {
@@ -795,6 +804,15 @@ namespace SlimWaist.Languages {
         public static string Servingsizediet {
             get {
                 return ResourceManager.GetString("Servingsizediet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set as default for next days.
+        /// </summary>
+        public static string Setasdefaultfornextdays {
+            get {
+                return ResourceManager.GetString("Setasdefaultfornextdays", resourceCulture);
             }
         }
         

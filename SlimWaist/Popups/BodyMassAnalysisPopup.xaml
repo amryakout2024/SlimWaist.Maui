@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Popups.BodyMassAnalysisPopup"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
+               Color="Transparent"
+             Shell.TabBarIsVisible="False">
+    <Border
+        BackgroundColor="LightGray"
+        StrokeShape="RoundRectangle 10">
+        <VerticalStackLayout Padding="10">
+            <!--label above body analysis-->
+            <Grid Margin="0,15,0,15" Grid.Row="1">
+                <Label 
+                Text="{extention:TranslateExtention Key=Bodymassanalysis}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Start" />
+                <Label 
+                Text="{extention:TranslateExtention Key=Edit}"
+                TextColor="SteelBlue"
+                VerticalOptions="Center" 
+                HorizontalOptions="End">
+                    <Label.GestureRecognizers>
+                        <!--<TapGestureRecognizer Command="{Binding GoProfilePageCommand}"/>-->
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </Grid>
+
+            <!--body analysis form-->
+            <VerticalStackLayout
+                Grid.Row="2"
+                Spacing="5">
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout
+                            Grid.Column="0">
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Weight}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding Weight}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Image 
+                            Grid.Column="1"
+                            WidthRequest="100"
+                            Source="scale2.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout
+                            Grid.Column="0">
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Idealweight}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding IdealWeight}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Image 
+                            Grid.Column="1"
+                            WidthRequest="100"
+                            Source="pass.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout
+                            Grid.Column="0">
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Targetedweight}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding TargetedWeight}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Label Grid.Column="1"
+                               WidthRequest="60"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                Text="{extention:TranslateExtention Key=Edit}"
+                TextColor="{StaticResource MainColor}">
+                            <Label.GestureRecognizers>
+                                <!--<TapGestureRecognizer Command="{Binding ShowBottomSheetCommand}"/>-->
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Border>
+
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout
+                            Grid.Column="0">
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Height}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding Height}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Image 
+                            Grid.Column="1"
+                            WidthRequest="100"
+                            Source="height.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout>
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Bodyactivity}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding BodyActivity}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Image 
+                            Grid.Column="1"
+                            WidthRequest="100"
+                            Source="bodyactivity.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <Border
+                    HeightRequest="50"
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid ColumnDefinitions="*,auto">
+                        <HorizontalStackLayout>
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Totalenergy}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding TotalEnergy}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+                        <Image 
+                            Grid.Column="1"
+                            WidthRequest="100"
+                            Source="totalenergy.png">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
+                </Border>
+
+                <Border 
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout
+                    Spacing="3"
+                    Padding="5">
+                        <Grid
+                            ColumnDefinitions="*,auto">
+                            <Grid RowDefinitions="*,*">
+                                <HorizontalStackLayout
+                                Grid.Row="0">
+                                    <Label 
+                            Text="{extention:TranslateExtention Key=Bodymassindex}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                                    <Label 
+                            Text="{Binding BMI}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                                </HorizontalStackLayout>
+                                <Label 
+                                    Scale="0"
+                            x:Name="obesityDegreeNameLabel"
+                            Grid.Row="1"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                            </Grid>
+                            <VerticalStackLayout
+                                WidthRequest="100"
+                                Grid.Column="1">
+                                <VerticalStackLayout.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="WidthRequest" Value="15"/>
+                                        <Setter Property="HeightRequest" Value="20"/>
+                                        <Setter Property="Margin" Value="1"/>
+                                    </Style>
+                                </VerticalStackLayout.Resources>
+                                <Border                                
+                                x:Name="bmi5"
+                                BackgroundColor="Red"/>
+                                <Border                                
+                                x:Name="bmi4"
+                                BackgroundColor="OrangeRed"/>
+                                <Border                                 
+                                x:Name="bmi3"
+                                BackgroundColor="DarkOrange"/>
+                                <Border                                
+                                x:Name="bmi2"
+                                BackgroundColor="Orange"/>
+                                <Border
+                                x:Name="bmi1"
+                                BackgroundColor="Green"/>
+
+                            </VerticalStackLayout>
+
+                            <!--<Grid
+                                Grid.Column="1">
+                                <Grid
+                                    ColumnDefinitions="auto,auto">
+                                    <ProgressBar 
+                                        Grid.Column="0"
+                                        Rotation="270"
+                                        BackgroundColor="Transparent"
+                                        ZIndex="1"
+                                        Progress="0.8"
+                                        x:Name="bmiProgressBar"/>
+                                </Grid>
+                            </Grid>-->
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+
+                <!--<Border 
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <Grid HeightRequest="100">
+                        <micro:ChartView 
+                            Rotation="270"
+                            Chart="{Binding Chart}"
+                            x:Name="chartView"
+                            HeightRequest="250"
+                            WidthRequest="100"
+                                            />                    </Grid>
+                </Border>-->
+
+                <!--<Border 
+                    BackgroundColor="White"
+                    Padding="5"
+                    Stroke="LightGray"
+                    StrokeThickness="0.4"
+                    StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout
+                    Spacing="3"
+                    Padding="5">
+                        <HorizontalStackLayout>
+                            <Label 
+                            Text="{extention:TranslateExtention Key=Waistcircumference}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                            <Label 
+                            Text="{Binding WaistCircumferenceMeasurement}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </HorizontalStackLayout>
+
+                        -->
+                <!--<HorizontalStackLayout>
+                        <Label 
+                            Text="{extention:TranslateExtention Key=Waistcircumferenceevaluation}"
+                            Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                            Text=" : "
+                            Style="{StaticResource Key=TitleLabel}"/>
+                        <Label 
+                            Text="{Binding WaistCircumferenceName}"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                    </HorizontalStackLayout>-->
+                <!--
+
+                        <Grid ColumnDefinitions="*,*">
+                            <ProgressBar 
+                            BackgroundColor="WhiteSmoke"
+                            Grid.Column="0"
+                            Progress="0"
+                            x:Name="waistProgressBar"/>
+                            <Label 
+                            x:Name="WaistCircumferenceNameLabel"
+                            Grid.Column="1"
+                            Margin="15,0,5,0"
+                            Style="{StaticResource Key=ValueLabel}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>-->
+
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

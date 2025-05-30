@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using Microcharts;
 using SkiaSharp;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
+using SlimWaist.Popups;
 using SlimWaist.ViewModels;
 using System.Drawing;
 using System.Globalization;
@@ -71,70 +73,6 @@ public partial class HomePage : UraniumContentPage
         await _homeVM.init();
 
         WantToExit = false;
-
-        bmi1.ScaleX = 1;
-        bmi2.ScaleX = 1;
-        bmi3.ScaleX = 1;
-        bmi4.ScaleX = 1;
-        bmi5.ScaleX = 1;
-
-        obesityDegreeNameLabel.Scale = 0;
-
-        await Task.Delay(500);
-
-        obesityDegreeNameLabel.Text = App.obesityDegrees.Where(x => x.ObesityDegreeId == 4).FirstOrDefault().ObesityDegreeName;
-
-        double mi = (Convert.ToDouble(App.currentMembership.Weight)) / ((Convert.ToDouble(App.currentMembership.Height) / 100) * (Convert.ToDouble(App.currentMembership.Height) / 100));
-
-        var BMI = Math.Round(mi, 2).ToString();
-
-        if (Convert.ToDouble(BMI) >= 18 && Convert.ToDouble(BMI) <= 24)
-        {
-            await bmi1.ScaleXTo(1.4, 150);
-            obesityDegreeNameLabel.TextColor = Colors.Green;
-        }
-        else if (Convert.ToDouble(BMI) > 24 && Convert.ToDouble(BMI) <= 29)
-        {
-            await bmi1.ScaleXTo(1.4, 150);
-            await bmi1.ScaleXTo(1);
-            await bmi2.ScaleXTo(1.4, 150);
-            obesityDegreeNameLabel.TextColor = Colors.Orange;
-        }
-        else if (Convert.ToDouble(BMI) > 29 && Convert.ToDouble(BMI) <= 34)
-        {
-            await bmi1.ScaleXTo(1.4, 150);
-            await bmi1.ScaleXTo(1);
-            await bmi2.ScaleXTo(1.4, 150);
-            await bmi2.ScaleXTo(1);
-            await bmi3.ScaleXTo(1.4, 150);
-            obesityDegreeNameLabel.TextColor = Colors.DarkOrange;
-        }
-        else if (Convert.ToDouble(BMI) > 34 && Convert.ToDouble(BMI) <= 39)
-        {
-            await bmi1.ScaleXTo(1.4, 150);
-            await bmi1.ScaleXTo(1);
-            await bmi2.ScaleXTo(1.4, 150);
-            await bmi2.ScaleXTo(1);
-            await bmi3.ScaleXTo(1.4, 150);
-            await bmi3.ScaleXTo(1);
-            await bmi4.ScaleXTo(1.4, 150);
-            obesityDegreeNameLabel.TextColor = Colors.OrangeRed;
-        }
-        else if (Convert.ToDouble(BMI) > 39)
-        {
-            await bmi1.ScaleXTo(1.4, 150);
-            await bmi1.ScaleXTo(1);
-            await bmi2.ScaleXTo(1.4, 150);
-            await bmi2.ScaleXTo(1);
-            await bmi3.ScaleXTo(1.4, 150);
-            await bmi3.ScaleXTo(1);
-            await bmi4.ScaleXTo(1.4, 150);
-            await bmi4.ScaleXTo(1);
-            await bmi5.ScaleXTo(1.4, 150);
-            obesityDegreeNameLabel.TextColor = Colors.Red;
-        }
-
-        await obesityDegreeNameLabel.ScaleTo(1, 250);
 
     }
 
@@ -269,8 +207,11 @@ public partial class HomePage : UraniumContentPage
 
     }
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
+    //private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    //{
+    //    var popup = new BodyMassAnalysisPopup();
 
-    }
+    //    this.ShowPopup(popup);
+
+    //}
 }

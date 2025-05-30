@@ -429,4 +429,10 @@
   <data name="Nodietselected" xml:space="preserve">
     <value>No diet selected</value>
   </data>
+  <data name="Setasdefaultfornextdays" xml:space="preserve">
+    <value>Set as default for next days</value>
+  </data>
+  <data name="Selectdiettype" xml:space="preserve">
+    <value>Select diet type</value>
+  </data>
 </root>

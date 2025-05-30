@@ -37,10 +37,10 @@
 
     <ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView 
-            HeightRequest="200" 
-            BackgroundColor="White"
+            BackgroundColor="LightGray"
             x:Name="btmSheet"
             IsPresented="{Binding IsBottomSheetPresented}">
+            
             <mat:BottomSheetView.Style>
                 <Style TargetType="mat:BottomSheetView">
                     <Style.Triggers>
@@ -53,31 +53,76 @@
                     </Style.Triggers>
                 </Style>
             </mat:BottomSheetView.Style>
-            <mat:BottomSheetView.Header>
-                <Label Text=""/>
-            </mat:BottomSheetView.Header>
+                        
             <mat:BottomSheetView.Body>
-                <VerticalStackLayout 
-                    BackgroundColor="White">
-                    <Grid RowDefinitions="*,*,*">
-                        <Label
-                            Grid.Row="0"
-                            HorizontalOptions="Center"
-                            FontSize="14"
-                            FontAttributes="Bold"
-                            Text="Targeted weight"/>
-                        <Label
-                            Grid.Row="1"
-                            HorizontalOptions="Center"
-                            FontSize="14"
-                            Margin="20"
-                            FontAttributes="Bold"
-                            Text="100"/>
-                        <Slider 
-                            Grid.Row="2"
-                            Value="100"
-                            Minimum="0" Maximum="200"/>
-                    </Grid>
+                <VerticalStackLayout
+                    Spacing="5"
+                    Padding="10">
+                    <HorizontalStackLayout>
+                        <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                            IconColor="IndianRed"
+                        IsChecked="{Binding IsKetoChecked}"
+                        Margin="0,0,5,0"/>
+                        <Label Grid.Column="1"
+                               Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Ketodiet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        IsChecked="{Binding IsLowCarbChecked}"
+                        Margin="0,0,5,0"/>
+                        <Label Grid.Column="1"
+                               Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Lowcarbdiet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <mat:CheckBox
+                        HorizontalOptions="Center"
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        IsChecked="{Binding IsServingSizeChecked}"
+                        Margin="0,0,5,0"/>
+                        <Label Grid.Column="1"
+                        HorizontalOptions="Start"
+                           Style="{StaticResource TitleLabel}"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Servingsizediet}"
+                        TextColor="{StaticResource MainColor}"
+                        FontSize="16"/>
+                    </HorizontalStackLayout>
+                    <mat:CheckBox
+                        BoxSizeRequest="20"
+                        Text="{extention:TranslateExtention Key=Setasdefaultfornextdays}"
+                        TextFontSize="12"
+                        TextColor="IndianRed"
+                        Margin="20,5,5,0"/>
+
+                    <Button 
+                VerticalOptions="End"
+                Text="{extention:TranslateExtention Key=Save}"
+                FontSize="20"
+                BackgroundColor="DarkSlateBlue"
+                TextColor="White"
+                Padding="0" 
+                Margin="10"
+                input:FormView.IsSubmitButton="True"
+                StyleClass="FilledButton"
+                Command="{Binding SaveDietCommand}"/>
+
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
@@ -90,11 +135,13 @@
             Margin="5"
             Spacing="5">
             <VerticalStackLayout
-                Spacing="5"
-                Margin="0,10,0,0">
+                Spacing="10"
+                Margin="0">
                 <HorizontalStackLayout
                     Grid.Column="1"
+                    Margin="10"
                     VerticalOptions="Center"
+                    HorizontalOptions="Center"
                     Spacing="2">
                     <HorizontalStackLayout.Resources>
                         <Style TargetType="Label">
@@ -141,62 +188,60 @@
                     <Label Style="{StaticResource ValueLabel}" Text="500"/>
                 </HorizontalStackLayout>
 
-                <Grid ColumnDefinitions="*,auto">
-                    <HorizontalStackLayout
-                        Spacing="5"
-                        VerticalOptions="Center"
-                        Grid.Column="0">
-                        <Label 
-                            Style="{StaticResource TitleLabel}"
-                            Text="{extention:TranslateExtention Key=Diettype}"/>
-                        <Label 
-                            Style="{StaticResource TitleLabel}"
-                            Text=":"/>
-                        <Label 
-                            TextColor="IndianRed"
-                            Text="{extention:TranslateExtention Key=Nodietselected}"/>
-                    </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{extention:TranslateExtention Key=Bodymassanalysis}"/>
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Text=":"/>
                     <Border
-                        Grid.Column="1"
+                        Padding="1"
                         HeightRequest="40"
-                        Margin="0,0,35,0"
-                        BackgroundColor="DodgerBlue"
+                        BackgroundColor="DarkSlateBlue"
                         StrokeShape="RoundRectangle 10">
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            <TapGestureRecognizer Command="{Binding GotoBodyMassAnalysisPageCommand}"/>
                         </Border.GestureRecognizers>
-                        <Image
-                            Scale="0.8"
-                            Source="choose.png">
+                        <Image 
+                        Source="analytics.png">
                             <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}"/>
+                                <toolkit:IconTintColorBehavior TintColor="White"/>
                             </Image.Behaviors>
                         </Image>
                     </Border>
-
-                </Grid>
-                <!--<
-                    
-            Date="{Binding BirthDate}"
-            Padding="0"
-                    Grid.Column="2"
-            Format=""
-                    IsClippedToBounds="True"
-            x:Name="datePickerField"
-            TextColor="DarkSlateBlue"
-            TitleColor="Gray"
-            MinimumDate="01/01/1930"
-            AccentColor="DarkSlateBlue">
-                    <mat:.Validations>
-                        --><!--<validation:RequiredValidation  Message="اختر التاريخ"/>
-                        <validation:RegexValidation Pattern="01-12-2025"
-                                               Message=""/>--><!--
-                    </mat:.Validations>
-                </>-->
-
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout
+                    Spacing="5">
+                    <Label 
+                        Style="{StaticResource TitleLabel}"
+                        Text="{extention:TranslateExtention Key=Diettype}"/>
+                    <Label 
+                        Style="{StaticResource TitleLabel}"
+                        Text=":"/>
+                    <Border
+                        Padding="0"
+                        StrokeThickness="0"
+                        Stroke="DarkBlue"
+                        StrokeShape="RoundRectangle 10">
+                        <Picker
+                    Title="{extention:TranslateExtention Key=Selectdiettype}"
+                    x:Name="picker" 
+                            FontAttributes="Bold"
+                    SelectedItem="{Binding SelectedDiet}"
+                    ItemsSource="{Binding Diets}" 
+                    ItemDisplayBinding="{Binding DietName}"
+                    TextColor="DarkBlue"
+                    TitleColor="IndianRed">
+                        </Picker>
+                    </Border>
+                </HorizontalStackLayout>
+               
             </VerticalStackLayout>
             
             <!--label for name-->
+            
             <!--<HorizontalStackLayout Grid.Row="0">
                 <Label 
                 Grid.Column="1"
@@ -216,356 +261,6 @@
                 </Label>
             </HorizontalStackLayout>-->
 
-            <!--label above body analysis-->
-            <Grid Grid.Row="1">
-                <Label 
-                Text="{extention:TranslateExtention Key=Bodymassanalysis}"
-                VerticalOptions="Center" 
-                HorizontalOptions="Start" />
-                <Label 
-                Text="{extention:TranslateExtention Key=Edit}"
-                TextColor="SteelBlue"
-                VerticalOptions="Center" 
-                HorizontalOptions="End">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoProfilePageCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-
-            </Grid>
-
-            <!--body analysis form-->
-            <VerticalStackLayout
-                Grid.Row="2"
-                Spacing="5">
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout
-                            Grid.Column="0">
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Weight}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding Weight}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Image 
-                            Grid.Column="1"
-                            WidthRequest="100"
-                            Source="scale2.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Grid>
-                </Border>
-                
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout
-                            Grid.Column="0">
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Idealweight}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding IdealWeight}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Image 
-                            Grid.Column="1"
-                            WidthRequest="100"
-                            Source="pass.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Grid>
-                </Border>
-                
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout
-                            Grid.Column="0">
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Targetedweight}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding TargetedWeight}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Label Grid.Column="1"
-                               WidthRequest="60"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                Text="{extention:TranslateExtention Key=Edit}"
-                TextColor="{StaticResource MainColor}">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ShowBottomSheetCommand}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-                </Border>
-                
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout
-                            Grid.Column="0">
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Height}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding Height}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Image 
-                            Grid.Column="1"
-                            WidthRequest="100"
-                            Source="height.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Grid>
-                </Border>
-                
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout>
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Bodyactivity}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding BodyActivity}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Image 
-                            Grid.Column="1"
-                            WidthRequest="100"
-                            Source="bodyactivity.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Grid>
-                </Border>
-                
-                <Border
-                    HeightRequest="50"
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid ColumnDefinitions="*,auto">
-                        <HorizontalStackLayout>
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Totalenergy}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding TotalEnergy}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-                        <Image 
-                            Grid.Column="1"
-                            WidthRequest="100"
-                            Source="totalenergy.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Grid>
-                </Border>
-
-                <Border 
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <VerticalStackLayout
-                    Spacing="3"
-                    Padding="5">
-                        <Grid
-                            ColumnDefinitions="*,auto">
-                            <Grid RowDefinitions="*,*">
-                                <HorizontalStackLayout
-                                Grid.Row="0">
-                                    <Label 
-                            Text="{extention:TranslateExtention Key=Bodymassindex}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                                    <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                                    <Label 
-                            Text="{Binding BMI}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                                </HorizontalStackLayout>
-                                <Label 
-                                    Scale="0"
-                            x:Name="obesityDegreeNameLabel"
-                            Grid.Row="1"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                            </Grid>
-                            <VerticalStackLayout
-                                WidthRequest="100"
-                                Grid.Column="1">
-                                <VerticalStackLayout.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="WidthRequest" Value="15"/>
-                                        <Setter Property="HeightRequest" Value="20"/>
-                                        <Setter Property="Margin" Value="1"/>
-                                    </Style>
-                                </VerticalStackLayout.Resources>
-                                <Border                                
-                                x:Name="bmi5"
-                                BackgroundColor="Red"/>
-                                <Border                                
-                                x:Name="bmi4"
-                                BackgroundColor="OrangeRed"/>
-                                <Border                                 
-                                x:Name="bmi3"
-                                BackgroundColor="DarkOrange"/>
-                                <Border                                
-                                x:Name="bmi2"
-                                BackgroundColor="Orange"/>
-                                <Border
-                                x:Name="bmi1"
-                                BackgroundColor="Green"/>
-
-                            </VerticalStackLayout>
-
-                            <!--<Grid
-                                Grid.Column="1">
-                                <Grid
-                                    ColumnDefinitions="auto,auto">
-                                    <ProgressBar 
-                                        Grid.Column="0"
-                                        Rotation="270"
-                                        BackgroundColor="Transparent"
-                                        ZIndex="1"
-                                        Progress="0.8"
-                                        x:Name="bmiProgressBar"/>
-                                </Grid>
-                            </Grid>-->
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
-
-
-                <!--<Border 
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <Grid HeightRequest="100">
-                        <micro:ChartView 
-                            Rotation="270"
-                            Chart="{Binding Chart}"
-                            x:Name="chartView"
-                            HeightRequest="250"
-                            WidthRequest="100"
-                                            />                    </Grid>
-                </Border>-->
-
-                <!--<Border 
-                    BackgroundColor="White"
-                    Padding="5"
-                    Stroke="LightGray"
-                    StrokeThickness="0.4"
-                    StrokeShape="RoundRectangle 10">
-                    <VerticalStackLayout
-                    Spacing="3"
-                    Padding="5">
-                        <HorizontalStackLayout>
-                            <Label 
-                            Text="{extention:TranslateExtention Key=Waistcircumference}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                            <Label 
-                            Text="{Binding WaistCircumferenceMeasurement}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </HorizontalStackLayout>
-
-                        --><!--<HorizontalStackLayout>
-                        <Label 
-                            Text="{extention:TranslateExtention Key=Waistcircumferenceevaluation}"
-                            Style="{StaticResource Key=TitleLabel}"/>
-                        <Label 
-                            Text=" : "
-                            Style="{StaticResource Key=TitleLabel}"/>
-                        <Label 
-                            Text="{Binding WaistCircumferenceName}"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                    </HorizontalStackLayout>--><!--
-
-                        <Grid ColumnDefinitions="*,*">
-                            <ProgressBar 
-                            BackgroundColor="WhiteSmoke"
-                            Grid.Column="0"
-                            Progress="0"
-                            x:Name="waistProgressBar"/>
-                            <Label 
-                            x:Name="WaistCircumferenceNameLabel"
-                            Grid.Column="1"
-                            Margin="15,0,5,0"
-                            Style="{StaticResource Key=ValueLabel}"/>
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>-->
-
-
-            </VerticalStackLayout>
 
             <!--label above collection view-->
             <Grid Grid.Row="3">

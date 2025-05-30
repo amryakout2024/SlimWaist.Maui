@@ -43,8 +43,9 @@ namespace SlimWaist.Views
         protected override bool OnBackButtonPressed()
         {
 
-            Shell.Current.GoToAsync($"//{nameof(SettingPage)}", animate: true);
-
+#if ANDROID
+            Shell.Current.GoToAsync("..", animate: true);
+#endif
             return true;
         }
 

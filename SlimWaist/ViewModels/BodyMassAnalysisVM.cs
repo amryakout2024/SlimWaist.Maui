@@ -1,35 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microcharts;
-using Microcharts.Maui;
-using SkiaSharp;
-using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class HomeVM(Setting setting) : BaseVM
-    {        
+    public partial class BodyMassAnalysisVM:BaseVM
+    {
         [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
-
-        [ObservableProperty]
-        private string _email;
-
-        [ObservableProperty]
-        private string _dateday;
-
-        [ObservableProperty]
-        private string _datedayname;
-
-        [ObservableProperty]
-        private string _datemonth;
-
-        [ObservableProperty]
-        private string _dateyear;
 
         [ObservableProperty]
         private string? _name;
@@ -70,9 +55,6 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isBottomSheetPresented;
 
-        [ObservableProperty]
-        private bool _isTabbarVisible;
-
         private int ObesityDegreeId;
 
         [ObservableProperty]
@@ -88,40 +70,8 @@ namespace SlimWaist.ViewModels
 
         Setting setting;
 
-        ChartEntry[] chartEntries;
-        [ObservableProperty]
-        private Chart _chart;
-
-        [ObservableProperty]
-        private bool _isKetoChecked;
-
-        [ObservableProperty]
-        private bool _isLowCarbChecked;
-
-        [ObservableProperty]
-        private bool _isServingSizeChecked;
-
-        [ObservableProperty]
-        private List<Diet> _diets;
-
-        [ObservableProperty]
-        private Diet _selectedDiet;
-
-
         public async Task init()
         {
-            //Preferences.Set("Email", "");
-
-            Diets = await App.dataContext.LoadAsync<Diet>();
-
-
-            Dateday = DateTime.Now.Day.ToString();
-            Datedayname = DateTime.Now.DayOfWeek.ToString();
-            Datemonth = DateTime.Now.Month.ToString();
-            Dateyear = DateTime.Now.Year.ToString();
-
-            IsBottomSheetPresented = false;
-            IsTabbarVisible = true;
             BodyActivities = App.BodyActivities;
 
             Name = App.currentMembership?.Name ?? "";
@@ -131,11 +81,11 @@ namespace SlimWaist.ViewModels
             Height = App.currentMembership?.Height.ToString() ?? "";
 
             BirthDate = App.currentMembership?.BirthDateDay.ToString() ?? "";
-            
-            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
+
+            BodyActivity = BodyActivities.Where(x => x.BodyActivityId == App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
 
             WaistCircumferenceMeasurement = App.currentMembership.WaistCircumferenceMeasurement.ToString();
-            
+
             BmiCalculator();
 
             IdealWeightCalculator();
@@ -152,108 +102,12 @@ namespace SlimWaist.ViewModels
 
             ObesityDegreeCalculator();
 
-            chartEntries = new ChartEntry[]
-            {
-                new ChartEntry((float)Math.Round(Convert.ToDouble(Weight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Weight",CultureInfo.CurrentCulture),
-                    ValueLabel=Weight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-                new ChartEntry((float) Math.Round(Convert.ToDouble(IdealWeight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Idealweight",CultureInfo.CurrentCulture),
-                    ValueLabel=IdealWeight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-                new ChartEntry((float)Math.Round( Convert.ToDouble(ModifiedWeight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Modifiedweight",CultureInfo.CurrentCulture),
-                    ValueLabel=ModifiedWeight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-            };
-
-            //await Task.Delay(500);
-
-            Chart = new BarChart()
-            {
-                Entries = chartEntries,
-                IsAnimated = true,
-                LabelTextSize = 14,
-                ValueLabelTextSize = 14,
-                SerieLabelTextSize = 14,
-                LabelOrientation = Orientation.Vertical,
-                AnimationDuration = TimeSpan.FromSeconds(4),
-            };
-
-        }
-
-        [RelayCommand]
-        private async Task GotoBodyMassAnalysisPage()
-        {
-            await GoToAsyncWithStack(nameof(BodyMassAnalysisPage), true);
-        }
-
-        [RelayCommand]
-        private void SaveDiet()
-        {
-
-        }
-        partial void OnIsKetoCheckedChanged(bool value)
-        {
-            if (IsKetoChecked)
-            {
-                IsLowCarbChecked = false;
-                IsServingSizeChecked = false;
-            }
-        }
-        partial void OnIsLowCarbCheckedChanged(bool value)
-        {
-            if (IsLowCarbChecked)
-            {
-                IsKetoChecked = false;
-                IsServingSizeChecked = false;
-            }
-        }
-        partial void OnIsServingSizeCheckedChanged(bool value)
-        {
-            if (IsServingSizeChecked)
-            {
-                IsKetoChecked = false;
-                IsLowCarbChecked = false;
-            }
-        }
-        [RelayCommand]
-        private async Task GoToDietsPage()
-        {
-            await GoToAsyncWithStack(nameof(DietsPage), true);
-        }
-
-        [RelayCommand]
-        private async Task ShowBottomSheet()
-        {
-            IsBottomSheetPresented = true;
-        }
-
-        partial void OnIsBottomSheetPresentedChanged(bool value)
-        {
-           IsTabbarVisible=IsBottomSheetPresented? false:true;
-        }
-
-        [RelayCommand]
-        private async void GoToSettingPage()
-        {
-            await GoToAsyncWithStack(nameof(SettingPage), true);
         }
 
         [RelayCommand]
         private async Task GoProfilePage()
         {
-            await GoToAsyncWithStack(nameof(ProfilePage), true);
+            //await GoToAsyncWithStack(nameof(ProfilePage), true);
         }
 
         private void BmiCalculator()
@@ -395,13 +249,13 @@ namespace SlimWaist.ViewModels
 
         }
 
-        private void WaistCircumferenceEvaluationCalculator() 
+        private void WaistCircumferenceEvaluationCalculator()
         {
             if (App.currentMembership.WaistCircumferenceMeasurement < 94)
                 WaistCircumferenceId = 1;
-            else if (App.currentMembership.WaistCircumferenceMeasurement >=94 && App.currentMembership.WaistCircumferenceMeasurement <= 101)
+            else if (App.currentMembership.WaistCircumferenceMeasurement >= 94 && App.currentMembership.WaistCircumferenceMeasurement <= 101)
                 WaistCircumferenceId = 2;
-            else if (App.currentMembership.WaistCircumferenceMeasurement >101)
+            else if (App.currentMembership.WaistCircumferenceMeasurement > 101)
                 WaistCircumferenceId = 3;
 
             WaistCircumferenceName = App.waistCircumferences.Where(x => x.WaistCircumferenceId == WaistCircumferenceId).FirstOrDefault().WaistCircumferenceName;
@@ -409,15 +263,15 @@ namespace SlimWaist.ViewModels
 
         private void ObesityDegreeCalculator()
         {
-            if(Convert.ToDouble(BMI)>=18 &&Convert.ToDouble(BMI) <=24)
+            if (Convert.ToDouble(BMI) >= 18 && Convert.ToDouble(BMI) <= 24)
                 ObesityDegreeId = 1;
-            if(Convert.ToDouble(BMI)>24 &&Convert.ToDouble(BMI) <=29)
+            if (Convert.ToDouble(BMI) > 24 && Convert.ToDouble(BMI) <= 29)
                 ObesityDegreeId = 2;
-            if(Convert.ToDouble(BMI)>29 &&Convert.ToDouble(BMI) <=34)
+            if (Convert.ToDouble(BMI) > 29 && Convert.ToDouble(BMI) <= 34)
                 ObesityDegreeId = 3;
-            if(Convert.ToDouble(BMI)>34 &&Convert.ToDouble(BMI) <=39)
+            if (Convert.ToDouble(BMI) > 34 && Convert.ToDouble(BMI) <= 39)
                 ObesityDegreeId = 4;
-            if(Convert.ToDouble(BMI)>39)
+            if (Convert.ToDouble(BMI) > 39)
                 ObesityDegreeId = 5;
 
             ObesityDegreeName = App.obesityDegrees.Where(x => x.ObesityDegreeId == ObesityDegreeId).FirstOrDefault().ObesityDegreeName;
@@ -425,4 +279,3 @@ namespace SlimWaist.ViewModels
 
     }
 }
-//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]

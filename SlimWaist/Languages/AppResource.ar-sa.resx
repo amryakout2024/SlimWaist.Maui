@@ -429,4 +429,10 @@
   <data name="Nodietselected" xml:space="preserve">
     <value>لم يتم اختيار نوع الدايت</value>
   </data>
+  <data name="Setasdefaultfornextdays" xml:space="preserve">
+    <value>تعيين كافتراضي للأيام القادمة</value>
+  </data>
+  <data name="Selectdiettype" xml:space="preserve">
+    <value>اختر نوع الدايت</value>
+  </data>
 </root>

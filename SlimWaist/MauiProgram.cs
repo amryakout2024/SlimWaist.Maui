@@ -84,6 +84,9 @@ namespace SlimWaist
             builder.Services.AddSingleton<CartPage>()
                             .AddSingleton<CartVM>();
 
+            builder.Services.AddSingleton<BodyMassAnalysisPage>()
+                            .AddSingleton<BodyMassAnalysisVM>();
+
             builder.Services.AddSingleton<ItemPage>()
                            .AddSingleton<ItemVM>();
 
