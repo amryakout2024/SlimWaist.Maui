@@ -23,25 +23,9 @@ public partial class FoodsPage : UraniumContentPage
     protected override bool OnBackButtonPressed()
     {
 #if ANDROID
-        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
         return true;
-
-        //        if (_foodsVM.IsFoodSelected)
-        //        {
-        //            _foodsVM.IsFoodSelected = false;
-
-        //            return true;
-        //        }
-        //        else
-        //        {
-
-        //#if ANDROID
-        //        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
-        //#endif
-        //        return true;
-
-        //        }
     }
 
 }

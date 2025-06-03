@@ -71,7 +71,8 @@ namespace SlimWaist.Platforms.Android
                 _badgeDrawable.BackgroundColor = Colors.DarkGreen.ToPlatform();
                 
                 _badgeDrawable.BadgeTextColor = Colors.White.ToPlatform();
-                _badgeDrawable.SetVisible(true);
+
+                //_badgeDrawable.SetVisible(true);
             }
         }
 

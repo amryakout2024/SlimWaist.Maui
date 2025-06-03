@@ -433,6 +433,9 @@
     <value>تعيين كافتراضي للأيام القادمة</value>
   </data>
   <data name="Selectdiettype" xml:space="preserve">
-    <value>اختر نوع الدايت</value>
+    <value>اختر الدايت</value>
+  </data>
+  <data name="Snaks" xml:space="preserve">
+    <value>سناكس</value>
   </data>
 </root>

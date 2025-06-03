@@ -2,6 +2,34 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Archives.Dictionary1">
+    <!--<mat:RadioButtonGroupView 
+                Grid.Row="0" 
+                SelectedItemChangedCommand="{Binding MealChangedCommand}"
+                Orientation="Horizontal">
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Breakfast}" IsChecked="{Binding IsBreakfast}"/>
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Lunch}" IsChecked="{Binding IsLunch}"/>
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Dinner}" IsChecked="{Binding IsDinner}"/>
+            </mat:RadioButtonGroupView>-->
+
+
+    <!--Shell.TabBarIsVisible="{Binding IsTabbarVisible}"-->
+    <!--partial void OnIsLowCarbCheckedChanged(bool value)
+        {
+            if (IsLowCarbChecked)
+            {
+                IsKetoChecked = false;
+                IsServingSizeChecked = false;
+            }
+        }-->
+
+    <!--<skia:SKLottieView Source="AniRun.json" 
+                               IsAnimationEnabled="True"
+                               x:Name="sk"
+                               ZIndex="1"
+                               WidthRequest="350"
+                               HeightRequest="350" 
+                               RepeatMode="Restart"
+                               RepeatCount="-1"/>-->
 
     <!--<Border 
                     BackgroundColor="White"

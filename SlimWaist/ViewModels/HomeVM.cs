@@ -107,6 +107,7 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private Diet _selectedDiet;
 
+        public static Meal? CurrentMeal { get; set;}
 
         public async Task init()
         {
@@ -190,6 +191,51 @@ namespace SlimWaist.ViewModels
                 AnimationDuration = TimeSpan.FromSeconds(4),
             };
 
+        }
+
+        [RelayCommand]
+        private async Task GotoBreakfastMealPage()
+        {
+            CurrentMeal = new Meal()
+            {
+                MealTypeId=0
+            };
+#if ANDROID
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+        }
+        [RelayCommand]
+        private async Task GotoLunchMealPage()
+        {
+            CurrentMeal = new Meal()
+            {
+                MealTypeId = 1
+            };
+#if ANDROID
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+        }
+        [RelayCommand]
+        private async Task GotoDinnerMealPage()
+        {
+            CurrentMeal = new Meal()
+            {
+                MealTypeId = 2
+            };
+#if ANDROID
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+        }
+        [RelayCommand]
+        private async Task GotoSnaksMealPage()
+        {
+            CurrentMeal = new Meal()
+            {
+                MealTypeId = 3
+            };
+#if ANDROID
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
         }
 
         [RelayCommand]

@@ -28,11 +28,11 @@ namespace SlimWaist.ViewModels
             AllMeals.ForEach(x => x.IsSelected = false);
 
             var breakfastMeals = await App.dataContext.LoadAsync<Meal>();
-            BreakfastMeals = breakfastMeals.Where(x => x.MealType == "إفطار").ToList();
+            BreakfastMeals = breakfastMeals.Where(x => x.MealTypeId == 0).ToList();
             var lunchMeals = await App.dataContext.LoadAsync<Meal>();
-            LunchMeals = lunchMeals.Where(x => x.MealType == "غداء").ToList();
+            LunchMeals = lunchMeals.Where(x => x.MealTypeId == 1).ToList();
             var dinnerMeals = await App.dataContext.LoadAsync<Meal>();
-            DinnerMeals = dinnerMeals.Where(x => x.MealType == "عشاء").ToList();
+            DinnerMeals = dinnerMeals.Where(x => x.MealTypeId == 2).ToList();
             SelectedMeals = new List<Meal>();
         }
 
@@ -88,11 +88,11 @@ namespace SlimWaist.ViewModels
         {
             AllMeals = await App.dataContext.LoadAsync<Meal>();
             var breakfastMeals = await App.dataContext.LoadAsync<Meal>();
-            BreakfastMeals = breakfastMeals.Where(x => x.MealType == "إفطار").ToList();
+            BreakfastMeals = breakfastMeals.Where(x => x.MealTypeId == 0).ToList();
             var lunchMeals = await App.dataContext.LoadAsync<Meal>();
-            LunchMeals = lunchMeals.Where(x => x.MealType == "غداء").ToList();
+            LunchMeals = lunchMeals.Where(x => x.MealTypeId == 1).ToList();
             var dinnerMeals = await App.dataContext.LoadAsync<Meal>();
-            DinnerMeals = dinnerMeals.Where(x => x.MealType == "عشاء").ToList();
+            DinnerMeals = dinnerMeals.Where(x => x.MealTypeId == 2).ToList();
         }
 
         [RelayCommand]

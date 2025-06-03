@@ -86,16 +86,16 @@ namespace SlimWaist.ViewModels
 
                     if (!previousmeal)
                     {
-                        await App.dataContext.InsertAsync<Meal>(new Meal()
-                        {
-                            MealName = result,
-                            MealType = CartItems.FirstOrDefault()?.MealType,
-                            TotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1),
-                            TotalFoodCarb = Math.Round(CartItems.Select(x => x.FoodCarb).Sum(), 1),
-                            TotalFoodProtien = Math.Round(CartItems.Select(x => x.FoodProtien).Sum(), 1),
-                            TotalFoodFat = Math.Round(CartItems.Select(x => x.FoodFat).Sum(), 1),
-                            TotalFoodFibers = Math.Round(CartItems.Select(x => x.FoodFibers).Sum(), 1)
-                        });
+                        //await App.dataContext.InsertAsync<Meal>(new Meal()
+                        //{
+                        //    MealName = result,
+                        //    MealType = CartItems.FirstOrDefault()?.MealType,
+                        //    TotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1),
+                        //    TotalFoodCarb = Math.Round(CartItems.Select(x => x.FoodCarb).Sum(), 1),
+                        //    TotalFoodProtien = Math.Round(CartItems.Select(x => x.FoodProtien).Sum(), 1),
+                        //    TotalFoodFat = Math.Round(CartItems.Select(x => x.FoodFat).Sum(), 1),
+                        //    TotalFoodFibers = Math.Round(CartItems.Select(x => x.FoodFibers).Sum(), 1)
+                        //});
 
                         foreach (var cartitem in CartItems)
                         {

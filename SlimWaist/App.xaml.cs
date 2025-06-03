@@ -23,6 +23,7 @@ namespace SlimWaist
         public static List<Gender> Genders;
         public static List<ObesityDegree> obesityDegrees;
         public static List<WaistCircumference> waistCircumferences;
+        public static List<MealType> mealTypes;
 
         public App(DataContext dataContext)
         {
@@ -47,6 +48,29 @@ namespace SlimWaist
 
                 ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
 
+                mealTypes = new List<MealType>()
+                {
+                    new MealType()
+                    {
+                        MealTypeId=0,
+                        MealTypeName="إفطار"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=1,
+                        MealTypeName="غداء"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=2,
+                        MealTypeName="عشاء"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=3,
+                        MealTypeName="سناكس"
+                    },
+                };
                 BodyActivities = new List<BodyActivity>() {
 
                         new BodyActivity()
@@ -147,6 +171,30 @@ namespace SlimWaist
                 ValidateForIntegerNumberMessage = "Enter integer number";
 
                 ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
+
+                mealTypes = new List<MealType>()
+                {
+                    new MealType()
+                    {
+                        MealTypeId=0,
+                        MealTypeName="Breakfast"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=1,
+                        MealTypeName="Lunch"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=2,
+                        MealTypeName="Dinner"
+                    },
+                    new MealType()
+                    {
+                        MealTypeId=3,
+                        MealTypeName="Snaks"
+                    },
+                };
 
                 BodyActivities = new List<BodyActivity>() {
 

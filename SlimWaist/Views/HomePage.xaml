@@ -15,10 +15,10 @@
              x:Class="SlimWaist.Views.HomePage"
              Shell.NavBarIsVisible="False"
              x:Name="this" 
-             Shell.TabBarIsVisible="{Binding IsTabbarVisible}"
-             BackgroundColor="WhiteSmoke"
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="White"
              FlowDirection="{extention:FlowDirectionsExtention}">
-   
+
     <ur:UraniumContentPage.Resources>
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -40,7 +40,7 @@
             BackgroundColor="LightGray"
             x:Name="btmSheet"
             IsPresented="{Binding IsBottomSheetPresented}">
-            
+
             <mat:BottomSheetView.Style>
                 <Style TargetType="mat:BottomSheetView">
                     <Style.Triggers>
@@ -53,7 +53,7 @@
                     </Style.Triggers>
                 </Style>
             </mat:BottomSheetView.Style>
-                        
+
             <mat:BottomSheetView.Body>
                 <VerticalStackLayout
                     Spacing="5"
@@ -127,105 +127,102 @@
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
     </ur:UraniumContentPage.Attachments>
-    
-    <ScrollView
-        HorizontalScrollBarVisibility="Never"
-        VerticalScrollBarVisibility="Never">
-        <VerticalStackLayout 
-            Margin="5"
-            Spacing="5">
-            <VerticalStackLayout
-                Spacing="10"
-                Margin="0">
-                <HorizontalStackLayout
-                    Grid.Column="1"
+
+    <Grid Padding="5"
+        RowDefinitions="auto,40,40,40,40,40,*">
+
+        <HorizontalStackLayout
                     Margin="10"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     Spacing="2">
-                    <HorizontalStackLayout.Resources>
-                        <Style TargetType="Label">
-                            <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="FontAttributes" Value="Bold"/>
-                        </Style>
-                    </HorizontalStackLayout.Resources>
+            <HorizontalStackLayout.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="FontAttributes" Value="Bold"/>
+                </Style>
+            </HorizontalStackLayout.Resources>
 
-                    <Image 
+            <Image 
                     Grid.Column="0"
                     Margin="0,0,10,0"
                     HeightRequest="30"
                         VerticalOptions="Center"
                     Source="today.png">
-                        <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                        </Image.Behaviors>
-                    </Image>
-                    <Label Text="{extention:TranslateExtention Key=Date}"/>
-                    <Label Text=":"/>
-                    <Label Text="{Binding Dateday}"/>
-                    <Label Text="/"/>
-                    <Label Text="{Binding Datemonth}"/>
-                    <Label Text="/"/>
-                    <Label Text="{Binding Dateyear}"/>
-                </HorizontalStackLayout>
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                </Image.Behaviors>
+            </Image>
+            <Label Text="{extention:TranslateExtention Key=Date}"/>
+            <Label Text=":"/>
+            <Label Text="{Binding Dateday}"/>
+            <Label Text="/"/>
+            <Label Text="{Binding Datemonth}"/>
+            <Label Text="/"/>
+            <Label Text="{Binding Dateyear}"/>
+        </HorizontalStackLayout>
 
-                <HorizontalStackLayout Spacing="5">
-                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Daycalories}"/>
-                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
-                    <Label Style="{StaticResource ValueLabel}" Text="{Binding TotalEnergy}"/>
-                </HorizontalStackLayout>
-                
-                <HorizontalStackLayout Spacing="5">
-                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Consumedcalories}"/>
-                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
-                    <Label Style="{StaticResource ValueLabel}" Text="2000"/>
-                </HorizontalStackLayout>
-           
-                <HorizontalStackLayout Spacing="5">
-                    <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Remainingcalories}"/>
-                    <Label Style="{StaticResource TitleLabel}" Text=":"/>
-                    <Label Style="{StaticResource ValueLabel}" Text="500"/>
-                </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="1" 
+            Spacing="5">
+            <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Daycalories}"/>
+            <Label Style="{StaticResource TitleLabel}" Text=":"/>
+            <Label Style="{StaticResource ValueLabel}" Text="{Binding TotalEnergy}"/>
+        </HorizontalStackLayout>
 
-                <HorizontalStackLayout Spacing="5">
-                    <Label 
+        <HorizontalStackLayout Grid.Row="2" 
+                               Spacing="5">
+            <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Consumedcalories}"/>
+            <Label Style="{StaticResource TitleLabel}" Text=":"/>
+            <Label Style="{StaticResource ValueLabel}" Text="2000"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="3" 
+                               Spacing="5">
+            <Label Style="{StaticResource TitleLabel}" Text="{extention:TranslateExtention Key=Remainingcalories}"/>
+            <Label Style="{StaticResource TitleLabel}" Text=":"/>
+            <Label Style="{StaticResource ValueLabel}" Text="500"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="4" 
+                               Spacing="5">
+            <Label 
                         Style="{StaticResource TitleLabel}" 
                         Text="{extention:TranslateExtention Key=Bodymassanalysis}"/>
-                    <Label 
+            <Label 
                         Style="{StaticResource TitleLabel}" 
                         Text=":"/>
-                    <Border
+            <Border
                         Padding="1"
                         HeightRequest="40"
                         BackgroundColor="DarkSlateBlue"
                         StrokeShape="RoundRectangle 10">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GotoBodyMassAnalysisPageCommand}"/>
-                        </Border.GestureRecognizers>
-                        <Image 
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoBodyMassAnalysisPageCommand}"/>
+                </Border.GestureRecognizers>
+                <Image 
                         Source="analytics.png">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="White"/>
-                            </Image.Behaviors>
-                        </Image>
-                    </Border>
-                </HorizontalStackLayout>
-                
-                <HorizontalStackLayout
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="White"/>
+                    </Image.Behaviors>
+                </Image>
+            </Border>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="5"
                     Spacing="5">
-                    <Label 
+            <Label 
                         Style="{StaticResource TitleLabel}"
                         Text="{extention:TranslateExtention Key=Diettype}"/>
-                    <Label 
+            <Label 
                         Style="{StaticResource TitleLabel}"
                         Text=":"/>
-                    <Border
+            <Border
                         Padding="0"
                         StrokeThickness="0"
                         Stroke="DarkBlue"
                         StrokeShape="RoundRectangle 10">
-                        <Picker
+                <Picker
                     Title="{extention:TranslateExtention Key=Selectdiettype}"
                     x:Name="picker" 
                             FontAttributes="Bold"
@@ -234,145 +231,110 @@
                     ItemDisplayBinding="{Binding DietName}"
                     TextColor="DarkBlue"
                     TitleColor="IndianRed">
-                        </Picker>
-                    </Border>
-                </HorizontalStackLayout>
-               
-            </VerticalStackLayout>
-            
-            <!--label for name-->
-            
-            <!--<HorizontalStackLayout Grid.Row="0">
-                <Label 
-                Grid.Column="1"
-                Margin="0,0,5,0"
-                VerticalOptions="Center"
-                Text="{extention:TranslateExtention Key=Welcomeback}"
-                FontSize="20"
-                TextColor="DarkSlateBlue">
-                </Label>
-                <Label 
-                Grid.Column="1"
-                Margin="0,0,5,0"
-                VerticalOptions="Center"
-                Text="{Binding Name}"
-                FontSize="23"
-                TextColor="DarkSlateBlue">
-                </Label>
-            </HorizontalStackLayout>-->
+                </Picker>
+            </Border>
+        </HorizontalStackLayout>
 
+        <Grid Grid.Row="6"
+              Padding="5"
+              ColumnDefinitions="*,*"
+              RowDefinitions="*,*">
+            <Border Grid.Row="0" Grid.Column="0"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="5"
+                    Padding="5"
+                    BackgroundColor="DarkSlateBlue">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoBreakfastMealPageCommand}"/>
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="*,auto">
+                    <Label
+                    Text="{extention:TranslateExtention Key=Breakfast}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+                    <Label
+                        Grid.Row="1"
+                    Text="0 Calories"
+                        FontSize="12"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    TextColor="White"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="1"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="5"
+                    Padding="5"
+                    BackgroundColor="DarkSlateBlue">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoLunchMealPageCommand}"/>
+                </Border.GestureRecognizers>
 
-            <!--label above collection view-->
-            <Grid Grid.Row="3">
-                <Label 
-                Text="{extention:TranslateExtention Key=Currentregieme}"
-                FontSize="15"
-                VerticalOptions="Center" 
-                HorizontalOptions="Start" />
-                <Label 
-                Text="{extention:TranslateExtention Key=Showall}"
-                FontSize="18"
-                    TextColor="SteelBlue"
-                VerticalOptions="Center" 
-                HorizontalOptions="End">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToDietsPageCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                <Grid RowDefinitions="*,auto">
+                    <Label
+                    Text="{extention:TranslateExtention Key=Lunch}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+                    <Label
+                        Grid.Row="1"
+                    Text="0 Calories"
+                        FontSize="12"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    TextColor="White"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="0"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="5"
+                    Padding="5"
+                    BackgroundColor="DarkSlateBlue">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoDinnerMealPageCommand}"/>
+                </Border.GestureRecognizers>
 
-            </Grid>
+                <Grid RowDefinitions="*,auto">
+                    <Label
+                    Text="{extention:TranslateExtention Key=Dinner}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+                    <Label
+                        Grid.Row="1"
+                    Text="0 Calories"
+                        FontSize="12"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    TextColor="White"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="5"
+                    Padding="5"
+                    BackgroundColor="DarkSlateBlue">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoSnaksMealPageCommand}"/>
+                </Border.GestureRecognizers>
 
-            <CollectionView
-                HeightRequest="300"
-                Grid.Row="4" ItemsSource="{Binding RegimeLists}">
-                <CollectionView.ItemTemplate >
-                    <DataTemplate>
-                        <Border 
-                        BackgroundColor="WhiteSmoke"
-                        Padding="10"
-                        StrokeThickness="1.5"
-                        Stroke="WhiteSmoke"
-                        StrokeShape="RoundRectangle 10">
-                            <Grid ColumnDefinitions="*,*">
-                                <VerticalStackLayout Grid.Column="0">
-                                    <HorizontalStackLayout>
-                                        <Label 
-                                Text="نوع الدايت : "
-                                 Style="{StaticResource Key=TitleLabel}"/>
-                                        <Label 
-                                Text="{Binding RegimeName}"
-                                Style="{StaticResource Key=ValueLabel}"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label 
-                                Text="من : "
-                                Style="{StaticResource Key=TitleLabel}"/>
-                                        <Label 
-                                Text="{Binding Datestart}"
-                                Style="{StaticResource Key=ValueLabel}"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label 
-                                Text="إلي : "
-                                Style="{StaticResource Key=TitleLabel}"/>
-                                        <Label 
-                                Text="{Binding DateEnd}"
-                                Style="{StaticResource Key=ValueLabel}"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label 
-                                Text="عدد الأيام : "
-                                Style="{StaticResource Key=TitleLabel}"/>
-                                        <Label 
-                                Text="10"
-                                Style="{StaticResource Key=ValueLabel}"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label 
-                                Text="الوزن : "
-                                Style="{StaticResource Key=TitleLabel}"/>
-                                        <Label 
-                                Text="{Binding Weight}"
-                                Style="{StaticResource Key=ValueLabel}"/>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
-                                <Image Grid.Column="1"
-                           Source="food2.jfif"/>
-                            </Grid>
-                        </Border>
+                <Grid RowDefinitions="*,auto">
+                    <Label
+                    Text="{extention:TranslateExtention Key=Snaks}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+                    <Label
+                        Grid.Row="1"
+                    Text="0 Calories"
+                        FontSize="12"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    TextColor="White"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-
-                <CollectionView.EmptyView>
-                    <ContentView HeightRequest="120">
-                        <StackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center">
-                            <Label Text="{extention:TranslateExtention Key=Noregiemetillnow}"
-                                   Margin="0,0,0,10"
-                               x:Name="NoRegiemeLabel"
-                                   FontAttributes="Bold"
-                                   FontSize="18"
-                                   HorizontalOptions="Fill"
-                                   HorizontalTextAlignment="Center" />
-                            <Button Text="{extention:TranslateExtention Key=Startregieme}"
-                                FontSize="20"
-                                Command="{Binding GoToDietsPageCommand}"
-                                BackgroundColor="{StaticResource MainColor}"
-                                HorizontalOptions="Fill"/>
-                        </StackLayout>
-                    </ContentView>
-                </CollectionView.EmptyView>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
 </ur:UraniumContentPage>
-
-<!--<skia:SKLottieView Source="AniRun.json" 
-                               IsAnimationEnabled="True"
-                               x:Name="sk"
-                               ZIndex="1"
-                               WidthRequest="350"
-                               HeightRequest="350" 
-                               RepeatMode="Restart"
-                               RepeatCount="-1"/>-->

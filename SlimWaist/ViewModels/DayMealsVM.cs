@@ -27,7 +27,7 @@ namespace SlimWaist.ViewModels
             {
                 MealGroups.Add(new MealGroup(meal.MealId,
                     meal.MealName,
-                    meal.MealType,
+                    meal.MealTypeId.ToString(),
                     meal.IsSelected,
                     meal.TotalCalories,
                     meal.TotalFoodCarb,

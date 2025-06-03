@@ -10,19 +10,19 @@ namespace SlimWaist.Models
 
         public string? MealName { get; set; }
 
-        public string? MealType { get; set; }
+        public int MealTypeId { get; set; }
 
         public bool IsSelected { get; set; } = false;
 
-        public double TotalCalories { get; set; }
+        public double TotalCalories { get; set; } = 0;
 
-        public double TotalFoodCarb { get; set; }
+        public double TotalFoodCarb { get; set; } = 0;
 
-        public double TotalFoodProtien { get; set; }
+        public double TotalFoodProtien { get; set; } = 0;
 
-        public double TotalFoodFat { get; set; }
+        public double TotalFoodFat { get; set; } = 0;
 
-        public double TotalFoodFibers { get; set; }
+        public double TotalFoodFibers { get; set; } = 0;
 
     }
 }

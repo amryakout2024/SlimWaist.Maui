@@ -36,7 +36,7 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string _foodFibers;
-
+        
         public static event EventHandler<int>? TotalCartCountChanged;
 
         public async Task Init()

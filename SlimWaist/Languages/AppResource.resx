@@ -433,6 +433,9 @@
     <value>Set as default for next days</value>
   </data>
   <data name="Selectdiettype" xml:space="preserve">
-    <value>Select diet type</value>
+    <value>Select diet</value>
+  </data>
+  <data name="Snaks" xml:space="preserve">
+    <value>Snaks</value>
   </data>
 </root>

@@ -7,7 +7,7 @@
 
         public string? MealName { get; set; }
 
-        public string? MealType { get; set; }
+        public int MealTypeId { get; set; }
 
         public bool IsSelected { get; set; } = false;
 
@@ -27,8 +27,6 @@
             MealId = mealId;
 
             MealName = mealName;
-
-            MealType = mealType;
 
             IsSelected = isSelected;
 

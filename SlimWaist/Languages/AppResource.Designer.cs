@@ -781,7 +781,7 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select diet type.
+        ///   Looks up a localized string similar to Select diet.
         /// </summary>
         public static string Selectdiettype {
             get {
@@ -849,6 +849,15 @@ namespace SlimWaist.Languages {
         public static string Slimwaste {
             get {
                 return ResourceManager.GetString("Slimwaste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snaks.
+        /// </summary>
+        public static string Snaks {
+            get {
+                return ResourceManager.GetString("Snaks", resourceCulture);
             }
         }
         
