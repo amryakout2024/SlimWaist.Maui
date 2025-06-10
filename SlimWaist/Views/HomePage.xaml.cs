@@ -30,42 +30,13 @@ public partial class HomePage : UraniumContentPage
 
         BindingContext = _homeVM;
 
-        timer = Application.Current?.Dispatcher.CreateTimer();
+        //timer = Application.Current?.Dispatcher.CreateTimer();
 
-        timer.Interval = TimeSpan.FromSeconds(7);
+        //timer.Interval = TimeSpan.FromSeconds(7);
 
-        timer.Tick += Timer_Tick;
-
-        this.Loaded += HomePage_Loaded;
+        //timer.Tick += Timer_Tick;
     }
 
-    private async void HomePage_Loaded(object? sender, EventArgs e)
-    {
-    
-    }
-
-    private async void Timer_Tick(object? sender, EventArgs e)
-    {
-        //chartView.Chart = new RadialGaugeChart()
-        //{
-        //    Entries = chartEntries,
-        //    IsAnimated = true,
-        //    AnimationDuration = TimeSpan.FromSeconds(5),
-        //};
-        //await NoRegiemeLabel.ScaleTo(1.2, 1000, Easing.Linear);
-        //await NoRegiemeLabel.ScaleTo(1, 1000, Easing.Linear);
-    }
-
-    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
-    {
-        base.OnNavigatedFrom(args);
-
-
-    }
-    protected override void OnNavigatingFrom(NavigatingFromEventArgs args)
-    {
-        base.OnNavigatingFrom(args);
-    }
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
@@ -75,22 +46,6 @@ public partial class HomePage : UraniumContentPage
         WantToExit = false;
 
     }
-
-    //private void ObesityDegreeCalculator()
-    //{
-    //    if (Convert.ToDouble(BMI) >= 18 && Convert.ToDouble(BMI) <= 24)
-    //        ObesityDegreeId = 1;
-    //    if (Convert.ToDouble(BMI) > 24 && Convert.ToDouble(BMI) <= 29)
-    //        ObesityDegreeId = 2;
-    //    if (Convert.ToDouble(BMI) > 29 && Convert.ToDouble(BMI) <= 34)
-    //        ObesityDegreeId = 3;
-    //    if (Convert.ToDouble(BMI) > 34 && Convert.ToDouble(BMI) <= 39)
-    //        ObesityDegreeId = 4;
-    //    if (Convert.ToDouble(BMI) > 39)
-    //        ObesityDegreeId = 5;
-
-    //    ObesityDegreeName = App.obesityDegrees.Where(x => x.ObesityDegreeId == ObesityDegreeId).FirstOrDefault().ObesityDegreeName;
-    //}
 
     private async void BmiProgressBar_Loaded(object? sender, EventArgs e)
     {

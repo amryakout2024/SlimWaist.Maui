@@ -2,6 +2,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Archives.Dictionary1">
+    <!--//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]-->
+
+
     <!--<mat:RadioButtonGroupView 
                 Grid.Row="0" 
                 SelectedItemChangedCommand="{Binding MealChangedCommand}"

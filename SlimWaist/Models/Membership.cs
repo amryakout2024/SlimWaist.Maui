@@ -20,13 +20,13 @@ namespace SlimWaist.Models
 
         public int WeightDateDay { get; set; }
 
-        public int WeightDateMounth { get; set; }
+        public int WeightDateMonth { get; set; }
 
         public int WeightDateYear { get; set; }
 
         public int BirthDateDay { get; set; }
 
-        public int BirthDateMounth { get; set; }
+        public int BirthDateMonth { get; set; }
 
         public int BirthDateYear { get; set; }
 

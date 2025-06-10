@@ -75,7 +75,7 @@ namespace SlimWaist.ViewModels
 
             Height = App.currentMembership?.Height.ToString() ?? "";
 
-            BirthDate = new DateTime(App.currentMembership.BirthDateYear, App.currentMembership.BirthDateMounth, App.currentMembership.BirthDateDay);
+            BirthDate = new DateTime(App.currentMembership.BirthDateYear, App.currentMembership.BirthDateMonth, App.currentMembership.BirthDateDay);
 
             SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==App.currentMembership.BodyActivityId).FirstOrDefault();
 
@@ -104,7 +104,7 @@ namespace SlimWaist.ViewModels
 
             App.currentMembership.BirthDateYear = BirthDate.Year;
 
-            App.currentMembership.BirthDateMounth=BirthDate.Month;
+            App.currentMembership.BirthDateMonth=BirthDate.Month;
 
             App.currentMembership.BirthDateDay=BirthDate.Day;
 

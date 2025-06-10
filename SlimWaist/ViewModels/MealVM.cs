@@ -11,115 +11,78 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class MealVM() : BaseVM
+    public partial class MealVM(DataContext dataContext) : BaseVM
     {
+        private readonly DataContext _dataContext = dataContext;
 
         [ObservableProperty]
         private string _mealTypeName;
 
-
         [ObservableProperty]
-        private List<BodyActivity> _bodyActivities;
-
-        [ObservableProperty]
-        private string _email;
-
-        [ObservableProperty]
-        private string _dateday;
+        private List<MealDetail> _mealDetails;
 
         [ObservableProperty]
         private string _datedayname;
 
         [ObservableProperty]
-        private string _datemonth;
-
-        [ObservableProperty]
-        private string _dateyear;
-
-        [ObservableProperty]
-        private string? _name;
-
-        [ObservableProperty]
-        private string? _birthDate;
-
-        [ObservableProperty]
-        private int _genderIndex;
-
-        [ObservableProperty]
-        private string? _weight;
-
-        [ObservableProperty]
-        private string? _height;
-
-        [ObservableProperty]
-        private string? _bMI;
-
-        [ObservableProperty]
-        private string? _idealWeight;
-
-        [ObservableProperty]
-        private string? _targetedWeight;
-
-        [ObservableProperty]
-        private string? _modifiedWeight;
-
-        [ObservableProperty]
-        private string? _waistCircumferenceMeasurement;
-
-        [ObservableProperty]
-        private string? _bodyActivity;
-
-        [ObservableProperty]
         private string? _totalEnergy;
-
-        [ObservableProperty]
-        private bool _isBottomSheetPresented;
-
-        [ObservableProperty]
-        private bool _isTabbarVisible;
-
-        private int ObesityDegreeId;
-
-        [ObservableProperty]
-        private string? _obesityDegreeName;
-
-        private int WaistCircumferenceId;
-
-        [ObservableProperty]
-        private string? _waistCircumferenceName;
-
-        [ObservableProperty]
-        private List<Diet> _diets;
-
 
         public async Task init()
         {
-
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName??"";
 
+            MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList();
 
+            var existingMeal = _dataContext.Database.Table<Meal>().ToList().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).FirstOrDefault();
 
-            Diets = await App.dataContext.LoadAsync<Diet>();
-            Dateday = DateTime.Now.Day.ToString();
-            Datedayname = DateTime.Now.DayOfWeek.ToString();
-            Datemonth = DateTime.Now.Month.ToString();
-            Dateyear = DateTime.Now.Year.ToString();
+            if (existingMeal is not null)
+            {
+                //var existingMealDetail = _dataContext.Database.Table<MealDetail>()
+                //    .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
+                //     x.FoodId == SelectedFood.FoodId).FirstOrDefault();
 
-            BodyActivities = App.BodyActivities;
+                //if (existingMealDetail is not null)
+                //{
+                //    if (Convert.ToInt32(Quantity) > 0)
+                //    {
+                //        existingMealDetail.Quantity = Convert.ToInt32(Quantity);
 
-            Name = App.currentMembership?.Name ?? "";
+                //        await App.dataContext.UpdateAsync(existingMealDetail);
 
-            Weight = App.currentMembership?.Weight.ToString() ?? "";
+                //        IsBottomSheetPresented = false;
 
-            Height = App.currentMembership?.Height.ToString() ?? "";
+                //        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                //    }
+                //    else
+                //    {
+                //        await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
-            BirthDate = App.currentMembership?.BirthDateDay.ToString() ?? "";
-            
-            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
+                //        IsBottomSheetPresented = false;
 
-            WaistCircumferenceMeasurement = App.currentMembership.WaistCircumferenceMeasurement.ToString();
-            
+                //        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                //    }
+
+                //}
+                //else
+                //{
+                //    var mealDetail = new MealDetail()
+                //    {
+                //        FoodId = SelectedFood.FoodId,
+                //        MealId = HomeVM.CurrentMeal.MealId,
+                //        Quantity = Convert.ToDouble(Quantity)
+                //    };
+
+                //    await App.dataContext.InsertAsync<MealDetail>(mealDetail);
+
+                //    IsBottomSheetPresented = false;
+
+                //    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                //}
+
+            }
+
         }
+
         [RelayCommand]
         private async Task GoToHomePage()
         {
@@ -143,24 +106,5 @@ namespace SlimWaist.ViewModels
         {
 
         }
-        [RelayCommand]
-        private async Task GoToDietsPage()
-        {
-            await GoToAsyncWithStack($"{nameof(DietsPage)}/{nameof(DietsPage)}", true);
-        }
-
-        [RelayCommand]
-        private async void GoToSettingPage()
-        {
-            await GoToAsyncWithStack(nameof(SettingPage), true);
-        }
-
-        [RelayCommand]
-        private async Task GoProfilePage()
-        {
-            await GoToAsyncWithStack(nameof(ProfilePage), true);
-        }
-
     }
 }
-//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]

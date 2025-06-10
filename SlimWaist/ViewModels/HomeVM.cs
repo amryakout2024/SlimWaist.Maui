@@ -11,8 +11,10 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class HomeVM(Setting setting) : BaseVM
-    {        
+    public partial class HomeVM(DataContext dataContext) : BaseVM
+    {
+        private readonly DataContext _dataContext = dataContext;
+
         [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
 
@@ -20,16 +22,16 @@ namespace SlimWaist.ViewModels
         private string _email;
 
         [ObservableProperty]
-        private string _dateday;
+        private int _dateday;
 
         [ObservableProperty]
         private string _datedayname;
 
         [ObservableProperty]
-        private string _datemonth;
+        private int _datemonth;
 
         [ObservableProperty]
-        private string _dateyear;
+        private int _dateyear;
 
         [ObservableProperty]
         private string? _name;
@@ -107,7 +109,7 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private Diet _selectedDiet;
 
-        public static Meal? CurrentMeal { get; set;}
+        public static Meal? CurrentMeal { get; set;}=new Meal();
 
         public async Task init()
         {
@@ -116,10 +118,9 @@ namespace SlimWaist.ViewModels
             Diets = await App.dataContext.LoadAsync<Diet>();
 
 
-            Dateday = DateTime.Now.Day.ToString();
-            Datedayname = DateTime.Now.DayOfWeek.ToString();
-            Datemonth = DateTime.Now.Month.ToString();
-            Dateyear = DateTime.Now.Year.ToString();
+            Dateday = Convert.ToInt32( DateTime.Now.Day);
+            Datemonth = Convert.ToInt32(DateTime.Now.Month);
+            Dateyear = Convert.ToInt32(DateTime.Now.Year);
 
             IsBottomSheetPresented = false;
             IsTabbarVisible = true;
@@ -178,8 +179,6 @@ namespace SlimWaist.ViewModels
                 },
             };
 
-            //await Task.Delay(500);
-
             Chart = new BarChart()
             {
                 Entries = chartEntries,
@@ -191,15 +190,39 @@ namespace SlimWaist.ViewModels
                 AnimationDuration = TimeSpan.FromSeconds(4),
             };
 
+            var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
+            var v1 = _dataContext.Database.Table<MealDetail>().ToList().Count();
+
+            CurrentMeal = new Meal()
+            {
+                MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
+                MembershipId=App.currentMembership.Id,
+                MealDateDay=Dateday,
+                MealDateMonth=Datemonth,
+                MealDateYear=Dateyear
+            };
+
         }
 
         [RelayCommand]
         private async Task GotoBreakfastMealPage()
         {
-            CurrentMeal = new Meal()
+            var existingMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId==0).FirstOrDefault();
+
+            if (existingMeal is not null)
             {
-                MealTypeId=0
-            };
+                CurrentMeal = existingMeal;
+            }
+            else
+            {
+                CurrentMeal.MealTypeId = 0;
+            }
+
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
@@ -207,10 +230,21 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task GotoLunchMealPage()
         {
-            CurrentMeal = new Meal()
+            var existingMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 1).FirstOrDefault();
+
+            if (existingMeal is not null)
             {
-                MealTypeId = 1
-            };
+                CurrentMeal = existingMeal;
+            }
+            else
+            {
+                CurrentMeal.MealTypeId = 1;
+            }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
@@ -218,10 +252,21 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task GotoDinnerMealPage()
         {
-            CurrentMeal = new Meal()
+            var existingMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 2).FirstOrDefault();
+
+            if (existingMeal is not null)
             {
-                MealTypeId = 2
-            };
+                CurrentMeal = existingMeal;
+            }
+            else
+            {
+                CurrentMeal.MealTypeId = 2;
+            }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
@@ -229,10 +274,21 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task GotoSnaksMealPage()
         {
-            CurrentMeal = new Meal()
+            var existingMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 3).FirstOrDefault();
+
+            if (existingMeal is not null)
             {
-                MealTypeId = 3
-            };
+                CurrentMeal = existingMeal;
+            }
+            else
+            {
+                CurrentMeal.MealTypeId = 3;
+            }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif

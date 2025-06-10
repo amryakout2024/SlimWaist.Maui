@@ -97,23 +97,23 @@ namespace SlimWaist.ViewModels
                         //    TotalFoodFibers = Math.Round(CartItems.Select(x => x.FoodFibers).Sum(), 1)
                         //});
 
-                        foreach (var cartitem in CartItems)
-                        {
-                            await App.dataContext.InsertAsync<MealDetail>(new MealDetail()
-                            {
-                                MealName = result,
-                                MealType = cartitem.MealType,
-                                FoodId = cartitem.FoodId,
-                                FoodName = cartitem.FoodName,
-                                Quantity = cartitem.Quantity,
-                                FoodCalories = cartitem.FoodCalories,
-                                FoodCarb = cartitem.FoodCarb,
-                                FoodProtien = cartitem.FoodProtien,
-                                FoodFat = cartitem.FoodFat,
-                                FoodFibers = cartitem.FoodFibers
-                            });
+                        //foreach (var cartitem in CartItems)
+                        //{
+                        //    await App.dataContext.InsertAsync<MealDetail>(new MealDetail()
+                        //    {
+                        //        MealName = result,
+                        //        MealType = cartitem.MealType,
+                        //        FoodId = cartitem.FoodId,
+                        //        FoodName = cartitem.FoodName,
+                        //        Quantity = cartitem.Quantity,
+                        //        FoodCalories = cartitem.FoodCalories,
+                        //        FoodCarb = cartitem.FoodCarb,
+                        //        FoodProtien = cartitem.FoodProtien,
+                        //        FoodFat = cartitem.FoodFat,
+                        //        FoodFibers = cartitem.FoodFibers
+                        //    });
 
-                        }
+                        //}
 
                         await ClearCart();
 

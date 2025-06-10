@@ -21,21 +21,21 @@ namespace SlimWaist.ViewModels
 
             var meals = DayMealsPage.Meals;
 
-            DayTotalCalories = Math.Round(meals.Select(x => x.TotalCalories).Sum(), 1).ToString() ?? "";
+            //DayTotalCalories = Math.Round(meals.Select(x => x.TotalCalories).Sum(), 1).ToString() ?? "";
 
-            foreach (Meal meal in meals)
-            {
-                MealGroups.Add(new MealGroup(meal.MealId,
-                    meal.MealName,
-                    meal.MealTypeId.ToString(),
-                    meal.IsSelected,
-                    meal.TotalCalories,
-                    meal.TotalFoodCarb,
-                    meal.TotalFoodProtien,
-                    meal.TotalFoodFat,
-                    meal.TotalFoodFibers,
-                    mealdetails.Where(x => x.MealName == meal.MealName).ToList()));
-            }
+            //foreach (Meal meal in meals)
+            //{
+            //    MealGroups.Add(new MealGroup(meal.MealId,
+            //        meal.MealName,
+            //        meal.MealTypeId.ToString(),
+            //        meal.IsSelected,
+            //        meal.TotalCalories,
+            //        meal.TotalFoodCarb,
+            //        meal.TotalFoodProtien,
+            //        meal.TotalFoodFat,
+            //        meal.TotalFoodFibers,
+            //        mealdetails.Where(x => x.MealName == meal.MealName).ToList()));
+            //}
         }
 
         [RelayCommand]

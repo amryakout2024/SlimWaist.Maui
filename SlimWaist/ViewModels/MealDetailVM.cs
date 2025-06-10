@@ -18,7 +18,7 @@ namespace SlimWaist.ViewModels
         {
             var mealDetails = await App.dataContext.LoadAsync<MealDetail>();
 
-            MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
+            //MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
         }
     }
 }

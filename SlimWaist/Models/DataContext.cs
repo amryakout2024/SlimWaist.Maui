@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist48";
+        public const string DbName = "SlimWaist52";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -52,10 +52,10 @@ namespace SlimWaist.Models
                     Height = 180,
                     Weight = 90,
                     WeightDateDay=28,
-                    WeightDateMounth=2,
+                    WeightDateMonth=2,
                     WeightDateYear=2025,
                     BirthDateDay=19,
-                    BirthDateMounth=8,
+                    BirthDateMonth=8,
                     BirthDateYear=1990,
                     GenderId = 1,
                     BodyActivityId=2,

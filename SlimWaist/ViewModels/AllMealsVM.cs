@@ -25,7 +25,7 @@ namespace SlimWaist.ViewModels
         public async Task Init()
         {
             AllMeals = await App.dataContext.LoadAsync<Meal>();
-            AllMeals.ForEach(x => x.IsSelected = false);
+            //AllMeals.ForEach(x => x.IsSelected = false);
 
             var breakfastMeals = await App.dataContext.LoadAsync<Meal>();
             BreakfastMeals = breakfastMeals.Where(x => x.MealTypeId == 0).ToList();
@@ -60,28 +60,28 @@ namespace SlimWaist.ViewModels
             //}
             await App.dataContext.UpdateMeal(meal);
 
-            if (meal.IsSelected == true)
-            {
+            //if (meal.IsSelected == true)
+            //{
 
-                SelectedMeals.Add(meal);
-                //if (CheckedDrugs.Count > 0)
-                //{
-                //    IsLabelVisible = true;
-                //    IsButtonVisible = true;
-                //}
-                //CountCheckedDrugs = CheckedDrugs.Count.ToString();
-            }
-            else
-            {
-                SelectedMeals.Remove(meal);
-                //if (CheckedDrugs.Count < 1)
-                //{
-                //    IsLabelVisible = false;
-                //    IsButtonVisible = false;
-                //}
+            //    SelectedMeals.Add(meal);
+            //    //if (CheckedDrugs.Count > 0)
+            //    //{
+            //    //    IsLabelVisible = true;
+            //    //    IsButtonVisible = true;
+            //    //}
+            //    //CountCheckedDrugs = CheckedDrugs.Count.ToString();
+            //}
+            //else
+            //{
+            //    SelectedMeals.Remove(meal);
+            //    //if (CheckedDrugs.Count < 1)
+            //    //{
+            //    //    IsLabelVisible = false;
+            //    //    IsButtonVisible = false;
+            //    //}
 
-                //CountCheckedDrugs = CheckedDrugs.Count.ToString();
-            }
+            //    //CountCheckedDrugs = CheckedDrugs.Count.ToString();
+            //}
         }
         [RelayCommand]
         private async Task SelectedTabChanged()
