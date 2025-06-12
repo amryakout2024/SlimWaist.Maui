@@ -93,6 +93,25 @@
                 HorizontalOptions="Center"
                 TextColor="{StaticResource MainColor}"
                 FontAttributes="Bold"/>
+                    <Label 
+                Text="{extention:TranslateExtention Key=Existingitem}" 
+                FontSize="12"
+                HorizontalOptions="End"
+                TextColor="Red"
+                FontAttributes="Bold">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Style.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsMealDetailExist}" Value="true">
+                                        <Setter Property="IsVisible" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsMealDetailExist}" Value="false">
+                                        <Setter Property="IsVisible" Value="Collapse"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
 
                     <mat:TextField 
                 Text="{Binding Quantity}"

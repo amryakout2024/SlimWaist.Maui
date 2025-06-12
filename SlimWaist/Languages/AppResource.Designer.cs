@@ -367,6 +367,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Existing item.
+        /// </summary>
+        public static string Existingitem {
+            get {
+                return ResourceManager.GetString("Existingitem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         public static string Exit {
@@ -700,6 +709,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No items to display !.
+        /// </summary>
+        public static string Noitemstodisplay {
+            get {
+                return ResourceManager.GetString("Noitemstodisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No regieme till now !.
         /// </summary>
         public static string Noregiemetillnow {
@@ -741,6 +759,15 @@ namespace SlimWaist.Languages {
         public static string Protiens {
             get {
                 return ResourceManager.GetString("Protiens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
             }
         }
         

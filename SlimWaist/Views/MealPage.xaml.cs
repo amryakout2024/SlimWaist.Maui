@@ -28,13 +28,17 @@ public partial class MealPage : UraniumContentPage
 
     }
 
-    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected async override void OnAppearing()
     {
-        base.OnNavigatedTo(args);
+        base.OnAppearing();
 
         await _mealVM.init();
-
     }
+
+    //protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    //{
+    //    base.OnNavigatedTo(args);
+    //}
 
     protected override bool OnBackButtonPressed()
     {

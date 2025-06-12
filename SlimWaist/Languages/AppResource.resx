@@ -438,4 +438,13 @@
   <data name="Snaks" xml:space="preserve">
     <value>Snaks</value>
   </data>
+  <data name="Existingitem" xml:space="preserve">
+    <value>Existing item</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="Noitemstodisplay" xml:space="preserve">
+    <value>No items to display !</value>
+  </data>
 </root>

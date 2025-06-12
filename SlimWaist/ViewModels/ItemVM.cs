@@ -47,51 +47,51 @@ namespace SlimWaist.ViewModels
 
             var existingItem =App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
 
-            if (existingItem is not null)
-            {
-                Quantity = existingItem.Quantity.ToString();
+            //if (existingItem is not null)
+            //{
+            //    Quantity = existingItem.Quantity.ToString();
 
-                FoodCalories = existingItem.FoodCalories.ToString("F1");
+            //    FoodCalories = existingItem.FoodCalories.ToString("F1");
 
-                FoodCarb = existingItem.FoodCarb.ToString("F1");
+            //    FoodCarb = existingItem.FoodCarb.ToString("F1");
 
-                FoodProtien = existingItem.FoodProtien.ToString("F1");
+            //    FoodProtien = existingItem.FoodProtien.ToString("F1");
 
-                FoodFat = existingItem.FoodFat.ToString("F1");
+            //    FoodFat = existingItem.FoodFat.ToString("F1");
 
-                FoodFibers = existingItem.FoodFibers.ToString("F1");
-            }
-            else
-            {
-                Quantity = null;
-                FoodCalories = "0.0";
-                FoodCarb = "0.0";
-                FoodProtien = "0.0";
-                FoodFat = "0.0";
-                FoodFibers = "0.0";
-            }
+            //    FoodFibers = existingItem.FoodFibers.ToString("F1");
+            //}
+            //else
+            //{
+            //    Quantity = null;
+            //    FoodCalories = "0.0";
+            //    FoodCarb = "0.0";
+            //    FoodProtien = "0.0";
+            //    FoodFat = "0.0";
+            //    FoodFibers = "0.0";
+            //}
         }
 
         [RelayCommand]
         private void ChangeQuantity()
         {
-            if(!string.IsNullOrWhiteSpace(Quantity))
-            {
-                FoodCalories = Math.Round((CartItem.FoodCalories * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodProtien = Math.Round((CartItem.FoodProtien * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodFat = Math.Round((CartItem.FoodFat * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodFibers = Math.Round((CartItem.FoodFibers * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-            }
-            else
-            {
-                FoodCalories = "0.0";
-                FoodCarb = "0.0";
-                FoodProtien = "0.0";
-                FoodFat = "0.0";
-                FoodFibers = "0.0";
-            }
+            //if(!string.IsNullOrWhiteSpace(Quantity))
+            //{
+            //    FoodCalories = Math.Round((CartItem.FoodCalories * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //    FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //    FoodProtien = Math.Round((CartItem.FoodProtien * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //    FoodFat = Math.Round((CartItem.FoodFat * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //    FoodFibers = Math.Round((CartItem.FoodFibers * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //    FoodCarb = Math.Round((CartItem.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
+            //}
+            //else
+            //{
+            //    FoodCalories = "0.0";
+            //    FoodCarb = "0.0";
+            //    FoodProtien = "0.0";
+            //    FoodFat = "0.0";
+            //    FoodFibers = "0.0";
+            //}
         }
 
         [RelayCommand]
@@ -105,51 +105,50 @@ namespace SlimWaist.ViewModels
         {
             var existingItem = App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
 
-            if (existingItem is not null)
-            {
-                if (Convert.ToInt32(Quantity) > 0)
-                {
-                    existingItem.Quantity = Convert.ToInt32(Quantity);
+            //if (existingItem is not null)
+            //{
+            //    if (Convert.ToInt32(Quantity) > 0)
+            //    {
+            //        existingItem.Quantity = Convert.ToInt32(Quantity);
 
-                    await App.dataContext.UpdateCartItem(existingItem);
+            //        await App.dataContext.UpdateCartItem(existingItem);
 
-                    await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+            //        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
-                    await Shell.Current.GoToAsync("..");
-                }
-                else
-                {
-                    await App.dataContext.DeleteAsync<CartItem>(existingItem);
+            //        await Shell.Current.GoToAsync("..");
+            //    }
+            //    else
+            //    {
+            //        await App.dataContext.DeleteAsync<CartItem>(existingItem);
 
-                    await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+            //        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
-                    await Shell.Current.GoToAsync("..");
+            //        await Shell.Current.GoToAsync("..");
 
-                }
+            //    }
 
-            }
-            else
-            {
-                var cartItem = new CartItem
-                {
-                    MealType = this.CartItem.MealType,
-                    FoodId = CartItem.FoodId,
-                    FoodName = FoodName,
-                    FoodCategory = FoodCategory,
-                    FoodCalories = Math.Round(Convert.ToDouble(FoodCalories), 1),
-                    FoodCarb = Math.Round(Convert.ToDouble(FoodCarb), 1),
-                    FoodProtien = Math.Round(Convert.ToDouble(FoodProtien), 1),
-                    FoodFat = Math.Round(Convert.ToDouble(FoodFat), 1),
-                    FoodFibers = Math.Round(Convert.ToDouble(FoodFibers), 1),
-                    Quantity = Convert.ToInt32(Quantity)
-                };
+            //}
+            //else
+            //{
+            //    var cartItem = new CartItem
+            //    {
+            //        FoodId = CartItem.FoodId,
+            //        FoodName = FoodName,
+            //        FoodCategory = FoodCategory,
+            //        FoodCalories = Math.Round(Convert.ToDouble(FoodCalories), 1),
+            //        FoodCarb = Math.Round(Convert.ToDouble(FoodCarb), 1),
+            //        FoodProtien = Math.Round(Convert.ToDouble(FoodProtien), 1),
+            //        FoodFat = Math.Round(Convert.ToDouble(FoodFat), 1),
+            //        FoodFibers = Math.Round(Convert.ToDouble(FoodFibers), 1),
+            //        Quantity = Convert.ToInt32(Quantity)
+            //    };
 
-                await App.dataContext.InsertAsync<CartItem>(cartItem);
+            //    await App.dataContext.InsertAsync<CartItem>(cartItem);
 
-                await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+            //    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
-                await Shell.Current.GoToAsync("..");
-            }
+            //    await Shell.Current.GoToAsync("..");
+            //}
 
 
             await NotifyCartCountChange();

@@ -438,4 +438,13 @@
   <data name="Snaks" xml:space="preserve">
     <value>سناكس</value>
   </data>
+  <data name="Existingitem" xml:space="preserve">
+    <value>موجود مسبقا</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="Noitemstodisplay" xml:space="preserve">
+    <value>لا يوجد عناصر لعرضها !</value>
+  </data>
 </root>

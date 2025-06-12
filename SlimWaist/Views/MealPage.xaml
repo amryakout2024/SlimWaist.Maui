@@ -9,6 +9,7 @@
              xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
              xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -40,7 +41,7 @@
 
     </ur:UraniumContentPage.Resources>
 
-    <ur:UraniumContentPage.Attachments>
+    <!--<ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView 
             BackgroundColor="LightGray"
             x:Name="btmSheet"
@@ -131,7 +132,7 @@
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
-    </ur:UraniumContentPage.Attachments>
+    </ur:UraniumContentPage.Attachments>-->
     
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding GoToHomePageCommand}"/>
@@ -176,6 +177,174 @@
         RowDefinitions="auto,auto,auto,*" 
         Padding="5,0,5,0" 
         RowSpacing="5">
+        <CollectionView 
+            Grid.Row="3"
+            SelectionMode="Single"
+            ItemsSource="{Binding CartItems}"
+            EmptyView="{extention:TranslateExtention Key=Noitemstodisplay}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate  x:DataType="m:CartItem">
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0.5"
+                        Padding="10"
+                        Margin="5" StrokeShape="RoundRectangle 5">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid ColumnDefinitions="*,*">
+                            <VerticalStackLayout 
+                                Grid.Column="0">
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Food}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodName}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Quantity}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding Quantity}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Calories}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding TotalFoodCalories}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Category}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCategory}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding TotalFoodCarb}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Protiens}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding TotalFoodProtien}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fats}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding TotalFoodFat}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fibers}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding TotalFoodFibers}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <!--<Grid 
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End">
+                                <Border 
+                                    WidthRequest="50"
+                                    BackgroundColor="{StaticResource MainColor}"
+                                    StrokeShape="RoundRectangle 10">
+                                    <Label 
+                                        Text="+" 
+                                        FontSize="25"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=ShowBottomSheetCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                </Border>
+                            </Grid>-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <!--<HorizontalStackLayout>
             <Label 

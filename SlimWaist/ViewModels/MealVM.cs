@@ -22,62 +22,79 @@ namespace SlimWaist.ViewModels
         private List<MealDetail> _mealDetails;
 
         [ObservableProperty]
+        private List<CartItem> _cartItems;
+
+        [ObservableProperty]
         private string _datedayname;
 
         [ObservableProperty]
         private string? _totalEnergy;
 
+        [ObservableProperty]
+        private string _foodName;
+
+        [ObservableProperty]
+        private string _quantity;
+
+        [ObservableProperty]
+        private string _foodCalories;
+
+        [ObservableProperty]
+        private string _totalMealCalories;
+
+        [ObservableProperty]
+        private string _foodCarb;
+
+        [ObservableProperty]
+        private string _foodProtien;
+
+        [ObservableProperty]
+        private string _foodFat;
+
+        [ObservableProperty]
+        private string _foodCategory;
+
+        [ObservableProperty]
+        private string _foodFibers;
+
         public async Task init()
         {
-            MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName??"";
+            CartItems = new List<CartItem>();
 
-            MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList();
+            MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName??"";
 
-            var existingMeal = _dataContext.Database.Table<Meal>().ToList().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).FirstOrDefault();
+            MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList()??new List<MealDetail>();
+
+            var existingMeal = _dataContext.Database.Table<Meal>().ToList().Where(x => x.MealId == HomeVM.CurrentMeal?.MealId).FirstOrDefault();
 
             if (existingMeal is not null)
             {
-                //var existingMealDetail = _dataContext.Database.Table<MealDetail>()
-                //    .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
-                //     x.FoodId == SelectedFood.FoodId).FirstOrDefault();
+                if (MealDetails.Count>0)
+                {
+                    await _dataContext.ClearAllAsync<CartItem>();
 
-                //if (existingMealDetail is not null)
-                //{
-                //    if (Convert.ToInt32(Quantity) > 0)
-                //    {
-                //        existingMealDetail.Quantity = Convert.ToInt32(Quantity);
+                    foreach (var mealDetail in MealDetails.Where(x=>x.MealId==existingMeal.MealId).ToList())
+                    {
+                        var existingFood = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
 
-                //        await App.dataContext.UpdateAsync(existingMealDetail);
+                        await _dataContext.InsertAsync<CartItem>(new CartItem()
+                        {
+                            FoodId=existingFood.FoodId,
+                            Quantity=mealDetail.Quantity,
+                            FoodName=existingFood.FoodName,
+                            FoodCategory=existingFood.FoodCategory,
+                            TotalFoodCarb = Math.Round((existingFood.FoodCarb * mealDetail.Quantity / 100), 1),
+                            TotalFoodProtien = Math.Round((existingFood.FoodProtien * mealDetail.Quantity / 100), 1),
+                            TotalFoodFat = Math.Round((existingFood.FoodFat * mealDetail.Quantity / 100), 1),
+                            TotalFoodFibers = Math.Round((existingFood.FoodFibers * mealDetail.Quantity / 100), 1),
+                            TotalFoodCalories = Math.Round((existingFood.FoodCalories * mealDetail.Quantity / 100), 1)
+                        });
 
-                //        IsBottomSheetPresented = false;
+                    }
 
-                //        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                //    }
-                //    else
-                //    {
-                //        await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
+                    CartItems = await _dataContext.LoadAsync<CartItem>();
 
-                //        IsBottomSheetPresented = false;
-
-                //        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                //    }
-
-                //}
-                //else
-                //{
-                //    var mealDetail = new MealDetail()
-                //    {
-                //        FoodId = SelectedFood.FoodId,
-                //        MealId = HomeVM.CurrentMeal.MealId,
-                //        Quantity = Convert.ToDouble(Quantity)
-                //    };
-
-                //    await App.dataContext.InsertAsync<MealDetail>(mealDetail);
-
-                //    IsBottomSheetPresented = false;
-
-                //    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                //}
+                }
 
             }
 

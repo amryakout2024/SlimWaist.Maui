@@ -28,7 +28,7 @@ namespace SlimWaist.ViewModels
         {
             CartItems = await App.dataContext.LoadAsync<CartItem>();
 
-            CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
+            //CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
             await NotifyCartCountChange();
 

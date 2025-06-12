@@ -58,6 +58,9 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string _foodFibers;
 
+        [ObservableProperty]
+        private bool _isMealDetailExist=false;
+
         public async Task Init()
         {
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
@@ -67,6 +70,8 @@ namespace SlimWaist.ViewModels
             Foods = FoodsFromDatabase;
 
             IsBottomSheetPresented = false;
+
+            TotalMealCalories = "0";
 
             var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
 
@@ -78,10 +83,6 @@ namespace SlimWaist.ViewModels
 
                     TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMealCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
                 }
-            }
-            else
-            {
-                TotalMealCalories = "0";
             }
         }
 
@@ -153,6 +154,7 @@ namespace SlimWaist.ViewModels
                 await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
             }
 
+            TotalMealCalories = "0";
 
             var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
 
@@ -164,11 +166,6 @@ namespace SlimWaist.ViewModels
 
                     TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMealCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
                 }
-
-            }
-            else
-            {
-                TotalMealCalories = "0";
 
             }
         }
@@ -189,6 +186,8 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task ShowBottomSheet(Food food)
         {
+            IsMealDetailExist = false;
+
             SelectedFood = food;
 
             FoodName = SelectedFood.FoodName ?? "";
@@ -205,6 +204,7 @@ namespace SlimWaist.ViewModels
 
                 if (existingMealDetail is not null)
                 {
+                    IsMealDetailExist = true;
                     Quantity = existingMealDetail.Quantity.ToString();
                     FoodCalories = Math.Round((SelectedFood.FoodCalories * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
                     FoodCarb = Math.Round((SelectedFood.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
