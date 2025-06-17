@@ -41,6 +41,14 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string _totalMealCalories;
+        [ObservableProperty]
+        private string _totalMealCarbohydrates;
+        [ObservableProperty]
+        private string _totalMealProtiens;
+        [ObservableProperty]
+        private string _totalMealFats;
+        [ObservableProperty]
+        private string _totalMealFibers;
 
         [ObservableProperty]
         private string _foodCarb;
@@ -57,10 +65,22 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private string _foodFibers;
 
+        [ObservableProperty]
+        private string _mealSize;
+
+        [ObservableProperty]
+        private bool _isMealExists;
+
         public async Task init()
         {
             CartItems = new List<CartItem>();
-
+            IsMealExists = false;
+            MealSize = "0";
+            TotalMealCalories = "0";
+            TotalMealCarbohydrates = "0";
+            TotalMealProtiens = "0";
+            TotalMealFats = "0";
+            TotalMealFibers = "0";
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName??"";
 
             MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList()??new List<MealDetail>();
@@ -69,6 +89,8 @@ namespace SlimWaist.ViewModels
 
             if (existingMeal is not null)
             {
+                IsMealExists = true;
+
                 if (MealDetails.Count>0)
                 {
                     await _dataContext.ClearAllAsync<CartItem>();
@@ -93,6 +115,23 @@ namespace SlimWaist.ViewModels
                     }
 
                     CartItems = await _dataContext.LoadAsync<CartItem>();
+                    
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
+
+                    if (mealDetails.Count > 0)
+                    {
+                        foreach (var mealDetail in mealDetails)
+                        {
+                            var oneFoodMeal = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+                            
+                            MealSize = Math.Round((Convert.ToDouble(MealSize) + Convert.ToDouble(mealDetail.Quantity)), 1).ToString("F0");
+                            TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMeal.FoodCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                            TotalMealCarbohydrates = Math.Round((Convert.ToDouble(TotalMealCarbohydrates) + (Convert.ToDouble(oneFoodMeal.FoodCarb) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                            TotalMealProtiens = Math.Round((Convert.ToDouble(TotalMealProtiens) + (Convert.ToDouble(oneFoodMeal.FoodProtien) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                            TotalMealFats = Math.Round((Convert.ToDouble(TotalMealFats) + (Convert.ToDouble(oneFoodMeal.FoodFat) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                            TotalMealFibers = Math.Round((Convert.ToDouble(TotalMealFibers) + (Convert.ToDouble(oneFoodMeal.FoodFibers) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                        }
+                    }
 
                 }
 

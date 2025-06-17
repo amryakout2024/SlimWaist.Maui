@@ -447,4 +447,13 @@
   <data name="Noitemstodisplay" xml:space="preserve">
     <value>No items to display !</value>
   </data>
+  <data name="Nutritionfacts" xml:space="preserve">
+    <value>Nutrition facts</value>
+  </data>
+  <data name="Mealsize" xml:space="preserve">
+    <value>Meal size</value>
+  </data>
+  <data name="Gram" xml:space="preserve">
+    <value>Grams</value>
+  </data>
 </root>

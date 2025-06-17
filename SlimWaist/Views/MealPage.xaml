@@ -174,14 +174,201 @@
     </Shell.TitleView>
 
     <Grid 
-        RowDefinitions="auto,auto,auto,*" 
+        RowDefinitions="auto,*" 
         Padding="5,0,5,0" 
         RowSpacing="5">
+        <Border
+            Stroke="Black"
+            StrokeThickness="1"
+            Grid.Row="0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="false">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <VerticalStackLayout
+                Padding="10"
+                Spacing="5">
+                
+                <Label
+                    TextColor="Black"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    Text="{extention:TranslateExtention Key=Nutritionfacts}"/>
+                <BoxView
+                    HeightRequest="2"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Mealsize}"/>
+                    <HorizontalStackLayout
+                        Spacing="5"
+                        Grid.Column="1">
+                        <Label
+                           FontAttributes="Bold"
+                    TextColor="Black"
+                    FontSize="14"
+                        Text="{Binding MealSize}"/>
+                        <Label
+                    TextColor="Black"
+                            FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Gram}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+                <BoxView
+                    HeightRequest="2"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{extention:TranslateExtention Key=Calories}"/>
+                    <Label
+                        Grid.Column="1"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="20"
+                    Text="{Binding TotalMealCalories}"/>
+                </Grid>
+                <BoxView
+                    HeightRequest="2"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Totalcarbohydrates}"/>
+                    <HorizontalStackLayout
+                        Spacing="5"
+                        Grid.Column="1">
+                        <Label
+                           FontAttributes="Bold"
+                    TextColor="Black"
+                    FontSize="14"
+                        Text="{Binding TotalMealCarbohydrates}"/>
+                        <Label
+                    TextColor="Black"
+                            FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+                <BoxView
+                    HeightRequest="1"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Totalprotiens}"/>
+                    <HorizontalStackLayout
+                        Spacing="5"
+                        Grid.Column="1">
+                        <Label
+                           FontAttributes="Bold"
+                    TextColor="Black"
+                    FontSize="14"
+                        Text="{Binding TotalMealProtiens}"/>
+                        <Label
+                    TextColor="Black"
+                            FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+                <BoxView
+                    HeightRequest="1"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Totalfats}"/>
+                    <HorizontalStackLayout
+                        Spacing="5"
+                        Grid.Column="1">
+                        <Label
+                           FontAttributes="Bold"
+                    TextColor="Black"
+                    FontSize="14"
+                        Text="{Binding TotalMealFats}"/>
+                        <Label
+                    TextColor="Black"
+                            FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+                <BoxView
+                    HeightRequest="1"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+                
+                <Grid ColumnDefinitions="*,auto">
+                    <Label
+                        Grid.Column="0"
+                    TextColor="Black"
+                        FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Totalfibers}"/>
+                    <HorizontalStackLayout
+                        Spacing="5"
+                        Grid.Column="1">
+                        <Label
+                           FontAttributes="Bold"
+                    TextColor="Black"
+                    FontSize="14"
+                        Text="{Binding TotalMealFibers}"/>
+                        <Label
+                    TextColor="Black"
+                            FontAttributes="Bold"
+                    FontSize="14"
+                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    </HorizontalStackLayout>
+                </Grid>
+                <BoxView
+                    HeightRequest="1"
+                    Margin="20,0,20,0"
+                    Color="Black" />
+
+            </VerticalStackLayout>
+        </Border>
         <CollectionView 
-            Grid.Row="3"
+            Grid.Row="1"
+            x:Name="cv"
             SelectionMode="Single"
             ItemsSource="{Binding CartItems}"
-            EmptyView="{extention:TranslateExtention Key=Noitemstodisplay}">
+            EmptyView="No items ">
             <CollectionView.ItemTemplate>
                 <DataTemplate  x:DataType="m:CartItem">
                     <Border 
@@ -224,8 +411,101 @@
                                 </VisualStateGroup>
                             </VisualStateGroupList>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid ColumnDefinitions="*,*">
-                            <VerticalStackLayout 
+                        <Grid 
+                            RowDefinitions="*,*,*,*"
+                            ColumnDefinitions="*,*">
+                            <HorizontalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
+                                <Label TextColor="DarkSlateBlue" 
+                                     Text="{extention:TranslateExtention Key=Food}"
+                                     FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+                                     Text=" : "
+                                     FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+                                     Text="{Binding FoodName}"
+                                     FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <!--<HorizontalStackLayout Grid.Row="1" Grid.Column="0">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Category}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding FoodCategory}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>-->
+
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Quantity}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding Quantity}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Calories}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding TotalFoodCalories}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout Grid.Row="2" Grid.Column="0">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Carbohydrates}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding TotalFoodCarb}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Protiens}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding TotalFoodProtien}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Row="3" Grid.Column="0">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Fats}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding TotalFoodFat}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Row="3" Grid.Column="1">
+                                <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Fibers}"
+             FontAttributes="Bold"/>
+                                <Label TextColor="DarkSlateBlue" 
+             Text=" : "
+             FontAttributes="Bold"/>
+                                <Label TextColor="IndianRed" 
+             Text="{Binding TotalFoodFibers}"
+             FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+
+                            <!--<VerticalStackLayout 
                                 Grid.Column="0">
                                 <HorizontalStackLayout>
                                     <Label TextColor="DarkSlateBlue" 
@@ -317,7 +597,7 @@
                                        Text="{Binding TotalFoodFibers}"
                                        FontAttributes="Bold"/>
                                 </HorizontalStackLayout>
-                            </VerticalStackLayout>
+                            </VerticalStackLayout>-->
                             <!--<Grid 
                                 Grid.Column="1"
                                 VerticalOptions="Center"

@@ -447,4 +447,13 @@
   <data name="Noitemstodisplay" xml:space="preserve">
     <value>لا يوجد عناصر لعرضها !</value>
   </data>
+  <data name="Nutritionfacts" xml:space="preserve">
+    <value>حقائق غذائية</value>
+  </data>
+  <data name="Mealsize" xml:space="preserve">
+    <value>حجم الوجبة</value>
+  </data>
+  <data name="Gram" xml:space="preserve">
+    <value>جرام</value>
+  </data>
 </root>

@@ -441,6 +441,15 @@ namespace SlimWaist.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Grams.
         /// </summary>
+        public static string Gram {
+            get {
+                return ResourceManager.GetString("Gram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grams.
+        /// </summary>
         public static string Grams {
             get {
                 return ResourceManager.GetString("Grams", resourceCulture);
@@ -628,6 +637,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meal size.
+        /// </summary>
+        public static string Mealsize {
+            get {
+                return ResourceManager.GetString("Mealsize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meal type.
         /// </summary>
         public static string Mealtype {
@@ -723,6 +741,15 @@ namespace SlimWaist.Languages {
         public static string Noregiemetillnow {
             get {
                 return ResourceManager.GetString("Noregiemetillnow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nutrition facts.
+        /// </summary>
+        public static string Nutritionfacts {
+            get {
+                return ResourceManager.GetString("Nutritionfacts", resourceCulture);
             }
         }
         

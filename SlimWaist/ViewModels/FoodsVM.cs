@@ -106,16 +106,22 @@ namespace SlimWaist.ViewModels
                         await App.dataContext.UpdateAsync(existingMealDetail);
 
                         IsBottomSheetPresented = false;
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
 
-                        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                        //await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
                     }
                     else
                     {
                         await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
                         IsBottomSheetPresented = false;
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
 
-                        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                        //await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
                     }
 
                 }
@@ -131,10 +137,13 @@ namespace SlimWaist.ViewModels
                     await App.dataContext.InsertAsync<MealDetail>(mealDetail);
 
                     IsBottomSheetPresented = false;
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
 
-                    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
                 }
-                
+
             }
             else
             {
@@ -151,7 +160,11 @@ namespace SlimWaist.ViewModels
 
                 IsBottomSheetPresented = false;
 
-                await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+#if ANDROID
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+
+                //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
             }
 
             TotalMealCalories = "0";
