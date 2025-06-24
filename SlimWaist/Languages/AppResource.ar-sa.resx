@@ -456,4 +456,10 @@
   <data name="Gram" xml:space="preserve">
     <value>جرام</value>
   </data>
+  <data name="Gm" xml:space="preserve">
+    <value>جم</value>
+  </data>
+  <data name="Consumed" xml:space="preserve">
+    <value>مستهلك</value>
+  </data>
 </root>

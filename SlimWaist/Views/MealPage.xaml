@@ -41,12 +41,11 @@
 
     </ur:UraniumContentPage.Resources>
 
-    <!--<ur:UraniumContentPage.Attachments>
+    <ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView 
-            BackgroundColor="LightGray"
             x:Name="btmSheet"
+            BackgroundColor="FloralWhite"
             IsPresented="{Binding IsBottomSheetPresented}">
-            
             <mat:BottomSheetView.Style>
                 <Style TargetType="mat:BottomSheetView">
                     <Style.Triggers>
@@ -59,81 +58,148 @@
                     </Style.Triggers>
                 </Style>
             </mat:BottomSheetView.Style>
-                        
+
             <mat:BottomSheetView.Body>
-                <VerticalStackLayout
-                    Spacing="5"
-                    Padding="10">
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                            IconColor="IndianRed"
-                        IsChecked="{Binding IsKetoChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                               Style="{StaticResource TitleLabel}"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Ketodiet}"
-                        TextColor="{StaticResource MainColor}"
-                        FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                        IsChecked="{Binding IsLowCarbChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                               Style="{StaticResource TitleLabel}"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Lowcarbdiet}"
-                        TextColor="{StaticResource MainColor}"
-                        FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                        IsChecked="{Binding IsServingSizeChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                        HorizontalOptions="Start"
-                           Style="{StaticResource TitleLabel}"
-                        VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Servingsizediet}"
-                        TextColor="{StaticResource MainColor}"
-                        FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <mat:CheckBox
-                        BoxSizeRequest="20"
-                        Text="{extention:TranslateExtention Key=Setasdefaultfornextdays}"
-                        TextFontSize="12"
-                        TextColor="IndianRed"
-                        Margin="20,5,5,0"/>
+                <input:FormView 
+                    Spacing="5" 
+                    Padding="10"
+                    BackgroundColor="FloralWhite"
+                    SubmitCommand="{Binding AddFoodToMealCommand}">
+                    <Label 
+                Text="{Binding FoodName}" 
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource MainColor}"
+                FontAttributes="Bold"/>
+                    
+                    <mat:TextField 
+                Text="{Binding Quantity}"
+                Title="{extention:TranslateExtention Key=Addquantity}"
+                AllowClear="True"
+                Keyboard="Numeric"
+                TextColor="DarkSlateBlue"
+                TitleColor="DarkGray"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                AccentColor="DarkSlateBlue">
+                        <mat:TextField.Validations>
+                            <helpers:ValidateForDecimalNumber/>
+                            <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+                        </mat:TextField.Validations>
+                        <mat:TextField.Behaviors>
+                            <toolkit:EventToCommandBehavior                            
+                    EventName="TextChanged"
+                    Command="{Binding Source={x:Reference this}, Path=BindingContext.ChangeQuantityCommand}">
+                            </toolkit:EventToCommandBehavior>
+                        </mat:TextField.Behaviors>
 
-                    <Button 
-                VerticalOptions="End"
-                Text="{extention:TranslateExtention Key=Save}"
-                FontSize="20"
-                BackgroundColor="DarkSlateBlue"
-                TextColor="White"
-                Padding="0" 
-                Margin="10"
-                input:FormView.IsSubmitButton="True"
-                StyleClass="FilledButton"
-                Command="{Binding SaveDietCommand}"/>
+                    </mat:TextField>
 
-                </VerticalStackLayout>
+                    <VerticalStackLayout 
+                Grid.Column="0">
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Category}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCategory}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Calories}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCalories}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCarb}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Protiens}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodProtien}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fats}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFat}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fibers}"
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                            <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFibers}"
+                                       FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button 
+                    Grid.Column="0"
+                    Text="{extention:TranslateExtention Key=Update}"
+                    FontAttributes="Bold"
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    Padding="0" 
+                    FontSize="14"
+                    input:FormView.IsSubmitButton="True"
+                    StyleClass="FilledButton"
+                    Command="{Binding AddFoodToMealCommand}"/>
+                        <Button 
+                    Grid.Column="1"
+                    Text="{extention:TranslateExtention Key=Cancel}"
+                    FontAttributes="Bold"
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    Padding="0" 
+                    FontSize="14"
+                            Command="{Binding HideBottomSheetCommand}"
+                    input:FormView.IsSubmitButton="False"
+                    StyleClass="FilledButton"
+                    />
+                    </Grid>
+
+                </input:FormView>
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
-    </ur:UraniumContentPage.Attachments>-->
-    
+    </ur:UraniumContentPage.Attachments>
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding GoToHomePageCommand}"/>
     </Shell.BackButtonBehavior>
@@ -411,31 +477,20 @@
                                 </VisualStateGroup>
                             </VisualStateGroupList>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid 
-                            RowDefinitions="*,*,*,*"
+                        <Grid
+                            RowDefinitions="*,*,*,*,auto"
                             ColumnDefinitions="*,*">
                             <HorizontalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
-                                <Label TextColor="DarkSlateBlue" 
+                                <!--<Label TextColor="DarkSlateBlue" 
                                      Text="{extention:TranslateExtention Key=Food}"
-                                     FontAttributes="Bold"/>
-                                <Label TextColor="DarkSlateBlue" 
+                                     FontAttributes="Bold"/>-->
+                                <!--<Label TextColor="DarkSlateBlue" 
                                      Text=" : "
-                                     FontAttributes="Bold"/>
+                                     FontAttributes="Bold"/>-->
                                 <Label TextColor="IndianRed" 
                                      Text="{Binding FoodName}"
                                      FontAttributes="Bold"/>
                             </HorizontalStackLayout>
-                            <!--<HorizontalStackLayout Grid.Row="1" Grid.Column="0">
-                                <Label TextColor="DarkSlateBlue" 
-             Text="{extention:TranslateExtention Key=Category}"
-             FontAttributes="Bold"/>
-                                <Label TextColor="DarkSlateBlue" 
-             Text=" : "
-             FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
-             Text="{Binding FoodCategory}"
-             FontAttributes="Bold"/>
-                            </HorizontalStackLayout>-->
 
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
                                 <Label TextColor="DarkSlateBlue" 
@@ -444,9 +499,16 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+                                    <Label TextColor="IndianRed" 
              Text="{Binding Quantity}"
              FontAttributes="Bold"/>
+
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Gm}"
+             />
+
+                                </HorizontalStackLayout>
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
                                 <Label TextColor="DarkSlateBlue" 
@@ -455,9 +517,17 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+
+                                    <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodCalories}"
              FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Calories}"
+            />
+
+                                </HorizontalStackLayout>
+
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Row="2" Grid.Column="0">
@@ -467,9 +537,17 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+
+                                    <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodCarb}"
              FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Gm}"
+             />
+
+                                </HorizontalStackLayout>
+
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
                                 <Label TextColor="DarkSlateBlue" 
@@ -478,9 +556,17 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+
+                                    <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodProtien}"
              FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Gm}"
+             />
+
+                                </HorizontalStackLayout>
+
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Row="3" Grid.Column="0">
                                 <Label TextColor="DarkSlateBlue" 
@@ -489,9 +575,17 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+
+                                    <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodFat}"
              FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Gm}"
+             />
+
+                                </HorizontalStackLayout>
+
                             </HorizontalStackLayout>
                             <HorizontalStackLayout Grid.Row="3" Grid.Column="1">
                                 <Label TextColor="DarkSlateBlue" 
@@ -500,126 +594,57 @@
                                 <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                <Label TextColor="IndianRed" 
+                                <HorizontalStackLayout Spacing="5">
+
+                                    <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodFibers}"
              FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+             Text="{extention:TranslateExtention Key=Gm}"
+             />
+
+                                </HorizontalStackLayout>
+
                             </HorizontalStackLayout>
 
-                            <!--<VerticalStackLayout 
-                                Grid.Column="0">
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Food}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodName}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Quantity}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding Quantity}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Calories}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding TotalFoodCalories}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Category}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodCategory}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding TotalFoodCarb}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Protiens}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding TotalFoodProtien}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Fats}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding TotalFoodFat}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Fibers}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding TotalFoodFibers}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                            </VerticalStackLayout>-->
-                            <!--<Grid 
+                            <HorizontalStackLayout 
+                                Grid.Row="4"
+                                HorizontalOptions="End"
                                 Grid.Column="1"
-                                VerticalOptions="Center"
-                                HorizontalOptions="End">
-                                <Border 
-                                    WidthRequest="50"
-                                    BackgroundColor="{StaticResource MainColor}"
-                                    StrokeShape="RoundRectangle 10">
-                                    <Label 
-                                        Text="+" 
-                                        FontSize="25"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Center"/>
-                                    <Border.GestureRecognizers>
+                                Margin="0,0,10,0"
+                                Spacing="20">
+                                <Image Grid.Row="0"
+                                       WidthRequest="20"
+                                       HeightRequest="20"
+                                       Source="edit4.png">
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                                    </Image.Behaviors>
+                                    <Image.GestureRecognizers>
                                         <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=ShowBottomSheetCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MealVM}},Path=ShowBottomSheetCommand}"
                                                 CommandParameter="{Binding .}"/>
-                                    </Border.GestureRecognizers>
-                                </Border>
-                            </Grid>-->
+
+                                        <TapGestureRecognizer Command="{Binding Show}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Grid.Row="1"
+                                       HeightRequest="20"
+                                       WidthRequest="20"
+                                       Source="trash1.png">
+                                    <Image.Behaviors>
+                                        <toolkit:IconTintColorBehavior TintColor="IndianRed"/>
+                                    </Image.Behaviors>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MealVM}},Path=DeleteMealDetailCommand}"
+                                                CommandParameter="{Binding .}"/>
+
+                                        <TapGestureRecognizer Command="{Binding Show}"/>
+                                    </Image.GestureRecognizers>
+
+                                </Image>
+                            </HorizontalStackLayout>
                         </Grid>
                     </Border>
                 </DataTemplate>

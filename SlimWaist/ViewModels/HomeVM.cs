@@ -68,6 +68,20 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string? _totalEnergy;
+        [ObservableProperty]
+        private string? _totalConsumedEnergy;
+        [ObservableProperty]
+        private string? _totalRemainingEnergy;
+
+
+        [ObservableProperty]
+        private string? _totalBreakfastEnergy;
+        [ObservableProperty]
+        private string? _totalLunchEnergy;
+        [ObservableProperty]
+        private string? _totalDinnerEnergy;
+        [ObservableProperty]
+        private string? _totalSnaksEnergy;
 
         [ObservableProperty]
         private bool _isBottomSheetPresented;
@@ -84,6 +98,9 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string? _waistCircumferenceName;
+
+        [ObservableProperty]
+        private double _percentConsumed;
 
         [ObservableProperty]
         private ObservableCollection<RegimeList> _regimeLists;
@@ -111,9 +128,21 @@ namespace SlimWaist.ViewModels
 
         public static Meal? CurrentMeal { get; set;}=new Meal();
 
+        private Meal ExistingBreakfastMeal=new Meal();
+        private Meal ExistingLunchMeal=new Meal();
+        private Meal ExistingDinnerMeal=new Meal();
+        private Meal ExistingSnaksMeal=new Meal();
         public async Task init()
         {
             //Preferences.Set("Email", "");
+
+            TotalEnergy = "0";
+            TotalRemainingEnergy = TotalEnergy;
+            TotalConsumedEnergy = "0";
+            TotalBreakfastEnergy = "0";
+            TotalLunchEnergy = "0";
+            TotalDinnerEnergy = "0";
+            TotalSnaksEnergy = "0";
 
             Diets = await App.dataContext.LoadAsync<Diet>();
 
@@ -154,43 +183,9 @@ namespace SlimWaist.ViewModels
 
             ObesityDegreeCalculator();
 
-            chartEntries = new ChartEntry[]
-            {
-                new ChartEntry((float)Math.Round(Convert.ToDouble(Weight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Weight",CultureInfo.CurrentCulture),
-                    ValueLabel=Weight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-                new ChartEntry((float) Math.Round(Convert.ToDouble(IdealWeight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Idealweight",CultureInfo.CurrentCulture),
-                    ValueLabel=IdealWeight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-                new ChartEntry((float)Math.Round( Convert.ToDouble(ModifiedWeight),2))
-                {
-                    Label=AppResource.ResourceManager.GetString( "Modifiedweight",CultureInfo.CurrentCulture),
-                    ValueLabel=ModifiedWeight,
-                    Color=SKColor.Parse("#127a0f"),
-                    TextColor=SKColor.Parse("#127a0f")
-                },
-            };
-
-            Chart = new BarChart()
-            {
-                Entries = chartEntries,
-                IsAnimated = true,
-                LabelTextSize = 14,
-                ValueLabelTextSize = 14,
-                SerieLabelTextSize = 14,
-                LabelOrientation = Orientation.Vertical,
-                AnimationDuration = TimeSpan.FromSeconds(4),
-            };
-
+            
             var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
+            
             var v1 = _dataContext.Database.Table<MealDetail>().ToList().Count();
 
             CurrentMeal = new Meal()
@@ -202,21 +197,140 @@ namespace SlimWaist.ViewModels
                 MealDateYear=Dateyear
             };
 
+            ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 0).FirstOrDefault()??new Meal();
+            ExistingLunchMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 1).FirstOrDefault()??new Meal();
+            ExistingDinnerMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 2).FirstOrDefault()??new Meal();
+            ExistingSnaksMeal = _dataContext.Database.Table<Meal>()
+                .Where(x => x.MembershipId == App.currentMembership.Id
+                && x.MealDateDay == Dateday
+                && x.MealDateMonth == Datemonth
+                && x.MealDateYear == Dateyear
+                && x.MealTypeId == 3).FirstOrDefault()??new Meal();
+            TotalConsumedEnergy = "0";
+            TotalConsumedEnergy = "0";
+            TotalBreakfastEnergy = "0";
+            TotalLunchEnergy = "0";
+            TotalDinnerEnergy = "0";
+            TotalSnaksEnergy = "0";
+
+            if (ExistingBreakfastMeal.IsExistsInDb == true)
+            {
+                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                if (mealDetails.Count > 0)
+                {
+                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList())
+                    {
+                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                        TotalBreakfastEnergy = (Convert.ToDouble(TotalBreakfastEnergy)+ Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                    }
+                }
+            }
+
+            if (ExistingLunchMeal.IsExistsInDb == true)
+            {
+                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                if (mealDetails.Count > 0)
+                {
+                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList())
+                    {
+                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                        TotalLunchEnergy = (Convert.ToDouble(TotalLunchEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                    }
+                }
+            }
+
+            if (ExistingDinnerMeal.IsExistsInDb == true)
+            {
+                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                if (mealDetails.Count > 0)
+                {
+                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList())
+                    {
+                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                        TotalDinnerEnergy = (Convert.ToDouble(TotalDinnerEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                    }
+                }
+            }
+
+            if (ExistingSnaksMeal.IsExistsInDb == true)
+            {
+                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                if (mealDetails.Count > 0)
+                {
+                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList())
+                    {
+                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                        TotalSnaksEnergy = (Convert.ToDouble(TotalSnaksEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                    }
+                }
+            }
+
+            TotalConsumedEnergy = Math.Round(
+                Convert.ToDouble(TotalBreakfastEnergy) +
+                Convert.ToDouble(TotalLunchEnergy) +
+                Convert.ToDouble(TotalDinnerEnergy) +
+                Convert.ToDouble(TotalSnaksEnergy),1).ToString("F1");
+            
+            TotalRemainingEnergy = Math.Round(
+                Convert.ToDouble(TotalEnergy) -
+                Convert.ToDouble(TotalConsumedEnergy), 1).ToString("F1");
+
+            var PercentRemain = (float)((Convert.ToDouble(TotalRemainingEnergy) / Convert.ToDouble(TotalEnergy) * 100));
+            PercentConsumed = Math.Round((Convert.ToDouble(TotalConsumedEnergy) / Convert.ToDouble(TotalEnergy) * 100),1);
+
+            chartEntries = new ChartEntry[]
+            {
+                
+                //red first
+                new ChartEntry((float)PercentConsumed)
+                {
+                    Color=SKColor.Parse("#a10a14"),
+                },
+                new ChartEntry(PercentRemain)
+                {
+                    Color=SKColor.Parse("#199c77"),
+                }
+
+            };
+            
+            Chart = new DonutChart()
+            {
+                Entries = chartEntries,
+                IsAnimated = true,
+                LabelTextSize = 14,
+                AnimationDuration = TimeSpan.FromSeconds(4),
+            };
         }
 
         [RelayCommand]
         private async Task GotoBreakfastMealPage()
         {
-            var existingMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId==0).FirstOrDefault();
-
-            if (existingMeal is not null)
+            if (ExistingBreakfastMeal.IsExistsInDb==true)
             {
-                CurrentMeal = existingMeal;
+                CurrentMeal = ExistingBreakfastMeal;
             }
             else
             {
@@ -227,19 +341,13 @@ namespace SlimWaist.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
         }
+        
         [RelayCommand]
         private async Task GotoLunchMealPage()
         {
-            var existingMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 1).FirstOrDefault();
-
-            if (existingMeal is not null)
+            if (ExistingLunchMeal.IsExistsInDb == true)
             {
-                CurrentMeal = existingMeal;
+                CurrentMeal = ExistingLunchMeal;
             }
             else
             {
@@ -249,19 +357,13 @@ namespace SlimWaist.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
         }
+        
         [RelayCommand]
         private async Task GotoDinnerMealPage()
         {
-            var existingMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 2).FirstOrDefault();
-
-            if (existingMeal is not null)
+            if (ExistingDinnerMeal.IsExistsInDb == true)
             {
-                CurrentMeal = existingMeal;
+                CurrentMeal = ExistingDinnerMeal;
             }
             else
             {
@@ -271,19 +373,13 @@ namespace SlimWaist.ViewModels
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
         }
+        
         [RelayCommand]
         private async Task GotoSnaksMealPage()
         {
-            var existingMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 3).FirstOrDefault();
-
-            if (existingMeal is not null)
+            if (ExistingSnaksMeal.IsExistsInDb == true)
             {
-                CurrentMeal = existingMeal;
+                CurrentMeal = ExistingSnaksMeal;
             }
             else
             {

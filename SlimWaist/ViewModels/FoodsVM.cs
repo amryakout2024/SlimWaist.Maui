@@ -147,6 +147,8 @@ namespace SlimWaist.ViewModels
             }
             else
             {
+                HomeVM.CurrentMeal.IsExistsInDb = true;
+
                 await App.dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
 
                 var mealDetail = new MealDetail()
@@ -182,9 +184,21 @@ namespace SlimWaist.ViewModels
 
             }
         }
-
         [RelayCommand]
         private async Task Search()
+        {
+            if (!string.IsNullOrEmpty(SearchName))
+            {
+                Foods = FoodsFromDatabase.Where(x => x.FoodName.Contains(SearchName)).ToList();
+            }
+            else
+            {
+                Foods = FoodsFromDatabase;
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteMealDetail()
         {
             if (!string.IsNullOrEmpty(SearchName))
             {
@@ -266,7 +280,6 @@ namespace SlimWaist.ViewModels
                 FoodProtien = Math.Round((SelectedFood.FoodProtien * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
                 FoodFat = Math.Round((SelectedFood.FoodFat * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
                 FoodFibers = Math.Round((SelectedFood.FoodFibers * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
-                FoodCarb = Math.Round((SelectedFood.FoodCarb * Convert.ToDouble(Quantity) / 100), 1).ToString("F1");
             }
             else
             {

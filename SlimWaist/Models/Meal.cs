@@ -12,6 +12,8 @@ namespace SlimWaist.Models
 
         public int MembershipId { get; set; }
 
+        public bool IsExistsInDb { get; set; }=false;
+
         public int MealDateDay { get; set; }
 
         public int MealDateMonth { get; set; }

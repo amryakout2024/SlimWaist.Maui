@@ -456,4 +456,10 @@
   <data name="Gram" xml:space="preserve">
     <value>Grams</value>
   </data>
+  <data name="Gm" xml:space="preserve">
+    <value>gm</value>
+  </data>
+  <data name="Consumed" xml:space="preserve">
+    <value>Consumed</value>
+  </data>
 </root>

@@ -223,6 +223,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consumed.
+        /// </summary>
+        public static string Consumed {
+            get {
+                return ResourceManager.GetString("Consumed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consumed calories.
         /// </summary>
         public static string Consumedcalories {
@@ -435,6 +444,15 @@ namespace SlimWaist.Languages {
         public static string Foods {
             get {
                 return ResourceManager.GetString("Foods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gm.
+        /// </summary>
+        public static string Gm {
+            get {
+                return ResourceManager.GetString("Gm", resourceCulture);
             }
         }
         

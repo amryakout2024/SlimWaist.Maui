@@ -33,10 +33,6 @@ namespace SlimWaist
                 .UseUraniumUIMaterial()
                 .UseMicrocharts()
                 .UseSkiaSharp()
-                .UseSentry(options =>
-                {
-                    options.Dsn = "https://cf56e869a0b99378014d4959f18b6619@o4509224782528512.ingest.de.sentry.io/4509224784822352";
-                })
                 .ConfigureMauiHandlers(handlers =>
                 {
                     handlers.AddInputKitHandlers();
@@ -123,3 +119,7 @@ namespace SlimWaist
 }
 //.ConfigureMopups()
 //builder.Services.AddMopupsDialogs();
+                //.UseSentry(options =>
+                // {
+                //     options.Dsn = "https://cf56e869a0b99378014d4959f18b6619@o4509224782528512.ingest.de.sentry.io/4509224784822352";
+                // })

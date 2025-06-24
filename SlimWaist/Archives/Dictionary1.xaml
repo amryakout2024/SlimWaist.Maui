@@ -4,6 +4,29 @@
              x:Class="SlimWaist.Archives.Dictionary1">
     <!--//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]-->
 
+    <!--//ValueLabelTextSize = 14,
+            //    SerieLabelTextSize = 14,
+            //    LabelOrientation = Orientation.Vertical,-->
+
+
+    <!--//chartEntries = new ChartEntry[]
+//{
+//    new ChartEntry(75)
+//    {
+//        Label=AppResource.ResourceManager.GetString( "Weight",CultureInfo.CurrentCulture),
+//        ValueLabel=Weight,
+//        Color=SKColor.Parse("#127a0f"),
+//        TextColor=SKColor.Parse("#127a0f")
+//    },
+//    new ChartEntry(25)
+//    {
+//        Label=AppResource.ResourceManager.GetString( "Idealweight",CultureInfo.CurrentCulture),
+//        ValueLabel=IdealWeight,
+//        Color=SKColor.Parse("#1c6ced"),
+//        TextColor=SKColor.Parse("#127a0f")
+//    }
+//};
+//new ChartEntry((float)Math.Round(Convert.ToDouble(Weight), 2))-->
 
     <!--<mat:RadioButtonGroupView 
                 Grid.Row="0" 
