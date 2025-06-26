@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microcharts;
 using Microcharts.Maui;
@@ -127,11 +128,19 @@ namespace SlimWaist.ViewModels
         private Diet _selectedDiet;
 
         public static Meal? CurrentMeal { get; set;}=new Meal();
+        public static DayDiet? CurrentDayDiet { get; set;}=new DayDiet();
 
         private Meal ExistingBreakfastMeal=new Meal();
         private Meal ExistingLunchMeal=new Meal();
         private Meal ExistingDinnerMeal=new Meal();
         private Meal ExistingSnaksMeal=new Meal();
+        private List<DayDiet> ExistingDayDiets=new List<DayDiet>();
+        private DayDiet ExistingDayDiet;
+
+        private DateTime SelectedDateFromUser { get; set; }
+
+        private DateTime ExistingDayDietDate { get; set; }
+
         public async Task init()
         {
             //Preferences.Set("Email", "");
@@ -143,90 +152,75 @@ namespace SlimWaist.ViewModels
             TotalLunchEnergy = "0";
             TotalDinnerEnergy = "0";
             TotalSnaksEnergy = "0";
-
-            Diets = await App.dataContext.LoadAsync<Diet>();
-
-
-            Dateday = Convert.ToInt32( DateTime.Now.Day);
-            Datemonth = Convert.ToInt32(DateTime.Now.Month);
-            Dateyear = Convert.ToInt32(DateTime.Now.Year);
-
             IsBottomSheetPresented = false;
             IsTabbarVisible = true;
+
+
             BodyActivities = App.BodyActivities;
-
             Name = App.currentMembership?.Name ?? "";
-
-            Weight = App.currentMembership?.Weight.ToString() ?? "";
-
-            Height = App.currentMembership?.Height.ToString() ?? "";
-
+            Weight = App.currentMembership?.Weight.ToString() ?? "";            Height = App.currentMembership?.Height.ToString() ?? "";
             BirthDate = App.currentMembership?.BirthDateDay.ToString() ?? "";
-            
-            BodyActivity = BodyActivities.Where(x=>x.BodyActivityId== App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
-
+            BodyActivity = BodyActivities.Where(x => x.BodyActivityId == App.currentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
             WaistCircumferenceMeasurement = App.currentMembership.WaistCircumferenceMeasurement.ToString();
-            
-            BmiCalculator();
-
-            IdealWeightCalculator();
-
             TargetedWeight = IdealWeight;
 
+            Diets = await App.dataContext.LoadAsync<Diet>();
+            
+            SelectedDateFromUser=new DateTime(
+                Convert.ToInt32(DateTime.Now.Year)
+                , Convert.ToInt32(DateTime.Now.Month)
+                , Convert.ToInt32(DateTime.Now.Day));
+            
+            Dateday=SelectedDateFromUser.Day;
+            Datemonth=SelectedDateFromUser.Month;
+            Dateyear=SelectedDateFromUser.Year;
+    
+            BmiCalculator();
+            IdealWeightCalculator();
             ModifiedWeightCalculator();
-
-            //BodyActivityCalculator();
-
             TotalEnergyCalculator(App.currentMembership.BodyActivityId);
-
             WaistCircumferenceEvaluationCalculator();
-
             ObesityDegreeCalculator();
 
-            
-            var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
-            
-            var v1 = _dataContext.Database.Table<MealDetail>().ToList().Count();
+            CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+                .Where(x => x.MembershipId == App.currentMembership.Id)
+                .Where(x=>x.DayDietDate==SelectedDateFromUser).FirstOrDefault()??new DayDiet();
+            var dayDietCount = _dataContext.Database.Table<DayDiet>().ToList().Count();
+            if (CurrentDayDiet.IsExistsInDb)
+            {
+                SelectedDiet = Diets.Where(x => x.DietId == CurrentDayDiet.DietId).FirstOrDefault();
+            }
+            else
+            {
+                CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
+                CurrentDayDiet.MembershipId = App.currentMembership.Id;
+                CurrentDayDiet.DayDietDate = new DateTime(
+                    SelectedDateFromUser.Year
+                    , SelectedDateFromUser.Month
+                    , SelectedDateFromUser.Day);
+            }
 
+            var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
             CurrentMeal = new Meal()
             {
                 MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
                 MembershipId=App.currentMembership.Id,
-                MealDateDay=Dateday,
-                MealDateMonth=Datemonth,
-                MealDateYear=Dateyear
+                DayDietId=CurrentDayDiet.DayDietId
             };
 
             ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
                 .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 0).FirstOrDefault()??new Meal();
+                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
             ExistingLunchMeal = _dataContext.Database.Table<Meal>()
                 .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 1).FirstOrDefault()??new Meal();
+                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
             ExistingDinnerMeal = _dataContext.Database.Table<Meal>()
                 .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 2).FirstOrDefault()??new Meal();
+                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
             ExistingSnaksMeal = _dataContext.Database.Table<Meal>()
                 .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.MealDateDay == Dateday
-                && x.MealDateMonth == Datemonth
-                && x.MealDateYear == Dateyear
-                && x.MealTypeId == 3).FirstOrDefault()??new Meal();
-            TotalConsumedEnergy = "0";
-            TotalConsumedEnergy = "0";
-            TotalBreakfastEnergy = "0";
-            TotalLunchEnergy = "0";
-            TotalDinnerEnergy = "0";
-            TotalSnaksEnergy = "0";
+                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
+
 
             if (ExistingBreakfastMeal.IsExistsInDb == true)
             {
@@ -242,7 +236,6 @@ namespace SlimWaist.ViewModels
                     }
                 }
             }
-
             if (ExistingLunchMeal.IsExistsInDb == true)
             {
                 var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
@@ -257,7 +250,6 @@ namespace SlimWaist.ViewModels
                     }
                 }
             }
-
             if (ExistingDinnerMeal.IsExistsInDb == true)
             {
                 var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
@@ -272,7 +264,6 @@ namespace SlimWaist.ViewModels
                     }
                 }
             }
-
             if (ExistingSnaksMeal.IsExistsInDb == true)
             {
                 var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
@@ -293,7 +284,6 @@ namespace SlimWaist.ViewModels
                 Convert.ToDouble(TotalLunchEnergy) +
                 Convert.ToDouble(TotalDinnerEnergy) +
                 Convert.ToDouble(TotalSnaksEnergy),1).ToString("F1");
-            
             TotalRemainingEnergy = Math.Round(
                 Convert.ToDouble(TotalEnergy) -
                 Convert.ToDouble(TotalConsumedEnergy), 1).ToString("F1");
@@ -315,7 +305,6 @@ namespace SlimWaist.ViewModels
                 }
 
             };
-            
             Chart = new DonutChart()
             {
                 Entries = chartEntries,
@@ -328,66 +317,118 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task GotoBreakfastMealPage()
         {
-            if (ExistingBreakfastMeal.IsExistsInDb==true)
+            if (SelectedDiet!=null)
             {
-                CurrentMeal = ExistingBreakfastMeal;
-            }
-            else
-            {
-                CurrentMeal.MealTypeId = 0;
-            }
+                if (CurrentDayDiet.IsExistsInDb==false)
+                {
+                    CurrentDayDiet.DietId = SelectedDiet.DietId ;
+                }
+                if (ExistingBreakfastMeal.IsExistsInDb == true)
+                {
+                    CurrentMeal = ExistingBreakfastMeal;
+                }
+                else
+                {
+                    CurrentMeal.MealTypeId = 0;
+                }
 
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
+            }
+            else
+            {
+                await ShowToastAsync(AppResource.ResourceManager.GetString("Pleaseselectdiettype", CultureInfo.CurrentCulture) ?? "");
+
+            }
+
         }
         
         [RelayCommand]
         private async Task GotoLunchMealPage()
         {
-            if (ExistingLunchMeal.IsExistsInDb == true)
+            if (SelectedDiet != null)
             {
-                CurrentMeal = ExistingLunchMeal;
-            }
-            else
-            {
-                CurrentMeal.MealTypeId = 1;
-            }
+                if (CurrentDayDiet.IsExistsInDb == false)
+                {
+                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                }
+                if (ExistingLunchMeal.IsExistsInDb == true)
+                {
+                    CurrentMeal = ExistingLunchMeal;
+                }
+                else
+                {
+                    CurrentMeal.MealTypeId = 1;
+                }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
+            }
+            else
+            {
+                await ShowToastAsync(AppResource.ResourceManager.GetString("Pleaseselectdiettype", CultureInfo.CurrentCulture) ?? "");
+            }
+
+
         }
         
         [RelayCommand]
         private async Task GotoDinnerMealPage()
         {
-            if (ExistingDinnerMeal.IsExistsInDb == true)
+            if (SelectedDiet != null)
             {
-                CurrentMeal = ExistingDinnerMeal;
-            }
-            else
-            {
-                CurrentMeal.MealTypeId = 2;
-            }
+                if (CurrentDayDiet.IsExistsInDb == false)
+                {
+                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                }
+                if (ExistingDinnerMeal.IsExistsInDb == true)
+                {
+                    CurrentMeal = ExistingDinnerMeal;
+                }
+                else
+                {
+                    CurrentMeal.MealTypeId = 2;
+                }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
+            }
+            else
+            {
+                await ShowToastAsync(AppResource.ResourceManager.GetString("Pleaseselectdiettype", CultureInfo.CurrentCulture) ?? "");
+            }
+
+
         }
         
         [RelayCommand]
         private async Task GotoSnaksMealPage()
         {
-            if (ExistingSnaksMeal.IsExistsInDb == true)
+            if (SelectedDiet != null)
             {
-                CurrentMeal = ExistingSnaksMeal;
-            }
-            else
-            {
-                CurrentMeal.MealTypeId = 3;
-            }
+                if (CurrentDayDiet.IsExistsInDb == false)
+                {
+                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                }
+                if (ExistingSnaksMeal.IsExistsInDb == true)
+                {
+                    CurrentMeal = ExistingSnaksMeal;
+                }
+                else
+                {
+                    CurrentMeal.MealTypeId = 3;
+                }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
+            }
+            else
+            {
+                await ShowToastAsync(AppResource.ResourceManager.GetString("Pleaseselectdiettype", CultureInfo.CurrentCulture) ?? "");
+            }
+
+
         }
 
         [RelayCommand]

@@ -462,4 +462,7 @@
   <data name="Consumed" xml:space="preserve">
     <value>Consumed</value>
   </data>
+  <data name="Pleaseselectdiettype" xml:space="preserve">
+    <value>Please select diet type</value>
+  </data>
 </root>

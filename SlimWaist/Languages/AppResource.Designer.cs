@@ -790,6 +790,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select diet type.
+        /// </summary>
+        public static string Pleaseselectdiettype {
+            get {
+                return ResourceManager.GetString("Pleaseselectdiettype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prepare your favorite meal.
         /// </summary>
         public static string Prepareyourfavoritemeal {

@@ -462,4 +462,7 @@
   <data name="Consumed" xml:space="preserve">
     <value>مستهلك</value>
   </data>
+  <data name="Pleaseselectdiettype" xml:space="preserve">
+    <value>يرجي اختيار نوع الدايت</value>
+  </data>
 </root>

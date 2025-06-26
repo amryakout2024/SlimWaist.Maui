@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist55";
+        public const string DbName = "SlimWaist58";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -40,6 +40,8 @@ namespace SlimWaist.Models
                 Database.CreateTable<MealDetail>();
 
                 Database.CreateTable<Diet>();
+
+                Database.CreateTable<DayDiet>();
 
                 ///////inserting data////////
 
