@@ -92,58 +92,81 @@ namespace SlimWaist.ViewModels
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName??"";
 
             MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList()??new List<MealDetail>();
-
-            var existingMeal = _dataContext.Database.Table<Meal>().ToList().Where(x => x.MealId == HomeVM.CurrentMeal?.MealId).FirstOrDefault();
-
-            if (existingMeal is not null)
+           
+            if (MealDetails.Count > 0)
             {
+                IsMealExists = true;
 
-                if (MealDetails.Count>0)
+                await _dataContext.ClearAllAsync<CartItem>();
+
+                foreach (var mealDetail in MealDetails)
                 {
-                    IsMealExists = true;
-
-                    await _dataContext.ClearAllAsync<CartItem>();
-
-                    foreach (var mealDetail in MealDetails.Where(x=>x.MealId==existingMeal.MealId).ToList())
-                    {
-                        var existingFood = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-
-                        await _dataContext.InsertAsync<CartItem>(new CartItem()
-                        {
-                            FoodId=existingFood.FoodId,
-                            Quantity=mealDetail.Quantity,
-                            FoodName=existingFood.FoodName,
-                            FoodCategory=existingFood.FoodCategory,
-                            TotalFoodCarb = Math.Round((existingFood.FoodCarb * mealDetail.Quantity / 100), 1),
-                            TotalFoodProtien = Math.Round((existingFood.FoodProtien * mealDetail.Quantity / 100), 1),
-                            TotalFoodFat = Math.Round((existingFood.FoodFat * mealDetail.Quantity / 100), 1),
-                            TotalFoodFibers = Math.Round((existingFood.FoodFibers * mealDetail.Quantity / 100), 1),
-                            TotalFoodCalories = Math.Round((existingFood.FoodCalories * mealDetail.Quantity / 100), 1)
-                        });
-
-                    }
-
-                    CartItems = await _dataContext.LoadAsync<CartItem>();
+                    var existingFood = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
                     
-                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
+                    MealSize = Math.Round((Convert.ToDouble(MealSize) + Convert.ToDouble(mealDetail.Quantity)), 1).ToString("F0");
+                    TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(existingFood.FoodCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                    TotalMealCarbohydrates = Math.Round((Convert.ToDouble(TotalMealCarbohydrates) + (Convert.ToDouble(existingFood.FoodCarb) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                    TotalMealProtiens = Math.Round((Convert.ToDouble(TotalMealProtiens) + (Convert.ToDouble(existingFood.FoodProtien) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                    TotalMealFats = Math.Round((Convert.ToDouble(TotalMealFats) + (Convert.ToDouble(existingFood.FoodFat) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
+                    TotalMealFibers = Math.Round((Convert.ToDouble(TotalMealFibers) + (Convert.ToDouble(existingFood.FoodFibers) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
 
-                    if (mealDetails.Count > 0)
+                    await _dataContext.InsertAsync<CartItem>(new CartItem()
                     {
-                        foreach (var mealDetail in mealDetails)
-                        {
-                            var oneFoodMeal = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-                            
-                            MealSize = Math.Round((Convert.ToDouble(MealSize) + Convert.ToDouble(mealDetail.Quantity)), 1).ToString("F0");
-                            TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMeal.FoodCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                            TotalMealCarbohydrates = Math.Round((Convert.ToDouble(TotalMealCarbohydrates) + (Convert.ToDouble(oneFoodMeal.FoodCarb) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
-                            TotalMealProtiens = Math.Round((Convert.ToDouble(TotalMealProtiens) + (Convert.ToDouble(oneFoodMeal.FoodProtien) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
-                            TotalMealFats = Math.Round((Convert.ToDouble(TotalMealFats) + (Convert.ToDouble(oneFoodMeal.FoodFat) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
-                            TotalMealFibers = Math.Round((Convert.ToDouble(TotalMealFibers) + (Convert.ToDouble(oneFoodMeal.FoodFibers) * Convert.ToDouble(mealDetail.Quantity) / 100)), 1).ToString("F1");
-                        }
-                    }
+                        FoodId = existingFood.FoodId,
+                        Quantity = mealDetail.Quantity,
+                        FoodName = existingFood.FoodName,
+                        FoodCategory = existingFood.FoodCategory,
+                        TotalFoodCarb = Math.Round((existingFood.FoodCarb * mealDetail.Quantity / 100), 1),
+                        TotalFoodProtien = Math.Round((existingFood.FoodProtien * mealDetail.Quantity / 100), 1),
+                        TotalFoodFat = Math.Round((existingFood.FoodFat * mealDetail.Quantity / 100), 1),
+                        TotalFoodFibers = Math.Round((existingFood.FoodFibers * mealDetail.Quantity / 100), 1),
+                        TotalFoodCalories = Math.Round((existingFood.FoodCalories * mealDetail.Quantity / 100), 1)
+                    });
+
 
                 }
 
+                CartItems = await _dataContext.LoadAsync<CartItem>();               
+            }
+            else
+            {
+
+                //delete meal
+
+                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
+
+                if (mealDetails.Count < 1)
+                {
+                    HomeVM.CurrentMeal.IsExistsInDb = false;
+
+                    await App.dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
+
+                    //delete day
+                    switch (HomeVM.CurrentMeal.MealTypeId)
+                    {
+                        case 0:
+                            HomeVM.ExistingBreakfastMeal.IsExistsInDb = false;
+                            break;
+                        case 1:
+                            HomeVM.ExistingLunchMeal.IsExistsInDb = false;
+                            break;
+                        case 2:
+                            HomeVM.ExistingDinnerMeal.IsExistsInDb = false;
+                            break;
+                        case 3:
+                            HomeVM.ExistingSnaksMeal.IsExistsInDb = false;
+                            break;
+                    }
+
+                    if (HomeVM.ExistingBreakfastMeal.IsExistsInDb == false &&
+                        HomeVM.ExistingLunchMeal.IsExistsInDb == false &&
+                        HomeVM.ExistingDinnerMeal.IsExistsInDb == false &&
+                        HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
+                    {
+                        HomeVM.CurrentDayDiet.IsExistsInDb = false;
+                        await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                    }
+                }
             }
 
         }
@@ -168,6 +191,7 @@ namespace SlimWaist.ViewModels
                 FoodFibers = "0.0";
             }
         }
+
         [RelayCommand]
         private async Task DeleteMealDetail(CartItem cartItem)
         {
@@ -178,15 +202,8 @@ namespace SlimWaist.ViewModels
             await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
             await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-         
-            if (MealDetails.Count > 0)
-            {
-                await init();
-            }
-            else
-            {
-                IsMealExists = false;
-            }
+
+            await init();
 
         }
 
@@ -218,10 +235,7 @@ namespace SlimWaist.ViewModels
                     IsBottomSheetPresented = false;
                    
                     await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                    if (MealDetails.Count<1)
-                    {
-                        IsMealExists = false;
-                    }
+                    
                 }
 
             }

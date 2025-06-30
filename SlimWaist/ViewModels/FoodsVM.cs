@@ -89,99 +89,111 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task AddFoodToMeal()
         {
-            var existingMeal = _dataContext.Database.Table<Meal>().ToList().Where(x=>x.MealId==HomeVM.CurrentMeal.MealId).FirstOrDefault();
-
-            if (existingMeal is not null)
+            if (HomeVM.CurrentDayDiet.IsExistsInDb==false)
             {
-                var existingMealDetail = _dataContext.Database.Table<MealDetail>()
-                    .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
-                     x.FoodId == SelectedFood.FoodId).FirstOrDefault();
+                HomeVM.CurrentDayDiet.IsExistsInDb = true;
 
-                if (existingMealDetail is not null)
+                await App.dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
+            }
+
+            if (HomeVM.CurrentMeal.IsExistsInDb==false)
+            {
+                var CurrentDayDietId = _dataContext.Database.Table<DayDiet>()
+                                        .Where(x => x.MembershipId == App.currentMembership.Id)
+                                        .Where(x => x.DayDietDate == HomeVM.SelectedDateFromUser).Select(x => x.DayDietId).FirstOrDefault();
+
+                HomeVM.CurrentMeal.DayDietId = CurrentDayDietId;
+
+                HomeVM.CurrentMeal.IsExistsInDb = true;
+
+                await App.dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
+            }
+
+            var m = _dataContext.Database.Table<Meal>().ToList();
+
+            var existingMealDetail = _dataContext.Database.Table<MealDetail>()
+                        .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
+                         x.FoodId == SelectedFood.FoodId).FirstOrDefault();
+
+            if (existingMealDetail is not null)
+            {
+                if (Convert.ToInt32(Quantity) > 0)
                 {
-                    if (Convert.ToInt32(Quantity) > 0)
-                    {
-                        existingMealDetail.Quantity = Convert.ToInt32(Quantity);
+                    existingMealDetail.Quantity = Convert.ToInt32(Quantity);
 
-                        await App.dataContext.UpdateAsync(existingMealDetail);
-
-                        IsBottomSheetPresented = false;
-#if ANDROID
-        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
-#endif
-
-                        //await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                    }
-                    else
-                    {
-                        await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
-
-                        IsBottomSheetPresented = false;
-#if ANDROID
-        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
-#endif
-
-                        //await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-                    }
-
-                }
-                else
-                {
-                    var mealDetail = new MealDetail()
-                    {
-                        FoodId = SelectedFood.FoodId,
-                        MealId = HomeVM.CurrentMeal.MealId,
-                        Quantity = Convert.ToDouble(Quantity)
-                    };
-
-                    await App.dataContext.InsertAsync<MealDetail>(mealDetail);
+                    await App.dataContext.UpdateAsync(existingMealDetail);
 
                     IsBottomSheetPresented = false;
 #if ANDROID
-        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+                    Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
 
-                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                }
+                else
+                {
+                    await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
+
+                    IsBottomSheetPresented = false;
+#if ANDROID
+                    Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+                    //delete meal
+
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
+
+                    if (mealDetails.Count < 1)
+                    {
+                        HomeVM.CurrentMeal.IsExistsInDb = false;
+
+                        await App.dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
+                    
+                        //delete day
+                        switch (HomeVM.CurrentMeal.MealTypeId)
+                        {
+                            case 0:HomeVM.ExistingBreakfastMeal.IsExistsInDb = false;
+                                break;
+                            case 1:HomeVM.ExistingLunchMeal.IsExistsInDb = false;
+                                break;
+                            case 2:HomeVM.ExistingDinnerMeal.IsExistsInDb = false;
+                                break;
+                            case 3:HomeVM.ExistingSnaksMeal.IsExistsInDb = false;
+                                break;
+                        }
+
+                        if (HomeVM.ExistingBreakfastMeal.IsExistsInDb == false &&
+                            HomeVM.ExistingLunchMeal.IsExistsInDb == false &&
+                            HomeVM.ExistingDinnerMeal.IsExistsInDb == false &&
+                            HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
+                        {
+                            HomeVM.CurrentDayDiet.IsExistsInDb = false;
+                            await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                        }
+                    }
+
+
+                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
                 }
 
             }
             else
             {
-                HomeVM.CurrentMeal.IsExistsInDb = true;
-
-                await App.dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
-
                 var mealDetail = new MealDetail()
                 {
-                    MealId = HomeVM.CurrentMeal.MealId,
                     FoodId = SelectedFood.FoodId,
+                    MealId = HomeVM.CurrentMeal.MealId,
                     Quantity = Convert.ToDouble(Quantity)
                 };
 
                 await App.dataContext.InsertAsync<MealDetail>(mealDetail);
 
                 IsBottomSheetPresented = false;
-
 #if ANDROID
-        Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+                Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
 
                 //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
-            }
-
-            TotalMealCalories = "0";
-
-            var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
-
-            if (mealDetails.Count > 0)
-            {
-                foreach (var mealDetail in mealDetails)
-                {
-                    var oneFoodMealCalories = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).Select(x => x.FoodCalories).FirstOrDefault();
-
-                    TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMealCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                }
-
             }
         }
         [RelayCommand]

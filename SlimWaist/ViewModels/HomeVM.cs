@@ -129,15 +129,16 @@ namespace SlimWaist.ViewModels
 
         public static Meal? CurrentMeal { get; set;}=new Meal();
         public static DayDiet? CurrentDayDiet { get; set;}=new DayDiet();
+        public static int CurrentDayDietId { get; set;}
 
-        private Meal ExistingBreakfastMeal=new Meal();
-        private Meal ExistingLunchMeal=new Meal();
-        private Meal ExistingDinnerMeal=new Meal();
-        private Meal ExistingSnaksMeal=new Meal();
+        public static Meal ExistingBreakfastMeal=new Meal();
+        public static Meal ExistingLunchMeal=new Meal();
+        public static Meal ExistingDinnerMeal=new Meal();
+        public static Meal ExistingSnaksMeal=new Meal();
         private List<DayDiet> ExistingDayDiets=new List<DayDiet>();
         private DayDiet ExistingDayDiet;
 
-        private DateTime SelectedDateFromUser { get; set; }
+        public static DateTime SelectedDateFromUser { get; set; }
 
         private DateTime ExistingDayDietDate { get; set; }
 
@@ -182,102 +183,114 @@ namespace SlimWaist.ViewModels
             WaistCircumferenceEvaluationCalculator();
             ObesityDegreeCalculator();
 
+
             CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
                 .Where(x => x.MembershipId == App.currentMembership.Id)
                 .Where(x=>x.DayDietDate==SelectedDateFromUser).FirstOrDefault()??new DayDiet();
-            var dayDietCount = _dataContext.Database.Table<DayDiet>().ToList().Count();
+
             if (CurrentDayDiet.IsExistsInDb)
             {
                 SelectedDiet = Diets.Where(x => x.DietId == CurrentDayDiet.DietId).FirstOrDefault();
+
+                CurrentDayDietId = CurrentDayDiet.DayDietId;
+
+                ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
+                    .Where(x => x.MembershipId == App.currentMembership.Id
+                    && x.DayDietId == CurrentDayDiet.DayDietId
+                    && x.MealTypeId == 0).FirstOrDefault() ?? new Meal();
+                ExistingLunchMeal = _dataContext.Database.Table<Meal>()
+                    .Where(x => x.MembershipId == App.currentMembership.Id
+                    && x.DayDietId == CurrentDayDiet.DayDietId
+                    && x.MealTypeId == 1).FirstOrDefault() ?? new Meal();
+                ExistingDinnerMeal = _dataContext.Database.Table<Meal>()
+                    .Where(x => x.MembershipId == App.currentMembership.Id
+                    && x.DayDietId == CurrentDayDiet.DayDietId
+                    && x.MealTypeId == 2).FirstOrDefault() ?? new Meal();
+                ExistingSnaksMeal = _dataContext.Database.Table<Meal>()
+                    .Where(x => x.MembershipId == App.currentMembership.Id
+                    && x.DayDietId == CurrentDayDiet.DayDietId
+                    && x.MealTypeId == 3).FirstOrDefault() ?? new Meal();
+
+
+                if (ExistingBreakfastMeal.IsExistsInDb == true)
+                {
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                    if (mealDetails.Count > 0)
+                    {
+                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList())
+                        {
+                            var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                            TotalBreakfastEnergy = (Convert.ToDouble(TotalBreakfastEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                        }
+                    }
+                }
+                if (ExistingLunchMeal.IsExistsInDb == true)
+                {
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                    if (mealDetails.Count > 0)
+                    {
+                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList())
+                        {
+                            var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                            TotalLunchEnergy = (Convert.ToDouble(TotalLunchEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                        }
+                    }
+                }
+                if (ExistingDinnerMeal.IsExistsInDb == true)
+                {
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                    if (mealDetails.Count > 0)
+                    {
+                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList())
+                        {
+                            var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                            TotalDinnerEnergy = (Convert.ToDouble(TotalDinnerEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                        }
+                    }
+                }
+                if (ExistingSnaksMeal.IsExistsInDb == true)
+                {
+                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
+
+                    if (mealDetails.Count > 0)
+                    {
+                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList())
+                        {
+                            var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
+
+                            TotalSnaksEnergy = (Convert.ToDouble(TotalSnaksEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
+                        }
+                    }
+                }
+
+
             }
             else
             {
-                CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
+                SelectedDiet = null;
+                //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
                 CurrentDayDiet.MembershipId = App.currentMembership.Id;
                 CurrentDayDiet.DayDietDate = new DateTime(
                     SelectedDateFromUser.Year
                     , SelectedDateFromUser.Month
                     , SelectedDateFromUser.Day);
+
+                
             }
 
-            var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
+            //var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
             CurrentMeal = new Meal()
             {
-                MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
+                //MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
                 MembershipId=App.currentMembership.Id,
                 DayDietId=CurrentDayDiet.DayDietId
             };
-
-            ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
-            ExistingLunchMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
-            ExistingDinnerMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
-            ExistingSnaksMeal = _dataContext.Database.Table<Meal>()
-                .Where(x => x.MembershipId == App.currentMembership.Id
-                && x.DayDietId == CurrentDayDiet.DayDietId).FirstOrDefault() ?? new Meal();
-
-
-            if (ExistingBreakfastMeal.IsExistsInDb == true)
-            {
-                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList() ?? new List<MealDetail>();
-
-                if (mealDetails.Count > 0)
-                {
-                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList())
-                    {
-                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-
-                        TotalBreakfastEnergy = (Convert.ToDouble(TotalBreakfastEnergy)+ Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                    }
-                }
-            }
-            if (ExistingLunchMeal.IsExistsInDb == true)
-            {
-                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
-
-                if (mealDetails.Count > 0)
-                {
-                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList())
-                    {
-                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-
-                        TotalLunchEnergy = (Convert.ToDouble(TotalLunchEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                    }
-                }
-            }
-            if (ExistingDinnerMeal.IsExistsInDb == true)
-            {
-                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
-
-                if (mealDetails.Count > 0)
-                {
-                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList())
-                    {
-                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-
-                        TotalDinnerEnergy = (Convert.ToDouble(TotalDinnerEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                    }
-                }
-            }
-            if (ExistingSnaksMeal.IsExistsInDb == true)
-            {
-                var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
-
-                if (mealDetails.Count > 0)
-                {
-                    foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList())
-                    {
-                        var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
-
-                        TotalSnaksEnergy = (Convert.ToDouble(TotalSnaksEnergy) + Math.Round((foodFromMealDetail.FoodCalories * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
-                    }
-                }
-            }
 
             TotalConsumedEnergy = Math.Round(
                 Convert.ToDouble(TotalBreakfastEnergy) +
@@ -323,6 +336,7 @@ namespace SlimWaist.ViewModels
                 {
                     CurrentDayDiet.DietId = SelectedDiet.DietId ;
                 }
+
                 if (ExistingBreakfastMeal.IsExistsInDb == true)
                 {
                     CurrentMeal = ExistingBreakfastMeal;
