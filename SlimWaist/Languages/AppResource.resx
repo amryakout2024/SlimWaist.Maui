@@ -465,4 +465,10 @@
   <data name="Pleaseselectdiettype" xml:space="preserve">
     <value>Please select diet type</value>
   </data>
+  <data name="Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday" xml:space="preserve">
+    <value>If you changed diet type ,all meals will be deleted related to this day</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
 </root>

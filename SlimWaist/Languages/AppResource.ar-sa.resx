@@ -465,4 +465,10 @@
   <data name="Pleaseselectdiettype" xml:space="preserve">
     <value>يرجي اختيار نوع الدايت</value>
   </data>
+  <data name="Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday" xml:space="preserve">
+    <value>اذا غيرت نوع الدايت سيتم حذف كل الوجبات المتعلقة يهذا اليوم</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>أوك</value>
+  </data>
 </root>

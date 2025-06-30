@@ -101,6 +101,9 @@ namespace SlimWaist.ViewModels
         private string? _waistCircumferenceName;
 
         [ObservableProperty]
+        private int _selectedIndex;
+
+        [ObservableProperty]
         private double _percentConsumed;
 
         [ObservableProperty]
@@ -129,7 +132,6 @@ namespace SlimWaist.ViewModels
 
         public static Meal? CurrentMeal { get; set;}=new Meal();
         public static DayDiet? CurrentDayDiet { get; set;}=new DayDiet();
-        public static int CurrentDayDietId { get; set;}
 
         public static Meal ExistingBreakfastMeal=new Meal();
         public static Meal ExistingLunchMeal=new Meal();
@@ -191,8 +193,6 @@ namespace SlimWaist.ViewModels
             if (CurrentDayDiet.IsExistsInDb)
             {
                 SelectedDiet = Diets.Where(x => x.DietId == CurrentDayDiet.DietId).FirstOrDefault();
-
-                CurrentDayDietId = CurrentDayDiet.DayDietId;
 
                 ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
                     .Where(x => x.MembershipId == App.currentMembership.Id
@@ -326,7 +326,25 @@ namespace SlimWaist.ViewModels
                 AnimationDuration = TimeSpan.FromSeconds(4),
             };
         }
+        partial void OnSelectedIndexChanged(int value)
+        {
+            if (CurrentDayDiet.IsExistsInDb)
+            {
+                if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                {
+                    var ds= Shell.Current.DisplayAlert(""
+                        , AppResource.ResourceManager.GetString("Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday", CultureInfo.CurrentCulture) ?? ""
+                        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? ""
+                        , AppResource.ResourceManager.GetString("Cancel", CultureInfo.CurrentCulture) ?? "");
+                    //fff = ds.Result.ToString();
 
+                    //if (ds.Result.ToString()== AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture))
+                    //{
+                    //    fff = ds.Result.ToString();
+                    //}
+                }
+            }
+        }
         [RelayCommand]
         private async Task GotoBreakfastMealPage()
         {

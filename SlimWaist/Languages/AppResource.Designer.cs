@@ -502,6 +502,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If you changed diet type ,all meals will be deleted related to this day.
+        /// </summary>
+        public static string Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday {
+            get {
+                return ResourceManager.GetString("Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The keto diet is a low-carb, high-fat diet that helps the body enter ketosis, where it burns fat for energy instead of carbs. It includes foods like meat, eggs, cheese, oils, and non-starchy vegetables, while avoiding bread, sugar, pasta, and most fruits. Benefits include weight loss and steady energy. Some may experience side effects like fatigue or headache at first..
         /// </summary>
         public static string Ketodescription {
@@ -777,6 +786,15 @@ namespace SlimWaist.Languages {
         public static string Obesitydegree {
             get {
                 return ResourceManager.GetString("Obesitydegree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
