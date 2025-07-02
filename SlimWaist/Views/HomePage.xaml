@@ -37,7 +37,7 @@
 
     <ur:UraniumContentPage.Attachments>
         <mat:BottomSheetView 
-            BackgroundColor="LightGray"
+            BackgroundColor="WhiteSmoke"
             x:Name="btmSheet"
             IsPresented="{Binding IsBottomSheetPresented}">
 
@@ -54,6 +54,14 @@
                 </Style>
             </mat:BottomSheetView.Style>
 
+            <mat:BottomSheetView.Header>
+                <Grid BackgroundColor="WhiteSmoke">
+                    <!--<BoxView HeightRequest="3"
+                             WidthRequest="30"
+                             VerticalOptions="Center"
+                        BackgroundColor="DarkRed"/>-->
+                </Grid>
+            </mat:BottomSheetView.Header>
             <mat:BottomSheetView.Body>
                 <VerticalStackLayout
                     Spacing="20"

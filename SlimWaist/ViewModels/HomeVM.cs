@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Kotlin.Uuid;
 using Microcharts;
 using Microcharts.Maui;
 using SkiaSharp;
@@ -275,7 +276,6 @@ namespace SlimWaist.ViewModels
             }
             else
             {
-                SelectedDiet = null;
                 //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
                 CurrentDayDiet.MembershipId = App.currentMembership.Id;
                 CurrentDayDiet.DayDietDate = new DateTime(
@@ -366,6 +366,8 @@ namespace SlimWaist.ViewModels
             {
                 if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
                 {
+                    CurrentDayDiet.IsExistsInDb = false;
+
                     await _dataContext.DeleteAsync<DayDiet>(CurrentDayDiet);
 
                     if (ExistingBreakfastMeal.IsExistsInDb == true)
@@ -374,6 +376,8 @@ namespace SlimWaist.ViewModels
                         {
                             await _dataContext.DeleteAsync<MealDetail>(mealDetail);
                         }
+
+                        ExistingBreakfastMeal.IsExistsInDb = false;
 
                         await _dataContext.DeleteAsync<Meal>(ExistingBreakfastMeal);
                     }
@@ -384,6 +388,8 @@ namespace SlimWaist.ViewModels
                             await _dataContext.DeleteAsync<MealDetail>(mealDetail);
                         }
 
+                        ExistingLunchMeal.IsExistsInDb = false;
+
                         await _dataContext.DeleteAsync<Meal>(ExistingLunchMeal);
                     }
                     if (ExistingDinnerMeal.IsExistsInDb == true)
@@ -392,6 +398,7 @@ namespace SlimWaist.ViewModels
                         {
                             await _dataContext.DeleteAsync<MealDetail>(mealDetail);
                         }
+                        ExistingDinnerMeal.IsExistsInDb = false;
 
                         await _dataContext.DeleteAsync<Meal>(ExistingDinnerMeal);
                     }
@@ -401,12 +408,18 @@ namespace SlimWaist.ViewModels
                         {
                             await _dataContext.DeleteAsync<MealDetail>(mealDetail);
                         }
+
+                        ExistingSnaksMeal.IsExistsInDb = false;
+
                         await _dataContext.DeleteAsync<Meal>(ExistingSnaksMeal);
                     }
+
 
                     IsBottomSheetPresented = false;
 
                     await init();
+
+                    SelectedDiet = Diets.Where(x => x.DietId == SelectedIndex+1).FirstOrDefault();
                 }
 
             }
