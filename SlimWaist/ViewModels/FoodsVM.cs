@@ -181,6 +181,7 @@ namespace SlimWaist.ViewModels
             {
                 var mealDetail = new MealDetail()
                 {
+                    DayDietId = HomeVM.CurrentDayDiet.DayDietId,
                     FoodId = SelectedFood.FoodId,
                     MealId = HomeVM.CurrentMeal.MealId,
                     Quantity = Convert.ToDouble(Quantity)

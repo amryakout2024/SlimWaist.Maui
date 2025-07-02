@@ -10,9 +10,11 @@ namespace SlimWaist.Models
 
         public string? MealName { get; set; }
 
-        public int MembershipId { get; set; }
+        //public int MembershipId { get; set; }
 
         public int DayDietId { get; set; }
+
+        public DateTime DayDietDate { get; set; }
 
         public int MealTypeId { get; set; }
 

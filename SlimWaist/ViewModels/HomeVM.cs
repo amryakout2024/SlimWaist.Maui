@@ -144,6 +144,15 @@ namespace SlimWaist.ViewModels
 
         private DateTime ExistingDayDietDate { get; set; }
 
+        private List<MealDetail> mealDetails { get; set; }
+        private List<MealDetail> breakfasts { get; set; }
+        private List<MealDetail> lunchs { get; set; }
+        private List<MealDetail> dinners { get; set; }
+        private List<MealDetail> snakss { get; set; }
+
+        private List<Meal> meals { get; set; }
+
+
         public async Task init()
         {
             //Preferences.Set("Email", "");
@@ -192,33 +201,26 @@ namespace SlimWaist.ViewModels
 
             if (CurrentDayDiet.IsExistsInDb)
             {
+                meals = _dataContext.Database.Table<Meal>().Where(
+                    x=>x.DayDietId==CurrentDayDiet.DayDietId).ToList() ?? new List<Meal>();
+
+                mealDetails = _dataContext.Database.Table<MealDetail>().Where(
+                    x=>x.DayDietId==CurrentDayDiet.DayDietId).ToList() ?? new List<MealDetail>();
+
                 SelectedDiet = Diets.Where(x => x.DietId == CurrentDayDiet.DietId).FirstOrDefault();
 
-                ExistingBreakfastMeal = _dataContext.Database.Table<Meal>()
-                    .Where(x => x.MembershipId == App.currentMembership.Id
-                    && x.DayDietId == CurrentDayDiet.DayDietId
-                    && x.MealTypeId == 0).FirstOrDefault() ?? new Meal();
-                ExistingLunchMeal = _dataContext.Database.Table<Meal>()
-                    .Where(x => x.MembershipId == App.currentMembership.Id
-                    && x.DayDietId == CurrentDayDiet.DayDietId
-                    && x.MealTypeId == 1).FirstOrDefault() ?? new Meal();
-                ExistingDinnerMeal = _dataContext.Database.Table<Meal>()
-                    .Where(x => x.MembershipId == App.currentMembership.Id
-                    && x.DayDietId == CurrentDayDiet.DayDietId
-                    && x.MealTypeId == 2).FirstOrDefault() ?? new Meal();
-                ExistingSnaksMeal = _dataContext.Database.Table<Meal>()
-                    .Where(x => x.MembershipId == App.currentMembership.Id
-                    && x.DayDietId == CurrentDayDiet.DayDietId
-                    && x.MealTypeId == 3).FirstOrDefault() ?? new Meal();
-
+                ExistingBreakfastMeal = meals.Where(x=> x.MealTypeId == 0).FirstOrDefault() ?? new Meal();
+                ExistingLunchMeal = meals.Where(x=> x.MealTypeId == 1).FirstOrDefault() ?? new Meal();
+                ExistingDinnerMeal = meals.Where(x=> x.MealTypeId == 2).FirstOrDefault() ?? new Meal();
+                ExistingSnaksMeal = meals.Where(x=> x.MealTypeId == 3).FirstOrDefault() ?? new Meal();
 
                 if (ExistingBreakfastMeal.IsExistsInDb == true)
                 {
-                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList() ?? new List<MealDetail>();
+                    breakfasts = mealDetails.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList() ?? new List<MealDetail>();
 
-                    if (mealDetails.Count > 0)
+                    if (breakfasts.Count > 0)
                     {
-                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList())
+                        foreach (var mealDetail in breakfasts.Where(x => x.MealId == ExistingBreakfastMeal.MealId).ToList())
                         {
                             var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
 
@@ -228,11 +230,11 @@ namespace SlimWaist.ViewModels
                 }
                 if (ExistingLunchMeal.IsExistsInDb == true)
                 {
-                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
+                    lunchs = mealDetails.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList() ?? new List<MealDetail>();
 
-                    if (mealDetails.Count > 0)
+                    if (lunchs.Count > 0)
                     {
-                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList())
+                        foreach (var mealDetail in lunchs.Where(x => x.MealId == ExistingLunchMeal.MealId).ToList())
                         {
                             var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
 
@@ -242,11 +244,11 @@ namespace SlimWaist.ViewModels
                 }
                 if (ExistingDinnerMeal.IsExistsInDb == true)
                 {
-                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
+                    dinners = mealDetails.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList() ?? new List<MealDetail>();
 
-                    if (mealDetails.Count > 0)
+                    if (dinners.Count > 0)
                     {
-                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList())
+                        foreach (var mealDetail in dinners.Where(x => x.MealId == ExistingDinnerMeal.MealId).ToList())
                         {
                             var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
 
@@ -256,11 +258,11 @@ namespace SlimWaist.ViewModels
                 }
                 if (ExistingSnaksMeal.IsExistsInDb == true)
                 {
-                    var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
+                    snakss = mealDetails.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList() ?? new List<MealDetail>();
 
-                    if (mealDetails.Count > 0)
+                    if (snakss.Count > 0)
                     {
-                        foreach (var mealDetail in mealDetails.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList())
+                        foreach (var mealDetail in snakss.Where(x => x.MealId == ExistingSnaksMeal.MealId).ToList())
                         {
                             var foodFromMealDetail = _dataContext.Database.Table<Food>().Where(x => x.FoodId == mealDetail.FoodId).FirstOrDefault();
 
@@ -288,7 +290,6 @@ namespace SlimWaist.ViewModels
             CurrentMeal = new Meal()
             {
                 //MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
-                MembershipId=App.currentMembership.Id,
                 DayDietId=CurrentDayDiet.DayDietId
             };
 
@@ -326,25 +327,99 @@ namespace SlimWaist.ViewModels
                 AnimationDuration = TimeSpan.FromSeconds(4),
             };
         }
+
+        partial void OnIsBottomSheetPresentedChanged(bool value)
+        {
+            IsTabbarVisible = IsBottomSheetPresented ? false : true;
+
+            if (CurrentDayDiet.IsExistsInDb)
+            {
+                if (IsBottomSheetPresented==false)
+                {
+                    if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                    {
+                        SelectedIndex = CurrentDayDiet.DietId - 1;
+                    }
+
+                }
+            }
+        }
+       
         partial void OnSelectedIndexChanged(int value)
         {
             if (CurrentDayDiet.IsExistsInDb)
             {
                 if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
                 {
-                    var ds= Shell.Current.DisplayAlert(""
-                        , AppResource.ResourceManager.GetString("Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Cancel", CultureInfo.CurrentCulture) ?? "");
-                    //fff = ds.Result.ToString();
-
-                    //if (ds.Result.ToString()== AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture))
-                    //{
-                    //    fff = ds.Result.ToString();
-                    //}
+                    if (IsBottomSheetPresented==false)
+                    {
+                        IsBottomSheetPresented = true;
+                    }
                 }
             }
         }
+      
+        [RelayCommand]
+        private async Task DeleteDayDiet()
+        {
+            if (CurrentDayDiet.IsExistsInDb)
+            {
+                if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                {
+                    await _dataContext.DeleteAsync<DayDiet>(CurrentDayDiet);
+
+                    if (ExistingBreakfastMeal.IsExistsInDb == true)
+                    {
+                        foreach (var mealDetail in breakfasts)
+                        {
+                            await _dataContext.DeleteAsync<MealDetail>(mealDetail);
+                        }
+
+                        await _dataContext.DeleteAsync<Meal>(ExistingBreakfastMeal);
+                    }
+                    if (ExistingLunchMeal.IsExistsInDb == true)
+                    {
+                        foreach (var mealDetail in lunchs)
+                        {
+                            await _dataContext.DeleteAsync<MealDetail>(mealDetail);
+                        }
+
+                        await _dataContext.DeleteAsync<Meal>(ExistingLunchMeal);
+                    }
+                    if (ExistingDinnerMeal.IsExistsInDb == true)
+                    {
+                        foreach (var mealDetail in dinners)
+                        {
+                            await _dataContext.DeleteAsync<MealDetail>(mealDetail);
+                        }
+
+                        await _dataContext.DeleteAsync<Meal>(ExistingDinnerMeal);
+                    }
+                    if (ExistingSnaksMeal.IsExistsInDb == true)
+                    {
+                        foreach (var mealDetail in snakss)
+                        {
+                            await _dataContext.DeleteAsync<MealDetail>(mealDetail);
+                        }
+                        await _dataContext.DeleteAsync<Meal>(ExistingSnaksMeal);
+                    }
+
+                    IsBottomSheetPresented = false;
+
+                    await init();
+                }
+
+            }
+
+
+        }
+
+        [RelayCommand]
+        private async Task HideBottomSheet()
+        {
+            IsBottomSheetPresented = false;
+        }
+
         [RelayCommand]
         private async Task GotoBreakfastMealPage()
         {
@@ -504,16 +579,6 @@ namespace SlimWaist.ViewModels
             await GoToAsyncWithStack(nameof(DietsPage), true);
         }
 
-        [RelayCommand]
-        private async Task ShowBottomSheet()
-        {
-            IsBottomSheetPresented = true;
-        }
-
-        partial void OnIsBottomSheetPresentedChanged(bool value)
-        {
-           IsTabbarVisible=IsBottomSheetPresented? false:true;
-        }
 
         [RelayCommand]
         private async void GoToSettingPage()

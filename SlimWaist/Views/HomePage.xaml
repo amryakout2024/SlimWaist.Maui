@@ -15,8 +15,8 @@
              x:Class="SlimWaist.Views.HomePage"
              Shell.NavBarIsVisible="False"
              x:Name="this" 
-             Shell.TabBarIsVisible="True"
              BackgroundColor="White"
+                       Shell.TabBarIsVisible="{Binding IsTabbarVisible}"
              FlowDirection="{extention:FlowDirectionsExtention}">
 
     <ur:UraniumContentPage.Resources>
@@ -56,73 +56,37 @@
 
             <mat:BottomSheetView.Body>
                 <VerticalStackLayout
-                    Spacing="5"
+                    Spacing="20"
                     Padding="10">
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                            IconColor="IndianRed"
-                        IsChecked="{Binding IsKetoChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                               Style="{StaticResource TitleLabel}"
+                    <Image
+                        Source="alert.jpg"/>
+                    <Label
+                        Style="{StaticResource TitleLabel}"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Ketodiet}"
-                        TextColor="{StaticResource MainColor}"
+                        Text="{extention:TranslateExtention Key=Ifyouchangeddiettypeallmealswillbedeletedrelatedtothisday}"
+                        TextColor="DarkRed"
                         FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                        IsChecked="{Binding IsLowCarbChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                               Style="{StaticResource TitleLabel}"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Lowcarbdiet}"
-                        TextColor="{StaticResource MainColor}"
-                        FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout>
-                        <mat:CheckBox
-                        HorizontalOptions="Center"
-                        WidthRequest="25"
-                        HeightRequest="25"
-                        IsChecked="{Binding IsServingSizeChecked}"
-                        Margin="0,0,5,0"/>
-                        <Label Grid.Column="1"
-                        HorizontalOptions="Start"
-                           Style="{StaticResource TitleLabel}"
-                        VerticalOptions="Center"
-                        Text="{extention:TranslateExtention Key=Servingsizediet}"
-                        TextColor="{StaticResource MainColor}"
-                        FontSize="16"/>
-                    </HorizontalStackLayout>
-                    <mat:CheckBox
-                        BoxSizeRequest="20"
-                        Text="{extention:TranslateExtention Key=Setasdefaultfornextdays}"
-                        TextFontSize="12"
-                        TextColor="IndianRed"
-                        Margin="20,5,5,0"/>
-
-                    <Button 
-                VerticalOptions="End"
-                Text="{extention:TranslateExtention Key=Save}"
-                FontSize="20"
-                BackgroundColor="DarkSlateBlue"
-                TextColor="White"
-                Padding="0" 
-                Margin="10"
-                input:FormView.IsSubmitButton="True"
-                StyleClass="FilledButton"
-                Command="{Binding SaveDietCommand}"/>
-
+                    <Grid ColumnDefinitions="*,*">
+                        <Button Grid.Column="0"
+                            Text="{extention:TranslateExtention Key=Ok}"
+                            FontSize="20"
+                            BackgroundColor="DarkSlateBlue"
+                            TextColor="White"
+                            Padding="0" 
+                            Margin="10"
+                            StyleClass="FilledButton"
+                            Command="{Binding DeleteDayDietCommand}"/>
+                        <Button Grid.Column="1"
+                            Text="{extention:TranslateExtention Key=Cancel}"
+                            FontSize="20"
+                            BackgroundColor="DarkSlateBlue"
+                            TextColor="White"
+                            Padding="0" 
+                            Margin="10"
+                            StyleClass="FilledButton"
+                            Command="{Binding HideBottomSheetCommand}"/>
+                    </Grid>
                 </VerticalStackLayout>
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
