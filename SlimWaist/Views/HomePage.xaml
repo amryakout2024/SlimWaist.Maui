@@ -105,8 +105,57 @@
         VerticalScrollBarVisibility="Never">
         <Grid Padding="5"
         RowDefinitions="auto,120,40,40,*">
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <HorizontalStackLayout.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                        <Setter Property="TextColor" Value="{StaticResource Black}"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                    </Style>
+                </HorizontalStackLayout.Resources>
+                <Image 
+               Grid.Column="0"
+               HeightRequest="30"
+                   VerticalOptions="Center"
+               Source="today.png">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Black}"/>
+                    </Image.Behaviors>
+                </Image>
+                <Label Margin="5" Text="{extention:TranslateExtention Key=Date}"/>
+                <Label Text=":"/>
 
-            <HorizontalStackLayout Grid.Row="0"
+                <mat:DatePickerField
+                    Date="{Binding BirthDate}"
+                    Padding="0" 
+                    BorderThickness="0"
+                    FontSize="20"
+                    Format="dd/MM/yyyy" 
+                    AllowClear="False"
+                    x:Name="MyDatePicker"
+                    
+                    TextColor="DarkSlateBlue" 
+                    HorizontalOptions="Center"
+                    TitleColor="Gray"
+                    MinimumDate="{Binding MinimumDate}"
+                    MaximumDate="{Binding MaximumDate}"
+                    AccentColor="DarkSlateBlue">
+                    <!--<mat:DatePickerField.Validations>
+                        <validation:RequiredValidation  Message="اختر التاريخ"/>
+                        <validation:RegexValidation Pattern="01-12-2025"
+                                               Message=""/>
+                    </mat:DatePickerField.Validations>-->
+                    <mat:DatePickerField.Behaviors>
+                        <!--<toolkit:EventToCommandBehavior
+                    Command="{Binding DatePickedCommand}"
+                    CommandParameter="{Binding Date, Source={x:Reference MyDatePicker}}"
+                    EventName="DateSelected" />-->
+                    </mat:DatePickerField.Behaviors>
+                </mat:DatePickerField>
+            </HorizontalStackLayout>
+            <!--<HorizontalStackLayout Grid.Row="0"
                     Margin="10"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
@@ -136,7 +185,7 @@
                 <Label Text="{Binding Datemonth}"/>
                 <Label Text="/"/>
                 <Label Text="{Binding Dateyear}"/>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout>-->
 
             <Grid Grid.Row="1" ColumnDefinitions="*,auto">
                 <Grid Grid.Column="0"

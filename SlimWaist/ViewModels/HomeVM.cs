@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Kotlin.Uuid;
 using Microcharts;
 using Microcharts.Maui;
 using SkiaSharp;
@@ -9,7 +8,10 @@ using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
@@ -141,7 +143,19 @@ namespace SlimWaist.ViewModels
         private List<DayDiet> ExistingDayDiets=new List<DayDiet>();
         private DayDiet ExistingDayDiet;
 
-        public static DateTime SelectedDateFromUser { get; set; }
+        //public static DateTime SelectedDateFromUser { get; set; }
+        
+        [ObservableProperty]
+        private DateTime _selectedDate;
+
+        [ObservableProperty]
+        private DateTime _maximumDate;
+
+        [ObservableProperty]
+        private DateTime _minimumDate;
+
+        private bool isDateChanged = false;
+        private bool isFirstDateChanged = true;
 
         private DateTime ExistingDayDietDate { get; set; }
 
@@ -153,6 +167,7 @@ namespace SlimWaist.ViewModels
 
         private List<Meal> meals { get; set; }
 
+        private Dispatcher dispatcher;
 
         public async Task init()
         {
@@ -178,16 +193,19 @@ namespace SlimWaist.ViewModels
             TargetedWeight = IdealWeight;
 
             Diets = await App.dataContext.LoadAsync<Diet>();
-            
-            SelectedDateFromUser=new DateTime(
-                Convert.ToInt32(DateTime.Now.Year)
-                , Convert.ToInt32(DateTime.Now.Month)
-                , Convert.ToInt32(DateTime.Now.Day));
-            
-            Dateday=SelectedDateFromUser.Day;
-            Datemonth=SelectedDateFromUser.Month;
-            Dateyear=SelectedDateFromUser.Year;
-    
+
+            MaximumDate = DateTime.Now.AddDays(30);
+
+            MinimumDate = DateTime.Now;
+            //SelectedDateFromUser=new DateTime(
+            //    Convert.ToInt32(DateTime.Now.Year)
+            //    , Convert.ToInt32(DateTime.Now.Month)
+            //    , Convert.ToInt32(DateTime.Now.Day));
+
+            //Dateday=SelectedDateFromUser.Day;
+            //Datemonth=SelectedDateFromUser.Month;
+            //Dateyear=SelectedDateFromUser.Year;
+
             BmiCalculator();
             IdealWeightCalculator();
             ModifiedWeightCalculator();
@@ -195,10 +213,18 @@ namespace SlimWaist.ViewModels
             WaistCircumferenceEvaluationCalculator();
             ObesityDegreeCalculator();
 
+            if (!isDateChanged)
+            {
+                SelectedDate = new DateTime(
+                    Convert.ToInt32(DateTime.Now.Year)
+                    , Convert.ToInt32(DateTime.Now.Month)
+                    , Convert.ToInt32(DateTime.Now.Day));
+
+            }
 
             CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
                 .Where(x => x.MembershipId == App.currentMembership.Id)
-                .Where(x=>x.DayDietDate==SelectedDateFromUser).FirstOrDefault()??new DayDiet();
+                .Where(x=>x.DayDietDate==SelectedDate).FirstOrDefault()??new DayDiet();
 
             if (CurrentDayDiet.IsExistsInDb)
             {
@@ -278,12 +304,7 @@ namespace SlimWaist.ViewModels
             {
                 //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
                 CurrentDayDiet.MembershipId = App.currentMembership.Id;
-                CurrentDayDiet.DayDietDate = new DateTime(
-                    SelectedDateFromUser.Year
-                    , SelectedDateFromUser.Month
-                    , SelectedDateFromUser.Day);
-
-                
+                CurrentDayDiet.DayDietDate = SelectedDate;
             }
 
             //var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
@@ -344,7 +365,32 @@ namespace SlimWaist.ViewModels
                 }
             }
         }
-       
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.PropertyName == nameof(SelectedDate))
+            {
+
+            }
+
+        }
+        partial void OnSelectedDateChanged(DateTime value)
+        {
+            if (isFirstDateChanged==false)
+            {
+                isDateChanged = true;
+
+                dispatcher.DispatchAsync(
+                                async () => await init());
+            }
+
+            if (isFirstDateChanged)
+            {
+                isFirstDateChanged = false;
+            }
+
+        }
         partial void OnSelectedIndexChanged(int value)
         {
             if (CurrentDayDiet.IsExistsInDb)
@@ -359,6 +405,12 @@ namespace SlimWaist.ViewModels
             }
         }
       
+        [RelayCommand]
+        private async Task DatePicked(DateTime dateTime)
+        {
+
+
+        }
         [RelayCommand]
         private async Task DeleteDayDiet()
         {

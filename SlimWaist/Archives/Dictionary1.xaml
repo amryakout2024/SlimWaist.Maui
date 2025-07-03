@@ -2,6 +2,20 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SlimWaist.Archives.Dictionary1">
+    <!--[ObservableProperty]
+private DateTime _appointmentDate = DateTime.Now;
+
+protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+{
+    base.OnPropertyChanged(e);
+
+    if (e.PropertyName == nameof(AppointmentDate))
+    {
+        Debug.WriteLine($"AppointmentDate: {AppointmentDate}");
+    }
+
+}-->
+    
     <!--//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]-->
 
     <!--//ValueLabelTextSize = 14,

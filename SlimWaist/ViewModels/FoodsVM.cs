@@ -100,7 +100,7 @@ namespace SlimWaist.ViewModels
             {
                 var CurrentDayDietId = _dataContext.Database.Table<DayDiet>()
                                         .Where(x => x.MembershipId == App.currentMembership.Id)
-                                        .Where(x => x.DayDietDate == HomeVM.SelectedDateFromUser).Select(x => x.DayDietId).FirstOrDefault();
+                                        .Where(x => x.DayDietDate == HomeVM.CurrentDayDiet.DayDietDate).Select(x => x.DayDietId).FirstOrDefault();
 
                 HomeVM.CurrentMeal.DayDietId = CurrentDayDietId;
 
