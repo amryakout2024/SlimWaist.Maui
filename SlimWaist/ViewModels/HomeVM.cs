@@ -213,14 +213,18 @@ namespace SlimWaist.ViewModels
             WaistCircumferenceEvaluationCalculator();
             ObesityDegreeCalculator();
 
-            if (!isDateChanged)
-            {
-                SelectedDate = new DateTime(
-                    Convert.ToInt32(DateTime.Now.Year)
-                    , Convert.ToInt32(DateTime.Now.Month)
-                    , Convert.ToInt32(DateTime.Now.Day));
+            //if (!isDateChanged)
+            //{
+            //    SelectedDate = new DateTime(
+            //        Convert.ToInt32(DateTime.Now.Year)
+            //        , Convert.ToInt32(DateTime.Now.Month)
+            //        , Convert.ToInt32(DateTime.Now.Day));
 
-            }
+            //}
+            //SelectedDate = new DateTime(
+            //            Convert.ToInt32(DateTime.Now.Year)
+            //            , Convert.ToInt32(DateTime.Now.Month)
+            //            , Convert.ToInt32(DateTime.Now.Day));
 
             CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
                 .Where(x => x.MembershipId == App.currentMembership.Id)
@@ -302,6 +306,7 @@ namespace SlimWaist.ViewModels
             }
             else
             {
+                SelectedDiet = null;
                 //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
                 CurrentDayDiet.MembershipId = App.currentMembership.Id;
                 CurrentDayDiet.DayDietDate = SelectedDate;
@@ -365,32 +370,32 @@ namespace SlimWaist.ViewModels
                 }
             }
         }
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
+        //protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        //{
+        //    base.OnPropertyChanged(e);
 
-            if (e.PropertyName == nameof(SelectedDate))
-            {
+        //    if (e.PropertyName == nameof(SelectedDate))
+        //    {
 
-            }
+        //    }
 
-        }
-        partial void OnSelectedDateChanged(DateTime value)
-        {
-            if (isFirstDateChanged==false)
-            {
-                isDateChanged = true;
+        //}
+        //partial void OnSelectedDateChanged(DateTime value)
+        //{
+        //    //if (isFirstDateChanged == false)
+        //    //{
+        //    //    isDateChanged = true;
 
-                dispatcher.DispatchAsync(
-                                async () => await init());
-            }
+        //    //    dispatcher.DispatchAsync(
+        //    //                    async () => await init());
+        //    //}
 
-            if (isFirstDateChanged)
-            {
-                isFirstDateChanged = false;
-            }
+        //    //if (isFirstDateChanged)
+        //    //{
+        //    //    isFirstDateChanged = false;
+        //    //}
 
-        }
+        //}
         partial void OnSelectedIndexChanged(int value)
         {
             if (CurrentDayDiet.IsExistsInDb)
@@ -408,7 +413,8 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task DatePicked(DateTime dateTime)
         {
-
+            SelectedDate = dateTime;
+            await init();
 
         }
         [RelayCommand]

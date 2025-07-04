@@ -127,8 +127,25 @@
                 <Label Margin="5" Text="{extention:TranslateExtention Key=Date}"/>
                 <Label Text=":"/>
 
-                <mat:DatePickerField
-                    Date="{Binding BirthDate}"
+                <DatePicker
+                    FontSize="20"
+                    Format="dd/MM/yyyy" 
+                    x:Name="MyDatePicker"
+                    TextColor="DarkSlateBlue" 
+                    HorizontalOptions="Center"
+                    MinimumDate="{Binding MinimumDate}"
+                    MaximumDate="{Binding MaximumDate}"
+                    >
+                    <DatePicker.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.DatePickedCommand}"
+
+                        CommandParameter="{Binding Date, Source={x:Reference MyDatePicker}}"
+                    EventName="DateSelected" />
+                    </DatePicker.Behaviors>
+                </DatePicker>
+                <!--<mat:DatePickerField
+                    Date="{Binding SelectedDate}"
                     Padding="0" 
                     BorderThickness="0"
                     FontSize="20"
@@ -142,18 +159,14 @@
                     MinimumDate="{Binding MinimumDate}"
                     MaximumDate="{Binding MaximumDate}"
                     AccentColor="DarkSlateBlue">
-                    <!--<mat:DatePickerField.Validations>
-                        <validation:RequiredValidation  Message="اختر التاريخ"/>
-                        <validation:RegexValidation Pattern="01-12-2025"
-                                               Message=""/>
-                    </mat:DatePickerField.Validations>-->
                     <mat:DatePickerField.Behaviors>
-                        <!--<toolkit:EventToCommandBehavior
-                    Command="{Binding DatePickedCommand}"
-                    CommandParameter="{Binding Date, Source={x:Reference MyDatePicker}}"
-                    EventName="DateSelected" />-->
+                        --><!--<toolkit:EventToCommandBehavior
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.DatePickedCommand}"
+
+                        CommandParameter="{Binding Date, Source={x:Reference MyDatePicker}}"
+                    EventName="DateSelected" />--><!--
                     </mat:DatePickerField.Behaviors>
-                </mat:DatePickerField>
+                </mat:DatePickerField>-->
             </HorizontalStackLayout>
             <!--<HorizontalStackLayout Grid.Row="0"
                     Margin="10"
