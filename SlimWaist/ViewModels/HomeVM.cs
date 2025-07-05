@@ -306,7 +306,7 @@ namespace SlimWaist.ViewModels
             }
             else
             {
-                SelectedDiet = null;
+                //SelectedDiet = null;
                 //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
                 CurrentDayDiet.MembershipId = App.currentMembership.Id;
                 CurrentDayDiet.DayDietDate = SelectedDate;

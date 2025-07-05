@@ -471,4 +471,13 @@
   <data name="Ok" xml:space="preserve">
     <value>موافقة</value>
   </data>
+  <data name="Tables" xml:space="preserve">
+    <value>جداولي</value>
+  </data>
+  <data name="Previousdays" xml:space="preserve">
+    <value>الأيام السابقة</value>
+  </data>
+  <data name="Nextdays" xml:space="preserve">
+    <value>الأيام القادمة</value>
+  </data>
 </root>

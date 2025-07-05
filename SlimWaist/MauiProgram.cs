@@ -89,6 +89,9 @@ namespace SlimWaist
             builder.Services.AddSingleton<AllMealsPage>()
                             .AddSingleton<AllMealsVM>();
 
+            builder.Services.AddSingleton<TablesPage>()
+                            .AddSingleton<TablesVM>();
+
             builder.Services.AddSingleton<MealDetailPage>()
                             .AddSingleton<MealDetailVM>();
 

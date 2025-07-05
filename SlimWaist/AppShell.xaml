@@ -29,10 +29,15 @@
             Route="FoodsPage"
             Title="{extention:TranslateExtention Key=Foods}"
             Icon="diet"/>-->
-        <ShellContent
+        <!--<ShellContent
             ContentTemplate="{DataTemplate v:AllMealsPage}"
             Route="AllMealsPage"
             Title="{extention:TranslateExtention Key=Mymeals}"
+            Icon="allmeal"/>-->
+        <ShellContent
+            ContentTemplate="{DataTemplate v:TablesPage}"
+            Route="TablesPage"
+            Title="{extention:TranslateExtention Key=Tables}"
             Icon="allmeal"/>
         <ShellContent
             ContentTemplate="{DataTemplate v:HomePage}"

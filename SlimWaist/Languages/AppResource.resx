@@ -471,4 +471,13 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Tables" xml:space="preserve">
+    <value>Tables</value>
+  </data>
+  <data name="Previousdays" xml:space="preserve">
+    <value>Previous days</value>
+  </data>
+  <data name="Nextdays" xml:space="preserve">
+    <value>Next days</value>
+  </data>
 </root>

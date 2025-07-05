@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ur:UraniumContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Views.TablesPage"
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Shell.NavBarIsVisible="False"
+             x:Name="this"
+             Title=""
+             Shell.TabBarIsVisible="True"
+             BackgroundColor="White"
+             FlowDirection="{extention:FlowDirectionsExtention}">
+    <ur:UraniumContentPage.Resources>
+        <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidMatTextFieldStyle" TargetType="mat:TextField">
+            <Setter Property="TextColor" Value="DarkSlateBlue" />
+        </Style>
+    </ur:UraniumContentPage.Resources>
+
+    <!--<Shell.TitleView>
+        <Label 
+            Text="{extention:TranslateExtention Key=Createonedayplan}"
+            FontAttributes="Bold"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            Margin="5"
+            TextColor="{StaticResource MainColor}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CreateDayPlanCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </Shell.TitleView>-->
+    
+    <mat:TabView Padding="10">
+        <mat:TabView.TabHeaderItemTemplate>
+            <DataTemplate>
+                <Button 
+                Text="{Binding Title}"
+                Command="{Binding Command}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
+                            <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
+                            <Setter Property="TextColor" Value="{StaticResource White}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="False">
+                            <Setter Property="BackgroundColor" Value="White" />
+                            <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </DataTemplate>
+        </mat:TabView.TabHeaderItemTemplate>
+
+        <mat:TabItem Title="{extention:TranslateExtention Key=Previousdays}">
+            <mat:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <CollectionView
+                        SelectionMode="Single"
+                        ItemsSource="{Binding PreviousDayDiets}"
+                        EmptyView="No items">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate  x:DataType="m:DayDiet">
+                                <Border 
+                                    BackgroundColor="WhiteSmoke"
+                                    StrokeThickness="0.3"
+                                    Padding="10"
+                                    Margin="5" 
+                                    StrokeShape="RoundRectangle 5">
+                                    <Grid ColumnDefinitions="*,auto">
+                                        <VerticalStackLayout Spacing="5">
+                                            <HorizontalStackLayout>
+                                                <Label 
+                                                    TextColor="DarkSlateBlue" 
+                                                    Text="{extention:TranslateExtention Key=Date}"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="DarkSlateBlue" 
+                                                    Text=" : "
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Day}"
+                                                    FontAttributes="Bold"/>
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="/"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Month}"
+                                                    FontAttributes="Bold"/>
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="/"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Year}"
+                                                    FontAttributes="Bold"/>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </DataTemplate>
+            </mat:TabItem.ContentTemplate>
+        </mat:TabItem>
+
+        <mat:TabItem Title="{extention:TranslateExtention Key=Nextdays}">
+            <mat:TabItem.ContentTemplate>
+                <DataTemplate>
+                    <CollectionView
+                        SelectionMode="Single"
+                        ItemsSource="{Binding NextDayDiets}"
+                        EmptyView="No items">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Focused">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate  x:DataType="m:DayDiet">
+                                <Border 
+                                    BackgroundColor="WhiteSmoke"
+                                    StrokeThickness="0.3"
+                                    Padding="10"
+                                    Margin="5" 
+                                    StrokeShape="RoundRectangle 5">
+                                    <Grid ColumnDefinitions="*,auto">
+                                        <VerticalStackLayout >
+                                            <HorizontalStackLayout>
+                                                <Label 
+                                                    TextColor="DarkSlateBlue" 
+                                                    Text="{extention:TranslateExtention Key=Date}"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="DarkSlateBlue" 
+                                                    Text=" : "
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Day}"
+                                                    FontAttributes="Bold"/>
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="/"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Month}"
+                                                    FontAttributes="Bold"/>
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="/"
+                                                    FontAttributes="Bold" />
+                                                <Label 
+                                                    TextColor="IndianRed" 
+                                                    Text="{Binding DayDietDate.Year}"
+                                                    FontAttributes="Bold"/>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </DataTemplate>
+            </mat:TabItem.ContentTemplate>
+        </mat:TabItem>
+    </mat:TabView>
+</ur:UraniumContentPage>
+  

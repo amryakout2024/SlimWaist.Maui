@@ -718,6 +718,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next days.
+        /// </summary>
+        public static string Nextdays {
+            get {
+                return ResourceManager.GetString("Nextdays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No diet selected.
         /// </summary>
         public static string Nodietselected {
@@ -822,6 +831,15 @@ namespace SlimWaist.Languages {
         public static string Prepareyourfavoritemeal {
             get {
                 return ResourceManager.GetString("Prepareyourfavoritemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous days.
+        /// </summary>
+        public static string Previousdays {
+            get {
+                return ResourceManager.GetString("Previousdays", resourceCulture);
             }
         }
         
@@ -966,6 +984,15 @@ namespace SlimWaist.Languages {
         public static string Startregieme {
             get {
                 return ResourceManager.GetString("Startregieme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tables.
+        /// </summary>
+        public static string Tables {
+            get {
+                return ResourceManager.GetString("Tables", resourceCulture);
             }
         }
         
