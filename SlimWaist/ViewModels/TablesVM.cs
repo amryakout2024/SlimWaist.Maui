@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
@@ -37,43 +39,27 @@ namespace SlimWaist.ViewModels
             NextDayDiets=DayDiets.Where(x=>x.DayDietDate>dateToday).ToList();
         }
 
-        //[RelayCommand]
-        //private async Task UpdateSelectedMeal(Meal meal)
-        //{
-        //    //if (meal.IsSelected == true)
-        //    //{
-        //    //    meal.IsSelected = false;
-        //    //}
-        //    //else
-        //    //{
-        //    //    meal.IsSelected = true;
-        //    //}
-        //    await App.dataContext.UpdateMeal(meal);
 
-        //    //if (meal.IsSelected == true)
-        //    //{
+        [RelayCommand]
+        private async Task GoToHomePage(DayDiet dayDiet)
+        {
+            //HomeVM.isFromTablesPage = true;
+            //HomeVM.SelectedDate = dayDiet.DayDietDate;
+            HomeVM.CurrentDayDiet = dayDiet;
 
-        //    //    SelectedMeals.Add(meal);
-        //    //    //if (CheckedDrugs.Count > 0)
-        //    //    //{
-        //    //    //    IsLabelVisible = true;
-        //    //    //    IsButtonVisible = true;
-        //    //    //}
-        //    //    //CountCheckedDrugs = CheckedDrugs.Count.ToString();
-        //    //}
-        //    //else
-        //    //{
-        //    //    SelectedMeals.Remove(meal);
-        //    //    //if (CheckedDrugs.Count < 1)
-        //    //    //{
-        //    //    //    IsLabelVisible = false;
-        //    //    //    IsButtonVisible = false;
-        //    //    //}
+            await GoToAsyncWithShell(nameof(HomePage), animate: true);
+        }
+ 
+        [RelayCommand]
+        private async Task DeleteDayDiet(DayDiet dayDiet)
+        {
+            await _dataContext.DeleteAsync<DayDiet>(dayDiet);
 
-        //    //    //CountCheckedDrugs = CheckedDrugs.Count.ToString();
-        //    //}
-        //}
-        
+            await Init();
+
+            await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+        }
+
         //[RelayCommand]
         //private async Task SelectedTabChanged()
         //{
@@ -82,17 +68,6 @@ namespace SlimWaist.ViewModels
         //    //LunchMeals = AllMeals.Where(x => x.MealTypeId == 1).ToList();
         //    //DinnerMeals = AllMeals.Where(x => x.MealTypeId == 2).ToList();
         //}
-
-        [RelayCommand]
-        private async Task GoToMealDetailsPage(Meal meal)
-        {
-            var parameter = new Dictionary<string, object>
-            {
-                [nameof(MealDetailVM.Meal)] = meal,
-            };
-            await GoToAsyncWithStackAndParameter(nameof(MealDetailPage), animate: true, parameter);
-
-        }
 
     }
 }

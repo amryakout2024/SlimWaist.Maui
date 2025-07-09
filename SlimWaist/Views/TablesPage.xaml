@@ -104,46 +104,66 @@
                             </VisualStateGroupList>
                         </VisualStateManager.VisualStateGroups>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate  x:DataType="m:DayDiet">
+                            <DataTemplate x:DataType="m:DayDiet">
                                 <Border 
                                     BackgroundColor="WhiteSmoke"
                                     StrokeThickness="0.3"
                                     Padding="10"
                                     Margin="5" 
                                     StrokeShape="RoundRectangle 5">
-                                    <Grid ColumnDefinitions="*,auto">
-                                        <VerticalStackLayout Spacing="5">
-                                            <HorizontalStackLayout>
-                                                <Label 
+                                    <Grid
+                                        ColumnSpacing="20"
+                                        ColumnDefinitions="*,auto,auto">
+                                        <HorizontalStackLayout Grid.Column="0">
+                                            <Label 
                                                     TextColor="DarkSlateBlue" 
                                                     Text="{extention:TranslateExtention Key=Date}"
                                                     FontAttributes="Bold" />
-                                                <Label 
+                                            <Label 
                                                     TextColor="DarkSlateBlue" 
                                                     Text=" : "
                                                     FontAttributes="Bold" />
-                                                <Label 
+                                            <Label 
                                                     TextColor="IndianRed" 
                                                     Text="{Binding DayDietDate.Day}"
                                                     FontAttributes="Bold"/>
-                                                <Label 
+                                            <Label 
                                                     TextColor="IndianRed" 
                                                     Text="/"
                                                     FontAttributes="Bold" />
-                                                <Label 
+                                            <Label 
                                                     TextColor="IndianRed" 
                                                     Text="{Binding DayDietDate.Month}"
                                                     FontAttributes="Bold"/>
-                                                <Label 
+                                            <Label 
                                                     TextColor="IndianRed" 
                                                     Text="/"
                                                     FontAttributes="Bold" />
-                                                <Label 
+                                            <Label 
                                                     TextColor="IndianRed" 
                                                     Text="{Binding DayDietDate.Year}"
                                                     FontAttributes="Bold"/>
-                                            </HorizontalStackLayout>
-                                        </VerticalStackLayout>
+                                        </HorizontalStackLayout>
+                                        <Label
+                                            Grid.Column="1"
+                                            TextColor="{StaticResource MainColor}"
+                                            Text="{extention:TranslateExtention Key=Show}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=GoToHomePageCommand}" 
+                                                    CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label
+                                            Grid.Column="2"
+                                            TextColor="DarkRed"
+                                            Text="{extention:TranslateExtention Key=Delete}">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=DeleteDayDietCommand}" 
+                                                    CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

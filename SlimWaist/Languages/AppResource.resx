@@ -480,4 +480,7 @@
   <data name="Nextdays" xml:space="preserve">
     <value>Next days</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>
