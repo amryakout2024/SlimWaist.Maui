@@ -134,7 +134,6 @@ namespace SlimWaist.ViewModels
         private Diet _selectedDiet;
 
         public static Meal? CurrentMeal { get; set;}=new Meal();
-        public static DayDiet? CurrentDayDiet { get; set;}=new DayDiet();
 
         public static Meal ExistingBreakfastMeal=new Meal();
         public static Meal ExistingLunchMeal=new Meal();
@@ -155,7 +154,7 @@ namespace SlimWaist.ViewModels
         private DateTime _minimumDate;
 
         private bool isDateChanged = false;
-        private bool isFirstDateChanged = true;
+        private bool isFirstCheckForExistingDayDiet = false;
 
         private DateTime ExistingDayDietDate { get; set; }
 
@@ -194,9 +193,9 @@ namespace SlimWaist.ViewModels
 
             Diets = await App.dataContext.LoadAsync<Diet>();
 
-            MaximumDate = DateTime.Now.AddDays(30);
+            //MaximumDate = DateTime.Now.AddDays(30);
 
-            MinimumDate = DateTime.Now;
+            //MinimumDate = DateTime.Now;
             //SelectedDateFromUser=new DateTime(
             //    Convert.ToInt32(DateTime.Now.Year)
             //    , Convert.ToInt32(DateTime.Now.Month)
@@ -221,24 +220,31 @@ namespace SlimWaist.ViewModels
             //        , Convert.ToInt32(DateTime.Now.Day));
 
             //}
-            //SelectedDate = new DateTime(
-            //            Convert.ToInt32(DateTime.Now.Year)
-            //            , Convert.ToInt32(DateTime.Now.Month)
-            //            , Convert.ToInt32(DateTime.Now.Day));
-
-            CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
-                .Where(x => x.MembershipId == App.currentMembership.Id)
-                .Where(x=>x.DayDietDate==SelectedDate).FirstOrDefault()??new DayDiet();
-
-            if (CurrentDayDiet.IsExistsInDb)
+            
+            if (isFirstCheckForExistingDayDiet==false)
             {
+                SelectedDate = new DateTime(
+                            DateTime.Now.Year
+                            , DateTime.Now.Month
+                            , DateTime.Now.Day);
+
+                App.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+                    .Where(x => x.MembershipId == App.currentMembership.Id)
+                    .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
+                isFirstCheckForExistingDayDiet = true;
+            }
+
+            if (App.CurrentDayDiet.IsExistsInDb)
+            {
+                SelectedDate = App.CurrentDayDiet.DayDietDate;
+                
                 meals = _dataContext.Database.Table<Meal>().Where(
-                    x=>x.DayDietId==CurrentDayDiet.DayDietId).ToList() ?? new List<Meal>();
+                    x=>x.DayDietId==App.CurrentDayDiet.DayDietId).ToList() ?? new List<Meal>();
 
                 mealDetails = _dataContext.Database.Table<MealDetail>().Where(
-                    x=>x.DayDietId==CurrentDayDiet.DayDietId).ToList() ?? new List<MealDetail>();
+                    x=>x.DayDietId==App.CurrentDayDiet.DayDietId).ToList() ?? new List<MealDetail>();
 
-                SelectedDiet = Diets.Where(x => x.DietId == CurrentDayDiet.DietId).FirstOrDefault();
+                SelectedDiet = Diets.Where(x => x.DietId == App.CurrentDayDiet.DietId).FirstOrDefault();
 
                 ExistingBreakfastMeal = meals.Where(x=> x.MealTypeId == 0).FirstOrDefault() ?? new Meal();
                 ExistingLunchMeal = meals.Where(x=> x.MealTypeId == 1).FirstOrDefault() ?? new Meal();
@@ -306,17 +312,18 @@ namespace SlimWaist.ViewModels
             }
             else
             {
+                App.CurrentDayDiet.DayDietDate = SelectedDate;
                 //SelectedDiet = null;
-                //CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
-                CurrentDayDiet.MembershipId = App.currentMembership.Id;
-                CurrentDayDiet.DayDietDate = SelectedDate;
+                //App.CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
+                App.CurrentDayDiet.MembershipId = App.currentMembership.Id;
+                App.CurrentDayDiet.DayDietDate = SelectedDate;
             }
 
             //var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
             CurrentMeal = new Meal()
             {
                 //MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
-                DayDietId=CurrentDayDiet.DayDietId
+                DayDietId=App.CurrentDayDiet.DayDietId
             };
 
             TotalConsumedEnergy = Math.Round(
@@ -358,13 +365,13 @@ namespace SlimWaist.ViewModels
         {
             IsTabbarVisible = IsBottomSheetPresented ? false : true;
 
-            if (CurrentDayDiet.IsExistsInDb)
+            if (App.CurrentDayDiet.IsExistsInDb)
             {
                 if (IsBottomSheetPresented==false)
                 {
-                    if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                    if ((SelectedIndex + 1) != App.CurrentDayDiet.DietId)
                     {
-                        SelectedIndex = CurrentDayDiet.DietId - 1;
+                        SelectedIndex = App.CurrentDayDiet.DietId - 1;
                     }
 
                 }
@@ -398,9 +405,9 @@ namespace SlimWaist.ViewModels
         //}
         partial void OnSelectedIndexChanged(int value)
         {
-            if (CurrentDayDiet.IsExistsInDb)
+            if (App.CurrentDayDiet.IsExistsInDb)
             {
-                if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                if ((SelectedIndex + 1) != App.CurrentDayDiet.DietId)
                 {
                     if (IsBottomSheetPresented==false)
                     {
@@ -414,19 +421,35 @@ namespace SlimWaist.ViewModels
         private async Task DatePicked(DateTime dateTime)
         {
             SelectedDate = dateTime;
-            await init();
 
+            if (App.IsFromTablesPage==false)
+            {
+                App.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+        .Where(x => x.MembershipId == App.currentMembership.Id)
+        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
+
+                await init();
+            }
+
+            //if (App.CurrentDayDiet.IsExistsInDb)
+            //{
+            //    SelectedDiet = Diets.Where(x => x.DietId == App.CurrentDayDiet.DietId).FirstOrDefault();
+            //}
+            //else
+            //{
+            //    //SelectedDiet = null;
+            //}
         }
         [RelayCommand]
         private async Task DeleteDayDiet()
         {
-            if (CurrentDayDiet.IsExistsInDb)
+            if (App.CurrentDayDiet.IsExistsInDb)
             {
-                if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
+                if ((SelectedIndex + 1) != App.CurrentDayDiet.DietId)
                 {
-                    CurrentDayDiet.IsExistsInDb = false;
+                    App.CurrentDayDiet.IsExistsInDb = false;
 
-                    await _dataContext.DeleteAsync<DayDiet>(CurrentDayDiet);
+                    await _dataContext.DeleteAsync<DayDiet>(App.CurrentDayDiet);
 
                     if (ExistingBreakfastMeal.IsExistsInDb == true)
                     {
@@ -496,9 +519,9 @@ namespace SlimWaist.ViewModels
         {
             if (SelectedDiet!=null)
             {
-                if (CurrentDayDiet.IsExistsInDb==false)
+                if (App.CurrentDayDiet.IsExistsInDb==false)
                 {
-                    CurrentDayDiet.DietId = SelectedDiet.DietId ;
+                    App.CurrentDayDiet.DietId = SelectedDiet.DietId ;
                 }
 
                 if (ExistingBreakfastMeal.IsExistsInDb == true)
@@ -527,9 +550,9 @@ namespace SlimWaist.ViewModels
         {
             if (SelectedDiet != null)
             {
-                if (CurrentDayDiet.IsExistsInDb == false)
+                if (App.CurrentDayDiet.IsExistsInDb == false)
                 {
-                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                    App.CurrentDayDiet.DietId = SelectedDiet.DietId;
                 }
                 if (ExistingLunchMeal.IsExistsInDb == true)
                 {
@@ -556,9 +579,9 @@ namespace SlimWaist.ViewModels
         {
             if (SelectedDiet != null)
             {
-                if (CurrentDayDiet.IsExistsInDb == false)
+                if (App.CurrentDayDiet.IsExistsInDb == false)
                 {
-                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                    App.CurrentDayDiet.DietId = SelectedDiet.DietId;
                 }
                 if (ExistingDinnerMeal.IsExistsInDb == true)
                 {
@@ -585,9 +608,9 @@ namespace SlimWaist.ViewModels
         {
             if (SelectedDiet != null)
             {
-                if (CurrentDayDiet.IsExistsInDb == false)
+                if (App.CurrentDayDiet.IsExistsInDb == false)
                 {
-                    CurrentDayDiet.DietId = SelectedDiet.DietId;
+                    App.CurrentDayDiet.DietId = SelectedDiet.DietId;
                 }
                 if (ExistingSnaksMeal.IsExistsInDb == true)
                 {

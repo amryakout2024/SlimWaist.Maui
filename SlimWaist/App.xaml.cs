@@ -13,6 +13,9 @@ namespace SlimWaist
         public static Membership currentMembership;
         public static int TotalCartCount;
 
+        public static DayDiet? CurrentDayDiet { get; set; } = new DayDiet();
+        public static bool IsFromTablesPage { get; set; } = false;
+        
         public static List<CartItem> CartItems = new List<CartItem>();
 
         public static string ValidateForNullOrEmptyMessage;

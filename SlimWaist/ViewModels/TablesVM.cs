@@ -34,22 +34,24 @@ namespace SlimWaist.ViewModels
 
             DayDiets = _dataContext.Database.Table<DayDiet>().Where(x => x.MembershipId == App.currentMembership.Id).ToList();
 
-            PreviousDayDiets = DayDiets.Where(x =>x.DayDietDate==dateToday || x.DayDietDate<dateToday).ToList();
+            PreviousDayDiets = DayDiets.Where(x=> x.DayDietDate<dateToday).ToList();
 
-            NextDayDiets=DayDiets.Where(x=>x.DayDietDate>dateToday).ToList();
+            NextDayDiets=DayDiets.Where(x=>x.DayDietDate>dateToday || x.DayDietDate == dateToday).ToList();
         }
 
 
         [RelayCommand]
         private async Task GoToHomePage(DayDiet dayDiet)
         {
-            //HomeVM.isFromTablesPage = true;
             //HomeVM.SelectedDate = dayDiet.DayDietDate;
-            HomeVM.CurrentDayDiet = dayDiet;
+            App.CurrentDayDiet = dayDiet;
 
             await GoToAsyncWithShell(nameof(HomePage), animate: true);
+
+            App.IsFromTablesPage = false;
+
         }
- 
+
         [RelayCommand]
         private async Task DeleteDayDiet(DayDiet dayDiet)
         {
