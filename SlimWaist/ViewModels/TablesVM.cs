@@ -32,7 +32,7 @@ namespace SlimWaist.ViewModels
                 , Convert.ToInt32(DateTime.Now.Month)
                 , Convert.ToInt32(DateTime.Now.Day));
 
-            DayDiets = _dataContext.Database.Table<DayDiet>().Where(x => x.MembershipId == App.currentMembership.Id).ToList();
+            DayDiets = _dataContext.Database.Table<DayDiet>().Where(x => x.MembershipId == HomeVM.CurrentMembership.Id).ToList();
 
             PreviousDayDiets = DayDiets.Where(x=> x.DayDietDate<dateToday).ToList();
 
@@ -44,7 +44,7 @@ namespace SlimWaist.ViewModels
         private async Task GoToHomePage(DayDiet dayDiet)
         {
             //HomeVM.SelectedDate = dayDiet.DayDietDate;
-            App.CurrentDayDiet = dayDiet;
+            HomeVM.CurrentDayDiet = dayDiet;
 
             await GoToAsyncWithShell(nameof(HomePage), animate: true);
 
@@ -55,6 +55,14 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task DeleteDayDiet(DayDiet dayDiet)
         {
+            if (HomeVM.CurrentDayDiet.DayDietId==dayDiet.DayDietId)
+            {
+                var dt = HomeVM.CurrentDayDiet.DayDietDate;
+
+                HomeVM.CurrentDayDiet = new DayDiet();
+
+                HomeVM.CurrentDayDiet.DayDietDate = new DateTime(dt.Year,dt.Month,dt.Day);
+            }
             await _dataContext.DeleteAsync<DayDiet>(dayDiet);
 
             await Init();

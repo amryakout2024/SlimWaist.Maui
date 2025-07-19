@@ -13,6 +13,7 @@ namespace SlimWaist
 
             RegisterRoutes();
 
+
             ////SentrySdk.CaptureMessage("Hello Sentry");
         }
 
@@ -20,7 +21,6 @@ namespace SlimWaist
         [
             typeof(RegisterPage),
             typeof(HomePage),
-            typeof(RegimesListPage),
             typeof(FoodsPage),
             typeof(ItemPage),
             typeof(CartPage),

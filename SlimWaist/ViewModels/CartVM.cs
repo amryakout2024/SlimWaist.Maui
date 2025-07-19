@@ -61,7 +61,7 @@ namespace SlimWaist.ViewModels
             {
                 string result = "";
 
-                switch (App.currentMembership.CultureInfo)
+                switch (HomeVM.CurrentMembership.CultureInfo)
                 {
                     case "ar-SA":
                         result = await Shell.Current.DisplayPromptAsync(

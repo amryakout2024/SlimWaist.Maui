@@ -32,12 +32,15 @@ namespace SlimWaist.Models
 
         public int BodyActivityId { get; set; }
 
-        //1 means male ---- 2 means female
+        //0 means male ---- 1 means female
         public int GenderId { get; set; }
 
         public double WaistCircumferenceMeasurement { get; set; }
 
         public string? CultureInfo { get; set; } = "ar-SA";
+
+        public bool IsExistsInDb { get; set; } = false;
+
     }
 
 }

@@ -5,7 +5,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist70";
+        public const string DbName = "SlimWaist72";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -27,10 +27,6 @@ namespace SlimWaist.Models
 
 
 
-                Database.CreateTable<RegimeList>();
-
-                Database.CreateTable<Regime>();
-
                 Database.CreateTable<Food>();
 
                 Database.CreateTable<CartItem>();
@@ -38,9 +34,7 @@ namespace SlimWaist.Models
                 Database.CreateTable<Meal>();
 
                 Database.CreateTable<MealDetail>();
-
-                Database.CreateTable<Diet>();
-
+                
                 Database.CreateTable<DayDiet>();
 
                 ///////inserting data////////
@@ -70,41 +64,6 @@ namespace SlimWaist.Models
                    Id = 1,
                 });
 
-                List<Diet> diets = new List<Diet>()
-                {
-                    new Diet()
-                    {
-                        DietName="نظام الكيتو",
-                        DietDescription="aaaaaaaaaaa"
-                    },
-                    new Diet()
-                    {
-                        DietName="نظام منخفض السعرات",
-                        DietDescription="bbbbbbbbbbbb"
-                    },
-                    new Diet()
-                    {
-                        DietName="نظام الحصص",
-                        DietDescription="ccccccccccccc"
-                    },
-                };
-
-                foreach (Diet diet in diets)
-                {
-                    Database.Insert(diet);
-                }
-
-                List<Regime> regimes = new List<Regime>()
-                {
-                    new Regime(){RegimeId=1,RegimeName="كيتو"},
-                    new Regime(){RegimeId=2,RegimeName="منخفض الكربوهيدرات"},
-                    new Regime(){RegimeId=3,RegimeName="حصص غذائية"},
-                };
-
-                foreach (Regime regime in regimes)
-                {
-                    Database.Insert(regime);
-                }
 
                 List<Food> foods = new List<Food>()
                 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.PlatformConfiguration;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
+using SlimWaist.Views;
 using System.Globalization;
 
 namespace SlimWaist
@@ -9,13 +10,12 @@ namespace SlimWaist
     {
         public static DataContext dataContext;
         public static Setting setting;
+
         public static List<Membership> memberships;
-        public static Membership currentMembership;
         public static int TotalCartCount;
 
-        public static DayDiet? CurrentDayDiet { get; set; } = new DayDiet();
         public static bool IsFromTablesPage { get; set; } = false;
-        
+
         public static List<CartItem> CartItems = new List<CartItem>();
 
         public static string ValidateForNullOrEmptyMessage;
@@ -24,6 +24,7 @@ namespace SlimWaist
 
         public static List<BodyActivity> BodyActivities;
         public static List<Gender> Genders;
+        public static List<Diet> Diets;
         public static List<ObesityDegree> obesityDegrees;
         public static List<WaistCircumference> waistCircumferences;
         public static List<MealType> mealTypes;
@@ -73,6 +74,24 @@ namespace SlimWaist
                         MealTypeId=3,
                         MealTypeName="سناكس"
                     },
+                };
+                Diets = new List<Diet>()
+                {
+                    new Diet()
+                    {
+                        DietId=1,
+                        DietName="كيتو"
+                    },
+                    new Diet()
+                    {
+                        DietId=2,
+                        DietName="منخفض السعرات"
+                    },
+                    new Diet()
+                    {
+                        DietId=3,
+                        DietName="حصص غذائية"
+                    }
                 };
                 BodyActivities = new List<BodyActivity>() {
 
@@ -199,6 +218,25 @@ namespace SlimWaist
                     },
                 };
 
+                Diets = new List<Diet>()
+                {
+                    new Diet()
+                    {
+                        DietId=1,
+                        DietName="Keto"
+                    },
+                    new Diet()
+                    {
+                        DietId=2,
+                        DietName="Low calories"
+                    },
+                    new Diet()
+                    {
+                        DietId=3,
+                        DietName="Serving sizes"
+                    }
+                };
+
                 BodyActivities = new List<BodyActivity>() {
 
                         new BodyActivity()
@@ -227,12 +265,12 @@ namespace SlimWaist
                     {
                         new Gender()
                         {
-                            GenderId=1,
+                            GenderId=0,
                             GenderName="Male"
                         },
                         new Gender()
                         {
-                            GenderId=2,
+                            GenderId=1,
                             GenderName="Female"
                         }
                     };
@@ -288,6 +326,7 @@ namespace SlimWaist
             }
 
             MainPage = new AppShell();
+
 
             //Helpers.ReadExcel.ReadExcelSheet();
         }

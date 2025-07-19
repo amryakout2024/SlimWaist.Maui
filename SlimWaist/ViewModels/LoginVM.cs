@@ -41,7 +41,7 @@ namespace SlimWaist.ViewModels
 
             if (App.setting.SavedMembershipId != 0)
             {
-                App.currentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+                HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
 
                 await GoToAsyncWithShell(nameof(HomePage), true);
             }
@@ -64,18 +64,18 @@ namespace SlimWaist.ViewModels
 
                 if (IsPassWordMatchWithEmail)
                 {
-                    App.currentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
+                    HomeVM.CurrentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
 
-                    App.setting.CultureInfo= App.currentMembership.CultureInfo;
+                    App.setting.CultureInfo= HomeVM.CurrentMembership.CultureInfo;
 
                     if (IsCheckBoxChecked)
                     {
-                        App.setting.SavedMembershipId = App.currentMembership.Id;
+                        App.setting.SavedMembershipId = HomeVM.CurrentMembership.Id;
                     }
 
                     await App.dataContext.UpdateAsync<Setting>(App.setting);
 
-                    await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
+                    await App.dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
                     
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }

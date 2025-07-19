@@ -46,9 +46,6 @@ namespace SlimWaist.ViewModels
         private string? _totalEnergy;
 
         [ObservableProperty]
-        private ObservableCollection<RegimeList> _regimeLists;
-
-        [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
 
         [ObservableProperty]
@@ -67,21 +64,21 @@ namespace SlimWaist.ViewModels
 
             BodyActivities = App.BodyActivities;
 
-            Name = App.currentMembership?.Name ?? "";
+            Name = HomeVM.CurrentMembership?.Name ?? "";
 
-            Email = App.currentMembership?.Email ?? "";
+            Email = HomeVM.CurrentMembership?.Email ?? "";
 
-            Weight = App.currentMembership?.Weight.ToString() ?? "";
+            Weight = HomeVM.CurrentMembership?.Weight.ToString() ?? "";
 
-            Height = App.currentMembership?.Height.ToString() ?? "";
+            Height = HomeVM.CurrentMembership?.Height.ToString() ?? "";
 
-            BirthDate = new DateTime(App.currentMembership.BirthDateYear, App.currentMembership.BirthDateMonth, App.currentMembership.BirthDateDay);
+            BirthDate = new DateTime(HomeVM.CurrentMembership.BirthDateYear, HomeVM.CurrentMembership.BirthDateMonth, HomeVM.CurrentMembership.BirthDateDay);
 
-            SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==App.currentMembership.BodyActivityId).FirstOrDefault();
+            SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==HomeVM.CurrentMembership.BodyActivityId).FirstOrDefault();
 
-            IsMale = (App.currentMembership.GenderId== 1) ? true : false;
+            IsMale = (HomeVM.CurrentMembership.GenderId== 1) ? true : false;
 
-            WaistCircumferenceMeasurement=App.currentMembership.WaistCircumferenceMeasurement.ToString();
+            WaistCircumferenceMeasurement=HomeVM.CurrentMembership.WaistCircumferenceMeasurement.ToString();
         }
 
 
@@ -94,29 +91,29 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task UpdateMembership()
         {
-            App.currentMembership.Email = Email ?? "";
+            HomeVM.CurrentMembership.Email = Email ?? "";
 
-            App.currentMembership.Name = Name;
+            HomeVM.CurrentMembership.Name = Name;
 
-            App.currentMembership.Height = Convert.ToDouble(Height);
+            HomeVM.CurrentMembership.Height = Convert.ToDouble(Height);
 
-            App.currentMembership.Weight = Convert.ToDouble(Weight);
+            HomeVM.CurrentMembership.Weight = Convert.ToDouble(Weight);
 
-            App.currentMembership.BirthDateYear = BirthDate.Year;
+            HomeVM.CurrentMembership.BirthDateYear = BirthDate.Year;
 
-            App.currentMembership.BirthDateMonth=BirthDate.Month;
+            HomeVM.CurrentMembership.BirthDateMonth=BirthDate.Month;
 
-            App.currentMembership.BirthDateDay=BirthDate.Day;
+            HomeVM.CurrentMembership.BirthDateDay=BirthDate.Day;
 
-            App.currentMembership.BodyActivityId = SelectedBodyActivity.BodyActivityId;
+            HomeVM.CurrentMembership.BodyActivityId = SelectedBodyActivity.BodyActivityId;
 
             GenderId = (IsMale == true) ? 1 : 2;
 
-            App.currentMembership.GenderId = GenderId;
+            HomeVM.CurrentMembership.GenderId = GenderId;
 
-            App.currentMembership.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
+            HomeVM.CurrentMembership.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
 
-            await App.dataContext.UpdateAsync<Membership>(App.currentMembership);
+            await App.dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
 
             await Toast.Make(AppResource.ResourceManager.GetString("Updatedsuccessfully",CultureInfo.CurrentCulture), ToastDuration.Short).Show();
         }
@@ -139,4 +136,4 @@ namespace SlimWaist.ViewModels
 
     }
 }
-//[QueryProperty(nameof(App.currentMembership), nameof(App.currentMembership))]
+//[QueryProperty(nameof(HomeVM.CurrentMembership), nameof(HomeVM.CurrentMembership))]

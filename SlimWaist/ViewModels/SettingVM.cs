@@ -16,9 +16,9 @@ namespace SlimWaist.ViewModels
        
         public async Task init()
         {
-            Name = App.currentMembership?.Name ?? "";
+            Name = HomeVM.CurrentMembership?.Name ?? "";
 
-            if (App.currentMembership.CultureInfo=="ar-SA")
+            if (HomeVM.CurrentMembership.CultureInfo=="ar-SA")
             {
                 IsCultureInfoArrowArabic = true;
             }

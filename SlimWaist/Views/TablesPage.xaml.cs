@@ -11,6 +11,8 @@ public partial class TablesPage : UraniumContentPage
     {
         InitializeComponent();
 
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}", true);
+
         _tablesVM = tablesVM;
 
         BindingContext = _tablesVM;

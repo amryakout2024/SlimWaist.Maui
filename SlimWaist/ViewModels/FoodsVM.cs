@@ -89,18 +89,18 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task AddFoodToMeal()
         {
-            if (App.CurrentDayDiet.IsExistsInDb==false)
+            if (HomeVM.CurrentDayDiet.IsExistsInDb==false)
             {
-                App.CurrentDayDiet.IsExistsInDb = true;
+                HomeVM.CurrentDayDiet.IsExistsInDb = true;
 
-                await App.dataContext.InsertAsync<DayDiet>(App.CurrentDayDiet);
+                await App.dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
             }
 
             if (HomeVM.CurrentMeal.IsExistsInDb==false)
             {
                 var CurrentDayDietId = _dataContext.Database.Table<DayDiet>()
-                                        .Where(x => x.MembershipId == App.currentMembership.Id)
-                                        .Where(x => x.DayDietDate == App.CurrentDayDiet.DayDietDate).Select(x => x.DayDietId).FirstOrDefault();
+                                        .Where(x => x.MembershipId == HomeVM.CurrentMembership.Id)
+                                        .Where(x => x.DayDietDate == HomeVM.CurrentDayDiet.DayDietDate).Select(x => x.DayDietId).FirstOrDefault();
 
                 HomeVM.CurrentMeal.DayDietId = CurrentDayDietId;
 
@@ -166,8 +166,8 @@ namespace SlimWaist.ViewModels
                             HomeVM.ExistingDinnerMeal.IsExistsInDb == false &&
                             HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
                         {
-                            App.CurrentDayDiet.IsExistsInDb = false;
-                            await App.dataContext.DeleteAsync<DayDiet>(App.CurrentDayDiet);
+                            HomeVM.CurrentDayDiet.IsExistsInDb = false;
+                            await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
                         }
                     }
 
@@ -181,7 +181,7 @@ namespace SlimWaist.ViewModels
             {
                 var mealDetail = new MealDetail()
                 {
-                    DayDietId = App.CurrentDayDiet.DayDietId,
+                    DayDietId = HomeVM.CurrentDayDiet.DayDietId,
                     FoodId = SelectedFood.FoodId,
                     MealId = HomeVM.CurrentMeal.MealId,
                     Quantity = Convert.ToDouble(Quantity)

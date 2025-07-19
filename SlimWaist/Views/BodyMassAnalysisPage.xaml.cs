@@ -39,7 +39,7 @@ public partial class BodyMassAnalysisPage : UraniumContentPage
 
         await Task.Delay(500);
 
-        double mi = (Convert.ToDouble(App.currentMembership.Weight)) / ((Convert.ToDouble(App.currentMembership.Height) / 100) * (Convert.ToDouble(App.currentMembership.Height) / 100));
+        double mi = (Convert.ToDouble(HomeVM.CurrentMembership.Weight)) / ((Convert.ToDouble(HomeVM.CurrentMembership.Height) / 100) * (Convert.ToDouble(HomeVM.CurrentMembership.Height) / 100));
 
         var BMI = Math.Round(mi, 2).ToString();
 

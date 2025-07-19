@@ -28,18 +28,11 @@ public partial class HomePage : UraniumContentPage
 
         _homeVM = homeVM;
 
-
         MyDatePicker.MinimumDate = new DateTime(2025, 1, 1);
 
         MyDatePicker.MaximumDate= DateTime.Now.AddDays(30);
 
         BindingContext = _homeVM;
-
-        //timer = Application.Current?.Dispatcher.CreateTimer();
-
-        //timer.Interval = TimeSpan.FromSeconds(7);
-
-        //timer.Tick += Timer_Tick;
     }
 
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
@@ -48,19 +41,21 @@ public partial class HomePage : UraniumContentPage
 
         await _homeVM.init();
 
-        var d = App.CurrentDayDiet;
+        var d = HomeVM.CurrentDayDiet;
 
-        if (App.CurrentDayDiet.IsExistsInDb)
+        if (HomeVM.CurrentDayDiet.IsExistsInDb)
         {
             MyDatePicker.Date = new DateTime(
-App.CurrentDayDiet.DayDietDate.Year
-, App.CurrentDayDiet.DayDietDate.Month
-, App.CurrentDayDiet.DayDietDate.Day);
+HomeVM.CurrentDayDiet.DayDietDate.Year
+, HomeVM.CurrentDayDiet.DayDietDate.Month
+, HomeVM.CurrentDayDiet.DayDietDate.Day);
         }
         else
         {
-            MyDatePicker.Date = DateTime.Now;
-
+            MyDatePicker.Date = new DateTime(
+                                DateTime.Now.Year
+                                , DateTime.Now.Month
+                                , DateTime.Now.Day);
         }
 
         WantToExit = false;

@@ -29,7 +29,7 @@ namespace SlimWaist.Platforms.Android
             base.SetAppearance(bottomView, appearance);
 
             if (_badgeDrawable is null)
-           {
+            {
                 const int cartTabbarItemIndex = 3;
 
                 _badgeDrawable = bottomView.GetOrCreateBadge(cartTabbarItemIndex);

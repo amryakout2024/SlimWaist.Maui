@@ -163,8 +163,8 @@ namespace SlimWaist.ViewModels
                         HomeVM.ExistingDinnerMeal.IsExistsInDb == false &&
                         HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
                     {
-                        App.CurrentDayDiet.IsExistsInDb = false;
-                        await App.dataContext.DeleteAsync<DayDiet>(App.CurrentDayDiet);
+                        HomeVM.CurrentDayDiet.IsExistsInDb = false;
+                        await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
                     }
                 }
             }
