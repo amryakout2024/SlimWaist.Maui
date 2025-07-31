@@ -1,4 +1,4 @@
-﻿namespace SlimWaist.Models
+﻿namespace SlimWaist.Models.Dto
 {
     public class Gender
     {

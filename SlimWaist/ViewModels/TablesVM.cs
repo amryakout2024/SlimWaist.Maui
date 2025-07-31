@@ -73,7 +73,7 @@ namespace SlimWaist.ViewModels
         //[RelayCommand]
         //private async Task SelectedTabChanged()
         //{
-        //    //AllMeals = await App.dataContext.LoadAsync<Meal>();
+        //    //AllMeals = await App._dataContext.LoadAsync<Meal>();
         //    //BreakfastMeals = AllMeals.Where(x => x.MealTypeId == 0).ToList();
         //    //LunchMeals = AllMeals.Where(x => x.MealTypeId == 1).ToList();
         //    //DinnerMeals = AllMeals.Where(x => x.MealTypeId == 2).ToList();

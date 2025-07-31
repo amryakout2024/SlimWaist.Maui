@@ -483,4 +483,10 @@
   <data name="Delete" xml:space="preserve">
     <value />
   </data>
+  <data name="NeedLogintousetheapp" xml:space="preserve">
+    <value>تحتاج تسجيل الدخول لاستخدام التطبيق</value>
+  </data>
+  <data name="Wanttostartyourchallenge" xml:space="preserve">
+    <value>هل تريد بدأ التحدي ؟</value>
+  </data>
 </root>

@@ -33,7 +33,7 @@ namespace SlimWaist.Platforms.Android
                 const int cartTabbarItemIndex = 3;
 
                 _badgeDrawable = bottomView.GetOrCreateBadge(cartTabbarItemIndex);
-                UpdateBadgeVisibilityAccordingToCartCount(App.TotalCartCount);
+                //UpdateBadgeVisibilityAccordingToCartCount(App.TotalCartCount);
 
                 //create the event implementation of the itemVM
                 ItemVM.TotalCartCountChanged += ItemVM_TotalCartCountChanged;

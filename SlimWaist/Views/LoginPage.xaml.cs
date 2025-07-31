@@ -16,30 +16,32 @@ namespace SlimWaist.Views;
 public partial class LoginPage : UraniumContentPage
 {
     private readonly LoginVM _loginVM;
-    private readonly IBadge _badge;
+    private readonly DataContext _dataContext;
 
-    //,IBadge badge
-    public LoginPage(LoginVM loginVM)
+    public LoginPage(LoginVM loginVM,DataContext dataContext)
     {
         InitializeComponent();
         _loginVM = loginVM;
+        _dataContext = dataContext;
         BindingContext = _loginVM;
     }
 
-    protected async override void OnAppearing()
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        base.OnNavigatedTo(args);
+
         await _loginVM.init();
-
-
     }
 
+    //change language
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
+
         if (App.setting.CultureInfo == "ar-SA")
         {
             App.setting.CultureInfo = "en-US";
 
-            await App.dataContext.UpdateAsync<Setting>(App.setting);
+            await _dataContext.UpdateAsync<Setting>(App.setting);
 
 #if ANDROID
             var context = Platform.AppContext;
@@ -56,7 +58,7 @@ public partial class LoginPage : UraniumContentPage
         {
             App.setting.CultureInfo = "ar-SA";
 
-            await App.dataContext.UpdateAsync<Setting>(App.setting);
+            await _dataContext.UpdateAsync<Setting>(App.setting);
 
 
 #if ANDROID

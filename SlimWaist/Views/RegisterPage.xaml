@@ -31,29 +31,32 @@
             FontSize="25"/>
     </Shell.TitleView>
 
-    <input:FormView 
+    <ScrollView>
+        <input:FormView x:Name="fv"
         Spacing="5" 
+               input:FormView.IsSubmitButton="{Binding IsFormViewReset}"
+               input:FormView.IsResetButton="{Binding IsFormViewReset}"
         Margin="10,5,10,0" 
         SubmitCommand="{Binding SaveNewMemberShipCommand}">
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-            <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
+                <mat:TextField.Validations>
+                    <helpers:ValidateForNullOrEmpty/>
+                    <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                </mat:TextField.Validations>
+                <mat:TextField.Behaviors>
+                    <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
                                                  InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
                                                  ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
-            </mat:TextField.Behaviors>
-        </mat:TextField>
+                </mat:TextField.Behaviors>
+            </mat:TextField>
 
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding Password}"
             Title="{extention:TranslateExtention Key=Password}"
             AllowClear="True"
@@ -61,13 +64,13 @@
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-        </mat:TextField>
+                <mat:TextField.Validations>
+                    <helpers:ValidateForNullOrEmpty/>
+                    <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                </mat:TextField.Validations>
+            </mat:TextField>
 
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding Name}"
             Title="{extention:TranslateExtention Key=Name}"
             AllowClear="True"
@@ -75,13 +78,13 @@
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="خطأ"/>
-            </mat:TextField.Validations>
-        </mat:TextField>
+                <mat:TextField.Validations>
+                    <helpers:ValidateForNullOrEmpty/>
+                    <validation:RegexValidation  Pattern="" Message="خطأ"/>
+                </mat:TextField.Validations>
+            </mat:TextField>
 
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding Height}"
             Title="{extention:TranslateExtention Key=Height}"
             AllowClear="True"
@@ -90,13 +93,13 @@
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
-                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
-            </mat:TextField.Validations>
-        </mat:TextField>
+                <mat:TextField.Validations>
+                    <helpers:ValidateForDecimalNumber/>
+                    <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+                </mat:TextField.Validations>
+            </mat:TextField>
 
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding WaistCircumferenceMeasurement}"
             Title="{extention:TranslateExtention Key=Waistcircumference}"
             AllowClear="True"
@@ -105,12 +108,13 @@
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
-                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
-            </mat:TextField.Validations>
-        </mat:TextField>
-        <mat:TextField 
+                <mat:TextField.Validations>
+                    <helpers:ValidateForDecimalNumber/>
+                    <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+                </mat:TextField.Validations>
+            </mat:TextField>
+
+            <mat:TextField 
             Text="{Binding Weight}"
             Title="{extention:TranslateExtention Key=Weight}"
             AllowClear="True"
@@ -119,13 +123,13 @@
             TitleColor="Gray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
-                <validation:MaxValueValidation MaxValue="10000000" Message=""/>
-            </mat:TextField.Validations>
-        </mat:TextField>
+                <mat:TextField.Validations>
+                    <helpers:ValidateForDecimalNumber/>
+                    <validation:MaxValueValidation MaxValue="10000000" Message=""/>
+                </mat:TextField.Validations>
+            </mat:TextField>
 
-        <mat:DatePickerField
+            <mat:DatePickerField
             Date="{Binding BirthDate}"
             Padding="0"
             Format="dd/MM/yyyy"
@@ -135,14 +139,14 @@
             TitleColor="Gray"
             MinimumDate="01/01/1930"
             AccentColor="DarkSlateBlue">
-            <mat:DatePickerField.Validations>
-                <validation:RequiredValidation  Message="اختر التاريخ"/>
-                <validation:RegexValidation Pattern="01-12-2025"
+                <mat:DatePickerField.Validations>
+                    <validation:RequiredValidation  Message="اختر التاريخ"/>
+                    <validation:RegexValidation Pattern="01-12-2025"
                                                Message=""/>
-            </mat:DatePickerField.Validations>
-        </mat:DatePickerField>
+                </mat:DatePickerField.Validations>
+            </mat:DatePickerField>
 
-        <Picker
+            <Picker
             Title="{extention:TranslateExtention Key=SelectBodyActivity}"
             x:Name="picker"
             SelectedItem="{Binding SelectedBodyActivity}"
@@ -150,22 +154,22 @@
             ItemDisplayBinding="{Binding BodyActivityName}"
             TextColor="DarkSlateBlue"
             TitleColor="DarkSlateBlue">
-        </Picker>
+            </Picker>
 
-        <mat:RadioButtonGroupView Orientation="Horizontal">
-            <mat:RadioButton
+            <mat:RadioButtonGroupView Orientation="Horizontal">
+                <mat:RadioButton
                 Text="{extention:TranslateExtention Key=Male}"
                 IsChecked="{Binding IsMale}"
                 StyleClass="CheckRadioButton"
                 TextColor="DarkSlateBlue"/>
-            <mat:RadioButton
+                <mat:RadioButton
                 Text="{extention:TranslateExtention Key=Female}"
                 StyleClass="CheckRadioButton"
                 TextColor="DarkSlateBlue"/>
 
-        </mat:RadioButtonGroupView>
+            </mat:RadioButtonGroupView>
 
-        <Button 
+            <Button 
             Text="{extention:TranslateExtention Key=Save}"
             FontSize="20"
             BackgroundColor="DarkSlateBlue"
@@ -176,7 +180,8 @@
             StyleClass="FilledButton"
             Command="{Binding SaveNewMemberShipCommand}"/>
 
-    </input:FormView >
+        </input:FormView >
+    </ScrollView>
 </ur:UraniumContentPage>
  <!--
     

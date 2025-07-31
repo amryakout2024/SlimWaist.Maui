@@ -14,9 +14,9 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            memberships = await App.dataContext.LoadAsync<Membership>();
+            memberships = await App._dataContext.LoadAsync<Membership>();
 
-            settings = await App.dataContext.LoadAsync<Setting>();
+            settings = await App._dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 

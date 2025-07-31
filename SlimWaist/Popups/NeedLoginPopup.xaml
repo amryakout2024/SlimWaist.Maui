@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SlimWaist.Popups.NeedLoginPopup"
+             xmlns:vm="clr-namespace:SlimWaist.ViewModels"
+             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:extention="clr-namespace:SlimWaist.Extentions"        
+             xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
+             xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.FlyoutItemIsVisible="False"
+             Shell.NavBarIsVisible="False"
+             Color="Transparent"
+             Shell.TabBarIsVisible="False">
+    <Border StrokeThickness="1" BackgroundColor="White" StrokeShape="RoundRectangle 10"
+            Stroke="Gray" Padding="10" WidthRequest="250">
+        <VerticalStackLayout>
+            <Image Source="challenge2.jpg" BackgroundColor="White"
+                   />
+            <Label
+                HorizontalOptions="Center"
+                TextColor="DarkRed"
+                Text="{extention:TranslateExtention Key=NeedLogintousetheapp}"/>
+            <Label
+                HorizontalOptions="Center"
+                TextColor="{StaticResource MainColor}"
+                Text="{extention:TranslateExtention Key=Wanttostartyourchallenge}"/>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                <Button
+                    Grid.Column="0"
+                    BackgroundColor="DarkSlateBlue"
+                    x:Name="btnOk"
+                    Clicked="btnOk_Clicked"
+                    Text="{extention:TranslateExtention Key=Ok}"/>
+                <Button
+                    Grid.Column="1"
+                    BackgroundColor="DarkSlateBlue"
+                    x:Name="btnCancel"
+                    Clicked="btnCancel_Clicked"
+                    Text="{extention:TranslateExtention Key=Cancel}"/>
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

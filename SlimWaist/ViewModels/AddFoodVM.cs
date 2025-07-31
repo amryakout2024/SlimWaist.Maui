@@ -32,7 +32,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task SaveNewFood()
         {
-            await App.dataContext.InsertAsync<Food>(new Food()
+            await App._dataContext.InsertAsync<Food>(new Food()
             {
                 FoodCategory = FoodCategory,
                 FoodName = FoodName,

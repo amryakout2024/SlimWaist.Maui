@@ -8,7 +8,7 @@
              xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:helpers="clr-namespace:SlimWaist.Helpers"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             xmlns:m="clr-namespace:SlimWaist.Models"
+             xmlns:m="clr-namespace:SlimWaist.Models.Dto"
              xmlns:vm="clr-namespace:SlimWaist.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"

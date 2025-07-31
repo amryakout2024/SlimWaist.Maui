@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.PlatformConfiguration;
 using SlimWaist.Extentions;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Globalization;
 
@@ -8,20 +9,18 @@ namespace SlimWaist
 {
     public partial class App : Application
     {
-        public static DataContext dataContext;
+        public static DataContext _dataContext;
         public static Setting setting;
 
-        public static List<Membership> memberships;
-        public static int TotalCartCount;
-
+        //??
         public static bool IsFromTablesPage { get; set; } = false;
 
-        public static List<CartItem> CartItems = new List<CartItem>();
-
+        //Validation Messages
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;
 
+        //Dto
         public static List<BodyActivity> BodyActivities;
         public static List<Gender> Genders;
         public static List<Diet> Diets;
@@ -33,7 +32,7 @@ namespace SlimWaist
         {
             InitializeComponent();
 
-            App.dataContext = dataContext;
+            _dataContext = dataContext;
 
             InitializeDatabase();
 
@@ -335,28 +334,20 @@ namespace SlimWaist
         {
             try
             {
-                App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
+                App.setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
                 
                 if (App.setting == null)
                 {
-                    await App.dataContext.init();
+                    await _dataContext.init();
                 }
             }
             catch (Exception)
             {
-                await App.dataContext.init();
+                await _dataContext.init();
             }
             finally
             {
-
-                App.setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
-
-                App.memberships = await App.dataContext.LoadAsync<Membership>();
-
-                CartItems = await App.dataContext.LoadAsync<CartItem>();
-
-                App.TotalCartCount = CartItems.Count();
-
+                App.setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
             }
 
         }

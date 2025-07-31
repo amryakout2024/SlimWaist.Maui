@@ -18,9 +18,9 @@ public partial class PasswordPopup : Popup
 
         Dispatcher.DispatchAsync(async () =>
         {
-            memberships = await App.dataContext.LoadAsync<Membership>();
+            memberships = await App._dataContext.LoadAsync<Membership>();
 
-            settings = await App.dataContext.LoadAsync<Setting>();
+            settings = await App._dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
@@ -40,7 +40,7 @@ public partial class PasswordPopup : Popup
                 {
                     membership.Password = PasswordNew1.Text;
 
-                    await App.dataContext.UpdateAsync<Membership>(membership);
+                    await App._dataContext.UpdateAsync<Membership>(membership);
 
                     await Toast.Make("تم التحديث", ToastDuration.Short).Show();
 

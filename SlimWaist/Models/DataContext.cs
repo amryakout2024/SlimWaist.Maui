@@ -1,11 +1,12 @@
-﻿using SQLite;
+﻿using SlimWaist.Models.Dto;
+using SQLite;
 using System.Resources;
 
 namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist72";
+        public const string DbName = "SlimWaist75";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -57,6 +58,7 @@ namespace SlimWaist.Models
                     BodyActivityId=2,
                     WaistCircumferenceMeasurement=100,
                     CultureInfo = "en-US",
+                    IsExistsInDb=true
                 });
 
                 Database.Insert(new Setting() 

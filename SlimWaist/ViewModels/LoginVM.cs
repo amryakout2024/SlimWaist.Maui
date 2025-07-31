@@ -29,9 +29,9 @@ namespace SlimWaist.ViewModels
 
             IsPassword = true;
 
-            App.memberships = await App.dataContext.LoadAsync<Membership>();
+            //App.memberships = await App._dataContext.LoadAsync<Membership>();
 
-            CheckLoginSaved();
+            //CheckLoginSaved();
 
         }
 
@@ -41,7 +41,7 @@ namespace SlimWaist.ViewModels
 
             if (App.setting.SavedMembershipId != 0)
             {
-                HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+                //HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
 
                 await GoToAsyncWithShell(nameof(HomePage), true);
             }
@@ -56,15 +56,15 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore = await App.dataContext.FindEmailAsync(Email);
+            var IsRegisteredEmailBefore = await App._dataContext.FindEmailAsync(Email);
 
             if (IsRegisteredEmailBefore)
             {
-                var IsPassWordMatchWithEmail = await App.dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                var IsPassWordMatchWithEmail = await App._dataContext.MatchEmailWithPassWordAsync(Email, Password);
 
                 if (IsPassWordMatchWithEmail)
                 {
-                    HomeVM.CurrentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
+                    //HomeVM.CurrentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
 
                     App.setting.CultureInfo= HomeVM.CurrentMembership.CultureInfo;
 
@@ -73,9 +73,9 @@ namespace SlimWaist.ViewModels
                         App.setting.SavedMembershipId = HomeVM.CurrentMembership.Id;
                     }
 
-                    await App.dataContext.UpdateAsync<Setting>(App.setting);
+                    await App._dataContext.UpdateAsync<Setting>(App.setting);
 
-                    await App.dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
+                    await App._dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
                     
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }

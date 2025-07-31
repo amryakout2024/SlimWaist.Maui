@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 
 namespace SlimWaist.ViewModels
 {
@@ -16,7 +17,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            var mealDetails = await App.dataContext.LoadAsync<MealDetail>();
+            var mealDetails = await App._dataContext.LoadAsync<MealDetail>();
 
             //MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
         }

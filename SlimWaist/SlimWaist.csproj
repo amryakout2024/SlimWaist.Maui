@@ -28,8 +28,8 @@
 		<ApplicationId>com.companyname.slimwaist</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>83.0</ApplicationDisplayVersion>
-		<ApplicationVersion>83</ApplicationVersion>
+		<ApplicationDisplayVersion>84.0</ApplicationDisplayVersion>
+		<ApplicationVersion>84</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -128,6 +128,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Popups\LanguagePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Popups\NeedLoginPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Popups\PasswordPopup.xaml">

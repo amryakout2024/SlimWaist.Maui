@@ -6,6 +6,7 @@ using Microcharts.Maui;
 using SkiaSharp;
 using SlimWaist.Languages;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,23 +19,50 @@ namespace SlimWaist.ViewModels
     public partial class HomeVM(DataContext dataContext) : BaseVM
     {
         //load data
-
         [ObservableProperty]
         private List<Diet> _diets;
         [ObservableProperty]
         private List<BodyActivity> _bodyActivities;
 
         //private properties
-
         private readonly DataContext _dataContext = dataContext;
+        private ChartEntry[] chartEntries;
+
 
         //static properties
-
         public static Membership CurrentMembership=new Membership();
         public static DayDiet? CurrentDayDiet { get; set; } = new DayDiet();
-
-
         public static Meal? CurrentMeal { get; set; } = new Meal();
+
+        //ObservableProperty
+        [ObservableProperty]
+        private Chart _chart;
+        [ObservableProperty]
+        private float _percentConsumed;
+        [ObservableProperty]
+        private float _percentRemain;
+        [ObservableProperty]
+        private string? _totalEnergy;
+        [ObservableProperty]
+        private string? _totalConsumedEnergy;
+        [ObservableProperty]
+        private string? _totalRemainingEnergy;
+        [ObservableProperty]
+        private string? _totalBreakfastEnergy;
+        [ObservableProperty]
+        private string? _totalLunchEnergy;
+        [ObservableProperty]
+        private string? _totalDinnerEnergy;
+        [ObservableProperty]
+        private string? _totalSnaksEnergy;
+        [ObservableProperty]
+        private bool _isBottomSheetPresented;
+        [ObservableProperty]
+        private bool _isTabbarVisible;
+
+
+
+
         public static Meal ExistingBreakfastMeal = new Meal();
         public static Meal ExistingLunchMeal = new Meal();
         public static Meal ExistingDinnerMeal = new Meal();
@@ -53,31 +81,9 @@ namespace SlimWaist.ViewModels
         private List<MealDetail> dinners { get; set; }
         private List<MealDetail> snakss { get; set; }
         private List<Meal> meals { get; set; }
-       
 
-        //ObservableProperty
 
-        [ObservableProperty]
-        private string? _totalEnergy;
-        [ObservableProperty]
-        private string? _totalConsumedEnergy;
-        [ObservableProperty]
-        private string? _totalRemainingEnergy;
-        [ObservableProperty]
-        private string? _totalBreakfastEnergy;
-        [ObservableProperty]
-        private string? _totalLunchEnergy;
-        [ObservableProperty]
-        private string? _totalDinnerEnergy;
-        [ObservableProperty]
-        private string? _totalSnaksEnergy;
-
-        [ObservableProperty]
-        private bool _isBottomSheetPresented;
-
-        [ObservableProperty]
-        private bool _isTabbarVisible;
-
+        
 
 
         [ObservableProperty]
@@ -95,14 +101,8 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private int _selectedIndex;
 
-        [ObservableProperty]
-        private double _percentConsumed;
-
         Setting setting;
 
-        ChartEntry[] chartEntries;
-        [ObservableProperty]
-        private Chart _chart;
 
 
         
@@ -116,13 +116,15 @@ namespace SlimWaist.ViewModels
             Diets = App.Diets;
             BodyActivities = App.BodyActivities;
 
-            TotalEnergy = "0.0";
-            TotalRemainingEnergy = "0.0";
-            TotalConsumedEnergy = "0.0";
-            TotalBreakfastEnergy = "0.0";
-            TotalLunchEnergy = "0.0";
-            TotalDinnerEnergy = "0.0";
-            TotalSnaksEnergy = "0.0";
+            TotalEnergy = "0";
+            TotalRemainingEnergy = "0";
+            TotalConsumedEnergy = "0";
+            TotalBreakfastEnergy = "0";
+            TotalLunchEnergy = "0";
+            TotalDinnerEnergy = "0";
+            TotalSnaksEnergy = "0";
+            PercentConsumed = 0;
+            PercentRemain = 100;
             IsBottomSheetPresented = false;
             IsTabbarVisible = true;
 
@@ -130,7 +132,6 @@ namespace SlimWaist.ViewModels
             {
                 if (HomeVM.CurrentDayDiet.IsExistsInDb)
                 {
-
                     BodyActivity = BodyActivities.Where(x => x.BodyActivityId == CurrentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
 
                     SelectedDate = HomeVM.CurrentDayDiet.DayDietDate;
@@ -206,22 +207,33 @@ namespace SlimWaist.ViewModels
                     }
 
                     TotalConsumedEnergy = Math.Round(
-    Convert.ToDouble(TotalBreakfastEnergy) +
-    Convert.ToDouble(TotalLunchEnergy) +
-    Convert.ToDouble(TotalDinnerEnergy) +
-    Convert.ToDouble(TotalSnaksEnergy), 1).ToString("F1");
+                        Convert.ToDouble(TotalBreakfastEnergy) +
+                        Convert.ToDouble(TotalLunchEnergy) +
+                        Convert.ToDouble(TotalDinnerEnergy) +
+                        Convert.ToDouble(TotalSnaksEnergy), 1).ToString("F1");
+
                     TotalRemainingEnergy = Math.Round(
                         Convert.ToDouble(TotalEnergy) -
                         Convert.ToDouble(TotalConsumedEnergy), 1).ToString("F1");
+                   
+                    PercentRemain = (float)((Convert.ToDouble(TotalRemainingEnergy) / Convert.ToDouble(TotalEnergy) * 100));
 
-                    var PercentRemain = (float)((Convert.ToDouble(TotalRemainingEnergy) / Convert.ToDouble(TotalEnergy) * 100));
-                    PercentConsumed = Math.Round((Convert.ToDouble(TotalConsumedEnergy) / Convert.ToDouble(TotalEnergy) * 100), 1);
+                    PercentConsumed = (float)Math.Round((Convert.ToDouble(TotalConsumedEnergy) / Convert.ToDouble(TotalEnergy) * 100), 1);
 
-                    chartEntries = new ChartEntry[]
-                    {
+                }
+                else
+                {
+                    HomeVM.CurrentDayDiet.MembershipId = CurrentMembership.Id;
+                    HomeVM.CurrentDayDiet.DayDietDate = SelectedDate;
+                }
+
+            }
+          
+            chartEntries = new ChartEntry[]
+            {
                 
                 //red first
-                new ChartEntry((float)PercentConsumed)
+                new ChartEntry(PercentConsumed)
                 {
                     Color=SKColor.Parse("#a10a14"),
                 },
@@ -230,26 +242,16 @@ namespace SlimWaist.ViewModels
                     Color=SKColor.Parse("#199c77"),
                 }
 
-                    };
-                    Chart = new DonutChart()
-                    {
-                        Entries = chartEntries,
-                        IsAnimated = true,
-                        LabelTextSize = 14,
-                        AnimationDuration = TimeSpan.FromSeconds(4),
-                    };
+            };
 
-                }
-                else
-                {
-                    HomeVM.CurrentDayDiet.DayDietDate = SelectedDate;
-                    //SelectedDiet = null;
-                    //HomeVM.CurrentDayDiet.DayDietId = (dayDietCount == 0) ? 1 : _dataContext.Database.Table<DayDiet>().ToList().Select(x => x.DayDietId).ToList().Max() + 1;
-                    HomeVM.CurrentDayDiet.MembershipId = CurrentMembership.Id;
-                    HomeVM.CurrentDayDiet.DayDietDate = SelectedDate;
-                }
+            Chart = new DonutChart()
+            {
+                Entries = chartEntries,
+                IsAnimated = true,
+                LabelTextSize = 14,
+                AnimationDuration = TimeSpan.FromSeconds(4),
+            };
 
-            }
 
 
 
@@ -265,15 +267,6 @@ namespace SlimWaist.ViewModels
                     .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
                 isFirstCheckForExistingDayDiet = true;
             }
-
-
-            //var mealsCount = _dataContext.Database.Table<Meal>().ToList().Count();
-            CurrentMeal = new Meal()
-            {
-                //MealId =(mealsCount==0)?1: _dataContext.Database.Table<Meal>().ToList().Select(x => x.MealId).ToList().Max() + 1,
-                DayDietId=HomeVM.CurrentDayDiet.DayDietId
-            };
-
         }
 
 
@@ -331,6 +324,7 @@ namespace SlimWaist.ViewModels
             //    //SelectedDiet = null;
             //}
         }
+        
         [RelayCommand]
         private async Task DeleteDayDiet()
         {
@@ -419,6 +413,8 @@ namespace SlimWaist.ViewModels
 
                     if (ExistingBreakfastMeal.IsExistsInDb == true)
                     {
+                        CurrentMeal.DayDietId = HomeVM.CurrentDayDiet.DayDietId;
+
                         CurrentMeal = ExistingBreakfastMeal;
                     }
                     else
@@ -457,6 +453,8 @@ namespace SlimWaist.ViewModels
                     }
                     if (ExistingLunchMeal.IsExistsInDb == true)
                     {
+                        CurrentMeal.DayDietId = HomeVM.CurrentDayDiet.DayDietId;
+
                         CurrentMeal = ExistingLunchMeal;
                     }
                     else
@@ -494,6 +492,8 @@ namespace SlimWaist.ViewModels
                     }
                     if (ExistingDinnerMeal.IsExistsInDb == true)
                     {
+                        CurrentMeal.DayDietId = HomeVM.CurrentDayDiet.DayDietId;
+
                         CurrentMeal = ExistingDinnerMeal;
                     }
                     else
@@ -531,6 +531,8 @@ namespace SlimWaist.ViewModels
                     }
                     if (ExistingSnaksMeal.IsExistsInDb == true)
                     {
+                        CurrentMeal.DayDietId = HomeVM.CurrentDayDiet.DayDietId;
+
                         CurrentMeal = ExistingSnaksMeal;
                     }
                     else

@@ -39,7 +39,7 @@ namespace SlimWaist.ViewModels
         {
             App.setting.SavedMembershipId = 0;
 
-            await App.dataContext.UpdateAsync<Setting>(App.setting);
+            await App._dataContext.UpdateAsync<Setting>(App.setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
         }

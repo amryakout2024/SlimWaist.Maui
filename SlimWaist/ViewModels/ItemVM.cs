@@ -45,7 +45,7 @@ namespace SlimWaist.ViewModels
 
             FoodCategory = CartItem.FoodCategory ?? "";
 
-            var existingItem =App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
+            //var existingItem =App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
 
             //if (existingItem is not null)
             //{
@@ -103,7 +103,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task AddItemToCart()
         {
-            var existingItem = App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
+            //var existingItem = App.CartItems.FirstOrDefault(ci => ci.FoodId == CartItem.FoodId);
 
             //if (existingItem is not null)
             //{
@@ -111,7 +111,7 @@ namespace SlimWaist.ViewModels
             //    {
             //        existingItem.Quantity = Convert.ToInt32(Quantity);
 
-            //        await App.dataContext.UpdateCartItem(existingItem);
+            //        await App._dataContext.UpdateCartItem(existingItem);
 
             //        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
@@ -119,7 +119,7 @@ namespace SlimWaist.ViewModels
             //    }
             //    else
             //    {
-            //        await App.dataContext.DeleteAsync<CartItem>(existingItem);
+            //        await App._dataContext.DeleteAsync<CartItem>(existingItem);
 
             //        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
@@ -143,7 +143,7 @@ namespace SlimWaist.ViewModels
             //        Quantity = Convert.ToInt32(Quantity)
             //    };
 
-            //    await App.dataContext.InsertAsync<CartItem>(cartItem);
+            //    await App._dataContext.InsertAsync<CartItem>(cartItem);
 
             //    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
@@ -157,14 +157,14 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task NotifyCartCountChange()
         {
-            App.CartItems = await App.dataContext.LoadAsync<CartItem>();
+            //App.CartItems = await App._dataContext.LoadAsync<CartItem>();
 
-            App.TotalCartCount = App.CartItems.Count();
+            //App.TotalCartCount = App.CartItems.Count();
 
             //when make invoke it fires the event that implemented in the BadgeShellBottomNavViewAppearanceTracker class
             //invoke only fire not create it as method
 
-            TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
+            //TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
         }
 
 

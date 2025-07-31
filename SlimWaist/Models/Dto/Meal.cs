@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace SlimWaist.Models
+namespace SlimWaist.Models.Dto
 {
     public class Meal
     {

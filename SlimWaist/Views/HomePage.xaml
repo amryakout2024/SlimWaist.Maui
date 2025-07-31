@@ -168,37 +168,6 @@
                     </mat:DatePickerField.Behaviors>
                 </mat:DatePickerField>-->
             </HorizontalStackLayout>
-            <!--<HorizontalStackLayout Grid.Row="0"
-                    Margin="10"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Spacing="2">
-                <HorizontalStackLayout.Resources>
-                    <Style TargetType="Label">
-                        <Setter Property="TextColor" Value="{StaticResource MainColor}"/>
-                        <Setter Property="FontSize" Value="18"/>
-                        <Setter Property="FontAttributes" Value="Bold"/>
-                    </Style>
-                </HorizontalStackLayout.Resources>
-
-                <Image 
-                    Grid.Column="0"
-                    Margin="0,0,10,0"
-                    HeightRequest="30"
-                        VerticalOptions="Center"
-                    Source="today.png">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                    </Image.Behaviors>
-                </Image>
-                <Label Text="{extention:TranslateExtention Key=Date}"/>
-                <Label Text=":"/>
-                <Label Text="{Binding Dateday}"/>
-                <Label Text="/"/>
-                <Label Text="{Binding Datemonth}"/>
-                <Label Text="/"/>
-                <Label Text="{Binding Dateyear}"/>
-            </HorizontalStackLayout>-->
 
             <Grid Grid.Row="1" ColumnDefinitions="*,auto">
                 <Grid Grid.Column="0"
@@ -232,10 +201,11 @@
                     </HorizontalStackLayout>
                 </Grid>
 
-                <Grid Grid.Column="1" RowDefinitions="*,auto">
+                <Grid 
+                    Grid.Column="1" 
+                    RowDefinitions="*,auto">
                     <micro:ChartView 
                     WidthRequest="100"
-                    BackgroundColor="Red"
                     Chart="{Binding Chart}"/>
                     <HorizontalStackLayout 
                         Grid.Row="1"
@@ -273,7 +243,9 @@
                         BackgroundColor="DarkSlateBlue"
                         StrokeShape="RoundRectangle 10">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoBodyMassAnalysisPageCommand}"/>
+                        <TapGestureRecognizer
+                            Tapped="TapGestureRecognizer_Tapped"
+                            Command="{Binding GotoBodyMassAnalysisPageCommand}"/>
                     </Border.GestureRecognizers>
                     <Image 
                         Source="analytics.png">
@@ -321,7 +293,9 @@
                     Padding="5"
                     BackgroundColor="DarkSlateBlue">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoBreakfastMealPageCommand}"/>
+                        <TapGestureRecognizer
+                            Tapped="TapGestureRecognizer_Tapped_1"
+                            Command="{Binding GotoBreakfastMealPageCommand}"/>
                     </Border.GestureRecognizers>
                     <Grid RowDefinitions="*,auto">
                         <Label
@@ -355,7 +329,9 @@
                     Padding="5"
                     BackgroundColor="DarkSlateBlue">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoLunchMealPageCommand}"/>
+                        <TapGestureRecognizer
+                            Tapped="TapGestureRecognizer_Tapped_1"
+                            Command="{Binding GotoLunchMealPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Grid RowDefinitions="*,auto">
@@ -390,7 +366,9 @@
                     Padding="5"
                     BackgroundColor="DarkSlateBlue">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoDinnerMealPageCommand}"/>
+                        <TapGestureRecognizer
+                            Tapped="TapGestureRecognizer_Tapped_1"
+                            Command="{Binding GotoDinnerMealPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Grid RowDefinitions="*,auto">
@@ -425,7 +403,9 @@
                     Padding="5"
                     BackgroundColor="DarkSlateBlue">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GotoSnaksMealPageCommand}"/>
+                        <TapGestureRecognizer
+                            Tapped="TapGestureRecognizer_Tapped_1"
+                            Command="{Binding GotoSnaksMealPageCommand}"/>
                     </Border.GestureRecognizers>
 
                     <Grid RowDefinitions="*,auto">

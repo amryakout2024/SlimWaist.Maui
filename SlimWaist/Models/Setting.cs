@@ -11,5 +11,7 @@ namespace SlimWaist.Models
 
         public string? CultureInfo { get; set; } = "en-US";
 
+        //public bool IsFirstTimeToInstallTheApplication { get; set; }
+
     }
 }

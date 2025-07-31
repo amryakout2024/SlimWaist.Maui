@@ -1,4 +1,4 @@
-using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.ViewModels;
 using UraniumUI.Pages;
 

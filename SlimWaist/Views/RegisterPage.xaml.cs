@@ -23,9 +23,11 @@ public partial class RegisterPage : UraniumContentPage
         datePickerField.MaximumDate = DateTime.Now;
 
     }
-    protected async override void OnAppearing()
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        await _registerVM.init();
-    }
+        base.OnNavigatedTo(args);
 
+        await _registerVM.init();
+
+    }
 }

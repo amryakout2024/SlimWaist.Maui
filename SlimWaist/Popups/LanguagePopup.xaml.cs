@@ -23,9 +23,9 @@ public partial class LanguagePopup : Popup
 
         Dispatcher.DispatchAsync(async () =>
         {
-            memberships = await App.dataContext.LoadAsync<Membership>();
+            memberships = await App._dataContext.LoadAsync<Membership>();
 
-            settings = await App.dataContext.LoadAsync<Setting>();
+            settings = await App._dataContext.LoadAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 
@@ -59,9 +59,9 @@ public partial class LanguagePopup : Popup
 
             setting.CultureInfo = "ar-SA";
 
-            await App.dataContext.UpdateAsync<Membership>(membership);
+            await App._dataContext.UpdateAsync<Membership>(membership);
 
-            await App.dataContext.UpdateAsync<Setting>(setting);
+            await App._dataContext.UpdateAsync<Setting>(setting);
 
 
 #if ANDROID
@@ -97,9 +97,9 @@ public partial class LanguagePopup : Popup
 
             setting.CultureInfo = "en-US";
 
-            await App.dataContext.UpdateAsync<Membership>(membership);
+            await App._dataContext.UpdateAsync<Membership>(membership);
 
-            await App.dataContext.UpdateAsync<Setting>(setting);
+            await App._dataContext.UpdateAsync<Setting>(setting);
 
 #if ANDROID
             var context = Platform.AppContext;

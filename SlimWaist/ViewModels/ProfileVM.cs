@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Languages;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -60,7 +61,7 @@ namespace SlimWaist.ViewModels
         {
             //Preferences.Set("Email", "");
 
-            setting = App.dataContext.Database.Table<Setting>().FirstOrDefault();
+            setting = App._dataContext.Database.Table<Setting>().FirstOrDefault();
 
             BodyActivities = App.BodyActivities;
 
@@ -113,7 +114,7 @@ namespace SlimWaist.ViewModels
 
             HomeVM.CurrentMembership.WaistCircumferenceMeasurement =Convert.ToDouble( WaistCircumferenceMeasurement);
 
-            await App.dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
+            await App._dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
 
             await Toast.Make(AppResource.ResourceManager.GetString("Updatedsuccessfully",CultureInfo.CurrentCulture), ToastDuration.Short).Show();
         }
@@ -123,7 +124,7 @@ namespace SlimWaist.ViewModels
         {
             App.setting.SavedMembershipId = 0;
 
-            await App.dataContext.UpdateAsync<Setting>(App.setting);
+            await App._dataContext.UpdateAsync<Setting>(App.setting);
 
             await GoToAsyncWithShell(nameof(LoginPage), true);
         }

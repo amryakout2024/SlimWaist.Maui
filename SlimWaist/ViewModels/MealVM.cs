@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Compatibility;
 using SkiaSharp;
 using SlimWaist.Languages;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -139,7 +140,7 @@ namespace SlimWaist.ViewModels
                 {
                     HomeVM.CurrentMeal.IsExistsInDb = false;
 
-                    await App.dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
+                    await App._dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
 
                     //delete day
                     switch (HomeVM.CurrentMeal.MealTypeId)
@@ -164,7 +165,7 @@ namespace SlimWaist.ViewModels
                         HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
                     {
                         HomeVM.CurrentDayDiet.IsExistsInDb = false;
-                        await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                        await App._dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
                     }
                 }
             }
@@ -199,7 +200,7 @@ namespace SlimWaist.ViewModels
     .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
      x.FoodId == cartItem.FoodId).FirstOrDefault();
 
-            await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
+            await App._dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
             await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 
@@ -222,7 +223,7 @@ namespace SlimWaist.ViewModels
                 {
                     existingMealDetail.Quantity = Convert.ToInt32(Quantity);
 
-                    await App.dataContext.UpdateAsync(existingMealDetail);
+                    await App._dataContext.UpdateAsync(existingMealDetail);
 
                     IsBottomSheetPresented = false;
 
@@ -230,7 +231,7 @@ namespace SlimWaist.ViewModels
                 }
                 else
                 {
-                    await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
+                    await App._dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
                     IsBottomSheetPresented = false;
                    

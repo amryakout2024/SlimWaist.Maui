@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Globalization;
 
@@ -40,6 +41,10 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isPassword;
 
+
+        [ObservableProperty]
+        private bool _isFormViewReset;
+
         [ObservableProperty]
         private bool _isCheckBoxChecked;
 
@@ -55,6 +60,8 @@ namespace SlimWaist.ViewModels
         public async Task init()
         {
             IsCheckBoxChecked = false;
+
+            IsFormViewReset = false;
 
             IsMale = true;
 
@@ -79,11 +86,11 @@ namespace SlimWaist.ViewModels
                 !string.IsNullOrEmpty(Height) &&
                 !string.IsNullOrEmpty(BirthDate.ToString()))
             {
-                var IsRegisteredEmailBefore = App.dataContext.FindEmailAsync(Email);
+                var IsRegisteredEmailBefore = App._dataContext.FindEmailAsync(Email);
 
                 if (!IsRegisteredEmailBefore.Result)
                 {
-                    await App.dataContext.InsertAsync(new Membership()
+                    await App._dataContext.InsertAsync(new Membership()
                     {
                         Email = Email,
                         Password = Password,

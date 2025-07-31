@@ -718,6 +718,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Need Login to use the app !.
+        /// </summary>
+        public static string NeedLogintousetheapp {
+            get {
+                return ResourceManager.GetString("NeedLogintousetheapp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New membership.
         /// </summary>
         public static string Newmembership {
@@ -1128,6 +1137,15 @@ namespace SlimWaist.Languages {
         public static string Waistcircumferenceevaluation {
             get {
                 return ResourceManager.GetString("Waistcircumferenceevaluation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Want to start your challenge ?.
+        /// </summary>
+        public static string Wanttostartyourchallenge {
+            get {
+                return ResourceManager.GetString("Wanttostartyourchallenge", resourceCulture);
             }
         }
         

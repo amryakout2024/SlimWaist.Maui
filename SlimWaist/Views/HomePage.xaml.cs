@@ -85,4 +85,24 @@ HomeVM.CurrentDayDiet.DayDietDate.Year
     {
 
     }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        if (HomeVM.CurrentMembership.IsExistsInDb == false)
+        {
+            var popup = new NeedLoginPopup();
+
+            this.ShowPopup(popup);
+        }
+    }
+
+    private void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
+    {
+        if (HomeVM.CurrentMembership.IsExistsInDb==false)
+        {
+            var popup = new NeedLoginPopup();
+
+            this.ShowPopup(popup);
+        }
+    }
 }

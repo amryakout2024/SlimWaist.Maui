@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
@@ -17,7 +18,7 @@ namespace SlimWaist.ViewModels
         {
             MealGroups = new List<MealGroup>();
 
-            var mealdetails = await App.dataContext.LoadAsync<MealDetail>();
+            var mealdetails = await App._dataContext.LoadAsync<MealDetail>();
 
             var meals = DayMealsPage.Meals;
 

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 
 namespace SlimWaist.ViewModels
 {
@@ -20,7 +20,7 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Diets = await App.dataContext.LoadAsync<Diet>();
+            Diets = await App._dataContext.LoadAsync<Diet>();
         }
 
         [RelayCommand]

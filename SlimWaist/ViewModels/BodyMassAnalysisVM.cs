@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microcharts;
 using SkiaSharp;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System;
 using System.Collections.Generic;

@@ -26,7 +26,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            CartItems = await App.dataContext.LoadAsync<CartItem>();
+            CartItems = await App._dataContext.LoadAsync<CartItem>();
 
             //CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
@@ -36,20 +36,20 @@ namespace SlimWaist.ViewModels
 
         private async Task NotifyCartCountChange()
         {
-            App.CartItems = await App.dataContext.LoadAsync<CartItem>();
+            //App.CartItems = await App._dataContext.LoadAsync<CartItem>();
 
-            App.TotalCartCount = App.CartItems.Count();
+            //App.TotalCartCount = App.CartItems.Count();
 
-            //when make invoke it fires the event that implemented in the BadgeShellBottomNavViewAppearanceTracker class
-            //invoke only fire not create it as method
+            ////when make invoke it fires the event that implemented in the BadgeShellBottomNavViewAppearanceTracker class
+            ////invoke only fire not create it as method
 
-            TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
+            //TotalCartCountChanged?.Invoke(null, App.TotalCartCount);
         }
 
         [RelayCommand]
         private async Task ClearCart()
         {
-            await App.dataContext.ClearAllAsync<CartItem>();
+            await App._dataContext.ClearAllAsync<CartItem>();
 
             await Init();
         }
@@ -82,11 +82,11 @@ namespace SlimWaist.ViewModels
 
                 if (!string.IsNullOrEmpty(result))
                 {
-                    var previousmeal = await App.dataContext.FindMealAsync(result);
+                    var previousmeal = await App._dataContext.FindMealAsync(result);
 
                     if (!previousmeal)
                     {
-                        //await App.dataContext.InsertAsync<Meal>(new Meal()
+                        //await App._dataContext.InsertAsync<Meal>(new Meal()
                         //{
                         //    MealName = result,
                         //    MealType = CartItems.FirstOrDefault()?.MealType,
@@ -99,7 +99,7 @@ namespace SlimWaist.ViewModels
 
                         //foreach (var cartitem in CartItems)
                         //{
-                        //    await App.dataContext.InsertAsync<MealDetail>(new MealDetail()
+                        //    await App._dataContext.InsertAsync<MealDetail>(new MealDetail()
                         //    {
                         //        MealName = result,
                         //        MealType = cartitem.MealType,

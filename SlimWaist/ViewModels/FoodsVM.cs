@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Languages;
 using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Globalization;
 
@@ -65,7 +66,7 @@ namespace SlimWaist.ViewModels
         {
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
 
-            FoodsFromDatabase = await App.dataContext.LoadAsync<Food>();
+            FoodsFromDatabase = await App._dataContext.LoadAsync<Food>();
 
             Foods = FoodsFromDatabase;
 
@@ -93,7 +94,7 @@ namespace SlimWaist.ViewModels
             {
                 HomeVM.CurrentDayDiet.IsExistsInDb = true;
 
-                await App.dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                await App._dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
             }
 
             if (HomeVM.CurrentMeal.IsExistsInDb==false)
@@ -106,7 +107,7 @@ namespace SlimWaist.ViewModels
 
                 HomeVM.CurrentMeal.IsExistsInDb = true;
 
-                await App.dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
+                await App._dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
             }
 
             var m = _dataContext.Database.Table<Meal>().ToList();
@@ -121,7 +122,7 @@ namespace SlimWaist.ViewModels
                 {
                     existingMealDetail.Quantity = Convert.ToInt32(Quantity);
 
-                    await App.dataContext.UpdateAsync(existingMealDetail);
+                    await App._dataContext.UpdateAsync(existingMealDetail);
 
                     IsBottomSheetPresented = false;
 #if ANDROID
@@ -132,7 +133,7 @@ namespace SlimWaist.ViewModels
                 }
                 else
                 {
-                    await App.dataContext.DeleteAsync<MealDetail>(existingMealDetail);
+                    await App._dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
                     IsBottomSheetPresented = false;
 #if ANDROID
@@ -146,7 +147,7 @@ namespace SlimWaist.ViewModels
                     {
                         HomeVM.CurrentMeal.IsExistsInDb = false;
 
-                        await App.dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
+                        await App._dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
                     
                         //delete day
                         switch (HomeVM.CurrentMeal.MealTypeId)
@@ -167,7 +168,7 @@ namespace SlimWaist.ViewModels
                             HomeVM.ExistingSnaksMeal.IsExistsInDb == false)
                         {
                             HomeVM.CurrentDayDiet.IsExistsInDb = false;
-                            await App.dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                            await App._dataContext.DeleteAsync<DayDiet>(HomeVM.CurrentDayDiet);
                         }
                     }
 
@@ -187,7 +188,7 @@ namespace SlimWaist.ViewModels
                     Quantity = Convert.ToDouble(Quantity)
                 };
 
-                await App.dataContext.InsertAsync<MealDetail>(mealDetail);
+                await App._dataContext.InsertAsync<MealDetail>(mealDetail);
 
                 IsBottomSheetPresented = false;
 #if ANDROID
@@ -315,7 +316,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task MealChanged()
         {
-            List<CartItem> allcartitems = await App.dataContext.LoadAsync<CartItem>();
+            List<CartItem> allcartitems = await App._dataContext.LoadAsync<CartItem>();
 
             //if (allcartitems.Count > 0)
             //{
