@@ -5,8 +5,9 @@ using SlimWaist.Views;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class LoginVM() : BaseVM
+    public partial class LoginVM(DataContext dataContext) : BaseVM
     {
+        private readonly DataContext _dataContext = dataContext;
         [ObservableProperty]
         private string _email;
 
@@ -28,55 +29,32 @@ namespace SlimWaist.ViewModels
             IsCheckBoxChecked = false;
 
             IsPassword = true;
-
-            //App.memberships = await App._dataContext.LoadAsync<Membership>();
-
-            //CheckLoginSaved();
-
-        }
-
-        private async void CheckLoginSaved()
-        {
-            Preferences.Set("Email", "");
-
-            if (App.setting.SavedMembershipId != 0)
-            {
-                //HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
-
-                await GoToAsyncWithShell(nameof(HomePage), true);
-            }
-        }
-
-        [RelayCommand]
-        private async Task RegisterNewMemberShip()
-        {
-            await GoToAsyncWithStack(nameof(RegisterPage), animate: true);
         }
 
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore = await App._dataContext.FindEmailAsync(Email);
+            var IsRegisteredEmailBefore = await _dataContext.FindEmailAsync(Email);
 
             if (IsRegisteredEmailBefore)
             {
-                var IsPassWordMatchWithEmail = await App._dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                var IsPassWordMatchWithEmail = await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
 
                 if (IsPassWordMatchWithEmail)
                 {
                     //HomeVM.CurrentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
 
-                    App.setting.CultureInfo= HomeVM.CurrentMembership.CultureInfo;
+                    App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
 
                     if (IsCheckBoxChecked)
                     {
                         App.setting.SavedMembershipId = HomeVM.CurrentMembership.Id;
                     }
 
-                    await App._dataContext.UpdateAsync<Setting>(App.setting);
+                    await _dataContext.UpdateAsync<Setting>(App.setting);
 
-                    await App._dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
-                    
+                    await _dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
+
                     await GoToAsyncWithShell(nameof(HomePage), true);
                 }
                 else
@@ -92,15 +70,11 @@ namespace SlimWaist.ViewModels
 
         }
 
+        [RelayCommand]
+        private async Task RegisterNewMemberShip()
+        {
+            await GoToAsyncWithStack(nameof(RegisterPage), animate: true);
+        }
     }
 }
-
-//await Shell.Current.Navigation.PushAsync(new HomePage(_regimeVM),animated:true);
-//Dictionary<string, object> parameter = new Dictionary<string, object>
-//{
-//    [nameof(HomeVM.Membership)] = Membership
-//};
-
-
-//await Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true, parameter);
 

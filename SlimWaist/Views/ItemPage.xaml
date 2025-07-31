@@ -6,7 +6,7 @@
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:myValidations="clr-namespace:SlimWaist.Validations"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
              xmlns:vm="clr-namespace:SlimWaist.ViewModels"
@@ -66,7 +66,7 @@
                 FontAttributes="Bold"
                 AccentColor="DarkSlateBlue">
                 <mat:TextField.Validations>
-                    <helpers:ValidateForDecimalNumber/>
+                    <myValidations:ValidateForDecimalNumber/>
                     <validation:MaxValueValidation MaxValue="10000000" Message=""/>
                 </mat:TextField.Validations>
                 <mat:TextField.Behaviors>

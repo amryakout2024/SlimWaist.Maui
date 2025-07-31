@@ -1,7 +1,7 @@
 ﻿using InputKit.Shared.Validations;
 using System.Text.RegularExpressions;
 
-namespace SlimWaist.Helpers
+namespace SlimWaist.Validations
 {
     public class ValidateForIntegerNumber : IValidation
     {

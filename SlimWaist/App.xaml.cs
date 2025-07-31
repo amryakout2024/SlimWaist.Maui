@@ -327,7 +327,7 @@ namespace SlimWaist
             MainPage = new AppShell();
 
 
-            //Helpers.ReadExcel.ReadExcelSheet();
+            //myValidations.ReadExcel.ReadExcelSheet();
         }
 
         private async Task InitializeDatabase()

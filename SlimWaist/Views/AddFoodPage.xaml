@@ -5,7 +5,7 @@
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:myValidations="clr-namespace:SlimWaist.Validations"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:m="clr-namespace:SlimWaist.Models"
              xmlns:vm="clr-namespace:SlimWaist.ViewModels"
@@ -37,7 +37,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold" >
             <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
+                <myValidations:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=Error}"/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -52,7 +52,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
+                <myValidations:ValidateForNullOrEmpty/>
                 <validation:RegexValidation  Pattern="" Message="خطأ"/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -68,7 +68,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
+                <myValidations:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -84,7 +84,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
+                <myValidations:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -100,7 +100,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
+                <myValidations:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -116,7 +116,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
+                <myValidations:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>
@@ -132,7 +132,7 @@
             AccentColor="DarkSlateBlue"
             FontAttributes="Bold">
             <mat:TextField.Validations>
-                <helpers:ValidateForDecimalNumber/>
+                <myValidations:ValidateForDecimalNumber/>
                 <validation:MaxValueValidation MaxValue="10000000" Message=""/>
             </mat:TextField.Validations>
         </mat:TextField>

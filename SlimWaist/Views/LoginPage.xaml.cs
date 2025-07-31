@@ -33,7 +33,14 @@ public partial class LoginPage : UraniumContentPage
         await _loginVM.init();
     }
 
-    //change language
+    protected override bool OnBackButtonPressed()
+    {
+        Shell.Current.GoToAsync($"//{nameof(HomePage)}", animate: true);
+
+        return true;
+    }
+
+    //change language to be removed in the future
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
 

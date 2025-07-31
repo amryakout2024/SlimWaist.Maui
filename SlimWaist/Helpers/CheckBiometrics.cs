@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SlimWaist.Helpers
+namespace SlimWaist.myValidations
 {
     public class CheckBiometrics
     {

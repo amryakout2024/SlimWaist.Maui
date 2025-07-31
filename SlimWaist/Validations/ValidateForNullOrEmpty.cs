@@ -1,6 +1,6 @@
 ﻿using InputKit.Shared.Validations;
 
-namespace SlimWaist.Helpers
+namespace SlimWaist.Validations
 {
     class ValidateForNullOrEmpty : IValidation
     {

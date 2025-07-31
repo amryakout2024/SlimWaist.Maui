@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace SlimWaist.Helpers
+namespace SlimWaist.myValidations
 {
     public static class ArabicNumeralHelper
     {

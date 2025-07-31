@@ -4,7 +4,7 @@
 //using DocumentFormat.OpenXml.Spreadsheet;
 //using DocumentFormat.OpenXml.Wordprocessing;
 
-namespace SlimWaist.Helpers
+namespace SlimWaist.myValidations
 {
     public class ReadExcel
     {

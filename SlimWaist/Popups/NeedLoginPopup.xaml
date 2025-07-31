@@ -6,7 +6,7 @@
              xmlns:m="clr-namespace:SlimWaist.Models"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:myValidations="clr-namespace:SlimWaist.Validations"
              xmlns:extention="clr-namespace:SlimWaist.Extentions"        
              xmlns:ur="http://schemas.enisn-projects.io/dotnet/maui/uraniumui"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"

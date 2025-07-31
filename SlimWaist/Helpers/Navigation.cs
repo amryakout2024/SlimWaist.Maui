@@ -1,4 +1,4 @@
-﻿namespace SlimWaist.Helpers
+﻿namespace SlimWaist.myValidations
 {
     public class Navigation
     {

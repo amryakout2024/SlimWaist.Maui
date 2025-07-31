@@ -5,11 +5,12 @@ using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using SlimWaist.Extentions;
-using SlimWaist.Helpers;
 using SlimWaist.Models;
+using SlimWaist.Validations;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
 using UraniumUI;
+
 
 #if ANDROID
 using System.Net.Security;

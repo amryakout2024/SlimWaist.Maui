@@ -5,7 +5,7 @@
              xmlns:extention="clr-namespace:SlimWaist.Extentions"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:helpers="clr-namespace:SlimWaist.Helpers"
+             xmlns:myValidations="clr-namespace:SlimWaist.Validations"
              xmlns:lang="clr-namespace:SlimWaist.Languages"
              xmlns:mat="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -24,19 +24,10 @@
 
     </ur:UraniumContentPage.Resources>
     
-    <VerticalStackLayout Spacing="10" Margin="10">
-        <HorizontalStackLayout HorizontalOptions="End">
-            <Image Source="earth.png"
-                   WidthRequest="25">
-                <Image.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
-                </Image.Behaviors>
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                </Image.GestureRecognizers>
-            </Image>
-        </HorizontalStackLayout>
-
+    <input:FormView
+        input:FormView.IsSubmitButton="{Binding LoginCommand}"
+        Spacing="10" Margin="10">
+        
         <Label
             Text="{extention:TranslateExtention Key=LoginPageTitle}"
             VerticalOptions="Center" 
@@ -55,27 +46,26 @@
             AllowClear="True"
             AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
+                <myValidations:ValidateForNullOrEmpty/>
             </mat:TextField.Validations>
             <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior Flags="ValidateOnValueChanged"
-                                                 InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
-                                                 ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
+                <toolkit:EmailValidationBehavior 
+                    Flags="ValidateOnValueChanged"
+                    InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
+                    ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
             </mat:TextField.Behaviors>
         </mat:TextField>
 
         <mat:TextField 
             Text="{Binding Password}"
             Title="{extention:TranslateExtention Key=Password}"
-            IsPassword="True"
+            IsPassword="True" AllowClear="True"
             TextColor="DarkSlateBlue"
             TitleColor="DarkGray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
-                <helpers:ValidateForNullOrEmpty/>
-                <validation:RegexValidation  Pattern="" Message="{extention:TranslateExtention Key=RegexValidationMessage}"/>
+                <myValidations:ValidateForNullOrEmpty/>
             </mat:TextField.Validations>
             <mat:TextField.Attachments>
                 <mat:TextFieldPasswordShowHideAttachment/>
@@ -89,7 +79,7 @@
         
         <Button 
             Text="{extention:TranslateExtention Key=LoginPageButtonLogin}"
-            FontSize="20"
+            FontSize="20" input:FormView.IsSubmitButton="True"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
             Command="{Binding LoginCommand}"
@@ -112,6 +102,6 @@
                 </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
-        
-    </VerticalStackLayout>
+
+    </input:FormView>
 </ur:UraniumContentPage>

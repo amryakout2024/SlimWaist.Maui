@@ -113,6 +113,8 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
+            //CheckLoginSaved();
+
             Diets = App.Diets;
             BodyActivities = App.BodyActivities;
 
@@ -269,6 +271,17 @@ namespace SlimWaist.ViewModels
             }
         }
 
+        private async void CheckLoginSaved()
+        {
+            Preferences.Set("Email", "");
+
+            if (App.setting.SavedMembershipId != 0)
+            {
+                //HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+
+                await GoToAsyncWithShell(nameof(HomePage), true);
+            }
+        }
 
         partial void OnIsBottomSheetPresentedChanged(bool value)
         {
