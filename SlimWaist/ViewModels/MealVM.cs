@@ -6,7 +6,6 @@ using Microsoft.Maui.Controls.Compatibility;
 using SkiaSharp;
 using SlimWaist.Languages;
 using SlimWaist.Models;
-using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;

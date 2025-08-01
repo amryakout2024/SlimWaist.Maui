@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SlimWaist.Models;
-using SlimWaist.Models.Dto;
 
 namespace SlimWaist.ViewModels
 {

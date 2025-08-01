@@ -9,16 +9,17 @@ namespace SlimWaist
 {
     public partial class App : Application
     {
-        public static DataContext _dataContext;
         public static Setting setting;
 
         //??
+        public static DataContext _dataContext;
         public static bool IsFromTablesPage { get; set; } = false;
 
         //Validation Messages
         public static string ValidateForNullOrEmptyMessage;
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;
+        public static string ValidateForEmailFormatMessage;
 
         //Dto
         public static List<BodyActivity> BodyActivities;
@@ -50,6 +51,8 @@ namespace SlimWaist
                 ValidateForIntegerNumberMessage = "ادخل رقم صحيح";
 
                 ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
+
+                ValidateForEmailFormatMessage="ايميل غير صحيح";
 
                 mealTypes = new List<MealType>()
                 {
@@ -192,6 +195,8 @@ namespace SlimWaist
                 ValidateForIntegerNumberMessage = "Enter integer number";
 
                 ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
+
+                ValidateForEmailFormatMessage = "Invalid Email format";
 
                 mealTypes = new List<MealType>()
                 {

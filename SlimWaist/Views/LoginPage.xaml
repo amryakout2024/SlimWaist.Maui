@@ -23,9 +23,8 @@
         </Style>
 
     </ur:UraniumContentPage.Resources>
-    
-    <input:FormView
-        input:FormView.IsSubmitButton="{Binding LoginCommand}"
+
+    <input:FormView SubmitCommand="{Binding LoginCommand}"
         Spacing="10" Margin="10">
         
         <Label
@@ -46,10 +45,11 @@
             AllowClear="True"
             AccentColor="DarkSlateBlue">
             <mat:TextField.Validations>
-                <myValidations:ValidateForNullOrEmpty/>
+                <!--<myValidations:ValidateForNullOrEmpty/>-->
+                <myValidations:ValidateForEmailFormat/>
             </mat:TextField.Validations>
             <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior 
+                <toolkit:EmailValidationBehavior
                     Flags="ValidateOnValueChanged"
                     InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
                     ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
@@ -79,7 +79,8 @@
         
         <Button 
             Text="{extention:TranslateExtention Key=LoginPageButtonLogin}"
-            FontSize="20" input:FormView.IsSubmitButton="True"
+            FontSize="20" 
+            input:FormView.IsSubmitButton="True"
             BackgroundColor="DarkSlateBlue"
             TextColor="White"
             Command="{Binding LoginCommand}"

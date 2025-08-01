@@ -20,7 +20,7 @@
             <Setter Property="TextColor" Value="DarkSlateBlue" />
         </Style>
     </ur:UraniumContentPage.Resources>
-    
+
     <Shell.TitleView>
         <Label 
             Text="{extention:TranslateExtention Key=Newmembership}"
@@ -32,12 +32,12 @@
     </Shell.TitleView>
 
     <ScrollView>
-        <input:FormView x:Name="fv"
-        Spacing="5" 
-               input:FormView.IsSubmitButton="{Binding IsFormViewReset}"
-               input:FormView.IsResetButton="{Binding IsFormViewReset}"
-        Margin="10,5,10,0" 
-        SubmitCommand="{Binding SaveNewMemberShipCommand}">
+        <input:FormView 
+            x:Name="fv"
+            Spacing="5" 
+            input:FormView.IsSubmitButton="{Binding IsFormViewReset}"
+            Margin="10,5,10,0" 
+            SubmitCommand="{Binding SaveNewMemberShipCommand}">
             <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
@@ -46,7 +46,7 @@
             AllowClear="True"
             AccentColor="DarkSlateBlue">
                 <mat:TextField.Validations>
-                    <myValidations:ValidateForNullOrEmpty/>
+                    <myValidations:ValidateForEmailFormat/>
                     <validation:RegexValidation  Pattern="" Message="خطأ"/>
                 </mat:TextField.Validations>
                 <mat:TextField.Behaviors>
@@ -147,13 +147,13 @@
             </mat:DatePickerField>
 
             <Picker
-            Title="{extention:TranslateExtention Key=SelectBodyActivity}"
-            x:Name="picker"
-            SelectedItem="{Binding SelectedBodyActivity}"
-            ItemsSource="{Binding BodyActivities}"
-            ItemDisplayBinding="{Binding BodyActivityName}"
-            TextColor="DarkSlateBlue"
-            TitleColor="DarkSlateBlue">
+                Title="{extention:TranslateExtention Key=SelectBodyActivity}"
+                x:Name="picker"
+                SelectedItem="{Binding SelectedBodyActivity}"
+                ItemsSource="{Binding BodyActivities}"
+                ItemDisplayBinding="{Binding BodyActivityName}"
+                TextColor="DarkSlateBlue"
+                TitleColor="DarkSlateBlue">
             </Picker>
 
             <mat:RadioButtonGroupView Orientation="Horizontal">
@@ -183,6 +183,3 @@
         </input:FormView >
     </ScrollView>
 </ur:UraniumContentPage>
- <!--
-    
--->

@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using SlimWaist.Languages;
 using SlimWaist.Models;
-using SlimWaist.Models.Dto;
 using SlimWaist.Views;
 using System.Globalization;
 

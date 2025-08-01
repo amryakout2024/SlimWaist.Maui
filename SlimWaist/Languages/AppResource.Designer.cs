@@ -385,6 +385,24 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email or password is not correct.
+        /// </summary>
+        public static string Emailorpasswordisnotcorrect {
+            get {
+                return ResourceManager.GetString("Emailorpasswordisnotcorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Existing item.
         /// </summary>
         public static string Existingitem {

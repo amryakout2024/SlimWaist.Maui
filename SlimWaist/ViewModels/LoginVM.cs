@@ -1,13 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
+using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
     public partial class LoginVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
+        
         [ObservableProperty]
         private string _email;
 
@@ -34,40 +37,30 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
-            var IsRegisteredEmailBefore = await _dataContext.FindEmailAsync(Email);
+            Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email&&x.Password==Password).FirstOrDefault()??new Membership();
 
-            if (IsRegisteredEmailBefore)
+            if (membership.IsExistsInDb)
             {
-                var IsPassWordMatchWithEmail = await _dataContext.MatchEmailWithPassWordAsync(Email, Password);
+                HomeVM.CurrentMembership = membership;
 
-                if (IsPassWordMatchWithEmail)
+                App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
+
+                if (IsCheckBoxChecked)
                 {
-                    //HomeVM.CurrentMembership = App.memberships.Where(x => x.Email == Email).FirstOrDefault();
-
-                    App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
-
-                    if (IsCheckBoxChecked)
-                    {
-                        App.setting.SavedMembershipId = HomeVM.CurrentMembership.Id;
-                    }
-
-                    await _dataContext.UpdateAsync<Setting>(App.setting);
-
-                    await _dataContext.UpdateAsync<Membership>(HomeVM.CurrentMembership);
-
-                    await GoToAsyncWithShell(nameof(HomePage), true);
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("خطأ", "كلمة السر غير صحيحة", "Ok");
+                    App.setting.SavedMembershipId = membership.Id;
                 }
 
+                await _dataContext.UpdateAsync<Setting>(App.setting);
+
+                await GoToAsyncWithShell(nameof(HomePage), true);
             }
             else
             {
-                await Shell.Current.DisplayAlert("خطأ", "الايميل غير مسجل", "Ok");
+                await Shell.Current.DisplayAlert(
+                    AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                    , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
+                    , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
             }
-
         }
 
         [RelayCommand]

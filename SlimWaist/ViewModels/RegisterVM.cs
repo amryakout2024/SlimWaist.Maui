@@ -39,16 +39,6 @@ namespace SlimWaist.ViewModels
         private BodyActivity _selectedBodyActivity;
 
         [ObservableProperty]
-        private bool _isPassword;
-
-
-        [ObservableProperty]
-        private bool _isFormViewReset;
-
-        [ObservableProperty]
-        private bool _isCheckBoxChecked;
-
-        [ObservableProperty]
         private bool _isMale;
 
         [ObservableProperty]
@@ -59,13 +49,7 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            IsCheckBoxChecked = false;
-
-            IsFormViewReset = false;
-
             IsMale = true;
-
-            IsPassword = true;
 
             BirthDate = DateTime.Now;
 

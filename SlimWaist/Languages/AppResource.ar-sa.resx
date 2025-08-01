@@ -469,7 +469,7 @@
     <value>اذا غيرت نوع الدايت سيتم حذف كل الوجبات المتعلقة يهذا اليوم</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>موافقة</value>
+    <value>موافق</value>
   </data>
   <data name="Tables" xml:space="preserve">
     <value>جداولي</value>
@@ -481,12 +481,18 @@
     <value>الأيام القادمة</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value />
+    <value>حذف</value>
   </data>
   <data name="NeedLogintousetheapp" xml:space="preserve">
     <value>تحتاج تسجيل الدخول لاستخدام التطبيق</value>
   </data>
   <data name="Wanttostartyourchallenge" xml:space="preserve">
     <value>هل تريد بدأ التحدي ؟</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="Emailorpasswordisnotcorrect" xml:space="preserve">
+    <value>الايميل او كلمة السر غير صحيحة</value>
   </data>
 </root>

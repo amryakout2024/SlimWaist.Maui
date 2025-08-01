@@ -489,4 +489,10 @@
   <data name="Wanttostartyourchallenge" xml:space="preserve">
     <value>Want to start your challenge ?</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Emailorpasswordisnotcorrect" xml:space="preserve">
+    <value>Email or password is not correct</value>
+  </data>
 </root>

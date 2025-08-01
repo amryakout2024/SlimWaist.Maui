@@ -54,11 +54,11 @@ namespace SlimWaist
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddSingleton<LoginPage>()
-                            .AddSingleton<LoginVM>();
+            builder.Services.AddTransient<LoginPage>()
+                            .AddTransient<LoginVM>();
 
-            builder.Services.AddSingleton<RegisterPage>()
-                            .AddSingleton<RegisterVM>();
+            builder.Services.AddTransient<RegisterPage>()
+                            .AddTransient<RegisterVM>();
 
             builder.Services.AddSingleton<HomePage>()
                             .AddSingleton<HomeVM>();

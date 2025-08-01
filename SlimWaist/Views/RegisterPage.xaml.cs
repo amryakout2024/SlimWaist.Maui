@@ -28,6 +28,5 @@ public partial class RegisterPage : UraniumContentPage
         base.OnNavigatedTo(args);
 
         await _registerVM.init();
-
     }
 }
