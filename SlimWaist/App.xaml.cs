@@ -52,7 +52,7 @@ namespace SlimWaist
 
                 ValidateForDecimalNumberMessage = "ادخل رقم صحيح او عشري واحد فقط";
 
-                ValidateForEmailFormatMessage="ايميل غير صحيح";
+                ValidateForEmailFormatMessage="ادخل ايميل صالح ";
 
                 mealTypes = new List<MealType>()
                 {

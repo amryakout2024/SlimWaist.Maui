@@ -385,6 +385,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email exists before.
+        /// </summary>
+        public static string Emailexistsbefore {
+            get {
+                return ResourceManager.GetString("Emailexistsbefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or password is not correct.
         /// </summary>
         public static string Emailorpasswordisnotcorrect {
@@ -705,6 +714,15 @@ namespace SlimWaist.Languages {
         public static string Mealtype {
             get {
                 return ResourceManager.GetString("Mealtype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Membership registered successfully.
+        /// </summary>
+        public static string Membershipregisteredsuccessfully {
+            get {
+                return ResourceManager.GetString("Membershipregisteredsuccessfully", resourceCulture);
             }
         }
         

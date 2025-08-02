@@ -73,7 +73,7 @@ namespace SlimWaist.ViewModels
 
             Height = HomeVM.CurrentMembership?.Height.ToString() ?? "";
 
-            BirthDate = new DateTime(HomeVM.CurrentMembership.BirthDateYear, HomeVM.CurrentMembership.BirthDateMonth, HomeVM.CurrentMembership.BirthDateDay);
+            BirthDate = new DateTime(HomeVM.CurrentMembership.BirthDate.Year, HomeVM.CurrentMembership.BirthDate.Month, HomeVM.CurrentMembership.BirthDate.Day);
 
             SelectedBodyActivity = BodyActivities.Where(x=>x.BodyActivityId==HomeVM.CurrentMembership.BodyActivityId).FirstOrDefault();
 
@@ -100,11 +100,7 @@ namespace SlimWaist.ViewModels
 
             HomeVM.CurrentMembership.Weight = Convert.ToDouble(Weight);
 
-            HomeVM.CurrentMembership.BirthDateYear = BirthDate.Year;
-
-            HomeVM.CurrentMembership.BirthDateMonth=BirthDate.Month;
-
-            HomeVM.CurrentMembership.BirthDateDay=BirthDate.Day;
+            HomeVM.CurrentMembership.BirthDate =new DateTime( BirthDate.Year,BirthDate.Month,BirthDate.Day);
 
             HomeVM.CurrentMembership.BodyActivityId = SelectedBodyActivity.BodyActivityId;
 

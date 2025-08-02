@@ -20,13 +20,6 @@ namespace SlimWaist.Models
 
         public bool IsExistsInDb { get; set; }=false;
 
-        //public int MealDateDay { get; set; }
-
-        //public int MealDateMonth { get; set; }
-
-        //public int MealDateYear { get; set; }
-
-
         //public double TotalCalories { get; set; } = 0;
 
         //public double TotalFoodCarb { get; set; } = 0;

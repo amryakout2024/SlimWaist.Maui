@@ -495,4 +495,10 @@
   <data name="Emailorpasswordisnotcorrect" xml:space="preserve">
     <value>الايميل او كلمة السر غير صحيحة</value>
   </data>
+  <data name="Membershipregisteredsuccessfully" xml:space="preserve">
+    <value>تم تسجيل العضوية بنجاح</value>
+  </data>
+  <data name="Emailexistsbefore" xml:space="preserve">
+    <value>الايميل موجود مسبقا</value>
+  </data>
 </root>

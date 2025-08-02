@@ -18,17 +18,21 @@ namespace SlimWaist.Models
 
         public double Weight { get; set; }
 
-        public int WeightDateDay { get; set; }
+        public DateTime WeightDate { get; set; }
 
-        public int WeightDateMonth { get; set; }
+        //public int WeightDateDay { get; set; }
 
-        public int WeightDateYear { get; set; }
+        //public int WeightDateMonth { get; set; }
 
-        public int BirthDateDay { get; set; }
+        //public int WeightDateYear { get; set; }
 
-        public int BirthDateMonth { get; set; }
+        public DateTime BirthDate { get; set; }
 
-        public int BirthDateYear { get; set; }
+        //public int BirthDateDay { get; set; }
+
+        //public int BirthDateMonth { get; set; }
+
+        //public int BirthDateYear { get; set; }
 
         public int BodyActivityId { get; set; }
 
@@ -37,7 +41,7 @@ namespace SlimWaist.Models
 
         public double WaistCircumferenceMeasurement { get; set; }
 
-        public string? CultureInfo { get; set; } = "ar-SA";
+        public string? CultureInfo { get; set; } = "en-US";
 
         public bool IsExistsInDb { get; set; } = false;
 

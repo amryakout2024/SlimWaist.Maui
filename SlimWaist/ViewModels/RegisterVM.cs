@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Models.Dto;
 using SlimWaist.Views;
@@ -9,8 +10,9 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class RegisterVM() : BaseVM
+    public partial class RegisterVM(DataContext dataContext) : BaseVM
     {
+        private readonly DataContext _dataContext = dataContext;
         [ObservableProperty]
         private string? _email;
 
@@ -63,47 +65,36 @@ namespace SlimWaist.ViewModels
         {
             GenderId = IsMale ? 1 : 2;
 
-            if (!string.IsNullOrEmpty(Email) &&
-                !string.IsNullOrEmpty(Password) &&
-                !string.IsNullOrEmpty(Name) &&
-                !string.IsNullOrEmpty(Weight) &&
-                !string.IsNullOrEmpty(Height) &&
-                !string.IsNullOrEmpty(BirthDate.ToString()))
+            var IsRegisteredEmailBefore = await _dataContext.FindEmailAsync(Email);
+
+            if (!IsRegisteredEmailBefore)
             {
-                var IsRegisteredEmailBefore = App._dataContext.FindEmailAsync(Email);
-
-                if (!IsRegisteredEmailBefore.Result)
+                await _dataContext.InsertAsync(new Membership()
                 {
-                    await App._dataContext.InsertAsync(new Membership()
-                    {
-                        Email = Email,
-                        Password = Password,
-                        Name = Name,
-                        Weight = Convert.ToDouble(Weight),
-                        WeightDateDay=DateTime.Now.Day,
-                        WeightDateMonth=DateTime.Now.Month,
-                        WeightDateYear=DateTime.Now.Year,
-                        Height = Convert.ToDouble(Height),                        
-                        BirthDateDay=BirthDate.Day,
-                        BirthDateMonth=BirthDate.Month,
-                        BirthDateYear=BirthDate.Year,
-                        BodyActivityId= SelectedBodyActivity.BodyActivityId,
-                        GenderId = GenderId,
-                        WaistCircumferenceMeasurement=Convert.ToDouble( WaistCircumferenceMeasurement)
-                    });
+                    Email = Email,
+                    Password = Password,
+                    Name = Name,
+                    Weight = Convert.ToDouble(Weight),
+                    WeightDate = DateTime.Now,
+                    Height = Convert.ToDouble(Height),
+                    BirthDate = new DateTime(BirthDate.Year,BirthDate.Month,BirthDate.Day),
+                    BodyActivityId = SelectedBodyActivity.BodyActivityId,
+                    GenderId = GenderId,
+                    WaistCircumferenceMeasurement = Convert.ToDouble(WaistCircumferenceMeasurement),IsExistsInDb=true,CultureInfo=App.setting.CultureInfo
+                });
 
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-                    await Toast.Make("تم تسجيل العضوية بنجاح", ToastDuration.Short).Show(cancellationTokenSource.Token);
+                await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully"), ToastDuration.Short).Show(cancellationTokenSource.Token);
 
-                    await GoToAsyncWithShell(nameof(LoginPage), true);
+                await GoToAsyncWithShell(nameof(LoginPage), true);
 
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert("خطأ", "الايميل مسجل مسبقا", "Ok");
-                }
             }
+            else
+            {
+                await Shell.Current.DisplayAlert(AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? "", AppResource.ResourceManager.GetString("Emailexistsbefore", CultureInfo.CurrentCulture) ?? "", AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+            }
+
         }
     }
 }

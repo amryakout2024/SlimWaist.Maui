@@ -80,7 +80,7 @@ namespace SlimWaist.ViewModels
 
             Height = HomeVM.CurrentMembership?.Height.ToString() ?? "";
 
-            BirthDate = HomeVM.CurrentMembership?.BirthDateDay.ToString() ?? "";
+            BirthDate = HomeVM.CurrentMembership?.BirthDate.ToString() ?? "";
 
             BodyActivity = BodyActivities.Where(x => x.BodyActivityId == HomeVM.CurrentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
 

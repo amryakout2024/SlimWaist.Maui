@@ -37,6 +37,8 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
+            
+            var memberships = _dataContext.Database.Table<Membership>().ToList();
             Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email&&x.Password==Password).FirstOrDefault()??new Membership();
 
             if (membership.IsExistsInDb)
