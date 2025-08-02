@@ -24,39 +24,40 @@
 
     </ur:UraniumContentPage.Resources>
 
-    <input:FormView SubmitCommand="{Binding LoginCommand}"
+    <ScrollView>
+        <input:FormView SubmitCommand="{Binding LoginCommand}"
         Spacing="10" Margin="10">
-        
-        <Label
+
+            <Label
             Text="{extention:TranslateExtention Key=LoginPageTitle}"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             TextColor="{StaticResource MainColor}"
             FontSize="30"/>
-        
-        <Image
+
+            <Image
             Source="fd"/>
-        
-        <mat:TextField 
+
+            <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
             TitleColor="Gray"
             CornerRadius="10"
             AllowClear="True"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <!--<myValidations:ValidateForNullOrEmpty/>-->
-                <myValidations:ValidateForEmailFormat/>
-            </mat:TextField.Validations>
-            <mat:TextField.Behaviors>
-                <toolkit:EmailValidationBehavior
+                <mat:TextField.Validations>
+                    <!--<myValidations:ValidateForNullOrEmpty/>-->
+                    <myValidations:ValidateForEmailFormat/>
+                </mat:TextField.Validations>
+                <mat:TextField.Behaviors>
+                    <toolkit:EmailValidationBehavior
                     Flags="ValidateOnValueChanged"
                     InvalidStyle="{StaticResource InvalidMatTextFieldStyle }"
                     ValidStyle="{StaticResource ValidMatTextFieldStyle}"/>
-            </mat:TextField.Behaviors>
-        </mat:TextField>
+                </mat:TextField.Behaviors>
+            </mat:TextField>
 
-        <mat:TextField 
+            <mat:TextField 
             Text="{Binding Password}"
             Title="{extention:TranslateExtention Key=Password}"
             IsPassword="True" AllowClear="True"
@@ -64,20 +65,20 @@
             TitleColor="DarkGray"
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
-            <mat:TextField.Validations>
-                <myValidations:ValidateForNullOrEmpty/>
-            </mat:TextField.Validations>
-            <mat:TextField.Attachments>
-                <mat:TextFieldPasswordShowHideAttachment/>
-            </mat:TextField.Attachments>
-        </mat:TextField>
+                <mat:TextField.Validations>
+                    <myValidations:ValidateForNullOrEmpty/>
+                </mat:TextField.Validations>
+                <mat:TextField.Attachments>
+                    <mat:TextFieldPasswordShowHideAttachment/>
+                </mat:TextField.Attachments>
+            </mat:TextField>
 
-        <mat:CheckBox Text="{extention:TranslateExtention Key=LoginPageCheckBox}"
+            <mat:CheckBox Text="{extention:TranslateExtention Key=LoginPageCheckBox}"
                       BoxSizeRequest="20" 
                       IsChecked="{Binding IsCheckBoxChecked}"
                       CheckChangedCommand="{Binding SaveLoginCommand}"/>
-        
-        <Button 
+
+            <Button 
             Text="{extention:TranslateExtention Key=LoginPageButtonLogin}"
             FontSize="20" 
             input:FormView.IsSubmitButton="True"
@@ -86,23 +87,24 @@
             Command="{Binding LoginCommand}"
             VerticalOptions="Center"
             Padding="0"/>
-        
-        <HorizontalStackLayout>
-            <Label
+
+            <HorizontalStackLayout>
+                <Label
                 VerticalOptions="Center"
             Text="{extention:TranslateExtention Key=LoginPageLabelHaveNoMembership} "/>
-            <Label 
+                <Label 
                 Text="{extention:TranslateExtention Key=LoginPageLabelAddNewMembership}"
                 BackgroundColor="Transparent"
                 TextColor="DodgerBlue"
                 VerticalOptions="Center"
                 Padding="0" >
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer 
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer 
                         Command="{Binding RegisterNewMemberShipCommand}"/>
-                </Label.GestureRecognizers>
-            </Label>
-        </HorizontalStackLayout>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
 
-    </input:FormView>
+        </input:FormView>
+    </ScrollView>
 </ur:UraniumContentPage>
