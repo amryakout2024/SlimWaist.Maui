@@ -619,6 +619,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login / Register.
+        /// </summary>
+        public static string Loginregister {
+            get {
+                return ResourceManager.GetString("Loginregister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A low-calorie diet limits daily calorie intake, typically between 1200–1800 calories, to support weight loss and improve overall health. It emphasizes nutrient-rich foods like vegetables, fruits, lean proteins, and whole grains, while reducing sugars, fried foods, and processed snacks. This diet helps create a calorie deficit, which encourages the body to burn stored fat. For best results, it should be balanced to provide essential nutrients and may be adjusted based on age, activity level, and health goals [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Lowcarbdescription {

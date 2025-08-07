@@ -93,7 +93,7 @@ namespace SlimWaist.ViewModels
             {
                 HomeVM.CurrentDayDiet.IsExistsInDb = true;
 
-                await App._dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
+                await _dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
             }
 
             if (HomeVM.CurrentMeal.IsExistsInDb==false)
@@ -196,6 +196,8 @@ namespace SlimWaist.ViewModels
 
                 //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
             }
+            var f = _dataContext.Database.Table<DayDiet>().ToList();
+            var f1 = _dataContext.Database.Table<MealDetail>().ToList();
         }
         [RelayCommand]
         private async Task Search()

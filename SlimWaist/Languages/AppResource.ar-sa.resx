@@ -501,4 +501,7 @@
   <data name="Emailexistsbefore" xml:space="preserve">
     <value>الايميل موجود مسبقا</value>
   </data>
+  <data name="Loginregister" xml:space="preserve">
+    <value>دخول / تسجيل</value>
+  </data>
 </root>

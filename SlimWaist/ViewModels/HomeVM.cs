@@ -32,6 +32,7 @@ namespace SlimWaist.ViewModels
         //static properties
         public static Membership CurrentMembership=new Membership();
         public static DayDiet? CurrentDayDiet { get; set; } = new DayDiet();
+
         public static Meal? CurrentMeal { get; set; } = new Meal();
 
         //ObservableProperty
@@ -60,6 +61,9 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isTabbarVisible;
 
+        [ObservableProperty]
+        private bool _isMembershipExists;
+
 
 
 
@@ -81,7 +85,9 @@ namespace SlimWaist.ViewModels
         private List<MealDetail> dinners { get; set; }
         private List<MealDetail> snakss { get; set; }
         private List<Meal> meals { get; set; }
-
+        private double BMI { get; set; }
+        private double IdealWeight { get; set; }
+        private double ModifiedWeight { get; set; }
 
         
 
@@ -107,13 +113,16 @@ namespace SlimWaist.ViewModels
 
         
         [ObservableProperty]
-        private DateTime _selectedDate;
+        private DateTime _selectedDate= new DateTime(
+                                DateTime.Now.Year
+                                , DateTime.Now.Month
+                                , DateTime.Now.Day);
 
 
 
         public async Task init()
         {
-            //CheckLoginSaved();
+            await CheckLoginSaved();
 
             Diets = App.Diets;
             BodyActivities = App.BodyActivities;
@@ -132,6 +141,21 @@ namespace SlimWaist.ViewModels
 
             if (CurrentMembership.IsExistsInDb)
             {
+                IsMembershipExists = true;
+                BmiCalculator();
+
+                IdealWeightCalculator();
+
+                ModifiedWeightCalculator();
+
+                TotalEnergyCalculator(HomeVM.CurrentMembership.BodyActivityId);
+
+                HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+.Where(x => x.MembershipId == CurrentMembership.Id)
+.Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet() {MembershipId=CurrentMembership.Id,
+    DayDietDate = SelectedDate };
+
+
                 if (HomeVM.CurrentDayDiet.IsExistsInDb)
                 {
                     BodyActivity = BodyActivities.Where(x => x.BodyActivityId == CurrentMembership.BodyActivityId).FirstOrDefault().BodyActivityName;
@@ -230,7 +254,12 @@ namespace SlimWaist.ViewModels
                 }
 
             }
-          
+            else
+            {
+                IsMembershipExists = false;
+
+            }
+
             chartEntries = new ChartEntry[]
             {
                 
@@ -257,30 +286,167 @@ namespace SlimWaist.ViewModels
 
 
 
-            if (isFirstCheckForExistingDayDiet==false)
-            {
-                SelectedDate = new DateTime(
-                            DateTime.Now.Year
-                            , DateTime.Now.Month
-                            , DateTime.Now.Day);
+            //if (isFirstCheckForExistingDayDiet==false)
+            //{
+            //    SelectedDate = new DateTime(
+            //                DateTime.Now.Year
+            //                , DateTime.Now.Month
+            //                , DateTime.Now.Day);
 
-                HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
-                    .Where(x => x.MembershipId == CurrentMembership.Id)
-                    .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
-                isFirstCheckForExistingDayDiet = true;
-            }
+            //    HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+            //        .Where(x => x.MembershipId == CurrentMembership.Id)
+            //        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
+            //    isFirstCheckForExistingDayDiet = true;
+            //}
+            var ff = _dataContext.Database.Table<DayDiet>().ToList();
+
         }
 
-        private async void CheckLoginSaved()
+        private void BmiCalculator()
+        {
+            double mi = (Convert.ToDouble(CurrentMembership.Weight)) / ((Convert.ToDouble(CurrentMembership.Height) / 100) * (Convert.ToDouble(CurrentMembership.Height) / 100));
+
+            BMI = Math.Round(mi, 2);
+        }
+
+        private void IdealWeightCalculator()
+        {
+            if (CurrentMembership.GenderId == 0)
+            {
+                //male
+                double iw = ((((Convert.ToDouble(CurrentMembership.Height )) - 152.4) / 2.5) * 1.7) + 49;
+                IdealWeight = Math.Round(iw, 2);
+            }
+            if (CurrentMembership.GenderId == 1)
+            {
+                //female
+                double iw = ((((Convert.ToDouble(CurrentMembership.Height)) - 152.4) / 2.5) * 1.9) + 52;
+                IdealWeight = Math.Round(iw, 2);
+            }
+
+        }
+
+        private void ModifiedWeightCalculator()
+        {
+            double mi = (Convert.ToDouble(IdealWeight)) + (0.4 * ((Convert.ToDouble(CurrentMembership. Weight) - Convert.ToDouble(IdealWeight))));
+            ModifiedWeight = Math.Round(mi, 2);
+        }
+
+        private void TotalEnergyCalculator(int bodyActivityIndex)
+        {
+            double BodyActivityDouble = 0;
+
+            if (CurrentMembership.BodyActivityId == 1)
+            {
+
+                if (BMI < 18.5)
+                {
+                    BodyActivityDouble = 35;
+                }
+                else if (BMI >= 18.5 && BMI <= 24.9)
+                {
+                    BodyActivityDouble = 30;
+                }
+                else if (BMI > 25 && BMI <= 29.9)
+                {
+                    BodyActivityDouble = 20;
+                }
+                else if (BMI >= 30)
+                {
+                    BodyActivityDouble = 15;
+                }
+
+            }
+            else if (CurrentMembership.BodyActivityId==2)
+            {
+                if (BMI < 18.5)
+                {
+                    BodyActivityDouble = 40;
+                }
+                else if (BMI >= 18.5 && BMI <= 24.9)
+                {
+                    BodyActivityDouble = 35;
+                }
+                else if (BMI > 25 && BMI <= 29.9)
+                {
+                    BodyActivityDouble = 25;
+                }
+                else if (BMI >= 30)
+                {
+                    BodyActivityDouble = 20;
+                }
+
+            }
+            else if (CurrentMembership.BodyActivityId==3)
+            {
+                if (BMI < 18.5)
+                {
+                    BodyActivityDouble = 45;
+                }
+                else if (BMI >= 18.5 && BMI <= 24.9)
+                {
+                    BodyActivityDouble = 40;
+                }
+                else if (BMI > 25 && BMI <= 29.9)
+                {
+                    BodyActivityDouble = 30;
+                }
+                else if (BMI >= 30)
+                {
+                    BodyActivityDouble = 25;
+                }
+
+            }
+            else if (CurrentMembership.BodyActivityId==4)
+            {
+                if (BMI < 18.5)
+                {
+                    BodyActivityDouble = 50;
+                }
+                else if (BMI >= 18.5 && BMI <= 24.9)
+                {
+                    BodyActivityDouble = 45;
+                }
+                else if (BMI > 25 && BMI <= 29.9)
+                {
+                    BodyActivityDouble = 35;
+                }
+                else if (BMI >= 30)
+                {
+                    BodyActivityDouble = 30;
+                }
+
+            }
+
+            TotalEnergy = Math.Round((Convert.ToDouble(ModifiedWeight) * BodyActivityDouble), 2).ToString();
+
+        }
+
+        private async Task CheckLoginSaved()
         {
             Preferences.Set("Email", "");
 
             if (App.setting.SavedMembershipId != 0)
             {
-                //HomeVM.CurrentMembership = App.memberships.Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
+                CurrentMembership = _dataContext.Database.Table<Membership>().Where(x => x.Id == App.setting.SavedMembershipId).FirstOrDefault();
 
-                await GoToAsyncWithShell(nameof(HomePage), true);
             }
+        }
+
+        [RelayCommand]
+        private async Task GotoLoginPage()
+        {
+           await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", animate: true);
+
+        }
+        [RelayCommand]
+        private async Task LogOut()
+        {
+            CurrentMembership = new Membership();
+            CurrentDayDiet= new DayDiet();
+            App.setting.SavedMembershipId = 0;
+            await _dataContext.UpdateAsync<Setting>(App.setting);
+            await init();
         }
 
         partial void OnIsBottomSheetPresentedChanged(bool value)
@@ -323,7 +489,7 @@ namespace SlimWaist.ViewModels
             {
                 HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
         .Where(x => x.MembershipId == CurrentMembership.Id)
-        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
+        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet() { DayDietDate = SelectedDate };
 
                 await init();
             }

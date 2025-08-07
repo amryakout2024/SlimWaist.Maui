@@ -41,8 +41,6 @@ public partial class HomePage : UraniumContentPage
 
         await _homeVM.init();
 
-        var d = HomeVM.CurrentDayDiet;
-
         if (HomeVM.CurrentDayDiet.IsExistsInDb)
         {
             MyDatePicker.Date = new DateTime(
@@ -50,13 +48,13 @@ HomeVM.CurrentDayDiet.DayDietDate.Year
 , HomeVM.CurrentDayDiet.DayDietDate.Month
 , HomeVM.CurrentDayDiet.DayDietDate.Day);
         }
-        else
-        {
-            MyDatePicker.Date = new DateTime(
-                                DateTime.Now.Year
-                                , DateTime.Now.Month
-                                , DateTime.Now.Day);
-        }
+        //else
+        //{
+        //    MyDatePicker.Date = new DateTime(
+        //                        DateTime.Now.Year
+        //                        , DateTime.Now.Month
+        //                        , DateTime.Now.Day);
+        //}
 
         WantToExit = false;
 

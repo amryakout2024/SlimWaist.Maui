@@ -104,9 +104,63 @@
         HorizontalScrollBarVisibility="Never"
         VerticalScrollBarVisibility="Never">
         <Grid Padding="5"
-        RowDefinitions="auto,120,40,40,*">
-            <HorizontalStackLayout
-                HorizontalOptions="Center">
+        RowDefinitions="auto,auto,120,40,40,*">
+            <Grid Grid.Row="0">
+                <Label
+                    TextColor="{StaticResource MainColor}"
+                    FontSize="22"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    Text="Slim Waste"/>
+                <Label
+                    HorizontalOptions="End"
+                    TextColor="IndianRed"
+                    FontSize="14"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    Text="{extention:TranslateExtention Key=Loginregister}">
+                    <Label.Style>
+                        <Style TargetType="Label">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsMembershipExists}" Value="true">
+                                    <Setter Property="IsVisible" Value="Collapse"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding GotoLoginPageCommand}">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image
+                    Source="logout1.png"
+                    WidthRequest="25"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="IndianRed"/>
+                    </Image.Behaviors>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Image" Binding="{Binding IsMembershipExists}" Value="true">
+                                    <Setter Property="IsVisible" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogOutCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <HorizontalStackLayout Grid.Row="1"
+                HorizontalOptions="Start">
                 <HorizontalStackLayout.Resources>
                     <Style TargetType="Label">
                         <Setter Property="VerticalOptions" Value="Center"/>
@@ -169,7 +223,7 @@
                 </mat:DatePickerField>-->
             </HorizontalStackLayout>
 
-            <Grid Grid.Row="1" ColumnDefinitions="*,auto">
+            <Grid Grid.Row="2" ColumnDefinitions="*,auto">
                 <Grid Grid.Column="0"
                       RowDefinitions="*,*,*">
                     <HorizontalStackLayout Grid.Row="0" 
@@ -229,7 +283,7 @@
                 </Grid>
             </Grid>
             
-            <HorizontalStackLayout Grid.Row="2" 
+            <HorizontalStackLayout Grid.Row="3" 
                                Spacing="5">
                 <Label 
                         Style="{StaticResource TitleLabel}" 
@@ -256,7 +310,7 @@
                 </Border>
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout Grid.Row="3"
+            <HorizontalStackLayout Grid.Row="4"
                     Spacing="5">
                 <Label 
                         Style="{StaticResource TitleLabel}"
@@ -283,7 +337,7 @@
                 </Border>
             </HorizontalStackLayout>
 
-            <Grid Grid.Row="4"
+            <Grid Grid.Row="5"
               Padding="5"
               ColumnDefinitions="*,*"
               RowDefinitions="*,*">
