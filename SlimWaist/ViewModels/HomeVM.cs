@@ -298,7 +298,6 @@ namespace SlimWaist.ViewModels
             //        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet();
             //    isFirstCheckForExistingDayDiet = true;
             //}
-            var ff = _dataContext.Database.Table<DayDiet>().ToList();
 
         }
 
@@ -598,7 +597,10 @@ namespace SlimWaist.ViewModels
                     }
                     else
                     {
-                        CurrentMeal.MealTypeId = 0;
+                        CurrentMeal = new Meal()
+                        {
+                            MealTypeId = 0
+                        };
                     }
 
 #if ANDROID
@@ -638,7 +640,10 @@ namespace SlimWaist.ViewModels
                     }
                     else
                     {
-                        CurrentMeal.MealTypeId = 1;
+                        CurrentMeal = new Meal()
+                        {
+                            MealTypeId = 1
+                        };
                     }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
@@ -677,7 +682,10 @@ namespace SlimWaist.ViewModels
                     }
                     else
                     {
-                        CurrentMeal.MealTypeId = 2;
+                        CurrentMeal = new Meal()
+                        {
+                            MealTypeId = 2
+                        };
                     }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
@@ -716,7 +724,10 @@ namespace SlimWaist.ViewModels
                     }
                     else
                     {
-                        CurrentMeal.MealTypeId = 3;
+                        CurrentMeal = new Meal()
+                        {
+                            MealTypeId = 3
+                        };
                     }
 #if ANDROID
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
