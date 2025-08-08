@@ -445,6 +445,7 @@ namespace SlimWaist.ViewModels
             CurrentDayDiet= new DayDiet();
             App.setting.SavedMembershipId = 0;
             await _dataContext.UpdateAsync<Setting>(App.setting);
+            SelectedDiet = null;
             await init();
         }
 
@@ -452,13 +453,15 @@ namespace SlimWaist.ViewModels
         {
             IsTabbarVisible = IsBottomSheetPresented ? false : true;
 
-            if (HomeVM.CurrentDayDiet.IsExistsInDb)
+            //reset picker to the first choice if cancel the bottom sheet without changing the diet type
+            //better than cancel botton because its firred if the user press on the screen to hide the botton sheet
+            if (CurrentDayDiet.IsExistsInDb)
             {
-                if (IsBottomSheetPresented==false)
+                if (IsBottomSheetPresented == false)
                 {
-                    if ((SelectedIndex + 1) != HomeVM.CurrentDayDiet.DietId)
+                    if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
                     {
-                        SelectedIndex = HomeVM.CurrentDayDiet.DietId - 1;
+                        SelectedIndex = CurrentDayDiet.DietId - 1;
                     }
 
                 }
@@ -467,15 +470,23 @@ namespace SlimWaist.ViewModels
 
         partial void OnSelectedIndexChanged(int value)
         {
-            if (HomeVM.CurrentDayDiet.IsExistsInDb)
+            if (CurrentMembership.IsExistsInDb)
             {
-                if ((SelectedIndex + 1) != HomeVM.CurrentDayDiet.DietId)
+                if (CurrentDayDiet.IsExistsInDb)
                 {
-                    if (IsBottomSheetPresented==false)
+                    if ((SelectedIndex + 1) != CurrentDayDiet.DietId)
                     {
-                        IsBottomSheetPresented = true;
+                        if (IsBottomSheetPresented == false)
+                        {
+                            IsBottomSheetPresented = true;
+                        }
                     }
                 }
+                else
+                {
+                    IsBottomSheetPresented = true;
+                }
+
             }
         }
       
@@ -484,15 +495,15 @@ namespace SlimWaist.ViewModels
         {
             SelectedDate = dateTime;
 
-            if (App.IsFromTablesPage==false)
-            {
-                HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
-        .Where(x => x.MembershipId == CurrentMembership.Id)
-        .Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet() { DayDietDate = SelectedDate };
+        ////    if (App.IsFromTablesPage==false)
+        ////    {
+        ////        HomeVM.CurrentDayDiet = _dataContext.Database.Table<DayDiet>()
+        ////.Where(x => x.MembershipId == CurrentMembership.Id)
+        ////.Where(x => x.DayDietDate == SelectedDate).FirstOrDefault() ?? new DayDiet() { DayDietDate = SelectedDate };
 
-                await init();
-            }
-
+        ////        await init();
+        ////    }
+            await init();
             //if (HomeVM.CurrentDayDiet.IsExistsInDb)
             //{
             //    SelectedDiet = Diets.Where(x => x.DietId == HomeVM.CurrentDayDiet.DietId).FirstOrDefault();

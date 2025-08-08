@@ -103,4 +103,15 @@ HomeVM.CurrentDayDiet.DayDietDate.Year
             this.ShowPopup(popup);
         }
     }
+
+    private void picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (HomeVM.CurrentMembership.IsExistsInDb == false)
+        {
+            var popup = new NeedLoginPopup();
+
+            this.ShowPopup(popup);
+        }
+
+    }
 }

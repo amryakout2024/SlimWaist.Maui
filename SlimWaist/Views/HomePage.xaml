@@ -327,6 +327,7 @@
                         Title="{extention:TranslateExtention Key=Selectdiettype}"
                         x:Name="picker" 
                         FontAttributes="Bold"
+                        SelectedIndexChanged="picker_SelectedIndexChanged"
                         SelectedIndex="{Binding SelectedIndex}"
                         SelectedItem="{Binding SelectedDiet}"
                         ItemsSource="{Binding Diets}" 
