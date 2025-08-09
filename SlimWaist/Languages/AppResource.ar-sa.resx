@@ -336,9 +336,6 @@
   <data name="Addquantity" xml:space="preserve">
     <value>ادخل الكمية</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>اضافة</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>الغاء</value>
   </data>
@@ -503,5 +500,14 @@
   </data>
   <data name="Loginregister" xml:space="preserve">
     <value>دخول / تسجيل</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="Deleteallnutritions" xml:space="preserve">
+    <value>حذف جميع المغذيات</value>
+  </data>
+  <data name="Savemealbyname" xml:space="preserve">
+    <value>حفظ الوجبة بإسم</value>
   </data>
 </root>

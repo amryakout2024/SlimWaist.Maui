@@ -336,9 +336,6 @@
   <data name="Addquantity" xml:space="preserve">
     <value>Add quantity</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -503,5 +500,14 @@
   </data>
   <data name="Loginregister" xml:space="preserve">
     <value>Login / Register</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Deleteallnutritions" xml:space="preserve">
+    <value>Delete all nutritions</value>
+  </data>
+  <data name="Savemealbyname" xml:space="preserve">
+    <value>Save meal by name</value>
   </data>
 </root>

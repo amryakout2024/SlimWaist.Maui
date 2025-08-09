@@ -26,8 +26,6 @@ namespace SlimWaist.Models
 
                 Database.CreateTable<Setting>();
 
-
-
                 Database.CreateTable<Food>();
 
                 Database.CreateTable<CartItem>();

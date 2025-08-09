@@ -251,6 +251,11 @@ namespace SlimWaist.ViewModels
                 {
                     HomeVM.CurrentDayDiet.MembershipId = CurrentMembership.Id;
                     HomeVM.CurrentDayDiet.DayDietDate = SelectedDate;
+
+                    ExistingBreakfastMeal = new Meal();
+                    ExistingLunchMeal = new Meal();
+                    ExistingDinnerMeal = new Meal();
+                    ExistingSnaksMeal = new Meal();
                 }
 
             }

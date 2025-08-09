@@ -304,6 +304,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete all nutritions.
+        /// </summary>
+        public static string Deleteallnutritions {
+            get {
+                return ResourceManager.GetString("Deleteallnutritions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deleted successfully.
         /// </summary>
         public static string Deletedsuccessfully {
@@ -948,6 +957,15 @@ namespace SlimWaist.Languages {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save meal by name.
+        /// </summary>
+        public static string Savemealbyname {
+            get {
+                return ResourceManager.GetString("Savemealbyname", resourceCulture);
             }
         }
         

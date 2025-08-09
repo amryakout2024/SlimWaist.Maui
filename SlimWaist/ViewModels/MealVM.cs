@@ -81,15 +81,17 @@ namespace SlimWaist.ViewModels
         {
             CartItems = new List<CartItem>();
             IsMealExists = false;
+            IsBottomSheetPresented = false;
+
+            MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
+
             MealSize = "0";
             TotalMealCalories = "0";
             TotalMealCarbohydrates = "0";
             TotalMealProtiens = "0";
             TotalMealFats = "0";
             TotalMealFibers = "0";
-            IsBottomSheetPresented = false;
 
-            MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName??"";
 
             MealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId ==HomeVM.CurrentMeal.MealId).ToList()??new List<MealDetail>();
            
@@ -171,6 +173,16 @@ namespace SlimWaist.ViewModels
 
         }
 
+        [RelayCommand]
+        private void DeleteAllNutritions()
+        {
+
+        }
+        [RelayCommand]
+        private void SaveMealByName()
+        {
+
+        }
         [RelayCommand]
         private void ChangeQuantity()
         {
@@ -282,12 +294,6 @@ namespace SlimWaist.ViewModels
 #endif
 
             //await GoToAsyncWithStack($"//{nameof(HomePage)}/{nameof(MealPage)}/{nameof(FoodsPage)}", true);
-        }
-
-        [RelayCommand]
-        private void SaveDiet()
-        {
-
         }
     }
 }
