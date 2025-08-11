@@ -160,6 +160,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cal.
+        /// </summary>
+        public static string Cal {
+            get {
+                return ResourceManager.GetString("Cal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calories.
         /// </summary>
         public static string Calories {
@@ -183,6 +192,15 @@ namespace SlimWaist.Languages {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carb.
+        /// </summary>
+        public static string Carb {
+            get {
+                return ResourceManager.GetString("Carb", resourceCulture);
             }
         }
         
@@ -304,20 +322,20 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete all nutritions.
-        /// </summary>
-        public static string Deleteallnutritions {
-            get {
-                return ResourceManager.GetString("Deleteallnutritions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Deleted successfully.
         /// </summary>
         public static string Deletedsuccessfully {
             get {
                 return ResourceManager.GetString("Deletedsuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the meal.
+        /// </summary>
+        public static string Deletethemeal {
+            get {
+                return ResourceManager.GetString("Deletethemeal", resourceCulture);
             }
         }
         

@@ -487,10 +487,6 @@ namespace SlimWaist.ViewModels
                         }
                     }
                 }
-                else
-                {
-                    IsBottomSheetPresented = true;
-                }
 
             }
         }

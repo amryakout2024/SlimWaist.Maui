@@ -242,8 +242,8 @@
     <ur:UraniumContentPage.ToolbarItems>
         <ToolbarItem
             Order="Secondary"
-            Text="{extention:TranslateExtention Key=Deleteallnutritions}"
-            Command="{Binding DeleteAllNutritionsCommand}">
+            Text="{extention:TranslateExtention Key=Deletethemeal}"
+            Command="{Binding DeleteAllMealCommand}">
         </ToolbarItem>
 
         <ToolbarItem 
@@ -251,11 +251,6 @@
             Text="{extention:TranslateExtention Key=Savemealbyname}"
             Command="{Binding SaveMealByNameCommand}">
         </ToolbarItem>
-        <!--<ToolbarItem 
-            Order="Secondary"  
-            Text="Exit"
-            Command="{Binding CloseAppCommand}">
-        </ToolbarItem>-->
     </ur:UraniumContentPage.ToolbarItems>
 
     <ScrollView>
@@ -264,9 +259,9 @@
         Padding="5,0,5,0" 
         RowSpacing="5">
             <Border
-            Stroke="Black"
-            StrokeThickness="1"
-            Grid.Row="0">
+                Stroke="Black"
+                StrokeThickness="1"
+                Grid.Row="0">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
@@ -280,46 +275,46 @@
                     </Style>
                 </Border.Style>
                 <VerticalStackLayout
-                Padding="10"
-                Spacing="5">
-
+                    Padding="10"
+                    Spacing="5">
+                    
                     <Label
-                    TextColor="Black"
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    Text="{extention:TranslateExtention Key=Nutritionfacts}"/>
+                        TextColor="Black"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        Text="{extention:TranslateExtention Key=Nutritionfacts}"/>
                     <BoxView
-                    HeightRequest="2"
-                    Margin="20,0,20,0"
-                    Color="Black" />
-
+                        HeightRequest="2"
+                        Margin="20,0,20,0"
+                        Color="Black" />
+                    
                     <Grid ColumnDefinitions="*,auto">
                         <Label
-                        Grid.Column="0"
-                    TextColor="Black"
-                        FontAttributes="Bold"
-                    FontSize="14"
-                    Text="{extention:TranslateExtention Key=Mealsize}"/>
-                        <HorizontalStackLayout
-                        Spacing="5"
-                        Grid.Column="1">
-                            <Label
-                           FontAttributes="Bold"
-                    TextColor="Black"
-                    FontSize="14"
-                        Text="{Binding MealSize}"/>
-                            <Label
-                    TextColor="Black"
+                            Grid.Column="0"
+                            TextColor="Black"
                             FontAttributes="Bold"
-                    FontSize="14"
-                    Text="{extention:TranslateExtention Key=Gram}"/>
+                            FontSize="14"
+                            Text="{extention:TranslateExtention Key=Mealsize}"/>
+                        <HorizontalStackLayout
+                            Spacing="5"
+                            Grid.Column="1">
+                            <Label
+                               FontAttributes="Bold"
+                                TextColor="Black"
+                                FontSize="14"
+                                Text="{Binding MealSize}"/>
+                            <Label
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                Text="{extention:TranslateExtention Key=Gm}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <BoxView
-                    HeightRequest="2"
-                    Margin="20,0,20,0"
-                    Color="Black" />
-
+                        HeightRequest="2"
+                        Margin="20,0,20,0"
+                        Color="Black" />
+                    
                     <Grid ColumnDefinitions="*,auto">
                         <Label
                         Grid.Column="0"
@@ -327,12 +322,23 @@
                         FontAttributes="Bold"
                     FontSize="18"
                     Text="{extention:TranslateExtention Key=Calories}"/>
-                        <Label
+                        <HorizontalStackLayout
+                            Spacing="5"
+                            Grid.Column="1">
+                            <Label
                         Grid.Column="1"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="20"
                     Text="{Binding TotalMealCalories}"/>
+                            <Label
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                VerticalOptions="Center"
+                                Text="{extention:TranslateExtention Key=Cal}"/>
+                        </HorizontalStackLayout>
+
                     </Grid>
                     <BoxView
                     HeightRequest="2"
@@ -358,7 +364,7 @@
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
-                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    Text="{extention:TranslateExtention Key=Gm}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <BoxView
@@ -385,7 +391,7 @@
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
-                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    Text="{extention:TranslateExtention Key=Gm}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <BoxView
@@ -412,7 +418,7 @@
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
-                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    Text="{extention:TranslateExtention Key=Gm}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <BoxView
@@ -439,7 +445,7 @@
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
-                    Text="{extention:TranslateExtention Key=Grams}"/>
+                    Text="{extention:TranslateExtention Key=Gm}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <BoxView
@@ -449,6 +455,7 @@
 
                 </VerticalStackLayout>
             </Border>
+            
             <CollectionView 
             Grid.Row="1"
             x:Name="cv"
@@ -458,10 +465,10 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate  x:DataType="m:CartItem">
                         <Border 
-                        BackgroundColor="WhiteSmoke"
-                        StrokeThickness="0.5"
-                        Padding="10"
-                        Margin="5" StrokeShape="RoundRectangle 5">
+                            BackgroundColor="WhiteSmoke"
+                            StrokeThickness="0.5"
+                            Padding="10"
+                            Margin="5" StrokeShape="RoundRectangle 5">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroupList>
                                     <VisualStateGroup Name="CommonStates">
@@ -500,17 +507,12 @@
                             <Grid
                             RowDefinitions="*,*,*,*,auto"
                             ColumnDefinitions="*,*">
-                                <HorizontalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
-                                    <!--<Label TextColor="DarkSlateBlue" 
-                                     Text="{extention:TranslateExtention Key=Food}"
-                                     FontAttributes="Bold"/>-->
-                                    <!--<Label TextColor="DarkSlateBlue" 
-                                     Text=" : "
-                                     FontAttributes="Bold"/>-->
-                                    <Label TextColor="IndianRed" 
-                                     Text="{Binding FoodName}"
-                                     FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Grid.Row="0" 
+                                    Grid.ColumnSpan="2"
+                                    Text="{Binding FoodName}"
+                                    FontAttributes="Bold"/>
 
                                 <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
                                     <Label TextColor="DarkSlateBlue" 
@@ -543,7 +545,7 @@
              Text="{Binding TotalFoodCalories}"
              FontAttributes="Bold"/>
                                         <Label TextColor="DarkSlateBlue" 
-             Text="{extention:TranslateExtention Key=Calories}"
+             Text="{extention:TranslateExtention Key=Cal}"
             />
 
                                     </HorizontalStackLayout>
@@ -552,7 +554,7 @@
 
                                 <HorizontalStackLayout Grid.Row="2" Grid.Column="0">
                                     <Label TextColor="DarkSlateBlue" 
-             Text="{extention:TranslateExtention Key=Carbohydrates}"
+             Text="{extention:TranslateExtention Key=Carb}"
              FontAttributes="Bold"/>
                                     <Label TextColor="DarkSlateBlue" 
              Text=" : "
@@ -670,190 +672,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <!--<HorizontalStackLayout>
-            <Label 
-                Text="{extention:TranslateExtention Key=Meal}"
-                Margin="0,0,10,0"
-                Grid.Row="1"
-                TextDecorations="Underline"
-                HorizontalOptions="End"
-                FontAttributes="Bold"
-                TextColor="{StaticResource MainColor}"
-                FontSize="14"/>
-
-            <Label 
-                Text=" : "
-                Margin="0,0,10,0"
-                Grid.Row="1"
-                HorizontalOptions="End"
-                FontAttributes="Bold"
-                TextColor="{StaticResource MainColor}"
-                FontSize="14"/>
-
-            <mat:RadioButtonGroupView 
-                Grid.Row="0" 
-                SelectedItemChangedCommand="{Binding MealChangedCommand}"
-                Orientation="Horizontal">
-                <mat:RadioButton Text="{extention:TranslateExtention Key=Breakfast}" IsChecked="{Binding IsBreakfast}"/>
-                <mat:RadioButton Text="{extention:TranslateExtention Key=Lunch}" IsChecked="{Binding IsLunch}"/>
-                <mat:RadioButton Text="{extention:TranslateExtention Key=Dinner}" IsChecked="{Binding IsDinner}"/>
-            </mat:RadioButtonGroupView>
-
-        </HorizontalStackLayout>-->
-
-            <!--<Label 
-            Text="{extention:TranslateExtention Key=Caloriescalculatedforeach100gm}"
-            Grid.Row="1"
-            FontAttributes="Bold"
-            TextColor="IndianRed"
-            FontSize="14"/>-->
-
-            <!--<mat:TextField
-            Grid.Row="2"
-            Text="{Binding SearchName}"
-            TextColor="{StaticResource MainColor}"
-            FontSize="14"
-            AccentColor="{StaticResource MainColor}"
-            VerticalOptions="Center"
-            AllowClear="True"
-            Title="{extention:TranslateExtention Key=Writefoodname}"
-            TitleColor="LightGray">
-            <mat:TextField.Behaviors>
-                <toolkit:EventToCommandBehavior                            
-                    EventName="TextChanged"
-                    Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
-                </toolkit:EventToCommandBehavior>
-            </mat:TextField.Behaviors>
-        </mat:TextField>-->
-
-            <!--<CollectionView 
-            Grid.Row="3"
-            SelectionMode="Single"
-            ItemsSource="{Binding Foods}"
-            EmptyView="{extention:TranslateExtention Key=Nofoodbythisname}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate  x:DataType="m:Food">
-                    <Border 
-                        BackgroundColor="WhiteSmoke"
-                        StrokeThickness="0"
-                        Padding="10"
-                        Margin="5" StrokeShape="RoundRectangle 5">
-                        <Grid ColumnDefinitions="*,*">
-                            <VerticalStackLayout 
-                                Grid.Column="0">
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Food}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodName}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Category}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodCategory}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Calories}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodCalories}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodCarb}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Protiens}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodProtien}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Fats}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodFat}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text="{extention:TranslateExtention Key=Fibers}"
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
-                                       Text=" : "
-                                       FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
-                                       Text="{Binding FoodFibers}"
-                                       FontAttributes="Bold"/>
-                                </HorizontalStackLayout>
-
-                            </VerticalStackLayout>
-                            <Grid 
-                                Grid.Column="1"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center">
-                                -->
-            <!--<Image Source="fd"/>-->
-            <!--
-                                <Border 
-                                    WidthRequest="50"
-                                    HeightRequest="50"
-                                    BackgroundColor="{StaticResource MainColor}"
-                                    StrokeShape="RoundRectangle 30">
-                                    <Label 
-                                        Text="+" 
-                                        FontSize="25"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Center"/>
-                                    <Border.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=GoToItemPageCommand}"
-                                                CommandParameter="{Binding .}"/>
-                                    </Border.GestureRecognizers>
-                                </Border>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
-
+            
             <Border 
             WidthRequest="60"
             HeightRequest="60"

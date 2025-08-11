@@ -504,10 +504,16 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="Deleteallnutritions" xml:space="preserve">
-    <value>Delete all nutritions</value>
+  <data name="Deletethemeal" xml:space="preserve">
+    <value>Delete the meal</value>
   </data>
   <data name="Savemealbyname" xml:space="preserve">
     <value>Save meal by name</value>
+  </data>
+  <data name="Cal" xml:space="preserve">
+    <value>cal</value>
+  </data>
+  <data name="Carb" xml:space="preserve">
+    <value>Carb</value>
   </data>
 </root>

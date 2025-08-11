@@ -26,3 +26,185 @@
                 </Image.GestureRecognizers>
             </Image>
 </HorizontalStackLayout>-->
+            <!--<HorizontalStackLayout>
+            <Label 
+                Text="{extention:TranslateExtention Key=Meal}"
+                Margin="0,0,10,0"
+                Grid.Row="1"
+                TextDecorations="Underline"
+                HorizontalOptions="End"
+                FontAttributes="Bold"
+                TextColor="{StaticResource MainColor}"
+                FontSize="14"/>
+
+            <Label 
+                Text=" : "
+                Margin="0,0,10,0"
+                Grid.Row="1"
+                HorizontalOptions="End"
+                FontAttributes="Bold"
+                TextColor="{StaticResource MainColor}"
+                FontSize="14"/>
+
+            <mat:RadioButtonGroupView 
+                Grid.Row="0" 
+                SelectedItemChangedCommand="{Binding MealChangedCommand}"
+                Orientation="Horizontal">
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Breakfast}" IsChecked="{Binding IsBreakfast}"/>
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Lunch}" IsChecked="{Binding IsLunch}"/>
+                <mat:RadioButton Text="{extention:TranslateExtention Key=Dinner}" IsChecked="{Binding IsDinner}"/>
+            </mat:RadioButtonGroupView>
+
+        </HorizontalStackLayout>-->
+
+            <!--<Label 
+            Text="{extention:TranslateExtention Key=Caloriescalculatedforeach100gm}"
+            Grid.Row="1"
+            FontAttributes="Bold"
+            TextColor="IndianRed"
+            FontSize="14"/>-->
+
+            <!--<mat:TextField
+            Grid.Row="2"
+            Text="{Binding SearchName}"
+            TextColor="{StaticResource MainColor}"
+            FontSize="14"
+            AccentColor="{StaticResource MainColor}"
+            VerticalOptions="Center"
+            AllowClear="True"
+            Title="{extention:TranslateExtention Key=Writefoodname}"
+            TitleColor="LightGray">
+            <mat:TextField.Behaviors>
+                <toolkit:EventToCommandBehavior                            
+                    EventName="TextChanged"
+                    Command="{Binding Source={x:Reference this}, Path=BindingContext.SearchCommand}">
+                </toolkit:EventToCommandBehavior>
+            </mat:TextField.Behaviors>
+        </mat:TextField>-->
+
+            <!--<CollectionView 
+            Grid.Row="3"
+            SelectionMode="Single"
+            ItemsSource="{Binding Foods}"
+            EmptyView="{extention:TranslateExtention Key=Nofoodbythisname}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate  x:DataType="m:Food">
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0"
+                        Padding="10"
+                        Margin="5" StrokeShape="RoundRectangle 5">
+                        <Grid ColumnDefinitions="*,*">
+                            <VerticalStackLayout 
+                                Grid.Column="0">
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Food}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodName}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Category}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCategory}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Calories}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCalories}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Carbohydrates}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodCarb}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Protiens}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodProtien}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fats}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFat}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Fibers}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="IndianRed" 
+                                       Text="{Binding FoodFibers}"
+                                       FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
+
+                            </VerticalStackLayout>
+                            <Grid 
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                                -->
+            <!--<Image Source="fd"/>-->
+            <!--
+                                <Border 
+                                    WidthRequest="50"
+                                    HeightRequest="50"
+                                    BackgroundColor="{StaticResource MainColor}"
+                                    StrokeShape="RoundRectangle 30">
+                                    <Label 
+                                        Text="+" 
+                                        FontSize="25"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"/>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=GoToItemPageCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->

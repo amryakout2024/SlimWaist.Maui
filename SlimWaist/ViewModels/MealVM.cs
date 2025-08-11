@@ -174,7 +174,7 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private void DeleteAllNutritions()
+        private void DeleteMeal()
         {
 
         }
