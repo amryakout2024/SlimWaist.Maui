@@ -430,6 +430,24 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter name for your the meal.
+        /// </summary>
+        public static string Enternameforyourfavouritemeal {
+            get {
+                return ResourceManager.GetString("Enternameforyourfavouritemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter new name for your the meal.
+        /// </summary>
+        public static string Enternewnameforyourfavouritemeal {
+            get {
+                return ResourceManager.GetString("Enternewnameforyourfavouritemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -880,15 +898,6 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Obesity degree.
-        /// </summary>
-        public static string Obesitydegree {
-            get {
-                return ResourceManager.GetString("Obesitydegree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {
@@ -979,11 +988,29 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved successfully.
+        /// </summary>
+        public static string Savedsuccessfully {
+            get {
+                return ResourceManager.GetString("Savedsuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save meal by name.
         /// </summary>
         public static string Savemealbyname {
             get {
                 return ResourceManager.GetString("Savemealbyname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save meal by name to use it again as ready meal.
+        /// </summary>
+        public static string Savemealbynametouseitagainasreadymeal {
+            get {
+                return ResourceManager.GetString("Savemealbynametouseitagainasreadymeal", resourceCulture);
             }
         }
         
@@ -1191,6 +1218,15 @@ namespace SlimWaist.Languages {
         public static string UpdatePassword {
             get {
                 return ResourceManager.GetString("UpdatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update the name of the meal.
+        /// </summary>
+        public static string Updatethenameofthemeal {
+            get {
+                return ResourceManager.GetString("Updatethenameofthemeal", resourceCulture);
             }
         }
         

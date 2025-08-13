@@ -231,7 +231,7 @@
   <data name="Waistcircumference" xml:space="preserve">
     <value>Waist circumference</value>
   </data>
-  <data name="Obesitydegree" xml:space="preserve">
+  <data name="&#x8;ظ" xml:space="preserve">
     <value>Obesity degree</value>
   </data>
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
@@ -515,5 +515,20 @@
   </data>
   <data name="Carb" xml:space="preserve">
     <value>Carb</value>
+  </data>
+  <data name="Savemealbynametouseitagainasreadymeal" xml:space="preserve">
+    <value>Save meal by name to use it again as ready meal</value>
+  </data>
+  <data name="Enternameforyourfavouritemeal" xml:space="preserve">
+    <value>Enter name for your the meal</value>
+  </data>
+  <data name="Updatethenameofthemeal" xml:space="preserve">
+    <value>Update the name of the meal</value>
+  </data>
+  <data name="Enternewnameforyourfavouritemeal" xml:space="preserve">
+    <value>Enter new name for your the meal</value>
+  </data>
+  <data name="Savedsuccessfully" xml:space="preserve">
+    <value>Saved successfully</value>
   </data>
 </root>

@@ -208,8 +208,11 @@
         <Border BackgroundColor="White" 
                 Margin="0"
                 StrokeThickness="0">
-            <HorizontalStackLayout Spacing="5">
-                <Label 
+            <Grid>
+                <HorizontalStackLayout
+                    HorizontalOptions="Start"
+                    Spacing="5">
+                    <Label 
                     Text="{extention:TranslateExtention Key=Meal}"
                     TextDecorations="None"
                     HorizontalOptions="Center"
@@ -217,7 +220,7 @@
                     TextColor="{StaticResource MainColor}"
                     FontSize="20"
                     VerticalOptions="Center"/>
-                <Label 
+                    <Label 
                     Text=":"
                Grid.Row="0"
                TextDecorations="None"
@@ -226,16 +229,38 @@
                TextColor="{StaticResource MainColor}"
                FontSize="20"
                VerticalOptions="Center"/>
-                <Label 
+                    <Label 
                     Text="{Binding MealTypeName}"
                Grid.Row="0"
                TextDecorations="None"
                HorizontalOptions="Center"
                FontAttributes="Bold"
-               TextColor="{StaticResource MainColor}"
+               TextColor="IndianRed"
                FontSize="20"
                VerticalOptions="Center"/>
-            </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+                <Border 
+            WidthRequest="40"
+            HeightRequest="40"
+            Grid.Row="3"
+            HorizontalOptions="End"
+            VerticalOptions="Center"                                    
+            BackgroundColor="DarkSlateBlue"
+            StrokeShape="RoundRectangle 30">
+                    <Label 
+                Text="+" 
+                FontSize="20"
+                TextColor="White"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToFoodsPageCommand}"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+            </Grid>
         </Border>
     </Shell.TitleView>
     
@@ -243,7 +268,7 @@
         <ToolbarItem
             Order="Secondary"
             Text="{extention:TranslateExtention Key=Deletethemeal}"
-            Command="{Binding DeleteAllMealCommand}">
+            Command="{Binding DeleteMealCommand}">
         </ToolbarItem>
 
         <ToolbarItem 
@@ -252,393 +277,435 @@
             Command="{Binding SaveMealByNameCommand}">
         </ToolbarItem>
     </ur:UraniumContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView>
+            <Grid
+                RowDefinitions="auto,auto,*" 
+                Padding="5,0,5,0" 
+                RowSpacing="5">
+            <HorizontalStackLayout 
+                Grid.Row="0"
+                Spacing="5">
+                    <HorizontalStackLayout.Style>
+                        <Style TargetType="HorizontalStackLayout">
+                            <Style.Triggers>
+                                <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding IsMealNameExists}" Value="false">
+                                    <Setter Property="IsVisible" Value="Collapse"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding IsMealNameExists}" Value="true">
+                                    <Setter Property="IsVisible" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </HorizontalStackLayout.Style>
+                    <Label 
+                    Text="{extention:TranslateExtention Key=Mealname}"
+                    TextDecorations="Underline"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource MainColor}"
+                    FontSize="18"
+                    VerticalOptions="Center"/>
+                    <Label 
+                    Text=":"
+               Grid.Row="0"
+               TextDecorations="None"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               TextColor="{StaticResource MainColor}"
+               FontSize="18"
+               VerticalOptions="Center"/>
+                    <Label 
+                    Text="{Binding MealName}"
+               Grid.Row="0"
+               TextDecorations="None"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               TextColor="IndianRed"
+               FontSize="20"
+               VerticalOptions="Center"/>
+                </HorizontalStackLayout>
 
-    <ScrollView>
-        <Grid 
-        RowDefinitions="auto,*" 
-        Padding="5,0,5,0" 
-        RowSpacing="5">
-            <Border
+                <Border
                 Stroke="Black"
                 StrokeThickness="1"
-                Grid.Row="0">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Style.Triggers>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="false">
-                                <Setter Property="IsVisible" Value="Collapse"/>
-                            </DataTrigger>
-                            <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="true">
-                                <Setter Property="IsVisible" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <VerticalStackLayout
+                Grid.Row="1">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="false">
+                                    <Setter Property="IsVisible" Value="Collapse"/>
+                                </DataTrigger>
+                                <DataTrigger TargetType="Border" Binding="{Binding IsMealExists}" Value="true">
+                                    <Setter Property="IsVisible" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <VerticalStackLayout
                     Padding="10"
                     Spacing="5">
-                    
-                    <Label
+
+                        <Label
                         TextColor="Black"
                         FontSize="18"
                         FontAttributes="Bold"
                         Text="{extention:TranslateExtention Key=Nutritionfacts}"/>
-                    <BoxView
+                        <BoxView
                         HeightRequest="2"
                         Margin="20,0,20,0"
                         Color="Black" />
-                    
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                             Grid.Column="0"
                             TextColor="Black"
                             FontAttributes="Bold"
                             FontSize="14"
                             Text="{extention:TranslateExtention Key=Mealsize}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                             Spacing="5"
                             Grid.Column="1">
-                            <Label
+                                <Label
                                FontAttributes="Bold"
                                 TextColor="Black"
                                 FontSize="14"
                                 Text="{Binding MealSize}"/>
-                            <Label
+                                <Label
                                 TextColor="Black"
                                 FontAttributes="Bold"
                                 FontSize="14"
                                 Text="{extention:TranslateExtention Key=Gm}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <BoxView
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
                         HeightRequest="2"
                         Margin="20,0,20,0"
                         Color="Black" />
-                    
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                         Grid.Column="0"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="18"
                     Text="{extention:TranslateExtention Key=Calories}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                             Spacing="5"
                             Grid.Column="1">
-                            <Label
+                                <Label
                         Grid.Column="1"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="20"
                     Text="{Binding TotalMealCalories}"/>
-                            <Label
+                                <Label
                                 TextColor="Black"
                                 FontAttributes="Bold"
                                 FontSize="14"
                                 VerticalOptions="Center"
                                 Text="{extention:TranslateExtention Key=Cal}"/>
-                        </HorizontalStackLayout>
+                            </HorizontalStackLayout>
 
-                    </Grid>
-                    <BoxView
+                        </Grid>
+                        <BoxView
                     HeightRequest="2"
                     Margin="20,0,20,0"
                     Color="Black" />
 
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                         Grid.Column="0"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Totalcarbohydrates}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                         Spacing="5"
                         Grid.Column="1">
-                            <Label
+                                <Label
                            FontAttributes="Bold"
                     TextColor="Black"
                     FontSize="14"
                         Text="{Binding TotalMealCarbohydrates}"/>
-                            <Label
+                                <Label
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Gm}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <BoxView
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
                     HeightRequest="1"
                     Margin="20,0,20,0"
                     Color="Black" />
 
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                         Grid.Column="0"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Totalprotiens}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                         Spacing="5"
                         Grid.Column="1">
-                            <Label
+                                <Label
                            FontAttributes="Bold"
                     TextColor="Black"
                     FontSize="14"
                         Text="{Binding TotalMealProtiens}"/>
-                            <Label
+                                <Label
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Gm}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <BoxView
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
                     HeightRequest="1"
                     Margin="20,0,20,0"
                     Color="Black" />
 
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                         Grid.Column="0"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Totalfats}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                         Spacing="5"
                         Grid.Column="1">
-                            <Label
+                                <Label
                            FontAttributes="Bold"
                     TextColor="Black"
                     FontSize="14"
                         Text="{Binding TotalMealFats}"/>
-                            <Label
+                                <Label
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Gm}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <BoxView
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
                     HeightRequest="1"
                     Margin="20,0,20,0"
                     Color="Black" />
 
-                    <Grid ColumnDefinitions="*,auto">
-                        <Label
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label
                         Grid.Column="0"
                     TextColor="Black"
                         FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Totalfibers}"/>
-                        <HorizontalStackLayout
+                            <HorizontalStackLayout
                         Spacing="5"
                         Grid.Column="1">
-                            <Label
+                                <Label
                            FontAttributes="Bold"
                     TextColor="Black"
                     FontSize="14"
                         Text="{Binding TotalMealFibers}"/>
-                            <Label
+                                <Label
                     TextColor="Black"
                             FontAttributes="Bold"
                     FontSize="14"
                     Text="{extention:TranslateExtention Key=Gm}"/>
-                        </HorizontalStackLayout>
-                    </Grid>
-                    <BoxView
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <BoxView
                     HeightRequest="1"
                     Margin="20,0,20,0"
                     Color="Black" />
 
-                </VerticalStackLayout>
-            </Border>
-            
-            <CollectionView 
-            Grid.Row="1"
+                    </VerticalStackLayout>
+                </Border>
+
+                <CollectionView 
+            Grid.Row="2"
             x:Name="cv"
             SelectionMode="Single"
             ItemsSource="{Binding CartItems}"
             EmptyView="No items ">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate  x:DataType="m:CartItem">
-                        <Border 
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate  x:DataType="m:CartItem">
+                            <Border 
                             BackgroundColor="WhiteSmoke"
                             StrokeThickness="0.5"
                             Padding="10"
                             Margin="5" StrokeShape="RoundRectangle 5">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroupList>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="White" />
-                                            </VisualState.Setters>
-                                        </VisualState>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
 
-                                        <VisualState Name="Focused">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="White" />
-                                            </VisualState.Setters>
-                                        </VisualState>
+                                            <VisualState Name="Focused">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
 
-                                        <VisualState Name="Disabled">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="White" />
-                                            </VisualState.Setters>
-                                        </VisualState>
+                                            <VisualState Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
 
-                                        <VisualState Name="PointerOver">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="White" />
-                                            </VisualState.Setters>
-                                        </VisualState>
+                                            <VisualState Name="PointerOver">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
 
-                                        <VisualState Name="Selected">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="White" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateGroupList>
-                            </VisualStateManager.VisualStateGroups>
-                            <Grid
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid
                             RowDefinitions="*,*,*,*,auto"
                             ColumnDefinitions="*,*">
-                                <Label 
+                                    <Label 
+                                    TextDecorations="Underline"
                                     TextColor="IndianRed" 
                                     Grid.Row="0" 
                                     Grid.ColumnSpan="2"
                                     Text="{Binding FoodName}"
                                     FontAttributes="Bold"/>
 
-                                <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    <HorizontalStackLayout Grid.Row="1" Grid.Column="0">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Quantity}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
-                                        <Label TextColor="IndianRed" 
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label TextColor="IndianRed" 
              Text="{Binding Quantity}"
              FontAttributes="Bold"/>
 
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Gm}"
              />
 
+                                        </HorizontalStackLayout>
                                     </HorizontalStackLayout>
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Calories}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
+                                        <HorizontalStackLayout Spacing="5">
 
-                                        <Label TextColor="IndianRed" 
+                                            <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodCalories}"
              FontAttributes="Bold"/>
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Cal}"
             />
 
+                                        </HorizontalStackLayout>
+
                                     </HorizontalStackLayout>
 
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout Grid.Row="2" Grid.Column="0">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Carb}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
+                                        <HorizontalStackLayout Spacing="5">
 
-                                        <Label TextColor="IndianRed" 
+                                            <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodCarb}"
              FontAttributes="Bold"/>
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Gm}"
              />
 
-                                    </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
 
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Row="2" Grid.Column="1">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Protiens}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
+                                        <HorizontalStackLayout Spacing="5">
 
-                                        <Label TextColor="IndianRed" 
+                                            <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodProtien}"
              FontAttributes="Bold"/>
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Gm}"
              />
 
-                                    </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
 
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Grid.Row="3" Grid.Column="0">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Row="3" Grid.Column="0">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Fats}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
+                                        <HorizontalStackLayout Spacing="5">
 
-                                        <Label TextColor="IndianRed" 
+                                            <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodFat}"
              FontAttributes="Bold"/>
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Gm}"
              />
 
-                                    </HorizontalStackLayout>
+                                        </HorizontalStackLayout>
 
-                                </HorizontalStackLayout>
-                                <HorizontalStackLayout Grid.Row="3" Grid.Column="1">
-                                    <Label TextColor="DarkSlateBlue" 
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Grid.Row="3" Grid.Column="1">
+                                        <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Fibers}"
              FontAttributes="Bold"/>
-                                    <Label TextColor="DarkSlateBlue" 
+                                        <Label TextColor="DarkSlateBlue" 
              Text=" : "
              FontAttributes="Bold"/>
-                                    <HorizontalStackLayout Spacing="5">
+                                        <HorizontalStackLayout Spacing="5">
 
-                                        <Label TextColor="IndianRed" 
+                                            <Label TextColor="IndianRed" 
              Text="{Binding TotalFoodFibers}"
              FontAttributes="Bold"/>
-                                        <Label TextColor="DarkSlateBlue" 
+                                            <Label TextColor="DarkSlateBlue" 
              Text="{extention:TranslateExtention Key=Gm}"
              />
 
+                                        </HorizontalStackLayout>
+
                                     </HorizontalStackLayout>
-
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout 
-                                Grid.Row="4"
-                                HorizontalOptions="End"
-                                Grid.Column="1"
-                                Margin="0,0,10,0"
-                                Spacing="20">
-                                    <Image Grid.Row="0"
-                                       WidthRequest="20"
-                                       HeightRequest="20"
-                                       Source="edit4.png">
+                                    <Image
+                                    Grid.Row="4"
+                                    Margin="0,5,0,0"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Column="0"
+                                    WidthRequest="22"
+                                    HeightRequest="22"
+                                    Source="edit4.png">
                                         <Image.Behaviors>
                                             <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
                                         </Image.Behaviors>
@@ -650,10 +717,15 @@
                                             <TapGestureRecognizer Command="{Binding Show}"/>
                                         </Image.GestureRecognizers>
                                     </Image>
-                                    <Image Grid.Row="1"
-                                       HeightRequest="20"
-                                       WidthRequest="20"
-                                       Source="trash1.png">
+                                    <Image 
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0"
+                                    HeightRequest="22"
+                                    WidthRequest="22"
+                                    Source="trash1.png">
                                         <Image.Behaviors>
                                             <toolkit:IconTintColorBehavior TintColor="IndianRed"/>
                                         </Image.Behaviors>
@@ -666,34 +738,43 @@
                                         </Image.GestureRecognizers>
 
                                     </Image>
-                                </HorizontalStackLayout>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
-            <Border 
+
+                                    <!--<HorizontalStackLayout 
+                                Grid.Row="4"
+                                HorizontalOptions="End"
+                                Grid.Column="1"
+                                Margin="0,0,10,0"
+                                Spacing="20">
+                                </HorizontalStackLayout>-->
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+        
+        <Border 
             WidthRequest="60"
             HeightRequest="60"
             Grid.Row="3"
             Margin="0,0,10,20"
-            HorizontalOptions="End"
+            HorizontalOptions="Center"
             VerticalOptions="End"                                    
             BackgroundColor="DarkSlateBlue"
             StrokeShape="RoundRectangle 30">
-                <Label 
+            <Label 
                 Text="+" 
                 FontSize="35"
                 TextColor="White"
                 FontAttributes="Bold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToFoodsPageCommand}"/>
-                </Border.GestureRecognizers>
-            </Border>
-        </Grid>
-    </ScrollView>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToFoodsPageCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
+    </Grid>
+
 </ur:UraniumContentPage>
 

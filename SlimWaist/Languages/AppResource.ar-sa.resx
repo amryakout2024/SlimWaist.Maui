@@ -231,7 +231,7 @@
   <data name="Waistcircumference" xml:space="preserve">
     <value>محيط الخصر</value>
   </data>
-  <data name="Obesitydegree" xml:space="preserve">
+  <data name="&#x8;ظ" xml:space="preserve">
     <value>درجة السمنة</value>
   </data>
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
@@ -511,9 +511,24 @@
     <value>حفظ الوجبة بإسم</value>
   </data>
   <data name="Cal" xml:space="preserve">
-    <value />
+    <value>كال</value>
   </data>
   <data name="Carb" xml:space="preserve">
+    <value>نشويات</value>
+  </data>
+  <data name="Savemealbynametouseitagainasreadymeal" xml:space="preserve">
+    <value>حفظ الوجبة بإسم حتي بمكن استخدامها مرة اخري</value>
+  </data>
+  <data name="Enternameforyourfavouritemeal" xml:space="preserve">
+    <value>ادخل اسم لوجبتك المفضلة</value>
+  </data>
+  <data name="Updatethenameofthemeal" xml:space="preserve">
+    <value>قم بتحديث اسم الوجبة</value>
+  </data>
+  <data name="Enternewnameforyourfavouritemeal" xml:space="preserve">
+    <value>ادخل اسم جديد للوجبة</value>
+  </data>
+  <data name="Savedsuccessfully" xml:space="preserve">
     <value />
   </data>
 </root>

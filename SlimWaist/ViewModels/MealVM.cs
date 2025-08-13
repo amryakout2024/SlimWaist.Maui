@@ -9,6 +9,7 @@ using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace SlimWaist.ViewModels
 {
@@ -18,6 +19,9 @@ namespace SlimWaist.ViewModels
 
         [ObservableProperty]
         private string _mealTypeName;
+
+        [ObservableProperty]
+        private string _mealName;
 
         [ObservableProperty]
         private List<MealDetail> _mealDetails;
@@ -77,6 +81,9 @@ namespace SlimWaist.ViewModels
         [ObservableProperty]
         private bool _isBottomSheetPresented;
 
+        [ObservableProperty]
+        private bool _isMealNameExists;
+
         public async Task init()
         {
             CartItems = new List<CartItem>();
@@ -84,7 +91,8 @@ namespace SlimWaist.ViewModels
             IsBottomSheetPresented = false;
 
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal?.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
-
+            IsMealNameExists=false;
+            MealName = "";
             MealSize = "0";
             TotalMealCalories = "0";
             TotalMealCarbohydrates = "0";
@@ -98,6 +106,11 @@ namespace SlimWaist.ViewModels
             if (MealDetails.Count > 0)
             {
                 IsMealExists = true;
+                if (!string.IsNullOrEmpty(HomeVM.CurrentMeal.MealName))
+                {
+                    MealName = HomeVM.CurrentMeal.MealName;
+                    IsMealNameExists = true;
+                }
 
                 await _dataContext.ClearAllAsync<CartItem>();
 
@@ -174,14 +187,69 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private void DeleteMeal()
+        private async Task DeleteMeal()
         {
+            IsMealExists = false;
+            IsMealNameExists=false;
 
+            CartItems.Clear();
+
+            await _dataContext.ClearAllAsync<CartItem>();
+
+            foreach (var mealDetail in MealDetails)
+            {
+                await _dataContext.DeleteAsync<MealDetail>(mealDetail);
+            }
+
+            await _dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
+
+            HomeVM.CurrentMeal = new Meal();
+
+            await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
         }
-        [RelayCommand]
-        private void SaveMealByName()
-        {
 
+        [RelayCommand]
+        private async Task SaveMealByName()
+        {
+            if (HomeVM.CurrentMeal.IsExistsInDb)
+            {
+                if (string.IsNullOrEmpty(HomeVM.CurrentMeal.MealName))
+                {
+                    var result1 = await Shell.Current.DisplayPromptAsync(AppResource.ResourceManager.GetString("Savemealbynametouseitagainasreadymeal", CultureInfo.CurrentCulture), null, AppResource.ResourceManager.GetString("Ok"), AppResource.ResourceManager.GetString("Cancel"), AppResource.ResourceManager.GetString("Enternameforyourfavouritemeal"));
+                    if (!string.IsNullOrEmpty(result1))
+                    {
+                        HomeVM.CurrentMeal.MealName = result1;
+                        MealName = result1;
+                        IsMealNameExists = true;
+                        await _dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+                        await ShowToastAsync(AppResource.ResourceManager.GetString("Savedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                    }
+
+                }
+                else
+                {
+                    var result2 = await Shell.Current.DisplayPromptAsync(AppResource.ResourceManager.GetString("Updatethenameofthemeal", CultureInfo.CurrentCulture), null, AppResource.ResourceManager.GetString("Ok"), AppResource.ResourceManager.GetString("Cancel"), AppResource.ResourceManager.GetString("Enternewnameforyourfavouritemeal"));
+
+                    if (!string.IsNullOrEmpty(result2)) 
+                    {
+                        MealName = result2;
+                        IsMealNameExists = true;
+                        HomeVM.CurrentMeal.MealName = result2;
+                        await _dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+                        await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
+                    }
+                    else
+                    {
+                        MealName = "";
+                        IsMealNameExists = false;
+                        HomeVM.CurrentMeal.MealName = "";
+                        await _dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+                        await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                    }
+
+                }
+            }
         }
         [RelayCommand]
         private void ChangeQuantity()
