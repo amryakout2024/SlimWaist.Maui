@@ -231,7 +231,7 @@
   <data name="Waistcircumference" xml:space="preserve">
     <value>Waist circumference</value>
   </data>
-  <data name="&#x8;ظ" xml:space="preserve">
+  <data name="Obesitydegree" xml:space="preserve">
     <value>Obesity degree</value>
   </data>
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
@@ -530,5 +530,8 @@
   </data>
   <data name="Savedsuccessfully" xml:space="preserve">
     <value>Saved successfully</value>
+  </data>
+  <data name="Per" xml:space="preserve">
+    <value>Per</value>
   </data>
 </root>

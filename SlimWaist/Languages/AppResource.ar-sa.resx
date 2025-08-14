@@ -231,7 +231,7 @@
   <data name="Waistcircumference" xml:space="preserve">
     <value>محيط الخصر</value>
   </data>
-  <data name="&#x8;ظ" xml:space="preserve">
+  <data name="Obesitydegree" xml:space="preserve">
     <value>درجة السمنة</value>
   </data>
   <data name="Waistcircumferenceevaluation" xml:space="preserve">
@@ -530,5 +530,8 @@
   </data>
   <data name="Savedsuccessfully" xml:space="preserve">
     <value />
+  </data>
+  <data name="Per" xml:space="preserve">
+    <value>لكل</value>
   </data>
 </root>

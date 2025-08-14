@@ -73,6 +73,7 @@
                 FontAttributes="Bold"/>
                     
                     <mat:TextField 
+                        x:Name="tf"
                 Text="{Binding Quantity}"
                 Title="{extention:TranslateExtention Key=Addquantity}"
                 AllowClear="True"
@@ -208,8 +209,9 @@
         <Border BackgroundColor="White" 
                 Margin="0"
                 StrokeThickness="0">
-            <Grid>
+            <Grid ColumnDefinitions="auto,*">
                 <HorizontalStackLayout
+                    Grid.Column="0"
                     HorizontalOptions="Start"
                     Spacing="5">
                     <Label 
@@ -240,26 +242,21 @@
                VerticalOptions="Center"/>
 
                 </HorizontalStackLayout>
-                <Border 
-            WidthRequest="40"
-            HeightRequest="40"
-            Grid.Row="3"
-            HorizontalOptions="End"
-            VerticalOptions="Center"                                    
-            BackgroundColor="DarkSlateBlue"
-            StrokeShape="RoundRectangle 30">
+                <Grid 
+                    Grid.Column="1" 
+                    Margin="10"
+                    BackgroundColor="DarkSlateBlue">
                     <Label 
-                Text="+" 
-                FontSize="20"
+                Text="{extention:TranslateExtention Key=Add}" 
+                FontSize="16"
                 TextColor="White"
                 FontAttributes="Bold"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"/>
-                    <Border.GestureRecognizers>
+                    <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToFoodsPageCommand}"/>
-                    </Border.GestureRecognizers>
-                </Border>
-
+                    </Grid.GestureRecognizers>
+                </Grid>
             </Grid>
         </Border>
     </Shell.TitleView>
@@ -754,7 +751,7 @@
             </Grid>
         </ScrollView>
         
-        <Border 
+        <!--<Border 
             WidthRequest="60"
             HeightRequest="60"
             Grid.Row="3"
@@ -773,7 +770,7 @@
             <Border.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding GoToFoodsPageCommand}"/>
             </Border.GestureRecognizers>
-        </Border>
+        </Border>-->
     </Grid>
 
 </ur:UraniumContentPage>

@@ -315,35 +315,6 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
-        private async Task MealChanged()
-        {
-            List<CartItem> allcartitems = await App._dataContext.LoadAsync<CartItem>();
-
-            //if (allcartitems.Count > 0)
-            //{
-            //    MealType = allcartitems[0].MealType;
-
-            //    if (IsBreakfast && MealType != Breakfast)
-            //    {
-            //        await ShowAlertAsync($"توجد وجبه {MealType} في السلة يرجي حفظها اولا او افراغها ");
-            //    }
-            //    if (IsLunch && MealType != Lunch)
-            //    {
-            //        await ShowAlertAsync($"توجد وجبه {MealType} في السلة يرجي حفظها اولا او افراغها");
-            //    }
-            //    if (IsDinner && MealType != Dinner)
-            //    {
-            //        await ShowAlertAsync($"توجد وجبه {MealType} في السلة يرجي حفظها اولا او افراغها");
-            //    }
-            //    if (MealType == Breakfast) IsBreakfast = true;
-            //    else if (MealType == Lunch) IsLunch = true;
-            //    else IsDinner = true;
-
-            //}
-
-        }
-
-        [RelayCommand]
         private async Task GoToItemPage(Food food)
         {
             //CartItem cartItem = new CartItem();

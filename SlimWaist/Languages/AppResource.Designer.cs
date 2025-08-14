@@ -898,6 +898,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obesity degree.
+        /// </summary>
+        public static string Obesitydegree {
+            get {
+                return ResourceManager.GetString("Obesitydegree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Ok {
@@ -912,6 +921,15 @@ namespace SlimWaist.Languages {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per.
+        /// </summary>
+        public static string Per {
+            get {
+                return ResourceManager.GetString("Per", resourceCulture);
             }
         }
         

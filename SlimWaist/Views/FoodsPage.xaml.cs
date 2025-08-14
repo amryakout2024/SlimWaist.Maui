@@ -16,10 +16,17 @@ public partial class FoodsPage : UraniumContentPage
         BindingContext = _foodsVM;
 
     }
-    protected async override void OnAppearing()
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
+        base.OnNavigatedTo(args);
+
         await _foodsVM.Init();
+
     }
+    //protected async override void OnAppearing()
+    //{
+    //    await _foodsVM.Init();
+    //}
     protected override bool OnBackButtonPressed()
     {
 #if ANDROID

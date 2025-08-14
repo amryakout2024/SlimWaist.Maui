@@ -18,6 +18,72 @@
              BackgroundColor="White"
              FlowDirection="{extention:FlowDirectionsExtention}">
     <ur:UraniumContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Border Stroke="Green"
+                        StrokeThickness="0"
+                        x:Name="b"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="Green"
+                        HeightRequest="40"
+                        WidthRequest="150"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                               Text="{TemplateBinding Content}" 
+                               FontSize="15"
+                               TextColor="White"
+                               x:Name="lb"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"/>
+                    <BoxView Grid.Row="1"
+                                 x:Name="line"
+                                 Color="White"
+                                 WidthRequest="130"
+                                 HeightRequest="1"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="MediumSeaGreen" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="White" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="White" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="MediumSeaGreen" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="MediumSeaGreen" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
@@ -240,7 +306,7 @@
             </mat:BottomSheetView.Body>
         </mat:BottomSheetView>
     </ur:UraniumContentPage.Attachments>
-
+    
     <Grid 
         RowDefinitions="auto,auto,auto,*" 
         Padding="5,0,5,0" 
@@ -279,7 +345,8 @@
                 Spacing="5"
                 Grid.Column="1">
                 <Label 
-                Text="{Binding TotalMealCalories}"
+                Text="{extention:TranslateExtention Key=Mealcalories}"
+                Margin="0,0,10,0"
                 Grid.Row="1"
                 HorizontalOptions="End"
                 FontAttributes="Bold"
@@ -294,25 +361,25 @@
                 FontSize="14"/>
 
                 <Label 
-                Text="{extention:TranslateExtention Key=Calories}"
-                Margin="0,0,10,0"
+                Text="{Binding TotalMealCalories}"
                 Grid.Row="1"
                 HorizontalOptions="End"
                 FontAttributes="Bold"
                 TextColor="{StaticResource MainColor}"
                 FontSize="14"/>
+
             </HorizontalStackLayout>
         </Grid>
         
-        <Label 
+        <!--<Label 
             Text="{extention:TranslateExtention Key=Caloriescalculatedforeach100gm}"
             Grid.Row="1"
             FontAttributes="Bold"
             TextColor="IndianRed"
-            FontSize="14"/>
+            FontSize="14"/>-->
 
         <mat:TextField
-            Grid.Row="2"
+            Grid.Row="1"
             Text="{Binding SearchName}"
             TextColor="{StaticResource MainColor}"
             FontSize="14"
@@ -328,6 +395,33 @@
                 </toolkit:EventToCommandBehavior>
             </mat:TextField.Behaviors>
         </mat:TextField>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0" 
+                                 Content="Scientific Name" 
+                                 GroupName="rd"
+                                 IsChecked="{Binding IsScientificRadioButtonChecked}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
+            <RadioButton Grid.Column="1"
+                                 Content="Trade Name"
+                                 GroupName="rd"
+                                 IsChecked="{Binding IsTradeRadioButtonChecked}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
+        </Grid>
 
         <CollectionView 
             Grid.Row="3"
@@ -398,9 +492,38 @@
                                     <Label TextColor="DarkSlateBlue" 
                                        Text=" : "
                                        FontAttributes="Bold"/>
-                                    <Label TextColor="IndianRed" 
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="IndianRed" 
                                        Text="{Binding FoodCalories}"
                                        FontAttributes="Bold"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text=" "
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Cal}"
+                                       FontAttributes="Bold"/>
+                                    </HorizontalStackLayout>
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Per}"
+                                       FontAttributes="Bold"/>
+                                    <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="IndianRed" 
+                                       Text="100"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="IndianRed" 
+                                       Text=" "
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Gm}"
+                                       FontAttributes="Bold"/>
+                                    </HorizontalStackLayout>
+
                                 </HorizontalStackLayout>
 
                                 <!--<HorizontalStackLayout>
