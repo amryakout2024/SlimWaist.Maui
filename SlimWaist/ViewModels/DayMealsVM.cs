@@ -21,7 +21,7 @@ namespace SlimWaist.ViewModels
 
             var meals = DayMealsPage.Meals;
 
-            //DayTotalCalories = Math.Round(meals.Select(x => x.TotalCalories).Sum(), 1).ToString() ?? "";
+            //DayTotalCalories = Math.Round(meals.Select(x => x.TotalMealCalories).Sum(), 1).ToString() ?? "";
 
             //foreach (Meal meal in meals)
             //{
@@ -29,7 +29,7 @@ namespace SlimWaist.ViewModels
             //        meal.MealName,
             //        meal.MealTypeId.ToString(),
             //        meal.IsSelected,
-            //        meal.TotalCalories,
+            //        meal.TotalMealCalories,
             //        meal.TotalFoodCarb,
             //        meal.TotalFoodProtien,
             //        meal.TotalFoodFat,

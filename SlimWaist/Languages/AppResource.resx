@@ -306,6 +306,9 @@
   <data name="Writefoodname" xml:space="preserve">
     <value>Write food name</value>
   </data>
+  <data name="Writereadymealname" xml:space="preserve">
+    <value>Write ready meal name</value>
+  </data>
   <data name="Nofoodbythisname" xml:space="preserve">
     <value>No food by this name !</value>
   </data>
@@ -382,7 +385,7 @@
     <value>All</value>
   </data>
   <data name="Mealname" xml:space="preserve">
-    <value>Mealname</value>
+    <value>Meal name</value>
   </data>
   <data name="Mealtype" xml:space="preserve">
     <value>Meal type</value>
@@ -533,5 +536,11 @@
   </data>
   <data name="Per" xml:space="preserve">
     <value>Per</value>
+  </data>
+  <data name="Nutritions" xml:space="preserve">
+    <value>Nutritions</value>
+  </data>
+  <data name="Readymeals" xml:space="preserve">
+    <value>Ready meals</value>
   </data>
 </root>

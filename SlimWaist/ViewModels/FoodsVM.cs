@@ -20,10 +20,25 @@ namespace SlimWaist.ViewModels
         private List<Food> _foods;
 
         [ObservableProperty]
+        private List<Meal> _meals;
+
+        [ObservableProperty]
+        private List<Meal> _mealsFromDatabase;
+
+        [ObservableProperty]
         private string _mealType;
 
         [ObservableProperty]
-        private string _searchName;
+        private string _Nutritions;
+
+        [ObservableProperty]
+        private string _readyMeals;
+
+        [ObservableProperty]
+        private string _searchName1;
+
+        [ObservableProperty]
+        private string _searchName2;
 
         [ObservableProperty]
         private Food _selectedFood;
@@ -59,23 +74,52 @@ namespace SlimWaist.ViewModels
         private string _foodFibers;
 
         [ObservableProperty]
-        private bool _isMealDetailExist=false;
+        private bool _isMealDetailExist = false;
+
+        [ObservableProperty]
+        private bool _isNutritionsChecked=true;
+
+        [ObservableProperty]
+        private bool _isReadymealsChecked=false;
 
         public async Task Init()
         {
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
 
-            FoodsFromDatabase = await App._dataContext.LoadAsync<Food>();
+            FoodsFromDatabase = await _dataContext.LoadAsync<Food>();
 
+            //need definition in the database to make the query awaitable
+            MealsFromDatabase = _dataContext.Database.Table<Meal>().Where(x=>x.MealName!=string.Empty).ToList();
+
+            var MealsFromDatabase2 = _dataContext.Database.Table<Meal>().ToList();
             Foods = FoodsFromDatabase;
 
-            IsBottomSheetPresented = false;
+            Meals = MealsFromDatabase;
 
+            IsBottomSheetPresented = false;
+            
+
+            if (HomeVM.CurrentMembership.CultureInfo=="ar-SA")
+            {
+                Nutritions = "المغذيات";
+                ReadyMeals = "وجبات جاهزة";
+            }
+            else
+            {
+                Nutritions = "Nutritions";
+                ReadyMeals = "Ready meals";
+            }
+
+            UpdateTotalMealCalories();
+        }
+
+        private void UpdateTotalMealCalories()
+        {
             TotalMealCalories = "0";
 
             var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
 
-            if (mealDetails.Count>0)
+            if (mealDetails.Count > 0)
             {
                 foreach (var mealDetail in mealDetails)
                 {
@@ -84,6 +128,7 @@ namespace SlimWaist.ViewModels
                     TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMealCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
                 }
             }
+
         }
 
         [RelayCommand]
@@ -108,8 +153,6 @@ namespace SlimWaist.ViewModels
 
                 await App._dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
             }
-
-            var m = _dataContext.Database.Table<Meal>().ToList();
 
             var existingMealDetail = _dataContext.Database.Table<MealDetail>()
                         .Where(x => x.MealId == HomeVM.CurrentMeal.MealId &&
@@ -196,28 +239,64 @@ namespace SlimWaist.ViewModels
 
                 //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
             }
-            var f = _dataContext.Database.Table<DayDiet>().ToList();
-            var f1 = _dataContext.Database.Table<MealDetail>().ToList();
+
+            UpdateTotalMealCalories();
+
+            HomeVM.CurrentMeal.TotalMealCalories = TotalMealCalories;
+
+            await App._dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+
         }
         [RelayCommand]
         private async Task Search()
         {
-            if (!string.IsNullOrEmpty(SearchName))
+            if (IsNutritionsChecked)
             {
-                Foods = FoodsFromDatabase.Where(x => x.FoodName.Contains(SearchName)).ToList();
+                if (!string.IsNullOrEmpty(SearchName1))
+                {
+                    Foods = FoodsFromDatabase.Where(x => x.FoodName.Contains(SearchName1)).ToList();
+                }
+                else
+                {
+                    Foods = FoodsFromDatabase;
+                }
+
             }
-            else
+            else if (IsReadymealsChecked)
             {
-                Foods = FoodsFromDatabase;
+                if (!string.IsNullOrEmpty(SearchName2))
+                {
+                    Meals = MealsFromDatabase.Where(x => x.MealName.Contains(SearchName2)).ToList();
+                }
+                else
+                {
+                    Meals = MealsFromDatabase;
+                }
             }
         }
+
+        partial void OnIsNutritionsCheckedChanged(bool value)
+        {
+            SearchName1 = "";
+            SearchName2 = "";
+            Search();
+
+        }
+
+        //no need only one enough
+        //partial void OnIsReadymealsCheckedChanged(bool value)
+        //{
+        //    SearchName1 = "";
+        //    SearchName2 = "";
+        //    Search();
+        //}
 
         [RelayCommand]
         private async Task DeleteMealDetail()
         {
-            if (!string.IsNullOrEmpty(SearchName))
+            if (!string.IsNullOrEmpty(SearchName1))
             {
-                Foods = FoodsFromDatabase.Where(x => x.FoodName.Contains(SearchName)).ToList();
+                Foods = FoodsFromDatabase.Where(x => x.FoodName.Contains(SearchName1)).ToList();
             }
             else
             {

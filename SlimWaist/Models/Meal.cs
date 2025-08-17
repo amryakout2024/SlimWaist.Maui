@@ -20,7 +20,7 @@ namespace SlimWaist.Models
 
         public bool IsExistsInDb { get; set; }=false;
 
-        //public double TotalCalories { get; set; } = 0;
+        public string? TotalMealCalories { get; set; }
 
         //public double TotalFoodCarb { get; set; } = 0;
 

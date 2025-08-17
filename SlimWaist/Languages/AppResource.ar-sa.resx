@@ -306,6 +306,9 @@
   <data name="Writefoodname" xml:space="preserve">
     <value>اكتب اسم الغذاء</value>
   </data>
+  <data name="Writereadymealname" xml:space="preserve">
+    <value>اكتب اسم الوجبة</value>
+  </data>
   <data name="Nofoodbythisname" xml:space="preserve">
     <value>مفيش غذاء بالاسم دا !</value>
   </data>
@@ -529,9 +532,15 @@
     <value>ادخل اسم جديد للوجبة</value>
   </data>
   <data name="Savedsuccessfully" xml:space="preserve">
-    <value />
+    <value>تم الحفظ بنجاح</value>
   </data>
   <data name="Per" xml:space="preserve">
     <value>لكل</value>
+  </data>
+  <data name="Nutritions" xml:space="preserve">
+    <value>المغذيات</value>
+  </data>
+  <data name="Readymeals" xml:space="preserve">
+    <value>وجبات جاهزة</value>
   </data>
 </root>

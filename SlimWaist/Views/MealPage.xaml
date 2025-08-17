@@ -244,11 +244,11 @@
                 </HorizontalStackLayout>
                 <Grid 
                     Grid.Column="1" 
-                    Margin="10"
+                    Margin="15,10,15,10"
                     BackgroundColor="DarkSlateBlue">
                     <Label 
                 Text="{extention:TranslateExtention Key=Add}" 
-                FontSize="16"
+                FontSize="14"
                 TextColor="White"
                 FontAttributes="Bold"
                 VerticalOptions="Center"

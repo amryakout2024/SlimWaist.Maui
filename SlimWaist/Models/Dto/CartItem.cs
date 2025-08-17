@@ -20,14 +20,14 @@ namespace SlimWaist.Models
         public double TotalFoodFat { get; set; }
         public double TotalFoodFibers { get; set; }
 
-        //public double TotalCalories { get => FoodCalories * _quantity / 100; set; }
+        //public double TotalMealCalories { get => FoodCalories * _quantity / 100; set; }
         //public double TotalFoodCarb => FoodCarb * _quantity / 100;
         //public double TotalFoodProtien => FoodProtien * _quantity / 100;
         //public double TotalFoodFat => FoodFat * _quantity / 100;
         //public double TotalFoodFibers => FoodFibers * _quantity / 100;
 
         //[ObservableProperty, NotifyPropertyChangedFor(
-        //    nameof(TotalCalories)
+        //    nameof(TotalMealCalories)
         //    , nameof(TotalFoodCarb)
         //    , nameof(TotalFoodProtien)
         //    , nameof(TotalFoodFat)
