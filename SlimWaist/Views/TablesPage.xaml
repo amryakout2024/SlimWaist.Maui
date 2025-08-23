@@ -12,13 +12,78 @@
              xmlns:vm="clr-namespace:SlimWaist.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
              x:Name="this"
              Title=""
              Shell.TabBarIsVisible="True"
              BackgroundColor="White"
              FlowDirection="{extention:FlowDirectionsExtention}">
     <ur:UraniumContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Border 
+                StrokeThickness="0"
+                x:Name="b"
+                StrokeShape="RoundRectangle 10"
+                HeightRequest="40"
+                WidthRequest="150"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                               Text="{TemplateBinding Content}" 
+                               FontSize="15"
+                               TextColor="White"
+                               x:Name="lb"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                    <BoxView Grid.Row="1"
+                                 x:Name="line"
+                                 Color="White"
+                                 WidthRequest="130"
+                                 HeightRequest="1"/>
+                </Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="Green" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="White" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                                Value="White" />
+                                    <Setter TargetName="lb"
+                                                Property="Label.TextColor"
+                                                Value="Green" />
+                                    <Setter TargetName="line"
+                                                Property="BoxView.Color"
+                                                Value="Green" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+
         <Style x:Key="InvalidMatTextFieldStyle" TargetType="mat:TextField">
             <Setter Property="TextColor" Value="Red" />
         </Style>
@@ -27,264 +92,290 @@
         </Style>
     </ur:UraniumContentPage.Resources>
 
-    <!--<Shell.TitleView>
+    <Shell.TitleView>
         <Label 
-            Text="{extention:TranslateExtention Key=Createonedayplan}"
+            Text="{extention:TranslateExtention Key=Mytables}"
             FontAttributes="Bold"
-            HorizontalOptions="End"
+            HorizontalOptions="Center"
             VerticalOptions="Center"
-            Margin="5"
+            FontSize="18"
             TextColor="{StaticResource MainColor}">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding CreateDayPlanCommand}"/>
-            </Label.GestureRecognizers>
         </Label>
-    </Shell.TitleView>-->
+    </Shell.TitleView>
     
-    <mat:TabView Padding="10">
-        <mat:TabView.TabHeaderItemTemplate>
-            <DataTemplate>
-                <Button 
-                Text="{Binding Title}"
-                Command="{Binding Command}">
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
-                            <Setter Property="TextColor" Value="{StaticResource White}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Button" Binding="{Binding IsSelected}" Value="False">
-                            <Setter Property="BackgroundColor" Value="White" />
-                            <Setter Property="TextColor" Value="{StaticResource MainColor}" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
-            </DataTemplate>
-        </mat:TabView.TabHeaderItemTemplate>
+    <Grid RowDefinitions="auto,*">
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <RadioButton 
+                Grid.Column="0" 
+                FontAttributes="Bold"
+                Content="{Binding NextDays}" 
+                GroupName="rd"
+                IsChecked="{Binding IsNextDaysChecked}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
+            <RadioButton 
+                Grid.Column="1"
+                FontAttributes="Bold"
+                Content="{Binding PreviousDays}"
+                GroupName="rd"
+                IsChecked="{Binding IsPreviousDaysChecked}">
+                <RadioButton.Style>
+                    <Style TargetType="RadioButton">
+                        <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}"/>
+                    </Style>
+                </RadioButton.Style>
+            </RadioButton>
+        </Grid>
         
-        <mat:TabItem Title="{extention:TranslateExtention Key=Nextdays}">
-            <mat:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <CollectionView
-                        SelectionMode="Single"
-                        ItemsSource="{Binding NextDayDiets}"
-                        EmptyView="No items">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+        <CollectionView
+            Grid.Row="1"
+            SelectionMode="Single"
+            ItemsSource="{Binding NextDayDiets}"
+            EmptyView="No items">
+            <CollectionView.Style>
+                <Style TargetType="CollectionView">
+                    <Setter Property="IsVisible" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="CollectionView" Binding="{Binding IsNextDaysChecked}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="CollectionView" Binding="{Binding IsNextDaysChecked}" Value="false">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </CollectionView.Style>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="m:DayDiet">
-                                <Border 
-                                    BackgroundColor="WhiteSmoke"
-                                    StrokeThickness="0.3"
-                                    Padding="10"
-                                    Margin="5" 
-                                    StrokeShape="RoundRectangle 5">
-                                    <Grid
-                                        ColumnSpacing="20"
-                                        ColumnDefinitions="*,auto,auto">
-                                        <HorizontalStackLayout Grid.Column="0">
-                                            <Label 
-                                                    TextColor="DarkSlateBlue" 
-                                                    Text="{extention:TranslateExtention Key=Date}"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="DarkSlateBlue" 
-                                                    Text=" : "
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Day}"
-                                                    FontAttributes="Bold"/>
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="/"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Month}"
-                                                    FontAttributes="Bold"/>
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="/"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Year}"
-                                                    FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
-                                        <Label
-                                            Grid.Column="1"
-                                            TextColor="{StaticResource MainColor}"
-                                            Text="{extention:TranslateExtention Key=Show}">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=GoToHomePageCommand}" 
-                                                    CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                        <Label
-                                            Grid.Column="2"
-                                            TextColor="DarkRed"
-                                            Text="{extention:TranslateExtention Key=Delete}">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=DeleteDayDietCommand}" 
-                                                    CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        <VisualState Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:DayDiet">
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0.3"
+                        Padding="10"
+                        Margin="5" 
+                        StrokeShape="RoundRectangle 5">
+                        <Grid
+                            ColumnSpacing="20"
+                            ColumnDefinitions="*,auto,auto">
+                            <HorizontalStackLayout Grid.Column="0">
+                                <Label 
+                                    TextColor="DarkSlateBlue" 
+                                    Text="{extention:TranslateExtention Key=Date}"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="DarkSlateBlue" 
+                                    Text=" : "
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Day}"
+                                    FontAttributes="Bold"/>
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="/"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Month}"
+                                    FontAttributes="Bold"/>
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="/"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Year}"
+                                    FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <Label
+                                Grid.Column="1"
+                                TextColor="{StaticResource MainColor}"
+                                Text="{extention:TranslateExtention Key=Show}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=GoToHomePageCommand}" 
+                                        CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label
+                                Grid.Column="2"
+                                TextColor="DarkRed"
+                                Text="{extention:TranslateExtention Key=Delete}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=DeleteDayDietCommand}" 
+                                        CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
-            </mat:TabItem.ContentTemplate>
-        </mat:TabItem>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <CollectionView
+            Grid.Row="1"
+            SelectionMode="Single"
+            ItemsSource="{Binding PreviousDayDiets}"
+            EmptyView="No items">
+            <CollectionView.Style>
+                <Style TargetType="CollectionView">
+                    <Setter Property="IsVisible" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger TargetType="CollectionView" Binding="{Binding IsPreviousDaysChecked}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="CollectionView" Binding="{Binding IsPreviousDaysChecked}" Value="false">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </CollectionView.Style>
 
-        <mat:TabItem Title="{extention:TranslateExtention Key=Previousdays}">
-            <mat:TabItem.ContentTemplate>
-                <DataTemplate>
-                    <CollectionView
-                        SelectionMode="Single"
-                        ItemsSource="{Binding PreviousDayDiets}"
-                        EmptyView="No items">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Focused">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="Focused">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Disabled">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="PointerOver">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
+                        <VisualState Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
 
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="m:DayDiet">
-                                <Border 
-                                    BackgroundColor="WhiteSmoke"
-                                    StrokeThickness="0.3"
-                                    Padding="10"
-                                    Margin="5" 
-                                    StrokeShape="RoundRectangle 5">
-                                    <Grid
-                                        ColumnSpacing="20"
-                                        ColumnDefinitions="*,auto,auto">
-                                        <HorizontalStackLayout Grid.Column="0">
-                                            <Label 
-                                                    TextColor="DarkSlateBlue" 
-                                                    Text="{extention:TranslateExtention Key=Date}"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="DarkSlateBlue" 
-                                                    Text=" : "
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Day}"
-                                                    FontAttributes="Bold"/>
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="/"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Month}"
-                                                    FontAttributes="Bold"/>
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="/"
-                                                    FontAttributes="Bold" />
-                                            <Label 
-                                                    TextColor="IndianRed" 
-                                                    Text="{Binding DayDietDate.Year}"
-                                                    FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
-                                        <Label
-                                            Grid.Column="1"
-                                            TextColor="{StaticResource MainColor}"
-                                            Text="{extention:TranslateExtention Key=Show}">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=GoToHomePageCommand}" 
-                                                    CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                        <Label
-                                            Grid.Column="2"
-                                            TextColor="DarkRed"
-                                            Text="{extention:TranslateExtention Key=Delete}">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=DeleteDayDietCommand}" 
-                                                    CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        <VisualState Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:DayDiet">
+                    <Border 
+                        BackgroundColor="WhiteSmoke"
+                        StrokeThickness="0.3"
+                        Padding="10"
+                        Margin="5" 
+                        StrokeShape="RoundRectangle 5">
+                        <Grid
+                            ColumnSpacing="20"
+                            ColumnDefinitions="*,auto,auto">
+                            <HorizontalStackLayout Grid.Column="0">
+                                <Label 
+                                    TextColor="DarkSlateBlue" 
+                                    Text="{extention:TranslateExtention Key=Date}"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="DarkSlateBlue" 
+                                    Text=" : "
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Day}"
+                                    FontAttributes="Bold"/>
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="/"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Month}"
+                                    FontAttributes="Bold"/>
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="/"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    TextColor="IndianRed" 
+                                    Text="{Binding DayDietDate.Year}"
+                                    FontAttributes="Bold"/>
+                            </HorizontalStackLayout>
+                            <Label
+                                Grid.Column="1"
+                                TextColor="{StaticResource MainColor}"
+                                Text="{extention:TranslateExtention Key=Show}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=GoToHomePageCommand}" 
+                                        CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label
+                                Grid.Column="2"
+                                TextColor="DarkRed"
+                                Text="{extention:TranslateExtention Key=Delete}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TablesVM}} ,Path=DeleteDayDietCommand}" 
+                                        CommandParameter="{Binding .}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
-            </mat:TabItem.ContentTemplate>
-        </mat:TabItem>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-    </mat:TabView>
+    </Grid>
 </ur:UraniumContentPage>
   

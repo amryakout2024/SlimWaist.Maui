@@ -727,6 +727,31 @@
                                     </HorizontalStackLayout>
                                     <HorizontalStackLayout>
                                         <Label TextColor="DarkSlateBlue" 
+                                       Text="{extention:TranslateExtention Key=Mealdate}"
+                                       FontAttributes="Bold"/>
+                                        <Label TextColor="DarkSlateBlue" 
+                                       Text=" : "
+                                       FontAttributes="Bold"/>
+                                        <HorizontalStackLayout>
+                                            <Label TextColor="IndianRed" 
+                                       Text="{Binding DayDietDate.Day}"
+                                       FontAttributes="Bold"/>
+                                            <Label TextColor="IndianRed" 
+                                       Text="/"
+                                       FontAttributes="Bold"/>
+                                            <Label TextColor="IndianRed" 
+                                       Text="{Binding DayDietDate.Month}"
+                                       FontAttributes="Bold"/>
+                                            <Label TextColor="IndianRed" 
+                                       Text="/"
+                                       FontAttributes="Bold"/>
+                                            <Label TextColor="IndianRed" 
+                                       Text="{Binding DayDietDate.Year}"
+                                       FontAttributes="Bold"/>
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkSlateBlue" 
                                        Text="{extention:TranslateExtention Key=Totalcalories}"
                                        FontAttributes="Bold"/>
                                         <Label TextColor="DarkSlateBlue" 
@@ -736,28 +761,45 @@
                                        Text="{Binding TotalMealCalories}"
                                        FontAttributes="Bold"/>
                                     </HorizontalStackLayout>
-                                    
                                 </VerticalStackLayout>
                                 <Grid 
+                                    RowDefinitions="*,*"
                                     Grid.Column="1"
                                     VerticalOptions="Center"
                                     HorizontalOptions="End">
+                                    <Image
+                                        Grid.Row="0" 
+                                        Margin="5"
+                                        HeightRequest="32"
+                                        Source="details.png">
+                                        <Image.Behaviors>
+                                            <toolkit:IconTintColorBehavior TintColor="{StaticResource MainColor}"/>
+                                        </Image.Behaviors>
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=GoToReadyMealPageCommand}"
+                                                CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                     <Border 
-                                    WidthRequest="50"
+                                        Margin="5"
+                                        Grid.Row="1"
+                                    HeightRequest="35"
+                                        WidthRequest="35"
                                     BackgroundColor="{StaticResource MainColor}"
                                     StrokeShape="RoundRectangle 10">
                                         <Label 
                                         Text="+" 
-                                        FontSize="25"
+                                        FontSize="22"
                                         TextColor="White"
                                         FontAttributes="Bold"
                                         VerticalOptions="Center"
                                         HorizontalOptions="Center"/>
-                                        <!--<Border.GestureRecognizers>
+                                        <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=ShowBottomSheetCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:FoodsVM}},Path=AddReadyMealToMealCommand}"
                                                 CommandParameter="{Binding .}"/>
-                                        </Border.GestureRecognizers>-->
+                                        </Border.GestureRecognizers>
                                     </Border>
                                 </Grid>
                             </Grid>

@@ -543,4 +543,13 @@
   <data name="Readymeals" xml:space="preserve">
     <value>وجبات جاهزة</value>
   </data>
+  <data name="Mealdate" xml:space="preserve">
+    <value>تاريخ الوجبة</value>
+  </data>
+  <data name="Readymeal" xml:space="preserve">
+    <value>وجبة جاهزة</value>
+  </data>
+  <data name="Mytables" xml:space="preserve">
+    <value>جداولي</value>
+  </data>
 </root>

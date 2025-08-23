@@ -15,18 +15,42 @@ namespace SlimWaist.ViewModels
         private List<DayDiet> _dayDiets = new List<DayDiet>();
 
         [ObservableProperty]
+        private List<DayDiet> _nextDayDiets;
+
+        [ObservableProperty]
         private List<DayDiet> _previousDayDiets;
 
         [ObservableProperty]
-        private List<DayDiet> _NextDayDiets;
+        private string _nextDays;
 
-        //private List<Meal> _SelectedMeals;
+        [ObservableProperty]
+        private string _previousDays;
+
+        [ObservableProperty]
+        private bool _isNextDaysChecked;
+
+        [ObservableProperty]
+        private bool _isPreviousDaysChecked;
 
         [ObservableProperty]
         private int _selectedTab = 1;
 
         public async Task Init()
         {
+            if (HomeVM.CurrentMembership.CultureInfo == "ar-SA")
+            {
+                NextDays = "الأيام القادمة";
+                PreviousDays = "الأيام السابقة";
+            }
+            else
+            {
+                NextDays = "Next days";
+                PreviousDays = "Previous days";
+            }
+
+            IsNextDaysChecked = true;
+            IsPreviousDaysChecked = false;
+
             var dateToday = new DateTime(
                 Convert.ToInt32(DateTime.Now.Year)
                 , Convert.ToInt32(DateTime.Now.Month)
@@ -69,15 +93,6 @@ namespace SlimWaist.ViewModels
 
             await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
         }
-
-        //[RelayCommand]
-        //private async Task SelectedTabChanged()
-        //{
-        //    //AllMeals = await App._dataContext.LoadAsync<Meal>();
-        //    //BreakfastMeals = AllMeals.Where(x => x.MealTypeId == 0).ToList();
-        //    //LunchMeals = AllMeals.Where(x => x.MealTypeId == 1).ToList();
-        //    //DinnerMeals = AllMeals.Where(x => x.MealTypeId == 2).ToList();
-        //}
 
     }
 }

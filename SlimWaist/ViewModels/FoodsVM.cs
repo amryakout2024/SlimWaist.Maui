@@ -4,6 +4,7 @@ using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Globalization;
+using System.Reflection.Metadata;
 
 namespace SlimWaist.ViewModels
 {
@@ -113,7 +114,7 @@ namespace SlimWaist.ViewModels
             UpdateTotalMealCalories();
         }
 
-        private void UpdateTotalMealCalories()
+        private async Task UpdateTotalMealCalories()
         {
             TotalMealCalories = "0";
 
@@ -128,6 +129,66 @@ namespace SlimWaist.ViewModels
                     TotalMealCalories = (Convert.ToDouble(TotalMealCalories) + Math.Round((Convert.ToDouble(oneFoodMealCalories) * Convert.ToDouble(mealDetail.Quantity) / 100), 1)).ToString("F1");
                 }
             }
+
+            HomeVM.CurrentMeal.TotalMealCalories = TotalMealCalories;
+
+            await _dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+
+        }
+
+        [RelayCommand]
+        private async Task AddReadyMealToMeal(Meal meal)
+        {
+            if (HomeVM.CurrentDayDiet.IsExistsInDb==false)
+            {
+                HomeVM.CurrentDayDiet.IsExistsInDb = true;
+
+                await _dataContext.InsertAsync<DayDiet>(HomeVM.CurrentDayDiet);
+            }
+
+            if (HomeVM.CurrentMeal.IsExistsInDb==false)
+            {
+                var CurrentDayDietId = _dataContext.Database.Table<DayDiet>()
+                                        .Where(x => x.MembershipId == HomeVM.CurrentMembership.Id)
+                                        .Where(x => x.DayDietDate == HomeVM.CurrentDayDiet.DayDietDate).Select(x => x.DayDietId).FirstOrDefault();
+
+                HomeVM.CurrentMeal.DayDietId = CurrentDayDietId;
+
+                HomeVM.CurrentMeal.IsExistsInDb = true;
+                HomeVM.CurrentMeal.DayDietDate = HomeVM.CurrentDayDiet.DayDietDate;
+                await App._dataContext.InsertAsync<Meal>(HomeVM.CurrentMeal);
+            }
+
+            
+            var AddNewMealDetails = _dataContext.Database.Table<MealDetail>()
+                        .Where(x => x.MealId == meal.MealId).ToList();
+
+            var existingMealDetails = _dataContext.Database.Table<MealDetail>()
+                        .Where(x => x.MealId == HomeVM.CurrentMeal.MealId ).ToList();
+            foreach (MealDetail existingMealDetail in existingMealDetails)
+            {
+                foreach (MealDetail addNewMealDetail in AddNewMealDetails)
+                {
+                    if (existingMealDetail.FoodId==addNewMealDetail.FoodId)
+                    {
+                        existingMealDetail.Quantity = existingMealDetail.Quantity + addNewMealDetail.Quantity;
+                        await _dataContext.UpdateAsync<MealDetail>(existingMealDetail);
+                    }
+                    else
+                    {
+                        await _dataContext.InsertAsync<MealDetail>(addNewMealDetail);
+                    }
+                }
+            }
+
+            await UpdateTotalMealCalories();
+
+            await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
+            await App._dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
+#if ANDROID
+                    Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
 
         }
 
@@ -167,23 +228,25 @@ namespace SlimWaist.ViewModels
                     await App._dataContext.UpdateAsync(existingMealDetail);
 
                     IsBottomSheetPresented = false;
+
+                    await UpdateTotalMealCalories();
+
+                    await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
 #if ANDROID
                     Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
 
-                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Updatedsuccessfully", CultureInfo.CurrentCulture) ?? "");
                 }
                 else
                 {
                     await App._dataContext.DeleteAsync<MealDetail>(existingMealDetail);
 
-                    IsBottomSheetPresented = false;
-#if ANDROID
-                    Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
-#endif
                     //delete meal
 
                     var mealDetails = _dataContext.Database.Table<MealDetail>().Where(x => x.MealId == HomeVM.CurrentMeal.MealId).ToList();
+                   
+                    //delete day
 
                     if (mealDetails.Count < 1)
                     {
@@ -191,7 +254,6 @@ namespace SlimWaist.ViewModels
 
                         await App._dataContext.DeleteAsync<Meal>(HomeVM.CurrentMeal);
                     
-                        //delete day
                         switch (HomeVM.CurrentMeal.MealTypeId)
                         {
                             case 0:HomeVM.ExistingBreakfastMeal.IsExistsInDb = false;
@@ -214,8 +276,16 @@ namespace SlimWaist.ViewModels
                         }
                     }
 
+                    IsBottomSheetPresented = false;
 
-                    //await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+                    await UpdateTotalMealCalories();
+
+                    await ShowToastAsync(AppResource.ResourceManager.GetString("Deletedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
+#if ANDROID
+                    Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
+#endif
+
 
                 }
 
@@ -231,22 +301,22 @@ namespace SlimWaist.ViewModels
                 };
 
                 await App._dataContext.InsertAsync<MealDetail>(mealDetail);
+                
+                await UpdateTotalMealCalories();
 
                 IsBottomSheetPresented = false;
+
+                await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 #if ANDROID
                 Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}", animate: true);
 #endif
 
-                //await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
+
             }
 
-            UpdateTotalMealCalories();
-
-            HomeVM.CurrentMeal.TotalMealCalories = TotalMealCalories;
-
-            await App._dataContext.UpdateAsync<Meal>(HomeVM.CurrentMeal);
 
         }
+
         [RelayCommand]
         private async Task Search()
         {
@@ -385,6 +455,19 @@ namespace SlimWaist.ViewModels
             }
         }
 
+        [RelayCommand]
+        private async Task GoToReadyMealPage(Meal meal)
+        {
+#if ANDROID
+Dictionary<string, object> parameter = new Dictionary<string, object>
+{
+    [nameof(Meal)] = meal
+};
+
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}/{nameof(MealPage)}/{nameof(ReadyMealPage)}", animate: true,parameter);
+#endif
+
+        }
         [RelayCommand]
         private async Task GoToMealPage()
         {

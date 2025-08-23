@@ -736,6 +736,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Meal date.
+        /// </summary>
+        public static string Mealdate {
+            get {
+                return ResourceManager.GetString("Mealdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meal name.
         /// </summary>
         public static string Mealname {
@@ -795,6 +804,15 @@ namespace SlimWaist.Languages {
         public static string Mymeals {
             get {
                 return ResourceManager.GetString("Mymeals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My tables.
+        /// </summary>
+        public static string Mytables {
+            get {
+                return ResourceManager.GetString("Mytables", resourceCulture);
             }
         }
         
@@ -984,6 +1002,15 @@ namespace SlimWaist.Languages {
         public static string Quantity {
             get {
                 return ResourceManager.GetString("Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready meal.
+        /// </summary>
+        public static string Readymeal {
+            get {
+                return ResourceManager.GetString("Readymeal", resourceCulture);
             }
         }
         

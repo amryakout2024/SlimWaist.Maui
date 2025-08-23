@@ -611,7 +611,8 @@ namespace SlimWaist.ViewModels
                     {
                         CurrentMeal = new Meal()
                         {
-                            MealTypeId = 0
+                            MealTypeId = 0,
+                            DayDietDate=SelectedDate
                         };
                     }
 
@@ -654,7 +655,8 @@ namespace SlimWaist.ViewModels
                     {
                         CurrentMeal = new Meal()
                         {
-                            MealTypeId = 1
+                            MealTypeId = 1,
+                            DayDietDate = SelectedDate
                         };
                     }
 #if ANDROID
@@ -696,7 +698,8 @@ namespace SlimWaist.ViewModels
                     {
                         CurrentMeal = new Meal()
                         {
-                            MealTypeId = 2
+                            MealTypeId = 2,
+                            DayDietDate = SelectedDate
                         };
                     }
 #if ANDROID
@@ -738,7 +741,8 @@ namespace SlimWaist.ViewModels
                     {
                         CurrentMeal = new Meal()
                         {
-                            MealTypeId = 3
+                            MealTypeId = 3,
+                            DayDietDate = SelectedDate
                         };
                     }
 #if ANDROID

@@ -39,7 +39,6 @@ public partial class HomePage : UraniumContentPage
     {
         base.OnNavigatedTo(args);
 
-        await _homeVM.init();
 
         if (HomeVM.CurrentDayDiet.IsExistsInDb)
         {
@@ -48,15 +47,10 @@ HomeVM.CurrentDayDiet.DayDietDate.Year
 , HomeVM.CurrentDayDiet.DayDietDate.Month
 , HomeVM.CurrentDayDiet.DayDietDate.Day);
         }
-        //else
-        //{
-        //    MyDatePicker.Date = new DateTime(
-        //                        DateTime.Now.Year
-        //                        , DateTime.Now.Month
-        //                        , DateTime.Now.Day);
-        //}
 
         WantToExit = false;
+
+        await _homeVM.init();
 
     }
 

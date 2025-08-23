@@ -543,4 +543,13 @@
   <data name="Readymeals" xml:space="preserve">
     <value>Ready meals</value>
   </data>
+  <data name="Mealdate" xml:space="preserve">
+    <value>Meal date</value>
+  </data>
+  <data name="Readymeal" xml:space="preserve">
+    <value>Ready meal</value>
+  </data>
+  <data name="Mytables" xml:space="preserve">
+    <value>My tables</value>
+  </data>
 </root>
