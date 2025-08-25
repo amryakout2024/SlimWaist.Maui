@@ -552,4 +552,7 @@
   <data name="Mytables" xml:space="preserve">
     <value>جداولي</value>
   </data>
+  <data name="CalFit" xml:space="preserve">
+    <value>كالفت</value>
+  </data>
 </root>

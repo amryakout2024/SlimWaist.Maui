@@ -552,4 +552,7 @@
   <data name="Mytables" xml:space="preserve">
     <value>My tables</value>
   </data>
+  <data name="CalFit" xml:space="preserve">
+    <value>CalFit</value>
+  </data>
 </root>

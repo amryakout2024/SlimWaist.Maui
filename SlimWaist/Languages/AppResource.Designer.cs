@@ -169,6 +169,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CalFit.
+        /// </summary>
+        public static string CalFit {
+            get {
+                return ResourceManager.GetString("CalFit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calories.
         /// </summary>
         public static string Calories {

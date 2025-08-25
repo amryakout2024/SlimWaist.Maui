@@ -112,7 +112,8 @@
                     VerticalOptions="Center"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
-                    Text="Slim Waste"/>
+                    Text="{extention:TranslateExtention Key=CalFit}">
+                </Label>
                 <Label
                     HorizontalOptions="End"
                     TextColor="IndianRed"
