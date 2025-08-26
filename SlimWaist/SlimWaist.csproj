@@ -28,8 +28,8 @@
 		<ApplicationId>com.companyname.slimwaist</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>97.0</ApplicationDisplayVersion>
-		<ApplicationVersion>97</ApplicationVersion>
+		<ApplicationDisplayVersion>98.0</ApplicationDisplayVersion>
+		<ApplicationVersion>98</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -61,7 +61,7 @@
 		<MauiIcon Include="Resources\AppIcon\calfit.svg" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#fafafa" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

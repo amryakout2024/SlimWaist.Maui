@@ -92,7 +92,7 @@
             VerticalOptions="Start"
             BackgroundColor="{StaticResource MainColor}">
             <Label 
-                Text="{extention:TranslateExtention Key=Slimwaste}"
+                Text="{extention:TranslateExtention Key=CalFit}"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 Margin="5"

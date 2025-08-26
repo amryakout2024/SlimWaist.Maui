@@ -7,5 +7,5 @@
 	<style>
 	</style>
 	<use id="Background" href="#img1" x="0" y="0"/>
-	<use id="calfiticon" href="#img2" transform="matrix(.121,0,0,.121,53.5,52)"/>
+	<use id="calfiticon" href="#img2" transform="matrix(.137,0,0,.137,45,45)"/>
 </svg>
