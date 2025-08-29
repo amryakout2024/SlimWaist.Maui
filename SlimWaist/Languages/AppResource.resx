@@ -555,4 +555,7 @@
   <data name="CalFit" xml:space="preserve">
     <value>CalFit</value>
   </data>
+  <data name="Clickagaintoexit" xml:space="preserve">
+    <value>Click again to exit</value>
+  </data>
 </root>

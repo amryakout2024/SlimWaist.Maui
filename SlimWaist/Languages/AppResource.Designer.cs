@@ -250,6 +250,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click again to exit.
+        /// </summary>
+        public static string Clickagaintoexit {
+            get {
+                return ResourceManager.GetString("Clickagaintoexit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consumed.
         /// </summary>
         public static string Consumed {

@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Views;
 using Microcharts;
 using SkiaSharp;
 using SlimWaist.Extentions;
+using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Popups;
 using SlimWaist.ViewModels;
@@ -60,21 +61,21 @@ HomeVM.CurrentDayDiet.DayDietDate.Year
         {
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-            Toast.Make("اضغط مرة اخري اذا كنت تريد الخروج !", ToastDuration.Short, 14).Show(cancellationTokenSource.Token);
+            Toast.Make(AppResource.ResourceManager.GetString("Clickagaintoexit",CultureInfo.CurrentCulture), ToastDuration.Short, 14).Show(cancellationTokenSource.Token);
 
             WantToExit = true;
 
             return true;
         }
 
+
+#if ANDROID
+            App.Current.CloseWindow(App.Current.MainPage.Window);
+            App.Current.Quit();
+#endif
         return false;
 
         // Return true to prevent back button 
-
-    }
-
-    private void MyDatePicker_DateSelected(object sender, DateChangedEventArgs e)
-    {
 
     }
 

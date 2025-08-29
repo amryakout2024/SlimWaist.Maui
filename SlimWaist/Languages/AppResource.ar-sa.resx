@@ -555,4 +555,7 @@
   <data name="CalFit" xml:space="preserve">
     <value>كالفت</value>
   </data>
+  <data name="Clickagaintoexit" xml:space="preserve">
+    <value>اضغط مرة اخري اذا كنت تريد الخروج !</value>
+  </data>
 </root>
