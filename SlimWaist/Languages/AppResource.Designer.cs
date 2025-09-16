@@ -1195,6 +1195,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sure you want to log out ?.
+        /// </summary>
+        public static string Sureyouwanttologout {
+            get {
+                return ResourceManager.GetString("Sureyouwanttologout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tables.
         /// </summary>
         public static string Tables {

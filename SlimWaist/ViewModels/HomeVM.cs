@@ -446,12 +446,18 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task LogOut()
         {
-            CurrentMembership = new Membership();
-            CurrentDayDiet= new DayDiet();
-            App.setting.SavedMembershipId = 0;
-            await _dataContext.UpdateAsync<Setting>(App.setting);
-            SelectedDiet = null;
-            await init();
+            var result= await Shell.Current.DisplayAlert(null,AppResource.ResourceManager.GetString("Sureyouwanttologout", CultureInfo.CurrentCulture),AppResource.ResourceManager.GetString("Ok",CultureInfo.CurrentCulture), AppResource.ResourceManager.GetString("Cancel", CultureInfo.CurrentCulture));
+
+            if (result)
+            {
+                CurrentMembership = new Membership();
+                CurrentDayDiet = new DayDiet();
+                App.setting.SavedMembershipId = 0;
+                await _dataContext.UpdateAsync<Setting>(App.setting);
+                SelectedDiet = null;
+                await init();
+            }
+
         }
 
         partial void OnIsBottomSheetPresentedChanged(bool value)
@@ -768,7 +774,7 @@ namespace SlimWaist.ViewModels
         {
             if (CurrentMembership.IsExistsInDb)
             {
-                await GoToAsyncWithStack(nameof(ProfilePage), true);
+                await GoToAsyncWithStack(nameof(BodyMassAnalysisPage), true);
             }
             else
             {

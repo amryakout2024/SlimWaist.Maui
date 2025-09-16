@@ -558,4 +558,7 @@
   <data name="Clickagaintoexit" xml:space="preserve">
     <value>Click again to exit</value>
   </data>
+  <data name="Sureyouwanttologout" xml:space="preserve">
+    <value>Sure you want to log out ?</value>
+  </data>
 </root>
