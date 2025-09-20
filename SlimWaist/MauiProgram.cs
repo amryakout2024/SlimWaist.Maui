@@ -10,7 +10,9 @@ using SlimWaist.Validations;
 using SlimWaist.ViewModels;
 using SlimWaist.Views;
 using UraniumUI;
-
+using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
 
 #if ANDROID
 using System.Net.Security;
@@ -53,6 +55,19 @@ namespace SlimWaist
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+            // ,UserRepository=new FileUserRepository("SlimWaist") to save the user offline in local repository
+
+
+            builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
+            {
+                ApiKey = "AIzaSyBS4rcRRgwKq_gmjiQ1M0e8A96PvR9vFH8",
+                AuthDomain = "calfit-weightloss.firebaseapp.com",
+                Providers = new FirebaseAuthProvider[]
+                {
+                    new EmailProvider()
+                }
+            }));
+
 
             builder.Services.AddTransient<LoginPage>()
                             .AddTransient<LoginVM>();
