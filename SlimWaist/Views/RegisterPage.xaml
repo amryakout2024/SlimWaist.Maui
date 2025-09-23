@@ -70,7 +70,7 @@
                 </mat:TextField.Validations>
             </mat:TextField>
 
-            <!--<mat:TextField 
+            <mat:TextField 
             Text="{Binding Name}"
             Title="{extention:TranslateExtention Key=Name}"
             AllowClear="True"
@@ -127,7 +127,7 @@
                     <myValidations:ValidateForDecimalNumber/>
                     <validation:MaxValueValidation MaxValue="10000000" Message=""/>
                 </mat:TextField.Validations>
-            </mat:TextField>-->
+            </mat:TextField>
 
             <mat:DatePickerField
             Date="{Binding BirthDate}"

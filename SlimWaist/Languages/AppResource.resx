@@ -561,4 +561,7 @@
   <data name="Sureyouwanttologout" xml:space="preserve">
     <value>Sure you want to log out ?</value>
   </data>
+  <data name="Pleasefillallfields" xml:space="preserve">
+    <value>Please fill all fields</value>
+  </data>
 </root>

@@ -562,4 +562,7 @@
   <data name="Sureyouwanttologout" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="Pleasefillallfields" xml:space="preserve">
+    <value>يرجي ملىء جميع الحقول</value>
+  </data>
 </root>

@@ -979,6 +979,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please fill all fields.
+        /// </summary>
+        public static string Pleasefillallfields {
+            get {
+                return ResourceManager.GetString("Pleasefillallfields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select diet type.
         /// </summary>
         public static string Pleaseselectdiettype {

@@ -13,6 +13,8 @@ using UraniumUI;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
+using Firebase.Database;
+
 
 #if ANDROID
 using System.Net.Security;
@@ -57,6 +59,7 @@ namespace SlimWaist
 #endif
             // ,UserRepository=new FileUserRepository("SlimWaist") to save the user offline in local repository
 
+            builder.Services.AddSingleton(new FirebaseClient("https://calfit-weightloss-default-rtdb.firebaseio.com/"));
 
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
             {
