@@ -58,9 +58,15 @@ namespace SlimWaist
             builder.Logging.AddDebug();
 #endif
             // ,UserRepository=new FileUserRepository("SlimWaist") to save the user offline in local repository
-
+            
+            /* 
+             // Initialize FirebaseClient with Realtime Database URL to use it in all the app by dependency injection
             builder.Services.AddSingleton(new FirebaseClient("https://calfit-weightloss-default-rtdb.firebaseio.com/"));
+            */
 
+            /*
+            // Initialize FirebaseAuthClient with EmailProvider
+            //so i can use it in all the app by dependency injection
             builder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig
             {
                 ApiKey = "AIzaSyBS4rcRRgwKq_gmjiQ1M0e8A96PvR9vFH8",
@@ -70,7 +76,7 @@ namespace SlimWaist
                     new EmailProvider()
                 }
             }));
-
+            */
 
             builder.Services.AddTransient<LoginPage>()
                             .AddTransient<LoginVM>();

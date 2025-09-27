@@ -205,6 +205,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not register.
+        /// </summary>
+        public static string Cannotregister {
+            get {
+                return ResourceManager.GetString("Cannotregister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Carb.
         /// </summary>
         public static string Carb {

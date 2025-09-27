@@ -6,7 +6,7 @@ namespace SlimWaist.Models
 {
     public class DataContext
     {
-        public const string DbName = "SlimWaist81";
+        public const string DbName = "SlimWaist83";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -23,6 +23,8 @@ namespace SlimWaist.Models
                 //create tables
 
                 Database.CreateTable<Membership>();
+
+                Database.CreateTable<User>();
 
                 Database.CreateTable<Setting>();
 
@@ -688,7 +690,7 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
         }
 
         //public async Task<int> AddCartItem(CartItemEntity entity) =>
-        //    await ExecuteAsync(async () => await Database.InsertAsync(entity));
+        //    await ExecuteAsync(async () => await Database.InsertUserInCalfitUsersAsync(entity));
 
 
         //public async Task DeleteCartItem(CartItemEntity entity)

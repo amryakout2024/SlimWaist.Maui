@@ -86,7 +86,7 @@ namespace SlimWaist.ViewModels
 
                     if (!previousmeal)
                     {
-                        //await App._dataContext.InsertAsync<Meal>(new Meal()
+                        //await App._dataContext.InsertUserInCalfitUsersAsync<Meal>(new Meal()
                         //{
                         //    MealName = result,
                         //    MealType = CartItems.FirstOrDefault()?.MealType,
@@ -99,7 +99,7 @@ namespace SlimWaist.ViewModels
 
                         //foreach (var cartitem in CartItems)
                         //{
-                        //    await App._dataContext.InsertAsync<MealDetail>(new MealDetail()
+                        //    await App._dataContext.InsertUserInCalfitUsersAsync<MealDetail>(new MealDetail()
                         //    {
                         //        MealName = result,
                         //        MealType = cartitem.MealType,

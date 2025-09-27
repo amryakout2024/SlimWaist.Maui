@@ -8,6 +8,8 @@ namespace SlimWaist.Models
 
         public int Id { get; set; }
 
+        public string? UserKey { get; set; } = "0";
+        
         public string? Email { get; set; }
 
         public string? Password { get; set; }
@@ -20,19 +22,7 @@ namespace SlimWaist.Models
 
         public DateTime WeightDate { get; set; }
 
-        //public int WeightDateDay { get; set; }
-
-        //public int WeightDateMonth { get; set; }
-
-        //public int WeightDateYear { get; set; }
-
         public DateTime BirthDate { get; set; }
-
-        //public int BirthDateDay { get; set; }
-
-        //public int BirthDateMonth { get; set; }
-
-        //public int BirthDateYear { get; set; }
 
         public int BodyActivityId { get; set; }
 

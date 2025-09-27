@@ -565,4 +565,7 @@
   <data name="Pleasefillallfields" xml:space="preserve">
     <value>يرجي ملىء جميع الحقول</value>
   </data>
+  <data name="Cannotregister" xml:space="preserve">
+    <value>لا يمكن التسجيل</value>
+  </data>
 </root>

@@ -1,4 +1,19 @@
-﻿// In your Page's constructor or OnAppearing method
+﻿                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+                await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully"), ToastDuration.Short).Show(cancellationTokenSource.Token);
+
+
+firebase null exception
+catch (Firebase.Database.FirebaseException ex)
+{
+   await Shell.Current.DisplayAlert("", ex.Message, "ok");
+   await Shell.Current.DisplayAlert(
+   AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""    , AppResource.ResourceManager.GetString("Pleasefillallfields", CultureInfo.CurrentCulture) ?? ""
+   , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+}
+
+
+// In your Page's constructor or OnAppearing method
 Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
 
 // Event handler

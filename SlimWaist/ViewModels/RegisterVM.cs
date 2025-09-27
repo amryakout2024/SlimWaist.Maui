@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
+using SlimWaist.Helpers;
 using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Models.Dto;
@@ -13,11 +14,12 @@ using System.Globalization;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class RegisterVM(DataContext dataContext,FirebaseAuthClient firebaseAuthClient,FirebaseClient firebaseClient) : BaseVM
+    public partial class RegisterVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
-        private readonly FirebaseAuthClient _firebaseAuthClient = firebaseAuthClient;
-        private readonly FirebaseClient _firebaseClient = firebaseClient;
+        private FirebaseAuthHelper firebaseAuthHelper = new FirebaseAuthHelper();
+        private FirebaseDbHelper firebaseDbHelper = new FirebaseDbHelper();
+
         [ObservableProperty]
         private string? _email;
 
@@ -57,8 +59,11 @@ namespace SlimWaist.ViewModels
         public async Task init()
         {
             Email = "amrnewstory@gmail.com";
-
             Password = "123456";
+            Weight = "10";
+            Height = "100";
+            Name = "ss";
+            WaistCircumferenceMeasurement = "50";
 
             IsMale = true;
 
@@ -72,11 +77,27 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task SaveNewMemberShip()
         {
-            if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+            //------need to handle weak password
+            try
             {
-                try
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    await _firebaseAuthClient.CreateUserWithEmailAndPasswordAsync(Email, Password);
+
+                }
+                else
+                {
+                    await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
+                }
+
+                var isRegisteredSuccessfully = await firebaseAuthHelper.SignUpWithEmail(Email, Password);
+
+                if (isRegisteredSuccessfully)
+                {
+                    Models.User user = new Models.User()
+                    {
+                        UserKey = "0",
+                        Email = Email
+                    };
 
                     GenderId = IsMale ? 1 : 2;
 
@@ -96,43 +117,58 @@ namespace SlimWaist.ViewModels
                         CultureInfo = App.setting.CultureInfo
                     };
 
-                    //save in firebase database
-                    await _firebaseClient.Child("Membership").PostAsync(membership);
+                    //save in calfit-storage database
+                    var userKey = await firebaseDbHelper.InsertUserInCalfitStorageAndReturnKeyAsync<Models.User>(user);
 
-                    
-                    //save in local database sqlite
-                    await _dataContext.InsertAsync(membership);
 
-                    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                    if (!string.IsNullOrEmpty(userKey))
+                    {
 
-                    await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully"), ToastDuration.Short).Show(cancellationTokenSource.Token);
+                        membership.UserKey = userKey;
 
-                    await GoToAsyncWithShell(nameof(LoginPage), true);
+                        user.UserKey = userKey;
+
+                        //save in firebase-storage database
+                        await firebaseDbHelper.InsertInCalfitStorageAsync<Membership>(userKey,membership);
+
+                        //save in firebase-users database
+                        await firebaseDbHelper.InsertUserInCalfitUsersAsync<Models.User>(user);
+
+                        //save in local database sqlite
+                        await _dataContext.InsertAsync(user);
+                        await _dataContext.InsertAsync(membership);
+
+                        await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully") ?? "", ToastDuration.Short).Show();
+
+                        //await GoToAsyncWithShell(nameof(LoginPage), true);
+
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert(
+                            AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Cannotregister", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+
+                    }
 
                 }
-                catch (FirebaseAuthException ex)
+                else
                 {
                     await Shell.Current.DisplayAlert(
                         AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
                         , AppResource.ResourceManager.GetString("Emailexistsbefore", CultureInfo.CurrentCulture) ?? ""
                         , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
                 }
-
-                //firebase null exception
-                //catch (Firebase.Database.FirebaseException ex)
-                //{
-                //    await Shell.Current.DisplayAlert("", ex.Message, "ok");
-                //    await Shell.Current.DisplayAlert(
-                //        AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
-                //        , AppResource.ResourceManager.GetString("Pleasefillallfields", CultureInfo.CurrentCulture) ?? ""
-                //        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
-                //}
-
             }
-            else
+            catch (Exception ex)
             {
-                await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
+                await Shell.Current.DisplayAlert(
+                    AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                    , ex.Message
+                    , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
             }
+
         }
     }
 }

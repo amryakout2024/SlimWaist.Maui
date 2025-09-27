@@ -143,7 +143,7 @@ namespace SlimWaist.ViewModels
             //        Quantity = Convert.ToInt32(Quantity)
             //    };
 
-            //    await App._dataContext.InsertAsync<CartItem>(cartItem);
+            //    await App._dataContext.InsertUserInCalfitUsersAsync<CartItem>(cartItem);
 
             //    await ShowToastAsync(AppResource.ResourceManager.GetString("Addedsuccessfully", CultureInfo.CurrentCulture) ?? "");
 

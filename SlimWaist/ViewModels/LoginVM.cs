@@ -3,17 +3,22 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
+using Firebase.Database;
+using SlimWaist.Helpers;
 using SlimWaist.Languages;
 using SlimWaist.Models;
 using SlimWaist.Views;
 using System.Globalization;
+using System.Xml.Linq;
 
 namespace SlimWaist.ViewModels
 {
-    public partial class LoginVM(DataContext dataContext,FirebaseAuthClient firebaseAuthClient) : BaseVM
+    public partial class LoginVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
-        private readonly FirebaseAuthClient _firebaseAuthClient = firebaseAuthClient;
+        private FirebaseAuthHelper firebaseAuthHelper=new FirebaseAuthHelper();
+        private FirebaseDbHelper firebaseDbHelper=new FirebaseDbHelper();
+
         [ObservableProperty]
         private string _email;
 
@@ -40,56 +45,113 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task Login()
         {
-            if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
+            try
             {
-                try
+                if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
-                    await _firebaseAuthClient.SignInWithEmailAndPasswordAsync(Email, Password);
-
-                    await Toast.Make("success", ToastDuration.Short).Show();
 
                 }
-                catch (FirebaseAuthException ex)
+                else
                 {
-                    await Shell.Current.DisplayAlert("", ex.Message, "ok");
-                    //await Shell.Current.DisplayAlert(
+                    await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
+                }
+                Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email && x.Password == Password).FirstOrDefault() ?? new Membership();
+
+                membership.IsExistsInDb = false;
+
+                if (membership.IsExistsInDb)
+                {
+                    HomeVM.CurrentMembership = membership;
+
+                    App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
+
+
+                    await _dataContext.UpdateAsync<Setting>(App.setting);
+
+                    if (IsCheckBoxChecked)
+                    {
+                        Preferences.Set("Email", Email);
+
+                        App.setting.SavedMembershipId = membership.Id;
+                    }
+
+                    await GoToAsyncWithShell(nameof(HomePage), true);
+
+                }
+                else
+                {
+
+                    var isSuccess = await firebaseAuthHelper.SignInWithEmail(Email, Password);
+
+                    if (!isSuccess)
+                    {
+                        await Shell.Current.DisplayAlert(
+                            AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+                        return;
+                    }
+
+                   await firebaseDbHelper.GetMembershipAsync(Email);
+
+                    //if (membership.IsExistsInDb)
+                    //{
+                    //    await Shell.Current.DisplayAlert(
+                    //        AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                    //        , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
+                    //        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+                    //    return;
+                    //}
+                    //else
+                    //{
+                    //    await Shell.Current.DisplayAlert(
                     //    AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
                     //    , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
                     //    , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+                    //                        return;
+
+                    //}
+
+                    //neet to get from firebase first
+
+                    //GenderId = IsMale ? 1 : 2;
+
+                    //Membership membership = new Membership()
+                    //{
+                    //    Email = Email,
+                    //    Password = Password,
+                    //    Name = Name,
+                    //    Weight = Convert.ToDouble(Weight),
+                    //    WeightDate = DateTime.Now,
+                    //    Height = Convert.ToDouble(Height),
+                    //    BirthDate = new DateTime(BirthDate.Year, BirthDate.Month, BirthDate.Day),
+                    //    BodyActivityId = SelectedBodyActivity.BodyActivityId,
+                    //    GenderId = GenderId,
+                    //    WaistCircumferenceMeasurement = Convert.ToDouble(WaistCircumferenceMeasurement),
+                    //    IsExistsInDb = true,
+                    //    CultureInfo = App.setting.CultureInfo
+                    //};
+
+
+                    //save in local database sqlite
+                    //await _dataContext.InsertUserInCalfitUsersAsync(membership);
+
+                    if (IsCheckBoxChecked)
+                    {
+                        Preferences.Set("Email", Email);
+
+                        App.setting.SavedMembershipId = membership.Id;
+                    }
+
+                    await GoToAsyncWithShell(nameof(HomePage), true);
                 }
 
+
             }
-            else
+            catch (Exception ex)
             {
-                await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
+                await Shell.Current.DisplayAlert(null,ex.Message, AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
             }
-
-
-            //var memberships = _dataContext.Database.Table<Membership>().ToList();
-            //Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email&&x.Password==Password).FirstOrDefault()??new Membership();
-
-            //if (membership.IsExistsInDb)
-            //{
-            //    HomeVM.CurrentMembership = membership;
-
-            //    App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
-
-            //    if (IsCheckBoxChecked)
-            //    {
-            //        App.setting.SavedMembershipId = membership.Id;
-            //    }
-
-            //    await _dataContext.UpdateAsync<Setting>(App.setting);
-
-            //    await GoToAsyncWithShell(nameof(HomePage), true);
-            //}
-            //else
-            //{
-            //    await Shell.Current.DisplayAlert(
-            //        AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
-            //        , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
-            //        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
-            //}
         }
 
         [RelayCommand]

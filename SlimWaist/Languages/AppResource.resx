@@ -564,4 +564,7 @@
   <data name="Pleasefillallfields" xml:space="preserve">
     <value>Please fill all fields</value>
   </data>
+  <data name="Cannotregister" xml:space="preserve">
+    <value>Can not register</value>
+  </data>
 </root>
