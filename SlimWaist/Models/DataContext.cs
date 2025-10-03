@@ -45,7 +45,7 @@ namespace SlimWaist.Models
                     Id= 1,
                     Name = "عمرو ياقوت",
                     Email = "amrnewstory@gmail.com",
-                    Password = "1",
+                    Password = "123456",
                     Height = 180,
                     Weight = 90,
                     WeightDate=DateTime.Now,

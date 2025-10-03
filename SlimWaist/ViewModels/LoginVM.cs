@@ -34,9 +34,9 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Email = "amrnewstory@gmail.com";
+            //Email = "amrnewstory@gmail.com";
 
-            Password = "123456";
+            //Password = "123456";
 
             IsCheckBoxChecked = false;
 

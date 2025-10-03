@@ -58,12 +58,12 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Email = "amrnewstory@gmail.com";
-            Password = "123456";
-            Weight = "10";
-            Height = "100";
-            Name = "ss";
-            WaistCircumferenceMeasurement = "50";
+            //Email = "amrnewstory@gmail.com";
+            //Password = "123456";
+            //Weight = "10";
+            //Height = "100";
+            //Name = "ss";
+            //WaistCircumferenceMeasurement = "50";
 
             IsMale = true;
 

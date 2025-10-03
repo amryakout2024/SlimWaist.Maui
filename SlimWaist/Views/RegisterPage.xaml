@@ -65,7 +65,7 @@
             CornerRadius="10"
             AccentColor="DarkSlateBlue">
                 <mat:TextField.Validations>
-                    <myValidations:ValidateForNullOrEmpty/>
+                    <myValidations:ValidateForFirebasePassword/>
                     <validation:RegexValidation  Pattern="" Message="خطأ"/>
                 </mat:TextField.Validations>
             </mat:TextField>

@@ -20,6 +20,7 @@ namespace SlimWaist
         public static string ValidateForIntegerNumberMessage;
         public static string ValidateForDecimalNumberMessage;
         public static string ValidateForEmailFormatMessage;
+        public static string ValidateForFirebasePasswordMessage;
 
         //Dto
         public static List<BodyActivity> BodyActivities;
@@ -54,6 +55,7 @@ namespace SlimWaist
 
                 ValidateForEmailFormatMessage="ادخل ايميل صالح ";
 
+                ValidateForFirebasePasswordMessage = "كلمة المرور يجب ان تكون 6 رموز علي الاقل";
                 mealTypes = new List<MealType>()
                 {
                     new MealType()
@@ -197,6 +199,8 @@ namespace SlimWaist
                 ValidateForDecimalNumberMessage = "Enter integer number or one decimal only";
 
                 ValidateForEmailFormatMessage = "Invalid Email format";
+
+                ValidateForFirebasePasswordMessage = "Password must be at least 6 characters";
 
                 mealTypes = new List<MealType>()
                 {
