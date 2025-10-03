@@ -3,6 +3,7 @@ using Firebase.Database.Offline;
 using Firebase.Database.Query;
 using Newtonsoft.Json;
 using SlimWaist.Models;
+using SlimWaist.Models.FirebaseDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,22 @@ namespace SlimWaist.Helpers
 {
     public class FirebaseDbHelper
     {
-        private FirebaseClient firebaseUsersClient=new FirebaseClient("https://calfit-users-2025-default-rtdb.firebaseio.com/");
+        private string dbUsers = "https://calfit-users-2025-default-rtdb.firebaseio.com/";
 
-        private FirebaseClient firebaseStorageClient=new FirebaseClient("https://calfit-storage-2025-default-rtdb.firebaseio.com/");
+        private string dbStorage = "https://calfit-storage-2025-default-rtdb.firebaseio.com/";
 
-        public async Task<bool> InsertInCalfitStorageAsync<T>(string userKey,T data) where T : class
+        private FirebaseClient firebaseUsersClient = new FirebaseClient("https://calfit-users-2025-default-rtdb.firebaseio.com/");
+
+        private FirebaseClient firebaseStorageClient = new FirebaseClient("https://calfit-storage-2025-default-rtdb.firebaseio.com/");
+
+        //----Firebase * storage----//
+
+        public async Task<bool> InsertAsync<T>(string userKey, T data) where T : class
         {
             try
             {
                 //var ff = Preferences.Get("firebaseObjectkey", "");
-                var f= await firebaseStorageClient.Child("User").Child(userKey).Child(typeof(T).Name).PostAsync(JsonConvert.SerializeObject(data));
+                var f = await firebaseStorageClient.Child("User").Child(userKey).Child(typeof(T).Name).PostAsync(JsonConvert.SerializeObject(data));
                 //Preferences.Set("firebaseObjectkey", f.Key);
 
                 //var ff = Preferences.Get("firebaseObjectkey","");
@@ -37,22 +44,37 @@ namespace SlimWaist.Helpers
             }
         }
 
-        public async Task<bool> InsertUserInCalfitUsersAsync<T>(T data) where T : class
+        public async Task<List<T>> GetAsync<T>(string userKey) where T : class
         {
             try
             {
-                //var ff = Preferences.Get("firebaseObjectkey", "");
-                
-                await firebaseUsersClient.Child(typeof(T).Name).PostAsync(JsonConvert.SerializeObject(data));
-                
-                //Preferences.Set("firebaseObjectkey", f.Key);
-                //var ff = Preferences.Get("firebaseObjectkey","");
+                using (HttpClient client = new())
+                {
 
-                return true;
+                    HttpResponseMessage response = await client.GetAsync($"{dbStorage}{typeof(User).Name}/{userKey}/{typeof(T).Name}.json");
+                    response.EnsureSuccessStatusCode();
+                    List<T> list = new List<T>();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBodyContent = await response.Content.ReadAsStringAsync();
+
+                        var objects = JsonConvert.DeserializeObject<Dictionary<string, T>>(responseBodyContent).ToList();
+
+                        foreach (var obj in objects)
+                        {
+                            list.Add(obj.Value);
+                        }
+                    }
+                    return list;
+
+                }
+
             }
             catch (Exception ex)
             {
-                return false;
+                await Shell.Current.DisplayAlert("", ex.Message, "ok");
+                return new List<T>();
             }
         }
 
@@ -72,35 +94,61 @@ namespace SlimWaist.Helpers
             }
         }
 
-        public async Task GetMembershipAsync(string email)         {
+        //----Firebase * users----//
+
+        public async Task<bool> InsertUserInCalfitUsersAsync<T>(T data) where T : class
+        {
             try
             {
-                //var membership = 
-                //    await firebaseClient.Child("Membership")
-                //    .OrderBy("Email")
-                //    .EqualTo(email)
-                //    .LimitToFirst(1)
-                //    .OnceSingleAsync<Membership>();
+                //var ff = Preferences.Get("firebaseObjectkey", "");
 
-                //var membership = await firebaseClient.Child("Membership").AsObservable<Membership>().Where(x => x.Object.Email == email).FirstOrDefaultAsync();
+                await firebaseUsersClient.Child(typeof(T).Name).PostAsync(JsonConvert.SerializeObject(data));
 
-                List<Membership> memberships = new List<Membership>();
+                //Preferences.Set("firebaseObjectkey", f.Key);
+                //var ff = Preferences.Get("firebaseObjectkey","");
 
-                //firebaseClient.Child("Membership").AsObservable<Membership>().Subscribe(async (item) =>
-                //{
-                //    if (item.Object!=null)
-                //    {
-                //        memberships.Add(item.Object);
-                //    }
-                //});
-
-
+                return true;
             }
             catch (Exception ex)
             {
-
+                return false;
             }
         }
 
+        public async Task<List<User>> GetUsersAsync()
+        {
+            try
+            {
+                using (HttpClient client = new())
+                {
+                    HttpResponseMessage response = await client.GetAsync($"{dbUsers}{typeof(User).Name}.json");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBodyContent = await response.Content.ReadAsStringAsync();
+
+                        var objects = JsonConvert.DeserializeObject<Dictionary<string, User>>(responseBodyContent);
+
+                        List<User> users = new List<User>();
+
+                        foreach (var user in objects)
+                        {
+                            users.Add(user.Value);
+                        }
+                        return users;
+                        // Process the users as needed
+                    }
+                    else
+                    {
+                        return new List<User>();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+                return new List<User>();
+            }
+        }
     }
 }

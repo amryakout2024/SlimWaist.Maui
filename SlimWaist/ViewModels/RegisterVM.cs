@@ -129,7 +129,7 @@ namespace SlimWaist.ViewModels
                         user.UserKey = userKey;
 
                         //save in firebase-storage database
-                        await firebaseDbHelper.InsertInCalfitStorageAsync<Membership>(userKey,membership);
+                        await firebaseDbHelper.InsertAsync<Membership>(userKey,membership);
 
                         //save in firebase-users database
                         await firebaseDbHelper.InsertUserInCalfitUsersAsync<Models.User>(user);
