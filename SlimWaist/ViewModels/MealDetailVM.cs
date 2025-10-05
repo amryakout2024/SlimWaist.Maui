@@ -16,7 +16,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            var mealDetails = await App._dataContext.LoadAsync<MealDetail>();
+            var mealDetails = await App._dataContext.GetAsync<MealDetail>();
 
             //MealDetails = mealDetails.Where(x => x.MealName == Meal.MealName).ToList();
         }

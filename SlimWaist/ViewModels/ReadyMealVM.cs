@@ -125,7 +125,7 @@ namespace SlimWaist.ViewModels
 
                 }
 
-                CartItems = await _dataContext.LoadAsync<CartItem>();
+                CartItems = await _dataContext.GetAsync<CartItem>();
             }
         }
 

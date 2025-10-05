@@ -25,11 +25,11 @@
 		<ApplicationTitle>CalFit</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.amryalout.calfit</ApplicationId>
+		<ApplicationId>com.companyname.slimwaist</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>101.0</ApplicationDisplayVersion>
-		<ApplicationVersion>101</ApplicationVersion>
+		<ApplicationDisplayVersion>105.0</ApplicationDisplayVersion>
+		<ApplicationVersion>105</ApplicationVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>

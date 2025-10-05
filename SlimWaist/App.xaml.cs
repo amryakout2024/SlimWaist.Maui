@@ -9,7 +9,7 @@ namespace SlimWaist
 {
     public partial class App : Application
     {
-        public static Setting setting;
+        public static Setting setting=new Setting() { CultureInfo="en-US"};
 
         //??
         public static DataContext _dataContext;
@@ -334,18 +334,15 @@ namespace SlimWaist
             }
 
             MainPage = new AppShell();
-
-
-            //myValidations.ReadExcel.ReadExcelSheet();
         }
 
         private async Task InitializeDatabase()
         {
             try
             {
-                App.setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
-                
-                if (App.setting == null)
+                var membership = (await _dataContext.GetAsync<Membership>()).FirstOrDefault() ?? new Membership();
+
+                if (membership.Email != "amrnewstory@gmail.com")
                 {
                     await _dataContext.init();
                 }
@@ -353,10 +350,6 @@ namespace SlimWaist
             catch (Exception)
             {
                 await _dataContext.init();
-            }
-            finally
-            {
-                App.setting = _dataContext.Database.Table<Setting>().FirstOrDefault();
             }
 
         }

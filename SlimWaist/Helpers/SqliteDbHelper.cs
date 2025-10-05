@@ -1,12 +1,17 @@
-﻿using SlimWaist.Models.Dto;
+﻿using SlimWaist.Models;
+using SlimWaist.Models.Dto;
 using SQLite;
-using System.Resources;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SlimWaist.Models
+namespace SlimWaist.Helpers
 {
-    public class DataContext
+    public class SqliteDbHelper
     {
-        public const string DbName = "SlimWaist95";
+        public const string DbName = "CalFit";
 
         public static string DbPath = Path.Combine(FileSystem.Current.AppDataDirectory, DbName);
 
@@ -15,52 +20,51 @@ namespace SlimWaist.Models
             DbPath, SQLiteOpenFlags.Create |
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.SharedCache);
-
         public async Task init()
         {
             try
             {
                 //create tables
 
-                Database.CreateTable<Membership>();
+                //Database.CreateTable<Membership>();
 
-                Database.CreateTable<User>();
+                //Database.CreateTable<User>();
 
-                Database.CreateTable<Setting>();
+                //Database.CreateTable<Setting>();
 
-                Database.CreateTable<Food>();
+                //Database.CreateTable<Food>();
 
-                Database.CreateTable<CartItem>();
+                //Database.CreateTable<CartItem>();
 
-                Database.CreateTable<Meal>();
+                //Database.CreateTable<Meal>();
 
-                Database.CreateTable<MealDetail>();
-                
-                Database.CreateTable<DayDiet>();
+                //Database.CreateTable<MealDetail>();
+
+                //Database.CreateTable<DayDiet>();
 
                 ///////inserting data////////
 
                 Database.Insert(new Membership()
                 {
-                    Id= 1,
+                    Id = 1,
                     Name = "عمرو ياقوت",
                     Email = "amrnewstory@gmail.com",
                     Password = "123456",
                     Height = 180,
                     Weight = 90,
-                    WeightDate=DateTime.Now,
-                    BirthDate= new DateTime(1990, 8, 19),
+                    WeightDate = DateTime.Now,
+                    BirthDate = new DateTime(1990, 8, 19),
                     GenderId = 1,
-                    BodyActivityId=2,
-                    WaistCircumferenceMeasurement=100,
+                    BodyActivityId = 2,
+                    WaistCircumferenceMeasurement = 100,
                     CultureInfo = "en-US",
-                    IsExistsInDb=true
+                    IsExistsInDb = true
                 });
 
-                Database.Insert(new Setting() 
-                { 
-                   Id = 1,
-                });
+                //Database.Insert(new Setting()
+                //{
+                //    Id = 1,
+                //});
 
 
                 List<Food> foods = new List<Food>()
@@ -526,17 +530,46 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
         }
 
+        public async Task InsertAsync<T>(T t) where T : new()
+        {
+            Database.CreateTable<T>();
+
+            await CheckDatabaseInitialization();
+
+            Database.Insert(t);
+        }
+
         public async Task<List<T>> GetAsync<T>() where T : new()
         {
             List<T> values = new List<T>();
+
+            await CheckDatabaseInitialization();
 
             values = Database.Table<T>().ToList();
 
             return values;
         }
 
+        private async Task CheckDatabaseInitialization()
+        {
+            try
+            {
+                var membership = (await GetAsync<Membership>()).FirstOrDefault();
+
+                if (membership.Email != "amrnewstory@gmail.com")
+                {
+                    await init();
+                }
+            }
+            catch (Exception e)
+            {
+                await init();
+            }
+        }
 
 
+
+        //old code//
 
         public async Task<List<T>> ClearAllAsync<T>() where T : new()
         {
@@ -547,12 +580,6 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             return Database.Table<T>().ToList();
         }
 
-        public async Task InsertAsync<T>(T t) where T : new()
-        {
-            await CheckDatabaseInitialization();
-
-            Database.Insert(t);
-        }
         public async Task UpdateAsync<T>(T t) where T : new()
         {
             await CheckDatabaseInitialization();
@@ -615,22 +642,6 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             }
         }
 
-        private async Task CheckDatabaseInitialization()
-        {
-            try
-            {
-                var BodyActivityTest = Database.Table<BodyActivity>().FirstOrDefault();
-
-                if (BodyActivityTest == null)
-                {
-                    await init();
-                }
-            }
-            catch (Exception e)
-            {
-                await init();
-            }
-        }
 
         public async Task<Membership> FindMemberShipByEmailAsync(string email)
         {
@@ -647,23 +658,6 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             return MemberShip;
         }
 
-        public async Task<bool> FindMealAsync(string mealname)
-        {
-            await CheckDatabaseInitialization();
-
-            List<Meal> allmeals = await GetAsync<Meal>();
-
-            var value = allmeals.Where(x => x.MealName == mealname).FirstOrDefault();
-
-            if (value != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         public async Task<bool> FindAsync<T>(string valueID) where T : new()
         {

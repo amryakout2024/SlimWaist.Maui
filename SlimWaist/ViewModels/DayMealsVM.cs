@@ -17,7 +17,7 @@ namespace SlimWaist.ViewModels
         {
             MealGroups = new List<MealGroup>();
 
-            var mealdetails = await App._dataContext.LoadAsync<MealDetail>();
+            var mealdetails = await App._dataContext.GetAsync<MealDetail>();
 
             var meals = DayMealsPage.Meals;
 

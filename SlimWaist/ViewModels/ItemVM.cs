@@ -157,7 +157,7 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task NotifyCartCountChange()
         {
-            //App.CartItems = await App._dataContext.LoadAsync<CartItem>();
+            //App.CartItems = await App._dataContext.GetAsync<CartItem>();
 
             //App.TotalCartCount = App.CartItems.Count();
 

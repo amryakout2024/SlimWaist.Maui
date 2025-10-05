@@ -20,7 +20,7 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            Diets = await App._dataContext.LoadAsync<Diet>();
+            Diets = await App._dataContext.GetAsync<Diet>();
         }
 
         [RelayCommand]

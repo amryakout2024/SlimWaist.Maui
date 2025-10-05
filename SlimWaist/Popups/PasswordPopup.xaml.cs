@@ -18,9 +18,9 @@ public partial class PasswordPopup : Popup
 
         Dispatcher.DispatchAsync(async () =>
         {
-            memberships = await App._dataContext.LoadAsync<Membership>();
+            memberships = await App._dataContext.GetAsync<Membership>();
 
-            settings = await App._dataContext.LoadAsync<Setting>();
+            settings = await App._dataContext.GetAsync<Setting>();
 
             setting = settings.Where(x => x.Id == 1).FirstOrDefault();
 

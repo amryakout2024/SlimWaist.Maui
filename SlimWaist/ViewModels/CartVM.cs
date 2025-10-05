@@ -26,7 +26,7 @@ namespace SlimWaist.ViewModels
 
         public async Task Init()
         {
-            CartItems = await App._dataContext.LoadAsync<CartItem>();
+            CartItems = await App._dataContext.GetAsync<CartItem>();
 
             //CartTotalCalories = Math.Round(CartItems.Select(x => x.FoodCalories).Sum(), 1).ToString();
 
@@ -36,7 +36,7 @@ namespace SlimWaist.ViewModels
 
         private async Task NotifyCartCountChange()
         {
-            //App.CartItems = await App._dataContext.LoadAsync<CartItem>();
+            //App.CartItems = await App._dataContext.GetAsync<CartItem>();
 
             //App.TotalCartCount = App.CartItems.Count();
 

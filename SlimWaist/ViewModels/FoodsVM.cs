@@ -87,7 +87,7 @@ namespace SlimWaist.ViewModels
         {
             MealTypeName = App.mealTypes.Where(x => x.MealTypeId == HomeVM.CurrentMeal.MealTypeId).FirstOrDefault()?.MealTypeName ?? "";
 
-            FoodsFromDatabase = await _dataContext.LoadAsync<Food>();
+            FoodsFromDatabase = await _dataContext.GetAsync<Food>();
 
             //need definition in the database to make the query awaitable
             MealsFromDatabase = _dataContext.Database.Table<Meal>().Where(x=>x.MealName!=string.Empty).ToList();
