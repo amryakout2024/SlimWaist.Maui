@@ -50,48 +50,16 @@ namespace SlimWaist.ViewModels
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
+                    Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email && x.Password == Password).FirstOrDefault() ?? new Membership();
 
-                }
-                else
-                {
-                    await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
-                }
-
-                Membership membership = _dataContext.Database.Table<Membership>().Where(x => x.Email == Email && x.Password == Password).FirstOrDefault() ?? new Membership();
-
-                if (membership.IsExistsInDb)
-                {
-                    HomeVM.CurrentMembership = membership;
-
-                    App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
-
-
-                    await _dataContext.UpdateAsync<Setting>(App.setting);
-
-                    if (IsCheckBoxChecked)
+                    if (membership.IsExistsInDb)
                     {
-                        Preferences.Set("Email", Email);
+                        HomeVM.CurrentMembership = membership;
 
-                        App.setting.SavedMembershipId = membership.Id;
-                    }
+                        App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
 
-                    await GoToAsyncWithShell(nameof(HomePage), true);
 
-                }
-                else
-                {
-
-                    var isAuthenticatedSuccess = await firebaseAuthHelper.SignInWithEmail(Email, Password);
-
-                    if (isAuthenticatedSuccess)
-                    {
-                        var user = (await firebaseDbHelper.GetUsersAsync()).Where(x => x.Email == Email).FirstOrDefault();
-
-                        var membershipFromFirebase = (await firebaseDbHelper.GetAsync<Membership>(user.UserKey)).FirstOrDefault();
-
-                        await _dataContext.InsertAsync<Membership>(membershipFromFirebase);
-
-                        HomeVM.CurrentMembership = membershipFromFirebase;
+                        await _dataContext.UpdateAsync<Setting>(App.setting);
 
                         if (IsCheckBoxChecked)
                         {
@@ -101,17 +69,49 @@ namespace SlimWaist.ViewModels
                         }
 
                         await GoToAsyncWithShell(nameof(HomePage), true);
+
                     }
                     else
                     {
-                        await Shell.Current.DisplayAlert(
-                        AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+
+                        var isAuthenticatedSuccess = await firebaseAuthHelper.SignInWithEmail(Email, Password);
+
+                        if (isAuthenticatedSuccess)
+                        {
+                            var user = (await firebaseDbHelper.GetUsersAsync()).Where(x => x.Email == Email).FirstOrDefault();
+
+                            var membershipFromFirebase = (await firebaseDbHelper.GetAsync<Membership>(user.UserKey)).FirstOrDefault();
+
+                            await _dataContext.InsertAsync<Membership>(membershipFromFirebase);
+
+                            HomeVM.CurrentMembership = membershipFromFirebase;
+
+                            if (IsCheckBoxChecked)
+                            {
+                                Preferences.Set("Email", Email);
+
+                                App.setting.SavedMembershipId = membership.Id;
+                            }
+
+                            await GoToAsyncWithShell(nameof(HomePage), true);
+                        }
+                        else
+                        {
+                            await Shell.Current.DisplayAlert(
+                            AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Emailorpasswordisnotcorrect", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+
+                        }
 
                     }
 
                 }
+                else
+                {
+                    await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
+                }
+
 
 
             }

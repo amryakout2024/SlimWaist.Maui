@@ -77,11 +77,81 @@ namespace SlimWaist.ViewModels
         [RelayCommand]
         private async Task SaveNewMemberShip()
         {
-            //------need to handle weak password
             try
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
                 {
+                    var isRegisteredSuccessfully = await firebaseAuthHelper.SignUpWithEmail(Email, Password);
+
+                    if (isRegisteredSuccessfully)
+                    {
+                        Models.User user = new Models.User()
+                        {
+                            UserKey = "0",
+                            Email = Email
+                        };
+
+                        GenderId = IsMale ? 1 : 2;
+
+                        Membership membership = new Membership()
+                        {
+                            Email = Email,
+                            Password = Password,
+                            Name = Name,
+                            Weight = Convert.ToDouble(Weight),
+                            WeightDate = DateTime.Now,
+                            Height = Convert.ToDouble(Height),
+                            BirthDate = new DateTime(BirthDate.Year, BirthDate.Month, BirthDate.Day),
+                            BodyActivityId = SelectedBodyActivity.BodyActivityId,
+                            GenderId = GenderId,
+                            WaistCircumferenceMeasurement = Convert.ToDouble(WaistCircumferenceMeasurement),
+                            IsExistsInDb = true,
+                            CultureInfo = App.setting.CultureInfo
+                        };
+
+                        //save in calfit-storage database
+                        var userKey = await firebaseDbHelper.InsertUserInCalfitStorageAndReturnKeyAsync<Models.User>(user);
+
+
+                        if (!string.IsNullOrEmpty(userKey))
+                        {
+
+                            membership.UserKey = userKey;
+
+                            user.UserKey = userKey;
+
+                            //save in firebase-storage database
+                            await firebaseDbHelper.InsertAsync<Membership>(userKey, membership);
+
+                            //save in firebase-users database
+                            await firebaseDbHelper.InsertUserInCalfitUsersAsync<Models.User>(user);
+
+                            //save in local database sqlite
+                            await _dataContext.InsertAsync<Models.User>(user);
+                            await _dataContext.InsertAsync<Membership>(membership);
+
+                            await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully") ?? "", ToastDuration.Short).Show();
+
+                            await GoToAsyncWithShell(nameof(LoginPage), true);
+
+                        }
+                        else
+                        {
+                            await Shell.Current.DisplayAlert(
+                                AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                                , AppResource.ResourceManager.GetString("Cannotregister", CultureInfo.CurrentCulture) ?? ""
+                                , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+
+                        }
+
+                    }
+                    else
+                    {
+                        await Shell.Current.DisplayAlert(
+                            AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Emailexistsbefore", CultureInfo.CurrentCulture) ?? ""
+                            , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
+                    }
 
                 }
                 else
@@ -89,77 +159,7 @@ namespace SlimWaist.ViewModels
                     await Toast.Make("Please check your internet connection", ToastDuration.Short).Show();
                 }
 
-                var isRegisteredSuccessfully = await firebaseAuthHelper.SignUpWithEmail(Email, Password);
 
-                if (isRegisteredSuccessfully)
-                {
-                    Models.User user = new Models.User()
-                    {
-                        UserKey = "0",
-                        Email = Email
-                    };
-
-                    GenderId = IsMale ? 1 : 2;
-
-                    Membership membership = new Membership()
-                    {
-                        Email = Email,
-                        Password = Password,
-                        Name = Name,
-                        Weight = Convert.ToDouble(Weight),
-                        WeightDate = DateTime.Now,
-                        Height = Convert.ToDouble(Height),
-                        BirthDate = new DateTime(BirthDate.Year, BirthDate.Month, BirthDate.Day),
-                        BodyActivityId = SelectedBodyActivity.BodyActivityId,
-                        GenderId = GenderId,
-                        WaistCircumferenceMeasurement = Convert.ToDouble(WaistCircumferenceMeasurement),
-                        IsExistsInDb = true,
-                        CultureInfo = App.setting.CultureInfo
-                    };
-
-                    //save in calfit-storage database
-                    var userKey = await firebaseDbHelper.InsertUserInCalfitStorageAndReturnKeyAsync<Models.User>(user);
-
-
-                    if (!string.IsNullOrEmpty(userKey))
-                    {
-
-                        membership.UserKey = userKey;
-
-                        user.UserKey = userKey;
-
-                        //save in firebase-storage database
-                        await firebaseDbHelper.InsertAsync<Membership>(userKey,membership);
-
-                        //save in firebase-users database
-                        await firebaseDbHelper.InsertUserInCalfitUsersAsync<Models.User>(user);
-
-                        //save in local database sqlite
-                        await _dataContext.InsertAsync(user);
-                        await _dataContext.InsertAsync(membership);
-
-                        await Toast.Make(AppResource.ResourceManager.GetString("Membershipregisteredsuccessfully") ?? "", ToastDuration.Short).Show();
-
-                        //await GoToAsyncWithShell(nameof(LoginPage), true);
-
-                    }
-                    else
-                    {
-                        await Shell.Current.DisplayAlert(
-                            AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
-                            , AppResource.ResourceManager.GetString("Cannotregister", CultureInfo.CurrentCulture) ?? ""
-                            , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
-
-                    }
-
-                }
-                else
-                {
-                    await Shell.Current.DisplayAlert(
-                        AppResource.ResourceManager.GetString("Error", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Emailexistsbefore", CultureInfo.CurrentCulture) ?? ""
-                        , AppResource.ResourceManager.GetString("Ok", CultureInfo.CurrentCulture) ?? "");
-                }
             }
             catch (Exception ex)
             {

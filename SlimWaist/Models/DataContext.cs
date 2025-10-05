@@ -526,9 +526,10 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
         }
 
-        public async Task InsertAsync<T>(T t) where T : new()
+        public async Task<bool> InsertAsync<T>(T t) where T : new()
         {
-            Database.Insert(t);
+            var row= Database.Insert(t);
+            return row > 0;
         }
 
         public async Task UpdateAsync<T>(T t) where T : new()

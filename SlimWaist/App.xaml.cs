@@ -11,6 +11,8 @@ namespace SlimWaist
     {
         public static Setting setting=new Setting() { CultureInfo="en-US"};
 
+        public static string AppCultureInfoName => Preferences.Get("AppCultureInfoName", "ar-SA");
+
         //??
         public static DataContext _dataContext;
         public static bool IsFromTablesPage { get; set; } = false;
@@ -39,7 +41,7 @@ namespace SlimWaist
             InitializeDatabase();
 
 
-            if (Preferences.Get("CultureInfoName","ar-SA")== "ar-SA")
+            if (AppCultureInfoName== "ar-SA")
             {
                 CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 

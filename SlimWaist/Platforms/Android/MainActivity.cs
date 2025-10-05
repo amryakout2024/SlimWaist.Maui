@@ -26,7 +26,7 @@ namespace SlimWaist
 
             if (firstTwoLetterFromDeviceLanguage == "ar")
             {
-                if (App.setting.CultureInfo == "ar-SA")
+                if (App.AppCultureInfoName == "ar-SA")
                 {
                     Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.RightToLeft;
                 }
@@ -38,7 +38,7 @@ namespace SlimWaist
             }
             else
             {
-                if (App.setting.CultureInfo == "ar-SA")
+                if (App.AppCultureInfoName == "ar-SA")
                 {
                     Window.DecorView.LayoutDirection = (Android.Views.LayoutDirection)LayoutDirection.LeftToRight;
                 }
