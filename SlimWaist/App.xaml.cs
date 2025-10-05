@@ -39,7 +39,7 @@ namespace SlimWaist
             InitializeDatabase();
 
 
-            if (App.setting.CultureInfo == "ar-SA")
+            if (Preferences.Get("CultureInfoName","ar-SA")== "ar-SA")
             {
                 CultureInfo.CurrentCulture = new CultureInfo("ar-SA");
 

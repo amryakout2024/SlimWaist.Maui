@@ -526,6 +526,21 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
         }
 
+        public async Task InsertAsync<T>(T t) where T : new()
+        {
+            Database.Insert(t);
+        }
+
+        public async Task UpdateAsync<T>(T t) where T : new()
+        {
+            Database.Update(t);
+        }
+
+        public async Task DeleteAsync<T>(T t) where T : new()
+        {
+            Database.Delete(t);
+        }
+
         public async Task<List<T>> GetAsync<T>() where T : new()
         {
             List<T> values = new List<T>();
@@ -537,119 +552,16 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
 
 
 
-
+        //old code
         public async Task<List<T>> ClearAllAsync<T>() where T : new()
         {
-            await CheckDatabaseInitialization();
-
             Database.DeleteAll<T>();
 
             return Database.Table<T>().ToList();
         }
 
-        public async Task InsertAsync<T>(T t) where T : new()
-        {
-            await CheckDatabaseInitialization();
-
-            Database.Insert(t);
-        }
-        public async Task UpdateAsync<T>(T t) where T : new()
-        {
-            await CheckDatabaseInitialization();
-
-            Database.Update(t);
-        }
-
-        public async Task DeleteAsync<T>(T t) where T : new()
-        {
-            await CheckDatabaseInitialization();
-
-            Database.Delete(t);
-        }
-
-        public async Task<bool> FindEmailAsync(string email)
-        {
-            try
-            {
-                Membership MemberShip = Database.Table<Membership>().Where(x => x.Email == email).FirstOrDefault();
-
-                if (MemberShip == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                await init();
-
-                return false;
-            }
-        }
-
-        public async Task<bool> MatchEmailWithPassWordAsync(string email, string passWord)
-        {
-            try
-            {
-                Membership MemberShip = Database.Table<Membership>().Where(x => x.Email == email && x.Password == passWord).FirstOrDefault();
-
-                if (MemberShip == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                await init();
-
-                return false;
-            }
-        }
-
-        private async Task CheckDatabaseInitialization()
-        {
-            try
-            {
-                var BodyActivityTest = Database.Table<BodyActivity>().FirstOrDefault();
-
-                if (BodyActivityTest == null)
-                {
-                    await init();
-                }
-            }
-            catch (Exception e)
-            {
-                await init();
-            }
-        }
-
-        public async Task<Membership> FindMemberShipByEmailAsync(string email)
-        {
-            Membership MemberShip;
-            try
-            {
-                MemberShip = Database.Table<Membership>().Where(x => x.Email == email).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                MemberShip = new Membership();
-                await init();
-            }
-            return MemberShip;
-        }
-
         public async Task<bool> FindMealAsync(string mealname)
         {
-            await CheckDatabaseInitialization();
 
             List<Meal> allmeals = await GetAsync<Meal>();
 
@@ -665,21 +577,6 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             }
         }
 
-        public async Task<bool> FindAsync<T>(string valueID) where T : new()
-        {
-            await CheckDatabaseInitialization();
-
-            var value = Database.Table<T>().Where(x => x.ToString() == valueID).FirstOrDefault();
-
-            if (value == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
 
         public async Task UpdateCartItem(CartItem cartItem) => Database.Update(cartItem);
 
@@ -690,22 +587,6 @@ new Food{FoodId=445,FoodCategory="خضروات",FoodName="طرشي",FoodCalories
             await init();
             return await actionOnDb.Invoke();
         }
-
-        //public async Task<int> AddCartItem(CartItemEntity entity) =>
-        //    await ExecuteAsync(async () => await Database.InsertUserInCalfitUsersAsync(entity));
-
-
-        //public async Task DeleteCartItem(CartItemEntity entity)
-        //=> await ExecuteAsync(async () => await Database.DeleteAsync(entity));
-
-        //public async Task<CartItemEntity> GetCartItemAsync(int id) =>
-        //    await ExecuteAsync(async () => await Database.GetAsync<CartItemEntity>(id));
-
-        //public async Task<List<CartItemEntity>> GetAllCartItemsAsync() =>
-        //    await ExecuteAsync(async () => await Database.Table<CartItemEntity>().ToListAsync());
-
-        //public async Task<int> ClearCartAsync() =>
-        //    await ExecuteAsync(async () => await Database.DeleteAllAsync<CartItemEntity>());
 
         //public async ValueTask DisposeAsync() =>
         //    await _connection?.CloseAsync();
