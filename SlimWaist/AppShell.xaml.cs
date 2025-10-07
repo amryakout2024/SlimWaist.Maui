@@ -33,6 +33,7 @@ namespace SlimWaist
             typeof(BodyMassAnalysisPage),
             typeof(MealPage),
             typeof(ReadyMealPage),
+            typeof(RecoverPasswordPage),
         ];
 
         private static void RegisterRoutes()

@@ -394,6 +394,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to do you forgot your password ?.
+        /// </summary>
+        public static string doyouforgotyourpassword {
+            get {
+                return ResourceManager.GetString("doyouforgotyourpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you like the app?.
         /// </summary>
         public static string Doyouliketheapp {
@@ -444,6 +453,15 @@ namespace SlimWaist.Languages {
         public static string Emailexistsbefore {
             get {
                 return ResourceManager.GetString("Emailexistsbefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is not correct.
+        /// </summary>
+        public static string Emailisnotcorrect {
+            get {
+                return ResourceManager.GetString("Emailisnotcorrect", resourceCulture);
             }
         }
         
@@ -651,15 +669,6 @@ namespace SlimWaist.Languages {
         public static string LoginPageButtonLogin {
             get {
                 return ResourceManager.GetString("LoginPageButtonLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save email and password.
-        /// </summary>
-        public static string LoginPageCheckBox {
-            get {
-                return ResourceManager.GetString("LoginPageCheckBox", resourceCulture);
             }
         }
         
@@ -979,6 +988,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password sent to your email.
+        /// </summary>
+        public static string Passwordsenttoyouremail {
+            get {
+                return ResourceManager.GetString("Passwordsenttoyouremail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Per.
         /// </summary>
         public static string Per {
@@ -1060,6 +1078,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recover your password.
+        /// </summary>
+        public static string Recoveryourpassword {
+            get {
+                return ResourceManager.GetString("Recoveryourpassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to error.
         /// </summary>
         public static string RegexValidationMessage {
@@ -1074,6 +1101,15 @@ namespace SlimWaist.Languages {
         public static string Remainingcalories {
             get {
                 return ResourceManager.GetString("Remainingcalories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string Rememberme {
+            get {
+                return ResourceManager.GetString("Rememberme", resourceCulture);
             }
         }
         
@@ -1128,6 +1164,15 @@ namespace SlimWaist.Languages {
         public static string Selectdiettype {
             get {
                 return ResourceManager.GetString("Selectdiettype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
             }
         }
         

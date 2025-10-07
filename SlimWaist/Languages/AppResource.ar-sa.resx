@@ -129,8 +129,8 @@
   <data name="LoginPageLabelHaveNoMembership" xml:space="preserve">
     <value>اذا لم يكن لك عضوية قم </value>
   </data>
-  <data name="LoginPageCheckBox" xml:space="preserve">
-    <value>حفظ بيانات الدخول</value>
+  <data name="Rememberme" xml:space="preserve">
+    <value>تذكرني</value>
   </data>
   <data name="LoginPageButtonLogin" xml:space="preserve">
     <value>دخول</value>
@@ -567,5 +567,20 @@
   </data>
   <data name="Cannotregister" xml:space="preserve">
     <value>لا يمكن التسجيل</value>
+  </data>
+  <data name="doyouforgotyourpassword" xml:space="preserve">
+    <value>هل نسيت كلمة السر ؟</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>إرسال</value>
+  </data>
+  <data name="Recoveryourpassword" xml:space="preserve">
+    <value>استرجع كلمة السر</value>
+  </data>
+  <data name="Passwordsenttoyouremail" xml:space="preserve">
+    <value>تم ارسال كلمة السر الي الايميل</value>
+  </data>
+  <data name="Emailisnotcorrect" xml:space="preserve">
+    <value>الايميل غير مسجل</value>
   </data>
 </root>

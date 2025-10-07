@@ -129,8 +129,8 @@
   <data name="LoginPageLabelHaveNoMembership" xml:space="preserve">
     <value>If you don't have membership </value>
   </data>
-  <data name="LoginPageCheckBox" xml:space="preserve">
-    <value>Save email and password</value>
+  <data name="Rememberme" xml:space="preserve">
+    <value>Remember me</value>
   </data>
   <data name="LoginPageButtonLogin" xml:space="preserve">
     <value>Log in</value>
@@ -566,5 +566,20 @@
   </data>
   <data name="Cannotregister" xml:space="preserve">
     <value>Can not register</value>
+  </data>
+  <data name="doyouforgotyourpassword" xml:space="preserve">
+    <value>do you forgot your password ?</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Recoveryourpassword" xml:space="preserve">
+    <value>Recover your password</value>
+  </data>
+  <data name="Passwordsenttoyouremail" xml:space="preserve">
+    <value>Password sent to your email</value>
+  </data>
+  <data name="Emailisnotcorrect" xml:space="preserve">
+    <value>Email is not correct</value>
   </data>
 </root>

@@ -17,6 +17,7 @@ namespace SlimWaist.ViewModels
     public partial class LoginVM(DataContext dataContext) : BaseVM
     {
         private readonly DataContext _dataContext = dataContext;
+
         private FirebaseAuthHelper firebaseAuthHelper=new FirebaseAuthHelper();
         private FirebaseDbHelper firebaseDbHelper=new FirebaseDbHelper();
 
@@ -56,16 +57,9 @@ namespace SlimWaist.ViewModels
                     {
                         HomeVM.CurrentMembership = membership;
 
-                        App.setting.CultureInfo = HomeVM.CurrentMembership.CultureInfo;
-
-
-                        await _dataContext.UpdateAsync<Setting>(App.setting);
-
                         if (IsCheckBoxChecked)
                         {
                             Preferences.Set("Email", Email);
-
-                            App.setting.SavedMembershipId = membership.Id;
                         }
 
                         await GoToAsyncWithShell(nameof(HomePage), true);
@@ -125,6 +119,12 @@ namespace SlimWaist.ViewModels
         private async Task RegisterNewMemberShip()
         {
             await GoToAsyncWithStack(nameof(RegisterPage), animate: true);
+        }
+
+        [RelayCommand]
+        private async Task NavigateToRecoverPasswordPage()
+        {
+            await GoToAsyncWithStack(nameof(RecoverPasswordPage), animate: true);
         }
     }
 }

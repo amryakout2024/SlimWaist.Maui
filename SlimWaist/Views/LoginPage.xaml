@@ -73,11 +73,25 @@
                 </mat:TextField.Attachments>
             </mat:TextField>
 
-            <mat:CheckBox Text="{extention:TranslateExtention Key=LoginPageCheckBox}"
+            <Grid ColumnDefinitions="auto,*">
+                
+                <mat:CheckBox Grid.Column="0" Text="{extention:TranslateExtention Key=Rememberme}"
                       BoxSizeRequest="20" 
                       IsChecked="{Binding IsCheckBoxChecked}"
                       CheckChangedCommand="{Binding SaveLoginCommand}"/>
 
+                <Label 
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Text="{extention:TranslateExtention Key=doyouforgotyourpassword} ">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer 
+                        Command="{Binding NavigateToRecoverPasswordPageCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </Grid>
             <Button 
             Text="{extention:TranslateExtention Key=LoginPageButtonLogin}"
             FontSize="20" 

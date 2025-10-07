@@ -22,7 +22,22 @@ public partial class RegisterPage : UraniumContentPage
 
         datePickerField.MaximumDate = DateTime.Now;
 
+        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
     }
+
+    void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+        if (e.NetworkAccess == NetworkAccess.ConstrainedInternet)
+        {
+            DisplayAlert("Warning", "Internet access is available but is limited.", "OK");
+        }
+        else if (e.NetworkAccess != NetworkAccess.Internet)
+        {
+            DisplayAlert("Warning", "Internet access has been lost.", "OK");
+        }
+    }
+
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
