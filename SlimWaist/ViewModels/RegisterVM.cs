@@ -19,6 +19,9 @@ namespace SlimWaist.ViewModels
         private readonly DataContext _dataContext = dataContext;
         private FirebaseAuthHelper firebaseAuthHelper = new FirebaseAuthHelper();
         private FirebaseDbHelper firebaseDbHelper = new FirebaseDbHelper();
+        
+        [ObservableProperty]
+        private bool _isBottomSheetPresented;
 
         [ObservableProperty]
         private string? _email;
@@ -58,12 +61,12 @@ namespace SlimWaist.ViewModels
 
         public async Task init()
         {
-            //Email = "amrnewstory@gmail.com";
-            //Password = "123456";
-            //Weight = "10";
-            //Height = "100";
-            //Name = "ss";
-            //WaistCircumferenceMeasurement = "50";
+            Email = "amrnewstory@gmail.com";
+            Password = "123456";
+            Weight = "10";
+            Height = "100";
+            Name = "ss";
+            WaistCircumferenceMeasurement = "50";
 
             IsMale = true;
 
@@ -75,8 +78,19 @@ namespace SlimWaist.ViewModels
         }
 
         [RelayCommand]
+        private async Task ShowBottomsheet()
+        {
+            IsBottomSheetPresented = true;
+        }
+        [RelayCommand]
+        private async Task HideBottomsheet()
+        {
+            IsBottomSheetPresented = true;
+        }
+        [RelayCommand]
         private async Task SaveNewMemberShip()
         {
+
             try
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)

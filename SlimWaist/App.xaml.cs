@@ -336,6 +336,24 @@ namespace SlimWaist
             }
 
             MainPage = new AppShell();
+
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
+        }
+        void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (e.NetworkAccess == NetworkAccess.ConstrainedInternet)
+            {
+                Shell.Current.DisplayAlert("Warning", "Internet access is available but is limited.", "OK");
+            }
+            else if (e.NetworkAccess != NetworkAccess.Internet)
+            {
+                Shell.Current.DisplayAlert("Warning", "Internet access has been lost.", "OK");
+            }
+            else if (e.NetworkAccess == NetworkAccess.Internet)
+            {
+                Shell.Current.DisplayAlert("Warning", "Internet access has been restored.", "OK");
+            }
         }
 
         private async Task InitializeDatabase()

@@ -268,6 +268,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consumed.
         /// </summary>
         public static string Consumed {
@@ -363,6 +372,15 @@ namespace SlimWaist.Languages {
         public static string Deletethemeal {
             get {
                 return ResourceManager.GetString("Deletethemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to did not recevied the OTP?.
+        /// </summary>
+        public static string didnotreceviedtheOTP {
+            get {
+                return ResourceManager.GetString("didnotreceviedtheOTP", resourceCulture);
             }
         }
         
@@ -489,6 +507,15 @@ namespace SlimWaist.Languages {
         public static string Enternewnameforyourfavouritemeal {
             get {
                 return ResourceManager.GetString("Enternewnameforyourfavouritemeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the confirmation OTP that sent to your email.
+        /// </summary>
+        public static string EntertheconfirmationOTPthatsenttoyouremail {
+            get {
+                return ResourceManager.GetString("EntertheconfirmationOTPthatsenttoyouremail", resourceCulture);
             }
         }
         
@@ -979,6 +1006,15 @@ namespace SlimWaist.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OTP within.
+        /// </summary>
+        public static string OTPwithin {
+            get {
+                return ResourceManager.GetString("OTPwithin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -1173,6 +1209,15 @@ namespace SlimWaist.Languages {
         public static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send again.
+        /// </summary>
+        public static string Sendagain {
+            get {
+                return ResourceManager.GetString("Sendagain", resourceCulture);
             }
         }
         

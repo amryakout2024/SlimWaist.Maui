@@ -30,6 +30,177 @@
             VerticalOptions="Center"
             FontSize="25"/>
     </Shell.TitleView>
+    
+    <ur:UraniumContentPage.Attachments>
+        <mat:BottomSheetView CloseOnTapOutside="False"
+            BackgroundColor="WhiteSmoke"
+            x:Name="btmSheet"
+            IsPresented="{Binding IsBottomSheetPresented}">
+
+            <mat:BottomSheetView.Style>
+                <Style TargetType="mat:BottomSheetView">
+                    <Style.Triggers>
+                        <DataTrigger TargetType="mat:BottomSheetView" Binding="{Binding IsBottomSheetPresented}" Value="false">
+                            <Setter Property="IsVisible" Value="Collapse"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="mat:BottomSheetView" Binding="{Binding IsBottomSheetPresented}" Value="true">
+                            <Setter Property="IsVisible" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </mat:BottomSheetView.Style>
+
+            <mat:BottomSheetView.Header>
+                <Grid BackgroundColor="WhiteSmoke"/>
+            </mat:BottomSheetView.Header>
+            <mat:BottomSheetView.Body>
+                <VerticalStackLayout
+                    Spacing="20"
+                    Padding="10">
+                    <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=EntertheconfirmationOTPthatsenttoyouremail}"
+                        TextColor="DarkBlue"
+                        FontSize="18"/>
+                    
+                    <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="{Binding Email}"
+                        TextColor="Blue"
+                        FontSize="16"/>
+                    
+                    <Grid FlowDirection="LeftToRight" Padding="10,0,10,0" ColumnSpacing="5" ColumnDefinitions="*,*,*,*,*,*">
+                        <Grid.Resources>
+                            <Style TargetType="mat:TextField">
+                                <Setter Property="HorizontalOptions" Value="Center"/>
+                                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                <Setter Property="TextColor" Value="DarkSlateBlue"/>
+                                <Setter Property="CornerRadius" Value="10"/>
+                                <Setter Property="Keyboard" Value="Numeric"/>
+                            </Style>
+                        </Grid.Resources>
+                        <mat:TextField 
+                            Grid.Column="0"
+                            AutomationId="1"
+                            x:Name="txt1"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                        <mat:TextField 
+                            Grid.Column="1"
+                            AutomationId="2"
+                            x:Name="txt2"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                        <mat:TextField 
+                            Grid.Column="2"
+                            AutomationId="3"
+                            x:Name="txt3"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                        <mat:TextField 
+                            Grid.Column="3"
+                            AutomationId="4"
+                            x:Name="txt4"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                        <mat:TextField 
+                            Grid.Column="4" 
+                            AutomationId="5"
+                            x:Name="txt5"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                        <mat:TextField 
+                            Grid.Column="5"
+                            AutomationId="6"
+                            x:Name="txt6"
+                            TextChanged="txt_TextChanged">
+                        </mat:TextField>
+                    </Grid>
+                    
+                    <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=didnotreceviedtheOTP}"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                    
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                        <Label
+                        Style="{StaticResource TitleLabel}"
+                            TextDecorations="Underline"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=Sendagain}"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                        <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Text="{extention:TranslateExtention Key=OTPwithin}"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                        <HorizontalStackLayout FlowDirection="LeftToRight">
+                            <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                            Text="0"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                            <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                            Text="2" x:Name="lblMinutes"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                            <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                            Text=":"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                            <Label
+                        Style="{StaticResource TitleLabel}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                            Text="0" x:Name="lblSeconds"
+                        TextColor="DarkBlue"
+                        FontSize="16"/>
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                   
+                    <Grid ColumnDefinitions="*,*">
+                        <Button Grid.Column="0"
+                            Text="{extention:TranslateExtention Key=Confirm}"
+                            FontSize="20"
+                            BackgroundColor="DarkSlateBlue"
+                            TextColor="White"
+                            Padding="0" 
+                            Margin="10"
+                            StyleClass="FilledButton"
+                            Command="{Binding SaveNewMemberShipCommand}"/>
+                        <Button Grid.Column="1"
+                            Text="{extention:TranslateExtention Key=Cancel}"
+                            FontSize="20"
+                            BackgroundColor="DarkSlateBlue"
+                            TextColor="White"
+                            Padding="0" 
+                            Margin="10"
+                            StyleClass="FilledButton"
+                            Command="{Binding HideBottomsheetCommand}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </mat:BottomSheetView.Body>
+        </mat:BottomSheetView>
+    </ur:UraniumContentPage.Attachments>
 
     <ScrollView>
         <input:FormView 
@@ -37,7 +208,7 @@
             Spacing="5" 
             input:FormView.IsSubmitButton="{Binding IsFormViewReset}"
             Margin="10,5,10,0" 
-            SubmitCommand="{Binding SaveNewMemberShipCommand}">
+            SubmitCommand="{Binding ShowBottomsheetCommand}">
             <mat:TextField 
             Text="{Binding Email}"
             Title="{extention:TranslateExtention Key=Email}"
@@ -177,9 +348,12 @@
             VerticalOptions="Center"
             Padding="0" 
             input:FormView.IsSubmitButton="True"
-            StyleClass="FilledButton"
-            Command="{Binding SaveNewMemberShipCommand}"/>
+            StyleClass="FilledButton" x:Name="btnShowBottomsheet"
+                Clicked="btnShowBottomsheet_Clicked"
+                Command="{Binding ShowBottomsheetCommand}"
+           />
 
         </input:FormView >
     </ScrollView>
+    
 </ur:UraniumContentPage>

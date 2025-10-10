@@ -583,4 +583,19 @@
   <data name="Emailisnotcorrect" xml:space="preserve">
     <value>الايميل غير مسجل</value>
   </data>
+  <data name="EntertheconfirmationOTPthatsenttoyouremail" xml:space="preserve">
+    <value>ادخل رمز التاكيد المرسل الي الايميل</value>
+  </data>
+  <data name="didnotreceviedtheOTP" xml:space="preserve">
+    <value>لم تستلم الرمز المرسل ؟</value>
+  </data>
+  <data name="OTPwithin" xml:space="preserve">
+    <value>رمز التحقق خلال</value>
+  </data>
+  <data name="Sendagain" xml:space="preserve">
+    <value>اعادة ارسال</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>تاكيد</value>
+  </data>
 </root>

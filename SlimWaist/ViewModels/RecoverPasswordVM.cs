@@ -23,7 +23,7 @@ namespace SlimWaist.ViewModels
         private FirebaseDbHelper firebaseDbHelper = new FirebaseDbHelper();
 
         [ObservableProperty]
-        private string _email= "amryakout2016@gmail.com";
+        private string _email;
 
         [RelayCommand]
         private async Task RecoverPassword()
